@@ -11,7 +11,7 @@ import App from './components/app/App';
 Vue.use(BootstrapVue)
 Vue.use(Vuelidate);
 
-// setup fake backend
+// setup fake backend test
 import { configureFakeBackend } from './_helpers';
 configureFakeBackend();
 
