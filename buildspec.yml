@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo update npm...
+      - npm install -g n
+      - n latest
+      # - npm update -g npm
+      - echo node -v
+      - node -v
+      - echo npm -v
+      - npm -v
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo build start
+      - npm run build
+      - echo build completed
+  post_build:
+    commands:
+      - echo Delete S3 Bucket object...
+      - aws s3 sync dist s3://cafex-codepipeline-bucket --delete
+      - echo create invalidation 
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'dist'
