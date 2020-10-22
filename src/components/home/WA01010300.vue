@@ -16,7 +16,7 @@
                 ></b-form-input>
                 <b-input-group-append>
                   <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
-                    <img src="src/assets/images/search-icon.png" width="30" height="30">
+                    <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
@@ -72,7 +72,7 @@
                     <a v-b-modal.modal-edit>
                       <!-- <b-icon icon="pencil" /> -->
                       <img
-                        src="src/assets/images/edit-icon.png"
+                        :src="imgEditIcon"
                         width="25"
                         height="25"
                       />
@@ -101,7 +101,7 @@
                     <a v-b-modal.modal-delete>
                       <!-- <b-icon icon="trash" /> -->
                       <img
-                        src="src/assets/images/delete-icon.png"
+                        :src="imgDeleteIcon"
                         width="25"
                         height="25"
                       />
@@ -155,6 +155,9 @@ import WA01010310 from '../edit-user/WA01010310.vue';
 export default {
   data() {
     return {
+      imgSearchIcon: './static/img/search-icon.png',
+      imgEditIcon: './static/img/edit-icon.png',
+      imgDeleteIcon: './static/img/delete-icon.png',
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },

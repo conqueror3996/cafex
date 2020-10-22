@@ -66,7 +66,8 @@ export default {
             console.log(this.account)
             const data = {
                 user_id: this.account.id,
-                user_password: this.newPassword
+                user_password: this.newPassword,
+                user_confirm_password: this.confirmPassword
             }
             if(this.currentPassword != this.account.user.username) {
                 this.msg = '現在のパスワードが間違っています'

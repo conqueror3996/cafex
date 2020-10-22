@@ -35,7 +35,7 @@
             <template #cell(action)="data">
               <div class="action-link" v-if="hoveredItem === data.item.filename">
                 <a v-b-modal.modal-delete @click="openModal(data.item)">
-                  <img src="src/assets/images/delete-icon.png" width="25" height="28" />
+                  <img :src="imgDeleteIcon" width="25" height="28" />
                 </a>
               </div>
                   <b-modal
@@ -66,7 +66,7 @@
             <span class="content-btn">ファイルアップロード</span>
             <img
               class="img-btn"
-              src="src/assets/images/upload-icon.png"
+              :src="imgUploadIcon"
               width="40"
               height="48"
             />
@@ -84,6 +84,8 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
+      imgDeleteIcon: './static/img/delete-icon.png',
+      imgUploadIcon: './static/img/upload-icon.png',
       userCols: [
         { key: "fullname", label: "氏名" },
         { key: "age", label: "年齢" },

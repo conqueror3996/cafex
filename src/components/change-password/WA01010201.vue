@@ -4,7 +4,7 @@
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handleSubmit" style="margin-top: 3rem;">
             <div class="div-change-password">
-                <img src="src/assets/images/change-password.png">
+                <img :src="imgChangePassword">
             </div>
             <div class="div-change-password">
                 <p style="font-size: 18px; margin-top: 20px;">パスワードの再登録が完了しました</p>
@@ -27,6 +27,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data () {
         return {
+            imgChangePassword: './static/img/change-password.png',
             currentPassword: '',
             newPassword: '',
             confirmPassword: '',

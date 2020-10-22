@@ -14,7 +14,7 @@ const actions = {
             .then(
                 user => {
                     commit('loginSuccess', user);
-                    router.push('/');
+                    router.push('/WA01010300');
                 },
                 error => {
                     commit('loginFailure', error);
@@ -58,7 +58,7 @@ const actions = {
             },
             error => {
                 commit('changePasswordFailed', error);
-                // dispatch('alert/error', error, { root: true });
+                dispatch('alert/error', error, { root: true });
             }
         );
 

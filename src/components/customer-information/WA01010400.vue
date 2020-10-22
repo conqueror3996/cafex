@@ -24,8 +24,8 @@
                 -->
             </div>
             <div class="form-group"> 
-                <b-button class="btn btn-primary button-file" @click="goTo(customer_detail)"><img src="src/assets/images/button_file.png"></b-button>
-                <b-button class="btn btn-primary button-remote"><img src="src/assets/images/button_remote.png"></b-button>
+                <b-button class="btn btn-primary button-file" @click="goTo(customer_detail)"><img :src="imgButtonFile"></b-button>
+                <b-button class="btn btn-primary button-remote"><img :src="imgButtonFile"></b-button>
             </div>
         </div>
     </div>
@@ -39,6 +39,8 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
+        imgButtonFile: './static/img/button_file.png',
+        imgButtonRemote: './static/img/button_remote.png',
         customer_detail: {
           fullname: 'Khang',
           name_kana: 'Khang',

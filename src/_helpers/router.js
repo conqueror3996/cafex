@@ -15,7 +15,7 @@ Vue.use(Router);
 export const router = new Router({
   mode: 'history',
   routes: [
-    { path: '/', component: WA01010300 }, // home
+    { path: '/WA01010300', component: WA01010300 }, // home
     { path: '/WA01010100', component: WA01010100 }, // login
     { path: '/register', component: RegisterPage },
     { path: '/WA01010200', component: WA01010200 }, //change-password
@@ -25,7 +25,7 @@ export const router = new Router({
     { path: '/WA01010600', component: WA01010600 }, //manage-file
 
     // otherwise redirect to home
-    { path: '*', redirect: '/' }
+    { path: '*', redirect: '/WA01010300' }
   ]
 });
 

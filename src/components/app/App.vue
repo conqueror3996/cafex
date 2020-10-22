@@ -1,12 +1,12 @@
 <template>
     <div class="main">
         <div class="header">
-            <a class="logo" href="/">
-                <img :src="img" alt="logo"/>
+            <a class="logo" href="/WA01010300">
+                <img :src="imgLogo" alt="logo"/>
             </a>
             <b-dropdown id="my-account" right class="m-2" v-if="account.user">
                 <template slot="button-content">
-                    <img class="img-fluid p-2" src="src/assets/images/my-account.png" width="50"/>
+                    <img class="img-fluid p-2" :src="imgMyAccountIcon" width="50"/>
                 </template>
                 <b-dropdown-item href="/WA01010200">パスワード変更</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
@@ -21,7 +21,7 @@
         </div> -->
         <div id="container">
             <div class="inner"> <!--v-if="alert.message" -->
-                <div :class="`alert alert-danger ${alert.type}`">{{alert.message}}</div>
+                <div v-if="alert.message" :class="`alert alert-custom ${alert.type}`">{{alert.message}}</div>
                 <div class="row div-login">
                     <router-view></router-view>
                 </div>
@@ -38,7 +38,8 @@ export default {
     name: 'app',
     data() {
         return {
-            img: './static/img/logo-cafex.png'
+            imgLogo: './static/img/logo-cafex.png',
+            imgMyAccountIcon: './static/img/my-account.png',
         }
     },
     computed: {
@@ -116,5 +117,9 @@ export default {
 .logo {
     display: inline-block;
     padding: 10px 0 0 10px;
+}
+
+.alert-custom {
+    white-space: pre-wrap;
 }
 </style>
