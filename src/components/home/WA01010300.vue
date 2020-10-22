@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-tabs card align="right">
-      <b-tab title="顧客登録">
+      <b-tab title="顧客選択">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
             <p class="title">顧客を選択して「次へ」を押してください</p>
@@ -76,7 +76,7 @@
                         width="25"
                         height="25"
                       />
-                      <b-modal id="modal-edit" hide-header centered @ok="editItem(selectedItem)">
+                      <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
                         <div>選択したお客様情報を編集しますか？</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
@@ -138,7 +138,7 @@
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客選択">
+      <b-tab title="顧客登録">
         <b-card-text class="selected-content">
           <WA01010320></WA01010320>
         </b-card-text>

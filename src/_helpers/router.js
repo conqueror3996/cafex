@@ -8,6 +8,7 @@ import WA01010200 from '../components/change-password/WA01010200'
 import WA01010201 from '../components/change-password/WA01010201'
 import WA01010400 from '../components/customer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
+import WA01010600 from '../components/contact/WA01010600'
 
 Vue.use(Router);
 
@@ -21,6 +22,7 @@ export const router = new Router({
     { path: '/WA01010201', component: WA01010201 }, //complete-change-password
     { path: '/WA01010400', component: WA01010400 }, //customer-info
     { path: '/WA01010500', component: WA01010500 }, //manage-file
+    { path: '/WA01010600', component: WA01010600 }, //manage-file
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }

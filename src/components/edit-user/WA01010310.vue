@@ -7,48 +7,36 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="namekana">カナ :</label></div>
-                <div><b-input class="input-form" type="text" id="namekana" maxlength=38></b-input></div>
+                <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="birthday">生年月日 :</label></div>
-                <div><b-input class="input-form" type="text" id="birthday" maxlength=10></b-input></div>
+                <div><b-input class="input-form" type="text" id="birthday" maxlength=10 v-model="user.birthday"></b-input></div>
             </div>
             
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phone1">電話番号1 :</label></div>
-                    <b-input class="input-form-84px" type="text" id="phone11" maxlength=4 v-model="user.phone11"></b-input>
-                    <span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                    <b-input class="input-form-84px" type="text" id="phone12" maxlength=4 v-model="user.phone12"></b-input>
-                    <span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                    <b-input class="input-form-84px" type="text" id="phone13" maxlength=4 v-model="user.phone13"></b-input>
+                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="user.phone1"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="phone2">電話番号2 :</label></div>
-                    <b-input class="input-form-84px" type="text" id="phone21" maxlength=4></b-input>
-                    <span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                    <b-input class="input-form-84px" type="text" id="phone22" maxlength=4></b-input>
-                    <span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                    <b-input class="input-form-84px" type="text" id="phone23" maxlength=4></b-input>
+                <div><b-input class="input-form" type="text" id="phone2" maxlength=12 v-model="user.phone2"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="zipcode">郵便番号 :</label></div>
-                <div style="display: flex; flex-direction: row;">
-                    <b-input class="input-form-54px" type="text" id="zipcode1" maxlength=3></b-input>
-                    <span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                    <b-input class="input-form-84px" type="text" id="zipcode2" maxlength=4></b-input>
-                    </div>
+                <div class="label-form"><label for="postal">郵便番号 :</label></div>
+                <div><b-input class="input-form" type="text" id="postal" maxlength=7 v-model="user.postalcode"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="address">住所 : </label></div>
-                <div><b-input class="input-form" type="text" id="address" maxlength=100></b-input></div>
+                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="user.address"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="memo">メモ :</label></div>
-                <div><b-input class="input-form" type="text" id="memo" maxlength=100></b-input></div>
+                <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="user.memo"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button type="submit" variant="primary" >変更</b-button>
@@ -57,7 +45,7 @@
             </div>
         </b-form>
         <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event"></WA01010311>
-        <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">
+        <!-- <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">
             <div>           
                 <div class="error" v-if="!$v.user.fullname.required ">氏名は必須項目です。</div>
                 <div class="error" v-if="(!$v.user.phone11.required || !$v.user.phone12.required || !$v.user.phone13.required)">電話番号1は必須項目です。</div>
@@ -73,15 +61,17 @@
                 </b-button>
               </div>
             </template>
-        </b-modal>
+        </b-modal> -->
     </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import WA01010311 from './WA01010311.vue';
-import userValidate from '../../validate/user/user-validate.js'
-import { required, alphaNum } from 'vuelidate/lib/validators'
+
 import validate from '../../validate/validate.js'
+import userValidatePattern from '../../validate/user/user-validate'
+import errormessage from '../../validate/errormessage';
 
 export default {
     data() {
@@ -90,34 +80,45 @@ export default {
             submited: false,
             user:{
                 fullname: 'Khang',
-                name_kana: 'Khang',
+                namekana: '',
                 age: '24',
                 birthday: '1996/03/09',
-                post_code: '3424',
+                postalcode: '3424',
                 address: '32/2',
-                phone11: '091',
-                phone12: "1234",
-                phone13: "4124",
+                phone1: '19001560',
                 phone2: '19001560',
                 memo: 'manhkhang@vn-cubesystem.com'
             },
         }
     },
-    validations: {
-        user: userValidate
-    },
     components: {
         WA01010311,
     },
+    computed: {
+        ...mapState({
+            alert: state => state.alert
+        })
+    },
     methods: {
+        ...mapActions("alert", {
+            error: "error",
+        }),
         handleShowEdit() {
-            this.submited = true;
-            this.$v.$touch();
-            validate();
-            if (this.$v.$invalid) {
-                this.$v
-                    return;
-                }
+            // validate
+            const errorCode = validate.validateInput(userValidatePattern, this.user);
+            console.log(errorCode)
+            if(errorCode.length > 0) {
+                const messageError = validate.getArrayMessageError(errorCode);
+                this.error(messageError.join("\n"));
+                return;
+            }
+            
+            // reset slert message
+            if(this.alert.message !== '') {
+                this.error('');
+            }
+
+            // show modal confirm
             this.showConfirmEdit = true;
         },
         handleCancle() {
