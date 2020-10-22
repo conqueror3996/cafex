@@ -1,24 +1,43 @@
-import { required, alphaNum } from 'vuelidate/lib/validators'
-
-const userValidate = {
-    fullname: {
-        validations: { required },
+export default  {
+  fullname: {
+    validations: {
+      required: { value: true, message: "S02003" },
     },
-    name_kana: {
-        validations: { required },
+  },
+  namekana: {
+    validations: {
+      required: { value: true, message: "S02004" },
+      type: { value: "KanaFull", message: "S02005" },
     },
-    birthday: {
-        validations: { required },
+  },
+  birthday: {
+    validations: {
+      required: { value: false },
+      type: { value: "Date", message: "S02006" },
     },
-    phone11: {
-        validations: { required, alphaNum },
+  },
+  phone1: {
+    validations: {
+      required: { value: true, message: "S02007" },
+      type: { value: "NumberHalfWidth", message: "S02008" },
     },
-    phone12: {
-        validations: { required, alphaNum },
+  },
+  phone2: {
+    validations: {
+      required: { value: false },
+      type: { value: "NumberHalfWidth", message: "S02008" },
     },
-    phone13: {
-        validations: { required, alphaNum },
+  },
+  email: {
+    validations: {
+      required: { value: false },
+      type: { value: "Alphanum", message: "S02009" },
     },
-}
-
-export default userValidate;
+  },
+  postalcode: {
+    validations: {
+      required: { value: false },
+      type: { value: "NumberHalfWidth", message: "S02010" },
+    },
+  }
+};

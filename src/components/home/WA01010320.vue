@@ -3,40 +3,40 @@
         <b-form @submit.stop.prevent class="form-info">
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
-                <div><b-input class="input-form" type="text" id="name"></b-input></div>
+                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="namekana">カナ :</label></div>
-                <div><b-input class="input-form" type="text" id="namekana"></b-input></div>
+                <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="birthday">生年月日 :</label></div>
-                <div><b-input class="input-form" type="text" id="birthday"></b-input></div>
+                <div><b-input class="input-form" type="text" id="birthday" maxlength=10 v-model="user.birthday"></b-input></div>
             </div>
             
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phone1">電話番号1 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone1"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="user.phone1"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="phone2">電話番号2 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone2"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone2" maxlength=12  v-model="user.phone2"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email"></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="zipcode">郵便番号 :</label></div>
-                <div style="display: flex; flex-direction: row;"><b-input class="input-form-zipcode1" type="text" id="zipcode1"></b-input><span style="padding-top: 0.5rem;">&nbsp;&nbsp;-&nbsp;&nbsp;</span><b-input class="input-form-zipcode2" type="text" id="zipcode2"></b-input></div>
+                <div class="label-form"><label for="postal">郵便番号 :</label></div>
+                <div><b-input class="input-form" type="text" id="postal" maxlength=7 v-model="user.postal"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="address">住所 : </label></div>
-                <div><b-input class="input-form" type="text" id="address"></b-input></div>
+                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="user.address"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="memo">メモ :</label></div>
-                <div><b-input class="input-form" type="text" id="memo"></b-input></div>
+                <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="user.memo"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button variant="primary" @click="handleShow()">確認</b-button>
@@ -47,18 +47,46 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import WA01010321 from './WA01010321.vue'
+import validate from '../../validate/validate.js'
+import userValidatePattern from '../../validate/user/user-validate'
+import errormessage from '../../validate/errormessage';
 export default {
     data() {
         return {
             showModal: false,
+            user: {}
         }
     },
     components: {
         WA01010321,
     },
+    computed: {
+        ...mapState({
+            alert: state => state.alert
+        })
+    },
     methods: {
+        ...mapActions("alert", {
+            error: "error",
+        }),
         handleShow() {
+            // validate
+            const errorCode = validate.validateInput(userValidatePattern, this.user);
+            
+            if(errorCode.length > 0) {
+                const messageError = validate.getArrayMessageError(errorCode);
+                this.error(messageError.join("\n"));
+                return;
+            }
+
+            // reset slert message
+            if(this.alert.message !== '') {
+                this.error('');
+            }
+
+            // show modal confirm
             this.showModal = true;
         },
     }
@@ -89,11 +117,11 @@ export default {
     height: 35px;
 }
 
-.input-form-zipcode1 {
+.input-form-54px {
     width: 54px;
 }
 
-.input-form-zipcode2 {
+.input-form-84px {
     width: 84px;
 }
 
