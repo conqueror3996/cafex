@@ -1,6 +1,5 @@
 <template>
-  <div class="selected-content">
-    <div>
+  <div class="customer-info-screen">
         <p class="title-information">顧客情報</p>
         <div class="content-information">
             <div class="information">
@@ -24,11 +23,10 @@
                 -->
             </div>
             <div class="form-group"> 
-                <b-button class="btn btn-primary button-file" @click="goTo(customer_detail)"><img src="src/assets/images/button_file.png"></b-button>
-                <b-button class="btn btn-primary button-remote"><img src="src/assets/images/button_remote.png"></b-button>
+                <b-button variant="link" class="button-file" @click="goTo(customer_detail)"><img src="src/assets/images/button_file.png"></b-button>
+                <b-button variant="link" class="button-remote" @click="goContact()"><img src="src/assets/images/button_remote.png"></b-button>
             </div>
         </div>
-    </div>
     
   </div>
 </template>
@@ -81,6 +79,9 @@ export default {
           goTo: "goToFileManagement",
           // setUserDetail: "setUserDetail",
       }),
+      goContact(){
+        this.$router.push('/WA01010600');
+      },
       // goToFileManagement() {
       //   this.detail = this.customer_detail
       // }
@@ -115,6 +116,14 @@ export default {
 </script>
 
 <style>
+.customer-info-screen {
+  background-color: #ffffff;
+  width: 100%;
+  height: auto;
+  padding: 1.5rem 3rem 0 3rem;
+  margin-top: 1.5rem auto;
+}
+
 .title-information {
     width: 100px;
     height: 28px;
@@ -122,17 +131,12 @@ export default {
     font-family: "HiraginoSans-W3";
     font-size: 24px;
     font-weight: 400;
-    line-height: 32px;
-    margin: 25px 0px 0px 123px;
+    /* line-height: 32px;
+    margin: 25px 0px 0px 123px; */
+    text-align: left;
 }
 
-.selected-content {
-    background-color: #ffffff;
-    width: 1327px;
-    height: 572px;
-}
-
-.div-login {
+/* .div-login {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -140,22 +144,22 @@ export default {
     width: auto !important;
     height: 100vh !important;
     border-radius: 0px !important;
-}
+} */
 
 .content-information {
-    width: 1102px;
-    height: 297px;
-    border: 1px solid #ccc!important;
+    /* width: 1102px; */
+    width: 100%;
+    height: auto;
     border-radius: 5px;
-    margin: 15px 0px 0px 123px;
+    margin: 15px auto;
 }
 
 .contractor-info {
     list-style-type: none;
 }
 .information {
-  width: 1102px;
-  height: 297px;
+  width: 100%;
+  height: auto;
   border-radius: 8px;
   border: solid 3px #979797;
   background: #ffffff;
@@ -167,10 +171,57 @@ export default {
 }
 
 .button-file {
-  margin: 40px 0px 0px 0px;
+  margin: 40px 0px 0px 10px;
+  width: 40%;
+  height: auto;
+    float: left;
+}
+
+.button-file img {
+    max-width: 100%;
+    height: auto;
 }
 
 .button-remote {
-  margin: 40px 0px 0px 90px;
+  margin: 40px 10px 0px 0px;
+  width: 40%;
+  height: auto;
+    float: right;
+}
+
+.button-remote img {
+    max-width: 100%;
+    height: auto;
+}
+
+.customer-info-screen .form-group {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+@media (max-width: 1000px) {
+  .button-file {
+    width: 45%;
+  }
+  .button-remote {
+    width: 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .button-file {
+    margin: unset;
+    width: 80%;
+    float: unset;
+  }
+  .button-remote {
+    margin: unset;
+    width: 80%;
+    float: unset;
+  }
+  .information {
+    font-size: 14px;
+  }
 }
 </style>

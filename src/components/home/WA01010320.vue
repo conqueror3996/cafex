@@ -98,21 +98,21 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 712px;
+    width: 60%;
     margin: auto;
 }
 
-.form-info {
+.main-content .form-info {
     margin-top: 3rem;
 }
 
-.input-row {
+.main-content .input-row {
     display: flex;
     flex-direction: row;
     margin: 1rem 0;
 }
 
-.input-form {
+.main-content .input-form {
     width: 495px;
     height: 35px;
 }
@@ -125,24 +125,24 @@ export default {
     width: 84px;
 }
 
-.label-form {
+.main-content .label-form {
     width: 12rem;
     text-align: right;
     padding-right: 2rem;
     font-size: 18px;
 }
 
-.form-button {
+.main-content .form-button {
     text-align: center;
     padding-top: 1.5rem;
 }
 
-.form-button button{
+.main-content .form-button button{
     width: 172px;
     height: 44px;
 }
 
-.field-request {
+.main-content .field-request {
     display: inline;
     font-size: 12px;
     background-color: #dedede;
@@ -150,4 +150,66 @@ export default {
     vertical-align: super;
     margin-right: .5rem;
 }
+
+@media (max-width: 1200px) {
+  .main-content {
+      width: 70%;
+      margin: auto;
+  }
+};
+
+@media (max-width: 1000px) {
+  .main-content {
+      width: 80%;
+      margin: auto;
+  }
+};
+
+@media (max-width: 969px) {
+  .main-content {
+      width: 90%;
+      margin: auto;
+  }
+};
+
+@media (max-width: 800px) {
+  .main-content {
+      margin: auto;
+  }
+  .main-content .input-form {
+      width: 375px;
+      height: 35px;
+  }
+  .main-content .label-form {
+    font-size: 16px;
+  }
+};
+
+@media (max-width: 600px) {
+  .main-content .input-form {
+      width: 305px;
+      height: 30px;
+  }
+  .main-content .label-form {
+    width: 12rem;
+    text-align: right;
+    padding-right: 2rem;
+    font-size: 15px;
+  }
+};
+
+
+@media (max-width: 500px) {
+  .main-content .input-form {
+      width: 100%;
+      height: 28px;
+  }
+  .main-content .label-form {
+    width: 10rem;
+    text-align: right;;
+    padding-right: 2rem;
+    font-size: 14px;
+  }
+};
+
 </style>

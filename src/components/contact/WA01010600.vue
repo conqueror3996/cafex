@@ -8,7 +8,6 @@
             placeholder="ショートコード"
             class="border-right-0 search-contact"
             maxlength=4
-            v-model="searchString"
           ></b-form-input>
           <b-input-group-append>
             <b-button class="bg-transparent">
@@ -56,48 +55,40 @@ export default {};
 </script>
 
 <style>
-/* disable class div-login in App component */
-.div-login {
-  display: unset;
-  justify-content: unset;
-  width: auto;
-  height: auto;
-  flex-direction: unset;
-  background-color: unset;
-  border-radius: unset;
-}
-</style>
-
-<style scoped>
 .screen-contact {
   display: flex;
   flex-direction: row;
-  width: 1400px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 1410px;
   height: 710px;
 }
 
 .side-left {
+  width: 25%;
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  padding-right: 1rem;
   margin: auto auto;
 }
 
 .side-right {
+  width: 75%;
   margin-left: 2rem;
   margin: auto auto;
 }
 
 .screen-share {
   background-color: #ffffff;
-  width: 1046px;
+  width: 100%;
   height: 702px;
   border-radius: .5rem;
 }
 
 .search-code {
   background-color: #ffffff;
-  width: 312px;
+  width: 100%;
   height: 52px;
   border-radius: .5rem;
   padding: .45rem 1rem;
@@ -112,9 +103,9 @@ export default {};
   color: black;
 }
 
-.info {
+.screen-contact .info {
   background-color: #ffffff;
-  width: 312px;
+  width: 100%;
   height: 228px;
   border-radius: .5rem;
   margin-top: .5rem;
@@ -134,7 +125,7 @@ export default {};
 
 .action {
   background-color: #ffffff;
-  width: 312px;
+  width: 100%;
   height: 400px;
   border-radius: .5rem;
   margin-top: .5rem;
@@ -142,10 +133,45 @@ export default {};
 
 .action-panel {
   margin: .75rem .5rem;
+  text-align: center;
 }
 
 .action-panel span {
-  font-size: 13px;
+  font-size: 0.75rem;
   color: black;
 }
+
+@media (max-width: 1400px) {
+  .screen-contact {
+    width: 100%
+  }
+};
+
+@media (max-width: 1200px) {
+  .action-panel {
+    margin: .75rem .5rem;
+    text-align: center;
+  }
+
+  .action-panel button {
+    padding-left: .25rem;
+    padding-right: .25rem;
+  }
+
+  .action-panel span {
+    font-size: 12px;
+    color: black;
+  }
+};
+
+@media (max-width: 1000px) {
+  .action-panel {
+    margin: .75rem 0;
+  }
+
+  .action-panel span {
+    font-size: 11px;
+    color: black;
+  }
+};
 </style>
