@@ -9,13 +9,36 @@ const state = {
 };
 
 const actions = {
-    getAll({ commit }) {
+    getAll({ dispatch, commit }) {
         commit('getAllRequest');
 
         userService.getAll()
             .then(
-                users => commit('getAllSuccess', users),
-                error => commit('getAllFailure', error)
+                datas => {
+                    console.log(datas.data.code)
+                    if (datas.data.code) {
+                        dispatch('alert/error', datas.data.message, { root: true });
+                    } else {
+                        commit('getAllSuccessGet', datas)
+                    }
+                }
+            );
+    },
+
+    getCustomerByID({ dispatch, commit }) {
+        commit('getAllRequest');
+
+        userService.getCustomerByID()
+            .then(
+                datas => {
+                    console.log(datas.data.code)
+                    if (datas.data.code) {
+                        dispatch('alert/error', datas.data.message, { root: true });
+                    } else {
+                        commit('getAllSuccessGet', datas)
+                    }
+                }
+                
             );
     },
 
@@ -48,10 +71,16 @@ const mutations = {
     getAllRequest(state) {
         state.all = { loading: true };
     },
-    getAllSuccess(state, users) {
-        state.all = { items: users.Repositories };
+    getAllSuccessGet(state, users) {
+        state.all = { items: users.data.Customers };
     },
-    getAllFailure(state, error) {
+    getAllFailureGet(state, error) {
+        state.all = { error };
+    },
+    getAllSuccessPost(state, users) {
+        state.all = { items: users.data.Customers };
+    },
+    getAllFailurePost(state, error) {
         state.all = { error };
     },
     deleteRequest(state, id) {
