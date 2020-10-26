@@ -13,6 +13,7 @@
                   class="border-right-0"
                   maxlength=38
                   v-model="searchString"
+                  autofocus
                 ></b-form-input>
                 <b-input-group-append>
                   <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">

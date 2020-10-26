@@ -4,7 +4,7 @@
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
                 <label>メールアドレス</label>
-                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" maxlength="190">
+                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" maxlength="190" autofocus>
             </div>
             <div class="form-group">
                 <label>パスワード</label>

@@ -8,7 +8,7 @@
             </div>
             <div class="form-group div-form-input">
                 <label for="currentpassword">現在のパスワード</label>
-                <input type="password" v-model="currentPassword" name="currentpassword" class="form-control" :class="{ 'is-invalid': submitted && !currentPassword }" maxlength="20" />
+                <input type="password" v-model="currentPassword" name="currentpassword" class="form-control" :class="{ 'is-invalid': submitted && !currentPassword }" maxlength="20" autofocus />
                 <div v-show="submitted && !currentPassword" class="invalid-feedback">Current password is required</div>
             </div>
             <div class="form-group div-form-input">

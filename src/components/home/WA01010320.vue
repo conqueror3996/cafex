@@ -3,7 +3,7 @@
         <b-form @submit.stop.prevent class="form-info">
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname" placeholder="山田太郎"></b-input></div>
+                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname" placeholder="山田太郎" autofocus></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="namekana">カナ :</label></div>
