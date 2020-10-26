@@ -1,5 +1,5 @@
 <template>
-    <div  class="box-login">
+    <div  class="change-password">
         <p style="font-size: 24px; text-align: center; margin-bottom: 0">パスワード変更</p>
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handleSubmit" >
@@ -8,28 +8,33 @@
             </div>
             <div class="form-group div-form-input">
                 <label for="currentpassword">現在のパスワード</label>
-                <input type="password" v-model="currentPassword" name="currentpassword" class="form-control" :class="{ 'is-invalid': submitted && !currentPassword }" />
+                <input type="password" v-model="currentPassword" name="currentpassword" class="form-control" :class="{ 'is-invalid': submitted && !currentPassword }" maxlength="20" autofocus />
                 <div v-show="submitted && !currentPassword" class="invalid-feedback">Current password is required</div>
             </div>
             <div class="form-group div-form-input">
                 <label htmlFor="newpassword">新しいパスワード</label>
-                <input type="password" v-model="newPassword" name="newpassword" class="form-control" :class="{ 'is-invalid': submitted && !newPassword }" />
+                <input type="password" v-model="newPassword" name="newpassword" class="form-control" :class="{ 'is-invalid': submitted && !newPassword }" maxlength="20" />
                 <div v-show="submitted && !newPassword" class="invalid-feedback">Password is required</div>
             </div>
                 
             <div class="form-group div-form-input">
                 <label for="retype">もう一度入力</label>
-                <input type="password" v-model="confirmPassword" name="retype" class="form-control" :class="{ 'is-invalid': submitted && !confirmPassword }" />
+                <input type="password" v-model="confirmPassword" name="retype" class="form-control" :class="{ 'is-invalid': submitted && !confirmPassword }" maxlength="20" />
                 <div v-show="submitted && !confirmPassword" class="invalid-feedback">Retype password is required</div>
             </div>
             <div class="form-group div-form-button">
-                <button class="btn btn-primary" style="width: 50%" :disabled="status.loggingIn">パスワードを登録</button>
+                <button class="btn btn-primary" :disabled="status.loggingIn">パスワードを登録</button>
                 <img v-show="status.loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                 <!-- <router-link to="/register" class="btn btn-link">Register</router-link> -->
             </div>
-            <div class="div-error-message">
-                <p style="">{{ msg }}</p>
+            <div class="form-group div-form-button">
+                <button class="btn btn-danger" :disabled="status.loggingIn">キャンセル</button>
+                <img v-show="status.loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <!-- <router-link to="/register" class="btn btn-link">Register</router-link> -->
             </div>
+            <!-- <div class="div-error-message">
+                <p style="">{{ msg }}</p>
+            </div> -->
         </form>
     </div>
 </template>
@@ -37,6 +42,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { router } from '../../_helpers';
+import validate from '../../validate/validate.js';
+import common from '../../validate/common.js';
 
 export default {
     data () {
@@ -61,25 +68,37 @@ export default {
     },
     methods: {
         ...mapActions('account', ['changePassword']),
+        ...mapActions("alert", { error: "error" }),
         handleSubmit (e) {
             this.msg = ''
-            console.log(this.account)
             const data = {
                 user_id: this.account.id,
                 user_password: this.newPassword,
                 user_confirm_password: this.confirmPassword
             }
-            if(this.currentPassword != this.account.user.username) {
-                this.msg = '現在のパスワードが間違っています'
-                return
-            }
-            if (this.newPassword.length < 8) {
-                this.msg = 'パスワードは半角8文字以上で入力してください'
-                return
+            // if(this.currentPassword != this.account.user.username) {
+            //     this.msg += '現在のパスワードが間違っています\n'
+            //     //return
+            // }
+            if(!this.currentPassword || !this.newPassword || !this.confirmPassword)
+                return;
+            
+            if (!common.isPassword(this.newPassword)) {
+                this.msg += validate.getMessageErrorFromCode("S02001") + "\n"; 
+                console.log(this.msg)
+                //return
             }
             if (this.newPassword != this.confirmPassword) {
-                this.msg = '新しいパスワードが一致していません'
-                return
+                this.msg += validate.getMessageErrorFromCode("S02002") + "\n";
+                //return
+            }
+            this.msg = this.msg.trimEnd('\n');
+            if(this.msg !== '') {
+                this.error(this.msg);
+                return;
+            }
+            else{
+                this.error('');
             }
             this.changePassword(data)
         }
@@ -88,17 +107,26 @@ export default {
 </script>
 
 <style>
-    .div-form-input {
-        margin-top: 0.5rem;
-    }
-    .div-form-button {
-        margin-top: 2.5rem;
-        text-align: center;
-    }
-    .div-error-message {
-        display: flex;
-        justify-content: center;
-        color: #E02020; 
-        font-size: 16px;
-    }
+
+/*login*/
+.change-password{width:484px;margin:20px auto 0px auto;background:#fff;border-radius:10px;padding:3rem;box-sizing:border-box;}
+.change-password > p.title{text-align:center;font-size:24px;border-bottom:2px solid rgb(151, 151, 151);margin-bottom:35px;}
+.change-password .div-form-button button {
+    width: 60%;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+}
+.change-password .div-form-input {
+    margin-top: 0.5rem;
+}
+.change-password .div-form-button {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.change-password .div-error-message {
+    display: flex;
+    justify-content: center;
+    color: #E02020; 
+    font-size: 16px;
+}
 </style>

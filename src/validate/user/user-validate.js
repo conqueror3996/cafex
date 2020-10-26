@@ -31,7 +31,7 @@ export default  {
   email: {
     validations: {
       required: { value: false },
-      type: { value: "Alphanum", message: "S02009" },
+      type: { value: "Email", message: "S02009" },
     },
   },
   postalcode: {

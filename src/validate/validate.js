@@ -83,10 +83,10 @@ function checkType(value, type) {
       return validator.isAlphanumeric(value);
 
     case "FullWidth":
-      return validator.isFullWidth(value);
+      return !validator.isHalfWidth(value);
 
     case "HalfWidth":
-      return validator.isHalfWidth(value);
+      return !validator.isFullWidth(value);
 
     case "KanaFull":
       return common.isKanaFull(value);
@@ -95,52 +95,45 @@ function checkType(value, type) {
       return common.isKanaHalf(value);
 
     case "AlphaFullWidth":
-      if (validator.isAlpha(value))
-      {
-        return validator.isFullWidth(value);
-      }
-      return false;
+      if (validator.isHalfWidth(value))
+        return false;
+      return validator.isAlpha(value);
 
     case "AlphaHalfWidth":
-      if (validator.isAlpha(value))
-      {
-        return validator.isHalfWidth(value);
-      }
-      return false;
+      if (validator.isFullWidth(value))
+        return false;
+      return validator.isAlpha(value);
 
     case "AlphanumFullWidth":
-      if (validator.isAlphanumeric(value))
-      {
-        return validator.isFullWidth(value);
-      }
-      return false;
+      if (validator.isHalfWidth(value))
+        return false;
+      return validator.isAlphanumeric(value);
 
     case "AlphanumHalfWidth":
-      if (validator.isAlphanumeric(value))
-      {
-        return validator.isHalfWidth(value);
-      }
-      return false;
+      if (validator.isFullWidth(value))
+        return false;
+      return validator.isAlphanumeric(value);
 
     case "Number":
       return validator.isNumeric(value);
 
     case "NumberFullWidth":
-      if (validator.isNumeric(value))
-      {
-        return validator.isFullWidth(value);
-      }
-      return false;
+      if (validator.isHalfWidth(value))
+        return false;
+      return validator.isNumeric(value);
 
     case "NumberHalfWidth":
-      if (validator.isNumeric(value))
-      {
-        return validator.isHalfWidth(value);
-      }
-      return false;
+      if (validator.isFullWidth(value))
+        return false;
+      return validator.isNumeric(value);
 
     case "Email":
+      if (validator.isFullWidth(value.replace("@",'')))
+        return false
       return validator.isEmail(value);
+
+    case "Password":
+      return common.isPassword(value);
 
     default:
       break;
