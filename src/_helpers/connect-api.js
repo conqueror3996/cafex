@@ -1,4 +1,5 @@
 import axios from "axios";
+import config from 'config';
 
 export const connectAPI = {
     sendRequest,
@@ -12,7 +13,7 @@ function sendRequest(method, url, requestData = null, headers = null) {
     
     const requestOptions = {
         method,
-        url,
+        url: `${config.apiUrl}${url}`,
         requestData,
         headers
     };

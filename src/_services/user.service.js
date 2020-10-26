@@ -1,5 +1,5 @@
 import config from 'config';
-import { authHeader, connectAPI } from '../_helpers';
+import { authHeader, connectAPI, allAPI } from '../_helpers';
 
 export const userService = {
     login,
@@ -20,7 +20,8 @@ function login(username, password) {
     // };
     let headers =  { 'Content-Type': 'application/json' }
     let body =  JSON.stringify({ username, password })
-    return connectAPI.sendRequest('POST', `${config.apiUrl}/users/authenticate`, body, headers)
+    // return connectAPI.sendRequest('POST', `${config.apiUrl}/users/authenticate`, body, headers)
+    return connectAPI.sendRequest('POST', allAPI.employee_login, body, headers)
     
     
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
