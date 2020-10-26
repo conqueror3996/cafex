@@ -2,6 +2,7 @@ import Vue from 'vue';
 // import VeeValidate from 'vee-validate';
 import { BootstrapVue } from 'bootstrap-vue'
 import { Vuelidate } from 'vuelidate';
+import 'babel-polyfill'
 
 import { store } from './_store';
 import { router } from './_helpers';
