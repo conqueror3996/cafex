@@ -1,0 +1,47 @@
+<template>
+    <div class="box-login">
+        <div>
+            <p class="div-manage-mode">管理モードを選択してください</p>
+        </div> 
+        <div class="div-space-title"></div>
+        <div>
+            <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                <img :src="imgEmployeeMode">
+            </b-button>
+            <div class="div-space">
+            </div>
+            <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                <img :src="imgConsumerMode">
+            </b-button>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapState, mapActions } from 'vuex'
+export default {
+    data () {
+        return {
+            imgEmployeeMode: './static/img/employee-mode.png',
+            imgConsumerMode:'./static/img/consumer-mode.png'
+
+        }
+    }
+}
+</script>
+
+<style>
+    .div-manage-mode {
+        font-size: 24px;
+    }
+    .div-space {
+        margin: 42px 0px 0px 0px;
+    }
+    .div-space-title {
+        margin: 43px 0px 0px 0px;
+    }
+    .box-login {
+        width: 460px;
+        height: 390px;
+    }
+</style>

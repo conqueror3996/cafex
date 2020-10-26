@@ -9,22 +9,36 @@ const state = {
 };
 
 const actions = {
-    getAll({ commit, dispatch }) {
+    getAll({ dispatch, commit }) {
         commit('getAllRequest');
 
         userService.getAll()
             .then(
-                info => {
-                    console.log(info.data.code)
-                    if (info.data.code) {
-                        dispatch('alert/error', info.data.code, { root: true });
-                        commit('getAllFailure', info)
+                datas => {
+                    console.log(datas.data.code)
+                    if (datas.data.code) {
+                        dispatch('alert/error', datas.data.message, { root: true });
                     } else {
-                        commit('getAllSuccess', info)
+                        commit('getAllSuccessGet', datas)
                     }
                 }
-                // users => commit('getAllSuccess', users),
-                // error => commit('getAllFailure', error)
+            );
+    },
+
+    getCustomerByID({ dispatch, commit }) {
+        commit('getAllRequest');
+
+        userService.getCustomerByID()
+            .then(
+                datas => {
+                    console.log(datas.data.code)
+                    if (datas.data.code) {
+                        dispatch('alert/error', datas.data.message, { root: true });
+                    } else {
+                        commit('getAllSuccessGet', datas)
+                    }
+                }
+                
             );
     },
 
@@ -57,10 +71,16 @@ const mutations = {
     getAllRequest(state) {
         state.all = { loading: true };
     },
-    getAllSuccess(state, users) {
-        state.all = { items: users.data.Consumers };
+    getAllSuccessGet(state, users) {
+        state.all = { items: users.data.Customers };
     },
-    getAllFailure(state, error) {
+    getAllFailureGet(state, error) {
+        state.all = { error };
+    },
+    getAllSuccessPost(state, users) {
+        state.all = { items: users.data.Customers };
+    },
+    getAllFailurePost(state, error) {
         state.all = { error };
     },
     deleteRequest(state, id) {
