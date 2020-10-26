@@ -9,6 +9,7 @@ import WA01010201 from '../components/change-password/WA01010201'
 import WA01010400 from '../components/customer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
 import WA01010600 from '../components/contact/WA01010600'
+import { connectAPI } from './connect-api';
 
 Vue.use(Router);
 
@@ -33,17 +34,12 @@ router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/WA01010100', '/register'];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
-  // const privatePages = ['/WA01010201']
-  // const isDenied = privatePages.includes(to.path);
+  // const loggedIn = localStorage.getItem('user');
+  const loggedIn = connectAPI.getToken()
 
   if (authRequired && !loggedIn) {
     return next('/WA01010100'); //LOGIN
   }
-
-  // if (isDenied) {
-  //   return next('/WA01010200')
-  // }
 
   next();
 })
