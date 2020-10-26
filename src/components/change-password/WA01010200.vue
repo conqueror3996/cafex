@@ -1,5 +1,5 @@
 <template>
-    <div style="margin:3rem; height: 100%">
+    <div  class="box-login">
         <p style="font-size: 24px; text-align: center; margin-bottom: 0">パスワード変更</p>
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handleSubmit" >

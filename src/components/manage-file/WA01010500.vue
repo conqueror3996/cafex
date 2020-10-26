@@ -62,7 +62,7 @@
           </b-table>
         </div>
         <div class="file-footer">
-          <b-button variant="primary" class="btn-upload">
+          <label variant="primary" class="btn btn-upload" for="file">
             <span class="content-btn">ファイルアップロード</span>
             <img
               class="img-btn"
@@ -70,7 +70,8 @@
               width="40"
               height="48"
             />
-          </b-button>
+          </label>
+          <input type="file" value="ファイルアップロード" id="file"/>
         </div>
       </div>
       <div class="panel"></div>
@@ -201,56 +202,51 @@ export default {
 </script>
 
 <style>
-/* disable class div-login in App component */
-.div-login {
-  display: unset;
-  justify-content: unset;
-  width: auto;
-  height: auto;
-  flex-direction: unset;
-  background-color: unset;
-  border-radius: unset;
+.manage-file-conent {
+  padding-top: 2rem;
+  margin: 0 auto;
 }
-
-.table {
+/* .manage-file-conent {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 1344px;
+} */
+/* .table {
   margin-bottom: unset;
-}
-
-.table td,
-.table th {
-  border-top: inherit !important;
-  padding: 0.45rem 2rem;
-}
-
-.table td.col-action {
-    padding: unset;
-    width: 0.5rem;
-}
-.table th.col-action {
-    padding: unset;
-    width: 0.5rem;
 }
 
 .table thead th {
   border-bottom: 2px solid #9d9fa0;
   font-weight: normal;
+} */
+
+.manage-file-conent .table td,
+.manage-file-conent .table th {
+  border-top: inherit !important;
+  padding: 0.45rem 2rem;
+}
+
+.manage-file-conent .table td.col-action {
+    padding: unset;
+    width: 0.5rem;
+}
+.manage-file-conent .table th.col-action {
+    padding: unset;
+    width: 0.5rem;
 }
 
 /* .action-link {
     display: none;
 } */
-
+/* 
 .table-hover tbody tr:hover {
     background-color: rgba(203, 245, 229, 0.4);
-}
+} */
 
 /* .table-hover tbody tr:hover .action-link {
     display: unset;
 } */
-
-.modal-backdrop {
-  opacity: 0.5 !important;
-}
 
 .modal-content {
   width: 501px;
@@ -275,21 +271,19 @@ export default {
   border-radius: 0.5rem;
   margin: 0 1rem;
 }
-</style>
-<style scoped>
-.manage-file-conent {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  width: 1344px;
+
+.manage-file-conent .info {
+  margin: 0 auto;
+  width: 100%;
 }
-.info-title {
+
+.manage-file-conent .info-title {
   padding-bottom: 0.5rem;
 }
 
-.info-table {
+.manage-file-conent .info-table {
   background-color: #ffffff;
-  width: 1342px;
+  width: 100%;
   border: 1px solid #97989c;
   border-radius: 0.5rem;
   height: 77px;
@@ -298,10 +292,10 @@ export default {
 .detail {
   display: flex;
   flex-direction: row;
-  margin-top: 2rem;
+  margin: 2rem auto auto 0;
   background-color: #ffffff;
   border-radius: 0.5rem;
-  width: 1344px;
+  width: 100%;
   height: 538px;
 }
 
@@ -325,6 +319,8 @@ export default {
   width: 288px;
   height: 66px;
   border-radius: 0.5rem;
+  background-color:#0091FF;
+  color: #ffffff;
 }
 
 .content-btn {
@@ -338,6 +334,10 @@ export default {
   margin-right: 0.5rem;
 }
 
+input[type="file"] {
+	display: none;
+}
+
 .panel {
   width: 466.43px;
   height: 490px;
@@ -347,5 +347,27 @@ export default {
   margin: auto;
 }
 
-
+@media (max-width: 1327px) {
+  .manage-file-conent {
+    width: 96%;
+  }
+  
+  .file-content {
+    width: 70%;
+  }
+  .file-table {
+    width: 100%;
+    height: 401px;
+    border: 1px solid #97989c;
+    overflow: auto;
+  }
+  .panel {
+    width: 30%;
+    height: 490px;
+    background-color: #d2d4d9;
+    border: 2px solid #bebfc2;
+    border-radius: 0.6rem;
+    margin: 2rem;
+  }
+}
 </style>
