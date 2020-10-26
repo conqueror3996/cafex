@@ -13,12 +13,14 @@ const actions = {
         userService.login(username, password)
             .then(
                 info => {
-                    if (info.data.code) {
-                        dispatch('alert/error', info.data.code, { root: true });
-                        commit('getAllFailure', info)
-                    } else {
-                        commit('getAllSuccess', info)
-                        // router.push('/WA01010300');
+                    if (info.data) {
+                        if (info.data.code) {
+                            dispatch('alert/error', info.data.code, { root: true });
+                            commit('getAllFailure', info)
+                        } else {
+                            commit('getAllSuccess', info)
+                            // router.push('/WA01010300');
+                        }
                     }
                 }
             );

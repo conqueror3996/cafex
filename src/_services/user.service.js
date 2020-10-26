@@ -1,5 +1,5 @@
 import config from 'config';
-import { authHeader, connectAPI, allAPI } from '../_helpers';
+import { authHeader, auth, allAPI } from '../_helpers';
 
 export const userService = {
     login,
@@ -15,12 +15,12 @@ export const userService = {
 function login(username, password) {
     let body =  JSON.stringify({ username, password })
     let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
-    return connectAPI.sendRequest('POST', allAPI.employee_login, body, headers)
+    return auth.sendRequest('POST', allAPI.employee_login, body, headers)
 }
 
 function logout() {
     // remove user from local storage to log user out
-    connectAPI.clearAuthToken();
+    auth.clearAuthToken();
 }
 
 function register(user) {

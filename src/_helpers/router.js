@@ -6,7 +6,7 @@ import WA01010100 from '../components/login/WA01010100'
 import RegisterPage from '../components/register/RegisterPage'
 import WA01010200 from '../components/change-password/WA01010200'
 import WA01010201 from '../components/change-password/WA01010201'
-import WA01010400 from '../components/customer-information/WA01010400'
+import WA01010400 from '../components/consumer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
 import WA01010600 from '../components/contact/WA01010600'
 import WA01020300 from '../components/contact/WA01010600' //update name component
