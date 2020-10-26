@@ -25,12 +25,15 @@ function validateInput(validatePattern, validateObject) {
             // not exists property
             if (!validateObject.hasOwnProperty(elementName)) {
               errorElementString.push(item.validations[rule].message);
+              blankValue = true;
               break;
             }
             
             // is empty
-            if ( validator.isEmpty(validateObject[elementName]))
+            if ( validator.isEmpty(validateObject[elementName])){
+              blankValue = true;
               errorElementString.push(item.validations[rule].message);
+            }
           } else {
             // not exists property
             if (!validateObject.hasOwnProperty(elementName)) {
