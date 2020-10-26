@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-screen">
     <b-tabs card align="right">
       <b-tab title="顧客選択">
         <b-card-text class="selected-content">
@@ -26,6 +26,7 @@
               <b-table
                 ref="selectableTable"
                 hover
+                :responsive="true"
                 :fields="cols"
                 :items="users.items"
                 selectable
@@ -233,70 +234,33 @@ export default {
 </script>
 
 <style>
-.div-login {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  background-color: transparent;
-  width: auto !important;
-  height: 100vh !important;
-  border-radius: 0px !important;
-}
-
-.nav-tabs .nav-link {
+.home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
 }
 
-.nav-link.active {
+.home-screen .nav-link.active {
   color: #007bff !important;
 }
 
-.card-header {
+.home-screen .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
 }
-.card-body {
+.home-screen .card-body {
   padding: 0px;
 }
 
-.form-control {
+.home-screen .form-control {
   border-radius: 0.5rem;
 }
 
-.input-group-text {
+.home-screen .input-group-text {
   border-radius: 0.5rem;
-}
-
-.table td,
-.table th {
-  border-top: 0px;
-  padding: 0.25rem 0.75rem;
-  vertical-align: middle;
-}
-
-.table thead th {
-  border-bottom: 2px solid #9d9fa0;
-  font-weight: normal;
-}
-
-.table-hover tbody tr:hover {
-    background-color: rgba(203, 245, 229, 0.4);
-}
-
-.table-active,
-.table-active > td,
-.table-active > th {
-  background-color: rgba(203, 245, 229, 0.4);
-}
-
-.modal-backdrop {
-  opacity: 0.5 !important;
 }
 
 .selected-content {
   background-color: #ffffff;
-  width: 1327px;
   height: 625px;
 }
 
@@ -319,7 +283,6 @@ export default {
 .table-main {
   margin: 1.5rem 0.75rem;
   border: 1px solid;
-  width: 1298px;
   height: 397px;
   overflow: auto;
 }
@@ -371,6 +334,42 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
+
+@media (max-width: 1327px) {
+  .home-screen {
+    width: 96%;
+    margin: 0 auto;
+  }
+};
+@media (max-width: 600px) {
+  .title {
+    text-align: center;
+    font-size: 20px;
+  }
+  .content-search {
+    width: 435px;
+  }
+  
+  .col-spec {
+    width: 3rem;
+  }
+};
+
+@media (max-width: 600px) {
+  .title {
+    text-align: center;
+    font-size: 16px;
+  }
+  .content-search {
+    width: 375px;
+  }
+};
+
+@media (max-width: 414px) {
+  .content-search {
+    width: 305px;
+  }
+};
 
 </style>
 

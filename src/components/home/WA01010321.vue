@@ -21,10 +21,14 @@
           <p>住所：</p>
           <p>メモ：</p>
         </div>
-        <template #modal-footer="{ ok }">
+        <template #modal-footer="{ ok, cancel }">
           <div>
             <b-button size="sm" variant="primary" @click="ok()">
               実行
+            </b-button>
+            
+            <b-button size="sm" variant="danger" @click="cancel()">
+              キャンセル
             </b-button>
           </div>
         </template>
