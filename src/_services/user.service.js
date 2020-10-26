@@ -13,33 +13,14 @@ export const userService = {
 };
 
 function login(username, password) {
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ username, password })
-    // };
-    let headers =  { 'Content-Type': 'application/json' }
     let body =  JSON.stringify({ username, password })
-    // return connectAPI.sendRequest('POST', `${config.apiUrl}/users/authenticate`, body, headers)
+    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
     return connectAPI.sendRequest('POST', allAPI.employee_login, body, headers)
-    
-    
-    // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-    //     .then(handleResponse)
-    //     .then(user => {
-    //         // login successful if there's a jwt token in the response
-    //         if (user.token) {
-    //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //             localStorage.setItem('user', JSON.stringify(user));
-    //         }
-
-    //         return user;
-    //     });
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    connectAPI.clearAuthToken();
 }
 
 function register(user) {

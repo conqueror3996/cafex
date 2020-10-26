@@ -18,22 +18,11 @@ const actions = {
                         commit('getAllFailure', info)
                     } else {
                         commit('getAllSuccess', info)
-                        connectAPI.setToken(info.data)
                         // router.push('/WA01010300');
                     }
                 }
-                // user => {
-                //     commit('loginSuccess', user);
-                //     router.push('/WA01010300');
-                // },
-                // error => {
-                //     commit('loginFailure', error);
-                //     dispatch('alert/error', error, { root: true });
-                // }
             );
-        if (connectAPI.getToken()) {
-            router.push('/WA01010300');
-        } 
+        
     },
     logout({ commit }) {
         userService.logout();

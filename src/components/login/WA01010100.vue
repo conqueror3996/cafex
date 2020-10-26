@@ -38,7 +38,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
+import { connectAPI } from '../../_helpers';
 export default {
     data () {
         return {
@@ -56,7 +56,8 @@ export default {
     },
     created () {
         // reset login status
-        this.logout();
+        //this.logout();
+        
     },
     methods: {
         ...mapActions('account', ['login', 'logout']),

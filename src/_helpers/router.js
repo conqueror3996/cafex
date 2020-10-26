@@ -9,21 +9,81 @@ import WA01010201 from '../components/change-password/WA01010201'
 import WA01010400 from '../components/customer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
 import WA01010600 from '../components/contact/WA01010600'
-import { connectAPI } from './connect-api';
+import WA01020300 from '../components/contact/WA01010600' //update name component
+import { auth } from './auth';
 
 Vue.use(Router);
 
 export const router = new Router({
   mode: 'history',
   routes: [
-    { path: '/WA01010300', component: WA01010300 }, // home
-    { path: '/WA01010100', component: WA01010100 }, // login
-    { path: '/register', component: RegisterPage },
-    { path: '/WA01010200', component: WA01010200 }, //change-password
-    { path: '/WA01010201', component: WA01010201 }, //complete-change-password
-    { path: '/WA01010400', component: WA01010400 }, //customer-info
-    { path: '/WA01010500', component: WA01010500 }, //manage-file
-    { path: '/WA01010600', component: WA01010600 }, //manage-file
+    { 
+      path: '/WA01010100', 
+      name: 'WA01010100',
+      component: WA01010100,
+    },// login
+    { 
+      path: '/WA01010300', 
+      name: 'WA01010300',
+      component: WA01010300, 
+      meta : { 
+        authRequired : true
+      } 
+    }, // home
+    { 
+      path: '/WA01020300', 
+      name: 'WA01020300',
+      component: WA01020300, 
+      meta : { 
+        authRequired : true,
+        is_admin: true
+      } 
+    }, // home admin
+    { 
+      path: '/register', 
+      name: 'register',
+      component: RegisterPage,
+    },
+    { 
+      path: '/WA01010200', 
+      name: 'WA01010200',
+      component: WA01010200,
+      meta : { 
+        authRequired : true
+      }  
+    }, //change-password
+    { 
+      path: '/WA01010201', 
+      name: 'WA01010201',
+      component: WA01010201,
+      meta : { 
+        authRequired : true
+      }  
+    }, //complete-change-password
+    { 
+      path: '/WA01010400', 
+      name: 'WA01010400',
+      component: WA01010400,
+      meta : { 
+        authRequired : true
+      }  
+    }, //customer-info
+    { 
+      path: '/WA01010500', 
+      name: 'WA01010500',
+      component: WA01010500,
+      meta : { 
+        authRequired : true
+      }  
+    }, //manage-file
+    { 
+      path: '/WA01010600', 
+      name: 'WA01010600',
+      component: WA01010600,
+      meta : { 
+        authRequired : true
+      }  
+    }, //manage-file
 
     // otherwise redirect to home
     { path: '*', redirect: '/WA01010300' }
@@ -32,14 +92,22 @@ export const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/WA01010100', '/register'];
-  const authRequired = !publicPages.includes(to.path);
-  // const loggedIn = localStorage.getItem('user');
-  const loggedIn = connectAPI.getToken()
-
-  if (authRequired && !loggedIn) {
-    return next('/WA01010100'); //LOGIN
+  if(!to.meta.authRequired && !auth.isLoggedIn){
+    next({
+      path: '/WA01010100', //Login
+      params: { nextUrl: to.fullPath }
+    })
+  }else{
+    next();
   }
+  // const publicPages = ['/WA01010100', '/register'];
+  // const authRequired = !publicPages.includes(to.path);
+  // // const loggedIn = localStorage.getItem('user');
+  // const loggedIn = connectAPI.getToken()
 
-  next();
+  // if (authRequired && !loggedIn) {
+  //   return next('/WA01010100'); //LOGIN
+  // }
+
+  // next();
 })
