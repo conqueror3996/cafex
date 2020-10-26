@@ -2,7 +2,7 @@
   <div id="container">
     <header class="clearfix header">
       <a class="logo" href="/WA01010300"
-        ><img class="mw100" :src="img" alt="logo CafeX"
+        ><img class="mw100" :src="imgLogo" alt="logo CafeX"
       /></a>
       <div class="account">
         <ul class="list_account-action">
