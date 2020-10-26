@@ -16,9 +16,25 @@ function isDate(value) {
     return reg.test(value);
 }
 
+function isPassword(value) {
+    let count = 0;
+    if(value.length >= 8 && value.length <= 20) {
+        if(value.match(".*\\d.*"))  count++;
+        if(value.match(".*[a-z].*")) count++;
+        if(value.match(".*[!#%&'\/=~`*+?{}^$|\-].*")) count++;
+    }
+    return count === 3
+
+    // console.log(value);
+    // const reg = new RegExp("^(?:(?:(?=.*[0-9])(?=.*[a-z])) |(?:(?=.*[a-z])(?=.*[!#%&'\/=~`*+?{}^$\-|])) |(?:(?=.*[0-9])(?=.*[!#%&'\/=~`*+?{}^$\-|])) |(?:(?=.*[0-9])(?=.*[a-z])(?=.*[!#%&'\/=~`*+?{}^$\-|]))).{8,32}$");
+    // console.log(reg.test(value));
+    // return reg.test(value);
+}
+
 export default {
     isHiraFull,
     isKanaFull,
     isKanaHalf,
-    isDate
+    isDate,
+    isPassword
 }

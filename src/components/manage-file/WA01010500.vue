@@ -1,7 +1,12 @@
 <template>
   <div class="manage-file-conent">
     <div class="info">
-      <div class="info-title">お客様情報</div>
+      <div class="info-title">
+        <p>お客様情報</p>
+        <b-button @click="$router.go(-1)">
+          <img src="src/assets/images/back-icon.png" /><p>モード選択画面に戻る</p>
+        </b-button>
+      </div>
       <div class="info-table">
         <b-table :fields="userCols" :items="user">
           <template #cell(fullname)="data">
@@ -71,7 +76,8 @@
               height="48"
             />
           </label>
-          <input type="file" value="ファイルアップロード" id="file"/>
+          <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" />
+           <!-- multiple="multiple" -->
         </div>
       </div>
       <div class="panel"></div>
@@ -81,6 +87,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import validate from '../../validate/validate.js';
 
 export default {
   data() {
@@ -180,6 +187,9 @@ export default {
     this.user[0] = this.detail 
   },
   methods: {
+      ...mapActions("alert", {
+          error: "error",
+      }),
       deleteFile(filename) {
           console.log(filename)
       },
@@ -194,6 +204,24 @@ export default {
       },
       closeModal() {
           this.modalItem = '';
+      },
+      uploadFile(event) {
+        const files = event.target.files;
+        let errorMessage = '';
+        for (var i = 0; i < files.length; i++)
+        {
+          if(files[i].size/1024/1024 > 100)
+          {
+            errorMessage = validate.getMessageErrorFromCode("S02011");
+            break;
+          }
+        }
+        
+        if(errorMessage !== '') {
+            this.error(errorMessage)
+        } else {
+            this.error('')
+        }
       }
   },
 };
@@ -276,7 +304,54 @@ export default {
 }
 
 .manage-file-conent .info-title {
+  width: 100%;
+  display: inline-block;
+}
+
+.manage-file-conent .info-title p {
   padding-bottom: 0.5rem;
+  text-align: left;
+  float: left;
+  clear: right;
+  margin-bottom: 0px;
+  padding-top: 1.25rem;
+}
+
+.manage-file-conent .info-title button {
+  background-color: #00897B;
+  float: right;
+  border-radius: .5rem;
+  width: 175px;
+  height: 41px;
+  font-size: 12px;
+}
+
+.info-title button img {
+  float: left;
+}
+
+.info-title button p {
+  color: #fff;
+  font-size: 12px;
+  padding: .25rem 0 .75rem .25rem !important;
+  margin-bottom: 0px;
+  float: unset !important;
+}
+
+.info-title button:hover {
+    color: #fff;
+    background-color: #02ad9c;
+    border-color: #9ed9d3;
+}
+
+.info-title button.focus, .info-title button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(158, 217, 211,.5);
+}
+
+.info-title button:not(:disabled):not(.disabled).active, .info-title button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #02ad9c;
+    border-color: #9ed9d3;
 }
 
 .manage-file-conent .info-table {

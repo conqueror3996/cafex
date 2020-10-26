@@ -83,7 +83,7 @@ div.modal#modal-reg .modal-content {
 <style scoped>
 .confirm-info {
   padding: 1rem 1rem .5rem 1rem;
-  font-size: 13px;
+  font-size: 14px;
   text-align: left;
   height: 407px;
   width: 471px;

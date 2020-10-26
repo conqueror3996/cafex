@@ -175,6 +175,8 @@ export default {
 .main-content .form-button button{
     width: 172px;
     height: 44px;
+    margin: 0 2rem;
+    border-radius: .5rem;
 }
 
 .main-content .field-request {

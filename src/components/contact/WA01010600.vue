@@ -31,15 +31,45 @@
       </div>
       <div class="action">
         <div class="action-panel">
-          <b-button class="bg-transparent">
-            <span class="">シミュレーション</span>
+          <b-button class="bg-transparent small-font" @click="showSimulation = true; showDescription = false; showContract = false">
+            <span>ライフプラン<br /> シミュレーション</span>
           </b-button>
-          <b-button class="bg-transparent">
-            <span class="">商品説明</span>
+          <b-button class="bg-transparent" @click="showSimulation = false; showDescription = true; showContract = false">
+            <span>商品説明</span>
           </b-button>
-          <b-button class="bg-transparent">
-            <span class="">契約申込</span>
+          <b-button class="bg-transparent" @click="showSimulation = false; showDescription = false; showContract = true">
+            <span>契約申込</span>
           </b-button>
+        </div>
+        
+        <div class="content-action">
+          <div class="simulation" v-if="showSimulation">
+            <b-button class="bg-transparent">
+              <span>代行入力</span>
+            </b-button>
+          </div>
+          <div class="description" v-if="showDescription">
+            <label>ページ</label>
+            <div class="input-group">
+              <select class="custom-select" id="select-page">
+                <option value=""></option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <b-button variant="primary">
+              <span>共有</span>
+            </b-button>
+            <div class="document-preview">
+
+            </div>
+          </div>
+          <div class="contract" v-if="showContract">
+            <b-button class="bg-transparent">
+              <span>代行入力</span>
+            </b-button>
+          </div>
         </div>
       </div>
     </div>
@@ -51,7 +81,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      showSimulation: true,
+      showDescription: false,
+      showContract: false
+    }
+  }
+};
 </script>
 
 <style>
@@ -136,11 +174,79 @@ export default {};
   text-align: center;
 }
 
+.action-panel button {
+  width: 29%;
+  height: 3rem;
+  line-height: 1rem;
+}
+
+.action-panel button.small-font {
+  width: 37%;
+}
+
+.action-panel .small-font span {
+  font-size: 10px;
+}
+
 .action-panel span {
   font-size: 0.75rem;
   color: black;
 }
 
+.action-panel button:hover {
+    color: #fff;
+    background-color: #BCD9D6 !important;
+}
+
+.action-panel button.focus, .action-panel button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(155, 224, 217,.5);
+}
+
+.action-panel button:not(:disabled):not(.disabled).active, .action-panel button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #BCD9D6 !important;
+}
+
+.simulation {
+  text-align: center;
+  margin-top: 8rem;
+}
+
+.simulation button {
+  color: #000000;
+  border-radius: 1rem;
+}
+
+.contract {
+  text-align: center;
+  margin-top: 8rem;
+}
+
+.contract button {
+  color: #000000;
+  border-radius: 1rem;
+}
+
+.description {
+  padding: 0 1rem;
+}
+
+.description label{
+  margin-bottom: 0px;
+}
+
+.description button{
+  margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.description .document-preview {
+  margin-top: .75rem;
+  background-color: #cacfce;
+  width: 100%;
+  height: 200px;
+}
 @media (max-width: 1400px) {
   .screen-contact {
     width: 100%
@@ -172,6 +278,14 @@ export default {};
   .action-panel span {
     font-size: 11px;
     color: black;
+  }
+
+  .action-panel button {
+    width: 28%;
+  }
+
+  .action-panel button.small-font {
+    width: 40%;
   }
 };
 </style>

@@ -4,11 +4,11 @@
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
                 <label>メールアドレス</label>
-                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }">
+                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" maxlength="190">
             </div>
             <div class="form-group">
                 <label>パスワード</label>
-                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }">
+                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }" maxlength="20">
             </div>
             <div class="form-group">
                 <button type="submit" :disabled="status.loggingIn" class="btn btn-primary btn-login">Sign In</button>
