@@ -9,13 +9,22 @@ const state = {
 };
 
 const actions = {
-    getAll({ commit }) {
+    getAll({ commit, dispatch }) {
         commit('getAllRequest');
 
         userService.getAll()
             .then(
-                users => commit('getAllSuccess', users),
-                error => commit('getAllFailure', error)
+                info => {
+                    console.log(info.data.code)
+                    if (info.data.code) {
+                        dispatch('alert/error', info.data.code, { root: true });
+                        commit('getAllFailure', info)
+                    } else {
+                        commit('getAllSuccess', info)
+                    }
+                }
+                // users => commit('getAllSuccess', users),
+                // error => commit('getAllFailure', error)
             );
     },
 
@@ -49,7 +58,7 @@ const mutations = {
         state.all = { loading: true };
     },
     getAllSuccess(state, users) {
-        state.all = { items: users.Repositories };
+        state.all = { items: users.data.Consumers };
     },
     getAllFailure(state, error) {
         state.all = { error };
