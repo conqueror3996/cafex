@@ -3,7 +3,7 @@
     <b-tabs card align="right">
       <template #tabs-start>
         <li role="presentation" class="nav-item align-self-center">
-          <button style="border: none;" @click="ok()"><img :src="imgManageMode" alt=""></button>
+          <b-button class="button-manage-mode" variant="primary" @click="ok()"><img class="img-manage-mode" :src="imgManageMode" alt="">モード選択画面に戻る</b-button>
         </li>
       </template>
       <b-tab title="従業員一覧">
@@ -137,9 +137,9 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table">
+            <!-- <div class="bottom-table">
                 <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
-            </div>
+            </div> -->
           </div>
           <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
         </b-card-text>
@@ -161,7 +161,7 @@ import WA01020410 from '../edit-user/WA01020410.vue';
 export default {
   data() {
     return {
-      imgManageMode: './static/img/button_manage_mode.png',
+      imgManageMode: './static/img/back-manage.png',
       imgSearchIcon: './static/img/search-icon.png',
       imgEditIcon: './static/img/edit-icon.png',
       imgDeleteIcon: './static/img/delete-icon.png',
@@ -244,6 +244,17 @@ export default {
 </script>
 
 <style>
+
+.btn-primary {
+    color: #fff;
+    background-color: #00897B;
+    border-color: #00897B;
+}
+
+.img-manage-mode {
+  padding-right: 5px;
+}
+
 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;

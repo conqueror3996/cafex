@@ -13,6 +13,7 @@
                   class="border-right-0"
                   maxlength=38
                   v-model="searchString"
+                  autofocus
                 ></b-form-input>
                 <b-input-group-append>
                   <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
@@ -170,6 +171,19 @@ export default {
       ],
       selectedItem: '',
       isEdit: false,
+      users: {
+        items: [{
+          fullname: 'Khang',
+                namekana: '',
+                age: '24',
+                birthday: '1996/03/09',
+                postalcode: '3424',
+                address: '32/2',
+                phone1: '19001560',
+                phone2: '19001560',
+                memo: 'manhkhang@vn-cubesystem.com'
+        },]
+      },
     };
   },
   components: {
@@ -179,13 +193,14 @@ export default {
   computed: {
     ...mapState({
       account: (state) => state.account,
-      users: (state) => state.users.all,
+      //users: (state) => state.users.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
+      
     }),
   },
   created() {
-    this.getAllUsers();
+    //this.getAllUsers();
     this.changePasswordState = false
     console.log(this.users)
     // console.log(this.changePasswordState)
@@ -234,13 +249,22 @@ export default {
 </script>
 
 <style>
+.home-screen .card-header {
+  font-size: 18px;
+  color: #0091FF;
+}
+
 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
 }
 
 .home-screen .nav-link.active {
-  color: #007bff !important;
+  color: #0091FF !important;
+}
+
+.home-screen .nav-tabs a:hover {
+    color: #0091FF;
 }
 
 .home-screen .card-header {

@@ -16,7 +16,6 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import WA01010321 from './WA01010321.vue'
 import validate from '../../../validate/validate.js'
 import userValidatePattern from '../../../validate/user/user-validate'
 import errormessage from '../../../validate/errormessage';
@@ -28,7 +27,7 @@ export default {
         }
     },
     components: {
-        WA01010321,
+        
     },
     computed: {
         ...mapState({
@@ -74,6 +73,7 @@ export default {
 
 .div-custom-alert {
     margin-bottom: 150px;
+
 }
 
 .div-button-confirm {
@@ -91,6 +91,14 @@ export default {
     border-radius: 10px;
 }
 
+.inner .alert {
+    margin-top: 1rem;
+    white-space: pre-line;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .5rem;
+}
 /* .main-content {
     display: flex;
     justify-content: center;

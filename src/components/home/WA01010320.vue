@@ -3,40 +3,40 @@
         <b-form @submit.stop.prevent class="form-info">
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname"></b-input></div>
+                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname" placeholder="山田太郎" autofocus></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="namekana">カナ :</label></div>
-                <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
+                <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana" placeholder="ヤマダタロウ"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="birthday">生年月日 :</label></div>
-                <div><b-input class="input-form" type="text" id="birthday" maxlength=10 v-model="user.birthday"></b-input></div>
+                <div><b-input class="input-form" type="text" id="birthday" maxlength=10 v-model="user.birthday" placeholder="YYYY/MM/DD"></b-input></div>
             </div>
             
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phone1">電話番号1 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="user.phone1"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="user.phone1" placeholder="000xxxxxxxx"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="phone2">電話番号2 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone2" maxlength=12  v-model="user.phone2"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone2" maxlength=12  v-model="user.phone2" placeholder="000xxxxxxxx"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email"></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email" placeholder="example@piyo.com"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="postal">郵便番号 :</label></div>
-                <div><b-input class="input-form" type="text" id="postal" maxlength=7 v-model="user.postal"></b-input></div>
+                <div><b-input class="input-form" type="text" id="postal" maxlength=7 v-model="user.postal" placeholder="0000000"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="address">住所 : </label></div>
-                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="user.address"></b-input></div>
+                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="user.address" placeholder="東京都〇〇区〇〇町１−８−２パーク〇〇〇　XXX号"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="memo">メモ :</label></div>
-                <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="user.memo"></b-input></div>
+                <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="user.memo" placeholder="コメントコメントコメントコメントコメント"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button variant="primary" @click="handleShow()">確認</b-button>
@@ -140,6 +140,8 @@ export default {
 .main-content .form-button button{
     width: 172px;
     height: 44px;
+    margin: 0 2rem;
+    border-radius: .5rem;
 }
 
 .main-content .field-request {

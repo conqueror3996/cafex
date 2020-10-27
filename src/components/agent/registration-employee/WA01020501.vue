@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapstate, mapactions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
     data () {
@@ -36,8 +36,8 @@ export default {
         }
     },
     computed: {
-        ...mapstate('account', ['status']),
-        ...mapstate({
+        ...mapState('account', ['status']),
+        ...mapState({
             account: state => state.account,
             users: state => state.users.all
         })

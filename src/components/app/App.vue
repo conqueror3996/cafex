@@ -143,7 +143,7 @@ export default {
 body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 #container{width:100%;margin:auto;}
 .inner{max-width: 1327px;margin:auto;}
-.inner .alert{margin-top:1rem;white-space: pre-line;}
+.inner .alert{margin-top:1rem;white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
 .logo{display:inline-block;padding:10px 0px 0px 10px;width:25%;float:left;}
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
@@ -181,6 +181,13 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .table-active > td,
 .table-active > th {
   background-color: rgba(203, 245, 229, 0.4);
+}
+
+.table-hover .table-active:hover>td, .table-hover .table-active:hover>th {
+  background-color: rgba(203, 245, 229, 0.4);
+}
+:focus {
+    outline: -webkit-focus-ring-color auto 0px;
 }
 /* modal */
 .modal-backdrop {

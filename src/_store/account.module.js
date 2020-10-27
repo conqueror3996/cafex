@@ -1,5 +1,5 @@
 import { userService } from '../_services';
-import { router } from '../_helpers';
+import { connectAPI, router } from '../_helpers';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const state = user
@@ -12,15 +12,19 @@ const actions = {
     
         userService.login(username, password)
             .then(
-                user => {
-                    commit('loginSuccess', user);
-                    router.push('/WA01010300');
-                },
-                error => {
-                    commit('loginFailure', error);
-                    dispatch('alert/error', error, { root: true });
+                info => {
+                    if (info.data) {
+                        if (info.data.code) {
+                            dispatch('alert/error', info.data.code, { root: true });
+                            commit('getAllFailure', info)
+                        } else {
+                            commit('getAllSuccess', info)
+                            // router.push('/WA01010300');
+                        }
+                    }
                 }
             );
+        
     },
     logout({ commit }) {
         userService.logout();

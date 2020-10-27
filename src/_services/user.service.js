@@ -1,6 +1,5 @@
 import config from 'config';
-import { authHeader } from '../_helpers';
-import Axios from "axios";
+import { authHeader, auth, allAPI } from '../_helpers';
 
 export const userService = {
     login,
@@ -14,28 +13,14 @@ export const userService = {
 };
 
 function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
-
-    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
-            return user;
-        });
+    let body =  JSON.stringify({ username, password })
+    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+    return auth.sendRequest('POST', allAPI.employee_login, body, headers)
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    auth.clearAuthToken();
 }
 
 function register(user) {
@@ -48,23 +33,34 @@ function register(user) {
     return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
+// function getAll() {
+//     // const requestOptions = {
+//     //     method: 'GET',
+//     //     // headers: authHeader()
+//     // };
+//     // return fetch(`${config.apiUrl}/v1/consumers`, requestOptions).then(handleResponse);
+
+//     const requestOptions = {
+//         method: 'GET',
+//         url: `${config.apiUrl}/api/index`,
+//         data: JSON.stringify(data),
+//         headers: {
+//             'Content-Type': 'application/json; charset=UTF-8',
+//          }
+//       }
+//     return Axios(requestOptions).then(handleResponse)
+
+// }
 function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        // headers: authHeader()
-    };
-    return fetch(`${config.apiUrl}/v1/consumers`, requestOptions).then(handleResponse);
-
     // const requestOptions = {
-        // method: 'GET',
-        // url: `${config.apiUrl}/api/index`,
-        // data: JSON.stringify(data),
-        // headers: {
-        //     'Content-Type': 'application/json; charset=UTF-8',
-        //  }
-    //   }
-    // return Axios(requestOptions).then(handleResponse)
-
+    //     method: 'get',
+    //     url: `${config.apiUrl}/v1/consumers`,
+    // };
+    // return Axios(requestOptions);
+    // headers = {
+    //     Cookie: 
+    // }
+    return connectAPI.sendRequest('GET', `${config.apiUrl}/v1/consumers`,null, null)
 }
 
 

@@ -4,11 +4,11 @@
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
                 <label>メールアドレス</label>
-                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }">
+                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" maxlength="190" autofocus>
             </div>
             <div class="form-group">
                 <label>パスワード</label>
-                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }">
+                <input type="password" v-model="password" name="password" class="form-control" :class="{ 'is-invalid': submitted && !password }" maxlength="20">
             </div>
             <div class="form-group">
                 <button type="submit" :disabled="status.loggingIn" class="btn btn-primary btn-login">Sign In</button>
@@ -38,7 +38,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
+import { connectAPI } from '../../_helpers';
 export default {
     data () {
         return {
@@ -56,7 +56,8 @@ export default {
     },
     created () {
         // reset login status
-        this.logout();
+        //this.logout();
+        
     },
     methods: {
         ...mapActions('account', ['login', 'logout']),
