@@ -254,10 +254,12 @@ export default {
 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
+  background-color: #D8D8D8;
 }
 
 .home-screen .nav-link.active {
   color: #0091FF !important;
+  background-color: #ffffff;
 }
 
 .home-screen .nav-tabs a:hover {

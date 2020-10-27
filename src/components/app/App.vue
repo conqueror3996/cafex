@@ -1,10 +1,13 @@
 <template>
   <div id="container">
     <header class="clearfix header">
-      <a class="logo" href="/WA01010300"
+      <a :class="($router.currentRoute.path !== '/WA01010600')?'logo':'logo-small'" href="/WA01010300"
         ><img class="mw100" :src="img" alt="logo CafeX"
       /></a>
-      <div class="account">
+      <div class="contact" v-if="$router.currentRoute.path === '/WA01010600'">
+        <p>お客様対応画面 &nbsp;&nbsp;&nbsp;   <a href="#">ヘルプ</a></p>
+      </div>
+      <div class="account" v-if="account.user && $router.currentRoute.path !== '/WA01010600'">
         <ul class="list_account-action">
           <li><a href="/WA01010200">パスワード変更</a></li>
           <li><a href="/WA01010100">ログアウト</a></li>
@@ -142,8 +145,9 @@ export default {
 body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 #container{width:100%;margin:auto;}
 .inner{max-width: 1327px;margin:auto;}
-.inner .alert{margin-top:1rem;white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
-.logo{display:inline-block;padding:10px 0px 0px 10px;width:25%;float:left;}
+.inner .alert{white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
+.logo{display:inline-block;padding:10px 0px 0px 10px;width:15%;float:left;}
+.logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;float:left;}
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;background:url(/src/assets/images/my-account.png) right 40px center no-repeat;}
@@ -155,6 +159,9 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .list_account-action li:hover{background:#eee;}
 .list_account-action li a{color:#000;}
 .list_account-action li a:hover{text-decoration:none;}
+.contact {max-width: 500px; float: left; margin-left: 3rem;}
+.contact p{font-size: 34px; font-weight: 200; font-family: "HiraginoSans-W3"; padding-top: 2.75rem; margin-bottom: 0px;}
+.contact a {color: #000; text-decoration: underline; font-size: 20px;}
 
 /*login*/
 .box-login{width:484px;margin:20px auto 0px auto;background:#fff;border-radius:10px;padding:3rem;box-sizing:border-box;}

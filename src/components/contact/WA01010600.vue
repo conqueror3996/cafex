@@ -100,6 +100,7 @@ export default {
   padding-right: 1rem;
   width: 1410px;
   height: 710px;
+  margin-top: .5rem;
 }
 
 .side-left {
@@ -175,17 +176,13 @@ export default {
 }
 
 .action-panel button {
-  width: 29%;
+  width: 30%;
   height: 3rem;
   line-height: 1rem;
 }
 
-.action-panel button.small-font {
-  width: 37%;
-}
-
 .action-panel .small-font span {
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .action-panel span {

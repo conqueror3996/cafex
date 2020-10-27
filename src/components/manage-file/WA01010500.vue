@@ -3,7 +3,7 @@
     <div class="info">
       <div class="info-title">
         <p>お客様情報</p>
-        <b-button @click="$router.go(-1)">
+        <b-button variant="primary" @click="$router.push('/WA01010400')">
           <img src="src/assets/images/back-icon.png" /><p>モード選択画面に戻る</p>
         </b-button>
       </div>
@@ -229,7 +229,6 @@ export default {
 
 <style>
 .manage-file-conent {
-  padding-top: 2rem;
   margin: 0 auto;
 }
 /* .manage-file-conent {
@@ -309,7 +308,6 @@ export default {
 }
 
 .manage-file-conent .info-title p {
-  padding-bottom: 0.5rem;
   text-align: left;
   float: left;
   clear: right;
@@ -318,12 +316,11 @@ export default {
 }
 
 .manage-file-conent .info-title button {
-  background-color: #00897B;
+  background-color: #0091FF;
   float: right;
   border-radius: .5rem;
   width: 175px;
   height: 41px;
-  font-size: 12px;
 }
 
 .info-title button img {
@@ -333,14 +330,15 @@ export default {
 .info-title button p {
   color: #fff;
   font-size: 12px;
-  padding: .25rem 0 .75rem .25rem !important;
+  padding: .4rem 0 .75rem .25rem !important;
   margin-bottom: 0px;
   float: unset !important;
+  font-size: 11px;
 }
 
-.info-title button:hover {
+/* .info-title button:hover {
     color: #fff;
-    background-color: #02ad9c;
+    background-color: #0091FF;
     border-color: #9ed9d3;
 }
 
@@ -350,9 +348,9 @@ export default {
 
 .info-title button:not(:disabled):not(.disabled).active, .info-title button:not(:disabled):not(.disabled):active {
     color: #fff;
-    background-color: #02ad9c;
+    background-color: #0091FF;
     border-color: #9ed9d3;
-}
+} */
 
 .manage-file-conent .info-table {
   background-color: #ffffff;
@@ -365,11 +363,12 @@ export default {
 .detail {
   display: flex;
   flex-direction: row;
-  margin: 2rem auto auto 0;
+  margin: 1rem auto auto 0;
   background-color: #ffffff;
   border-radius: 0.5rem;
   width: 100%;
   height: 538px;
+  border: 2px solid #cacaca;
 }
 
 .file-content {
