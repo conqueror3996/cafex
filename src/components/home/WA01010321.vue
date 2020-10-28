@@ -60,6 +60,7 @@ export default {
 div.modal#modal-reg .modal-content {
   width: 594px;
   height: 528px;
+  margin: 0 auto;
 }
 
 .modal-body {

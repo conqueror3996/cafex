@@ -279,6 +279,7 @@ export default {
 .modal-content {
   width: 501px;
   height: 149px;
+  margin: 0 auto;
 }
 
 .modal-body {
