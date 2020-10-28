@@ -3,7 +3,7 @@
     <b-tabs card align="right">
       <template #tabs-start>
         <div class="div-back-button nav-item align-self-center">
-          <b-button class="button-manage-mode" @click="ok()"><img class="img-back-icon" :src="imgManageMode" alt=""><label>モード選択画面に戻る</label></b-button>
+          <b-button class="button-manage-mode" href="/WA01020300"><img class="img-back-icon" :src="imgManageMode" alt=""><label>モード選択画面に戻る</label></b-button>
         </div>
       </template>
       <b-tab title="従業員一覧">
@@ -244,20 +244,29 @@ export default {
 </script>
 
 <style>
+
+.inner .alert {
+    white-space: pre-line;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .5rem;
+}
+
 .button-manage-mode img {
   padding-right: 5px;
 }
 
 .div-back-button {
   margin-right: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
 }
 
 .button-manage-mode {
   background-color: #0091FF;
   border-radius: 10px;
   width: 230px;
-  height: 38px;
+  height: 37px;
   border: none;
 }
 

@@ -10,7 +10,7 @@
                 <p style="font-size: 18px; margin-top: 20px;">従業員の登録が完了しました</p>
             </div>
             <div class="form-group div-form-button">
-                <a href="#" style="color: #0091ff">従業員一覧画面に戻る</a>
+                <a href="/WA01020400" style="color: #0091ff">従業員一覧画面に戻る</a>
                 <img v-show="status.loggingin" src="data:image/gif;base64,r0lgodlheaaqapiaap///waaamlcwkjcqgaaagjiyokcgpkskih/c05fvfndqvbfmi4waweaaaah/hpdcmvhdgvkihdpdgggywphegxvywquaw5mbwah+qqjcgaaacwaaaaaeaaqaaadmwi63p4wyklre2mioggznadomgyjrbexwroumcg2lmdewnhqlvsyod2mbzkydadka+diaaah+qqjcgaaacwaaaaaeaaqaaadnai63p5ojcegg4qmu7dmikrxqlfuydezigbmrvsaqhwctxxf7weyb4ag1xjihkmzsiukkhiaifkecqoaaaasaaaaabaaeaaaazyiujijk8pbyjdmlfyvbovjha70gu7xsujhmktwhpakzlo9hmaokwjz7rf8aypddzkpzbqfvwqaifkecqoaaaasaaaaabaaeaaaazmiumilk8oyhphsnfzfhyumcyuhdaqxridhhbgqrokw0r8dyljd8z0fmdgsgo/iphi5taaaifkecqoaaaasaaaaabaaeaaaaziiunink0rnzbtwgpnmgqwmdsngxgjuliweur5owuipz8paeame6twfwyysgo/ipfksaaah+qqjcgaaacwaaaaaeaaqaaadmwi6imkqorfjdoe82p4wgccc4ceuqradylesojembgsuc2g7sdx3lqgbmlajibufbslkaaah+qqjcgaaacwaaaaaeaaqaaadmgi63p7wcrhznfvdmghu2nfwlwci3wgc3tswhufgxtaukgcbtgenbmjaejsxgmlwzpeaach5bakkaaaalaaaaaaqabaaaamyclrc/jdksatlqtsckdcecajdii7hcq4emtcpyrcuubjcyrghvtqlaib1yhicnlsrkaaaowaaaaaaaaaaaa==" />
                 <!-- <router-link to="/register" class="btn btn-link">register</router-link> -->
             </div>
