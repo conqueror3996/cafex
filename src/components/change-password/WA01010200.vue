@@ -59,8 +59,8 @@ export default {
     computed: {
         ...mapState('employees', ['status']),
         ...mapState({
-            employee: state => state.employee,
-            users: state => state.users.all,
+            employees: state => state.employees,
+            consumers: state => state.consumers.all,
             // changePasswordState: (state) => state.changePasswordState
         })
     },

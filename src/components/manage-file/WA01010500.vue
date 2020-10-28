@@ -183,7 +183,7 @@ export default {
   },
   computed: {
     ...mapState({
-      detail: (state) => state.users.single
+      detail: (state) => state.consumers.single
     }),
   },
   created() {

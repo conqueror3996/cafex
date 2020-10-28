@@ -7,7 +7,7 @@
       <div class="contact" v-if="$router.currentRoute.path === '/WA01010600'">
         <p>お客様対応画面 &nbsp;&nbsp;&nbsp;   <a href="#">ヘルプ</a></p>
       </div>
-      <div class="account" v-if="account.user && $router.currentRoute.path !== '/WA01010600'">
+      <div class="account" v-if="employees.employee && $router.currentRoute.path !== '/WA01010600'">
         <ul class="list_account-action">
           <li><a href="/WA01010200">パスワード変更</a></li>
           <li><a href="/WA01010100">ログアウト</a></li>
@@ -68,7 +68,7 @@ export default {
   computed: {
     ...mapState({
       alert: (state) => state.alert,
-      employee: (state) => state.employee,
+      employees: (state) => state.employees,
       // changePasswordState: (state) => state.changePasswordState
     }),
   },
