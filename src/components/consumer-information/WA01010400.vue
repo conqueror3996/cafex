@@ -151,7 +151,7 @@ export default {
 }
 
 .title-information button {
-  background-color: #00897B;
+  background-color: #0091FF;
   float: right;
   border-radius: .5rem;
   width: 175px;
@@ -165,12 +165,12 @@ export default {
 
 .title-information button p {
   color: #fff;
-  font-size: 12px;
-  padding: .25rem 0 .75rem .25rem;
+  font-size: 11px;
+  padding: .4rem 0 .75rem .25rem;
   margin-bottom: 0px;
 }
 
-.title-information button:hover {
+/* .title-information button:hover {
     color: #fff;
     background-color: #02ad9c;
     border-color: #9ed9d3;
@@ -184,7 +184,7 @@ export default {
     color: #fff;
     background-color: #02ad9c;
     border-color: #9ed9d3;
-}
+} */
 /* .div-login {
     display: flex;
     justify-content: center;
