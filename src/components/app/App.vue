@@ -14,12 +14,12 @@
           <li><a href="/WA01010100">ログアウト</a></li>
         </ul>
       </div>
+			<div v-if="alert.message" :class="`alert alert-message pre-formatted ${alert.type}`">
+				<p>{{alert.message}}</p>
+			</div>
     </header>
 
     <div class="inner">
-      <div v-if="alert.message" :class="`alert alert-custom ${alert.type}`">
-        {{ alert.message }}
-      </div>
       <router-view></router-view>
     </div>
 
@@ -140,10 +140,10 @@ export default {
   display: inline-block;
   padding: 10px 0 0 10px;
 }
-
+*/
 .pre-formatted {
-  white-space: pre;
-} */
+  white-space: pre-line;
+} 
 body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 #container{width:100%;margin:auto;}
 .inner{max-width: 1327px;margin:auto;}
@@ -156,7 +156,8 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .header{position:relative;left:0px;right:0px;width:100%;}
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;background:url(/src/assets/images/my-account.png) right 40px center no-repeat;}
 .account:hover .list_account-action{opacity:1;transition:0.2s all;visibility:visible;}
-.alert-message{max-width:500px;position:absolute;left:0px;right:0px;bottom:0px;margin:auto;z-index:99}
+.alert-message{max-width:500px;position: relative;;left:0px;right:0px;bottom:0px;top:10px;margin:auto;z-index:99}
+.alert-message p {margin-bottom: 0px;}
 .list_account-action{width:162px;position:absolute;background:#fff;border-radius:5px;right:20px;top:55px;list-style:none;border:1px solid #b1acac;padding:0px;visibility:hidden; opacity:0;transition:0.2s all;}
 .list_account-action li{padding:10px 0px 10px 15px;border-bottom:1px solid #e0e0e0;}
 .list_account-action li:last-child{border-bottom:none}
