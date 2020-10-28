@@ -18,7 +18,7 @@
 import { mapState, mapActions } from "vuex";
 import WA01010321 from './WA01010321.vue'
 import validate from '../../../validate/validate.js'
-import userValidatePattern from '../../../validate/user/user-validate'
+import userValidatePattern from '../../../validate/consumer/consumer-validate'
 import errormessage from '../../../validate/errormessage';
 export default {
     data() {

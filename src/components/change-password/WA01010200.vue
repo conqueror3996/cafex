@@ -56,9 +56,9 @@ export default {
         }
     },
     computed: {
-        ...mapState('account', ['status']),
+        ...mapState('employees', ['status']),
         ...mapState({
-            account: state => state.account,
+            employee: state => state.employee,
             users: state => state.users.all,
             // changePasswordState: (state) => state.changePasswordState
         })
@@ -67,19 +67,16 @@ export default {
         // this.changePasswordState = true
     },
     methods: {
-        ...mapActions('account', ['changePassword']),
+        ...mapActions('employees', ['changePassword']),
         ...mapActions("alert", { error: "error" }),
         handleSubmit (e) {
             this.msg = ''
             const data = {
-                user_id: this.account.id,
-                user_password: this.newPassword,
-                user_confirm_password: this.confirmPassword
+                employee_current_password: this.currentPassword,
+                employee_new_password: this.newPassword,
+                employee_confirm_password: this.confirmPassword
             }
-            // if(this.currentPassword != this.account.user.username) {
-            //     this.msg += '現在のパスワードが間違っています\n'
-            //     //return
-            // }
+
             if(!this.currentPassword || !this.newPassword || !this.confirmPassword)
                 return;
             

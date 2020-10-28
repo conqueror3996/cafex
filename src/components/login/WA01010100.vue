@@ -49,9 +49,9 @@ export default {
         }
     },
     computed: {
-        ...mapState('account', ['status']),
+        ...mapState('employees', ['status']),
         ...mapState({
-            account: state => state.account,
+            employees: state => state.employee,
         })
     },
     created () {
@@ -60,7 +60,7 @@ export default {
         
     },
     methods: {
-        ...mapActions('account', ['login', 'logout']),
+        ...mapActions('employees', ['login', 'logout']),
         handleSubmit (e) {
             
             this.submitted = true;
@@ -68,7 +68,7 @@ export default {
             if (username && password) {
                 this.login({ username, password })
             } else {
-                this.account.err = 'メールアドレス、もしくはパスワードが間違'
+                this.employee.err = 'メールアドレス、もしくはパスワードが間違'
                 return
             }
         }

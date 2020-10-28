@@ -1,7 +1,8 @@
 import axios from "axios";
 import moment from 'moment';
+import config from 'config';
 import decode from 'jwt-decode';
-
+const Axios = require("axios").default;
 
 const AUTH_TOKEN_KEY = 'authToken';
 
@@ -13,29 +14,61 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
+    sendRequestForm
+}
 
+function sendRequestForm(method, url, requestData, inputHeader = {}) {
+    var headers =  { 
+        ...inputHeader,
+        'User-Agent' : '',
+        'X-API-Key' : config.API_KEY,
+        'X-CX-Date' : formatDateTime(new Date()),
+        'X-CX-Channel' : '0',
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date()),
+        'Access-Control-Expose-Headers': 'set-cookie'
+    };
+    
+    const requestOptions = {
+        method,
+        url,
+        data: requestData,
+        headers,
+    };
+
+    // const configAxios = {
+    //     withCredentials: true,
+    //     maxRedirects: 0,
+    //     validateStatus: function(status) {
+    //         return status >= 200 && status <= 303;
+    //     },
+    //     headers
+    // }
+    
+    return axios(requestOptions)
+    // return Axios.post(url, requestData, configAxios)
 }
 
 function sendRequest(method, url, requestData, inputHeader = {}) {
     var headers =  { 
         ...inputHeader,
         'User-Agent' : '',
-        'X-API-Key' : '',
+        'X-API-Key' : config.API_KEY,
         'X-CX-Date' : formatDateTime(new Date()),
         'X-CX-Channel' : '0',
-        'X-CX-Client-Version' : '1.0.0',
-        'X-CX-Interaction-Id' : ''
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date())
     };
     
     const requestOptions = {
         method,
         url,
-        requestData,
-        headers
+        body: requestData,
+        headers 
     };
-    return axios(requestOptions)
+    // return axios(requestOptions)
+    return axios.post(url, requestData, { withCredentials: true, headers: headers})
 }
-
 
 function setAuthToken(token) {
     axios.defaults.headers.common['Cookie'] = `${token}`

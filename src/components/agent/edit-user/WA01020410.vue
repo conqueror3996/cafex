@@ -53,7 +53,7 @@ import { mapState, mapActions } from "vuex";
 import WA01020411 from './WA01020411.vue';
 
 import validate from '../../../validate/validate'
-import userValidatePattern from '../../../validate/user/user-validate'
+import userValidatePattern from '../../../validate/consumer/consumer-validate'
 import errormessage from '../../../validate/errormessage';
 
 export default {

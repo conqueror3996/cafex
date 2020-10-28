@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import WA01010300 from '../components/home/WA01010300'
+import WA01010310 from '../components/edit-user/WA01010310'
 import WA01010100 from '../components/login/WA01010100'
 import RegisterPage from '../components/register/RegisterPage'
 import WA01010200 from '../components/change-password/WA01010200'
@@ -29,7 +30,15 @@ export const router = new Router({
       meta : { 
         authRequired : true
       } 
-    }, // home
+    }, // dashboard
+    { 
+      path: '/WA01010310/:consumerId', 
+      name: 'WA01010310',
+      component: WA01010310, 
+      meta : { 
+        authRequired : true
+      } 
+    }, // edit user
     { 
       path: '/WA01020300', 
       name: 'WA01020300',

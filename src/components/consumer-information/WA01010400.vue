@@ -1,6 +1,11 @@
 <template>
   <div class="customer-info-screen">
-        <p class="title-information">顧客情報</p>
+        <div class="title-information">
+           <p >顧客情報</p>
+           <b-button @click="$router.push('/WA01010300')">
+             <img :src="imgBackIcon" /><p>モード選択画面に戻る</p>
+           </b-button>
+        </div>
         <div class="content-information">
             <div class="information">
                 <p style="margin: 0;">氏名：{{ customer_detail.fullname }}</p> 
@@ -24,7 +29,7 @@
             </div>
             <div class="form-group"> 
                 <b-button variant="link" class="button-file" @click="goTo(customer_detail)"><img :src="imgButtonFile"></b-button>
-                <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonFile"></b-button>
+                <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonRemote"></b-button>
             </div>
         </div>
     
@@ -39,6 +44,7 @@ export default {
     return {
         imgButtonFile: './static/img/button_file.png',
         imgButtonRemote: './static/img/button_remote.png',
+        imgBackIcon: './static/img/back-icon.png',
         customer_detail: {
           fullname: 'Khang',
           name_kana: 'Khang',
@@ -65,8 +71,8 @@ export default {
   },
   computed: {
     ...mapState({
-      account: (state) => state.account,
-      users: (state) => state.users.all,
+      employee: (state) => state.employee,
+      consumers: (state) => state.consumers.all,
       detail: (state) => state.users.single
     }),
   },
@@ -123,10 +129,14 @@ export default {
   width: 100%;
   height: auto;
   padding: 1.5rem 3rem 0 3rem;
-  margin-top: 1.5rem auto;
+  margin: 2.5rem auto;
+}
+.title-information {
+  width: 100%;
+  display: inline-block;
 }
 
-.title-information {
+.title-information p{
     width: 100px;
     height: 28px;
     color: #313131;
@@ -136,8 +146,45 @@ export default {
     /* line-height: 32px;
     margin: 25px 0px 0px 123px; */
     text-align: left;
+    float: left;
+    clear: right;
 }
 
+.title-information button {
+  background-color: #00897B;
+  float: right;
+  border-radius: .5rem;
+  width: 175px;
+  height: 41px;
+  font-size: 12px;
+}
+
+.title-information button img {
+  float: left;
+}
+
+.title-information button p {
+  color: #fff;
+  font-size: 12px;
+  padding: .25rem 0 .75rem .25rem;
+  margin-bottom: 0px;
+}
+
+.title-information button:hover {
+    color: #fff;
+    background-color: #02ad9c;
+    border-color: #9ed9d3;
+}
+
+.title-information button.focus, .title-information button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(158, 217, 211,.5);
+}
+
+.title-information button:not(:disabled):not(.disabled).active, .title-information button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #02ad9c;
+    border-color: #9ed9d3;
+}
 /* .div-login {
     display: flex;
     justify-content: center;
@@ -153,7 +200,7 @@ export default {
     width: 100%;
     height: auto;
     border-radius: 5px;
-    margin: 15px auto;
+    margin: 0px auto;
 }
 
 .contractor-info {
@@ -172,56 +219,33 @@ export default {
   font-size: 16px;
 }
 
-.button-file {
-  margin: 40px 0px 0px 10px;
-  width: 40%;
-  height: auto;
-    float: left;
-}
-
-.button-file img {
-    max-width: 100%;
-    height: auto;
-}
-
-.button-remote {
-  margin: 40px 10px 0px 0px;
-  width: 40%;
-  height: auto;
-    float: right;
-}
-
-.button-remote img {
-    max-width: 100%;
-    height: auto;
-}
-
 .customer-info-screen .form-group {
   width: 100%;
   text-align: center;
   display: inline-block;
 }
 
+.customer-info-screen .form-group button{
+  margin: 40px 4rem 0 4rem;
+  width: 331px;
+  height: 85px;
+  padding: 0px;
+}
+
+.customer-info-screen .form-group button img{
+    width: 100%;
+  height: 85px;
+}
+
 @media (max-width: 1000px) {
-  .button-file {
-    width: 45%;
-  }
-  .button-remote {
-    width: 45%;
+  .customer-info-screen .form-group button{
+    width: 35%;
+    height: auto;
   }
 }
 
 @media (max-width: 600px) {
-  .button-file {
-    margin: unset;
-    width: 80%;
-    float: unset;
-  }
-  .button-remote {
-    margin: unset;
-    width: 80%;
-    float: unset;
-  }
+  
   .information {
     font-size: 14px;
   }

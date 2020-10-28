@@ -36,9 +36,9 @@ export default {
         }
     },
     computed: {
-        ...mapstate('account', ['status']),
+        ...mapstate('employees', ['status']),
         ...mapstate({
-            account: state => state.account,
+            employee: state => state.employee,
             users: state => state.users.all
         })
     },

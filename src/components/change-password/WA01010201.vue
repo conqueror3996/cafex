@@ -36,38 +36,17 @@ export default {
         }
     },
     computed: {
-        ...mapState('account', ['status']),
+        ...mapState('employees', ['status']),
         ...mapState({
-            account: state => state.account,
+            employee: state => state.employee,
             users: state => state.users.all
         })
     },
     created () {
-        // reset login status
-        // this.logout();
+        
     },
     methods: {
-        // ...mapActions('account', ['login', 'logout']),
-        // handleSubmit (e) {
-        //     this.msg = ''
-        //     this.submitted = true;
-        //     const { username, password } = this;
-        //     if (username && password) {
-        //         this.login({ username, password })
-        //     }
-        //     if(this.currentPassword != this.account.user.username) {
-        //         this.msg = '現在のパスワードが間違っています'
-        //         return
-        //     }
-        //     if (this.newPassword.length < 8) {
-        //         this.msg = 'パスワードは半角8文字以上で入力してください'
-        //         return
-        //     }
-        //     if (this.newPassword != this.confirmPassword) {
-        //         this.msg = '新しいパスワードが一致していません'
-        //         return
-        //     }
-        // }
+        
     }
 };
 </script>

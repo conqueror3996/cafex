@@ -18,7 +18,7 @@ const actions = {
     // delete({ commit }, id) {
     //     commit('deleteRequest', id);
 
-    //     userService.delete(id)
+    //     fileService.delete(id)
     //         .then(
     //             user => commit('deleteSuccess', id),
     //             error => commit('deleteFailure', { id, error: error.toString() })

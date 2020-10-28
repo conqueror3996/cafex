@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { alert } from './alert.module';
-import { account } from './account.module';
-import { users } from './users.module';
+import { employees } from './employee.module';
+import { consumers } from './consumer.module';
 import { files } from './files.module';
 
 Vue.use(Vuex);
@@ -11,8 +11,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     modules: {
         alert,
-        account,
-        users,
+        employees,
+        consumers,
         files,
         // changePasswordState: false,
     }

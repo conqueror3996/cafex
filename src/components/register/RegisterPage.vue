@@ -47,10 +47,10 @@ export default {
         }
     },
     computed: {
-        ...mapState('account', ['status'])
+        ...mapState('employees', ['status'])
     },
     methods: {
-        ...mapActions('account', ['register']),
+        ...mapActions('employees', ['register']),
         handleSubmit(e) {
             this.submitted = true;
             this.register(this.user);

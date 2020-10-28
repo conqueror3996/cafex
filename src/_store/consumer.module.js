@@ -1,4 +1,4 @@
-import { userService } from '../_services';
+import { consumerService } from '../_services';
 import { router } from '../_helpers';
 
 const state = {
@@ -9,13 +9,13 @@ const state = {
 };
 
 const actions = {
-    getAll({ dispatch, commit }) {
+    getAll({ dispatch, commit }, input) {
         commit('getAllRequest');
 
-        userService.getAll()
+        consumerService.getAll(input)
             .then(
                 datas => {
-                    console.log(datas.data.code)
+                    // console.log(datas.data.code)
                     if (datas.data.code) {
                         dispatch('alert/error', datas.data.message, { root: true });
                     } else {
@@ -25,13 +25,13 @@ const actions = {
             );
     },
 
-    getCustomerByID({ dispatch, commit }) {
+    getConsumerByID({ dispatch, commit }, id) {
         commit('getAllRequest');
 
-        userService.getCustomerByID()
+        consumerService.getConsumerById(id)
             .then(
                 datas => {
-                    console.log(datas.data.code)
+                    // console.log(datas.data.code)
                     if (datas.data.code) {
                         dispatch('alert/error', datas.data.message, { root: true });
                     } else {
@@ -45,15 +45,21 @@ const actions = {
     delete({ commit }, id) {
         commit('deleteRequest', id);
 
-        // userService.delete(id)
+        // consumerService.delete(id)
         //     .then(
         //         user => commit('deleteSuccess', id),
         //         error => commit('deleteFailure', { id, error: error.toString() })
         //     );
     },
 
-    getUserById({ commit }, id) {
-
+    postConsumer({ commit, dispatch }, input) {
+        consumerService.postConsumer(input).then((info) => {
+            if (info.data.code) {
+                dispatch('alert/error', info.data.message, { root: true });
+            } else {
+                // commit('getAllSuccessGet', datas)
+            }
+        })
     },
 
     setUserDetail({ commit }, detail) {
@@ -113,7 +119,7 @@ const mutations = {
     }
 };
 
-export const users = {
+export const consumers = {
     namespaced: true,
     state,
     actions,

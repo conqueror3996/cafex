@@ -65,7 +65,7 @@ export default {
   computed: {
     ...mapState({
       alert: (state) => state.alert,
-      account: (state) => state.account,
+      employee: (state) => state.employee,
       // changePasswordState: (state) => state.changePasswordState
     }),
   },

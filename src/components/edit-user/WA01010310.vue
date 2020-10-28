@@ -70,7 +70,7 @@ import { mapState, mapActions } from "vuex";
 import WA01010311 from './WA01010311.vue';
 
 import validate from '../../validate/validate.js'
-import userValidatePattern from '../../validate/user/user-validate'
+import userValidatePattern from '../../validate/consumer/consumer-validate'
 import errormessage from '../../validate/errormessage';
 
 export default {
@@ -99,9 +99,16 @@ export default {
             alert: state => state.alert
         })
     },
+    created() {
+        this.getConsumerById(this.$route.params.consumerId)
+    },
     methods: {
         ...mapActions("alert", {
             error: "error",
+        }),
+        ...mapActions("consumers", {
+            getConsumerById: "getConsumerById",
+            //   deleteItem: "deleteItem"
         }),
         handleShowEdit() {
             // validate

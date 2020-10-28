@@ -3,8 +3,8 @@
     <div class="info">
       <div class="info-title">
         <p>お客様情報</p>
-        <b-button @click="$router.go(-1)">
-          <img src="src/assets/images/back-icon.png" /><p>モード選択画面に戻る</p>
+        <b-button @click="$router.push('/WA01010400')">
+          <img :src="imgBackIcon" /><p>モード選択画面に戻る</p>
         </b-button>
       </div>
       <div class="info-table">
@@ -94,6 +94,7 @@ export default {
     return {
       imgDeleteIcon: './static/img/delete-icon.png',
       imgUploadIcon: './static/img/upload-icon.png',
+      imgBackIcon: './static/img/back-icon.png',
       userCols: [
         { key: "fullname", label: "氏名" },
         { key: "age", label: "年齢" },

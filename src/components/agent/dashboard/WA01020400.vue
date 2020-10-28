@@ -188,21 +188,21 @@ export default {
   },
   computed: {
     ...mapState({
-      account: (state) => state.account,
-      users: (state) => state.users.all,
+      employee: (state) => state.employee,
+      consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
     }),
   },
   created() {
-    this.getAllUsers();
+    this.getAllConsumer();
     this.changePasswordState = false
     console.log(this.users)
     // console.log(this.changePasswordState)
   },
   methods: {
-    ...mapActions("users", {
-      getAllUsers: "getAll",
+    ...mapActions("consumers", {
+      getAllConsumer: "getAll",
       deleteUser: "delete",
     //   deleteItem: "deleteItem"
     }),

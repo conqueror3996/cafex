@@ -70,8 +70,8 @@ export default {
   },
   computed: {
     ...mapState({
-      account: (state) => state.account,
-      users: (state) => state.users.all,
+      employee: (state) => state.employee,
+      consumers: (state) => state.consumers.all,
       detail: (state) => state.users.single
     }),
   },
