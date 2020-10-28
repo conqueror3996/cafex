@@ -3,7 +3,7 @@
     <b-tabs card align="right">
       <template #tabs-start>
         <li role="presentation" class="nav-item align-self-center">
-          <b-button class="button-manage-mode" variant="primary" @click="ok()"><img class="img-manage-mode" :src="imgManageMode" alt="">モード選択画面に戻る</b-button>
+          <b-button class="button-manage-mode" variant="primary" @click="ok()"><img class="img-manage-mode" :src="imgManageMode" alt=""><label class="label-manage-mode" for="">モード選択画面に戻る</label></b-button>
         </li>
       </template>
       <b-tab title="従業員一覧">
@@ -245,14 +245,19 @@ export default {
 
 <style>
 
+.button-manage-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #00897B;
     border-color: #00897B;
-}
-
-.img-manage-mode {
-  padding-right: 5px;
 }
 
 .home-screen .nav-tabs .nav-link {
