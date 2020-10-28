@@ -171,12 +171,12 @@ export default {
 }
 
 .action-panel {
-  margin: .75rem .5rem;
+  margin: .75rem .3rem;
   text-align: center;
 }
 
 .action-panel button {
-  width: 30%;
+  width: 32%;
   height: 3rem;
   line-height: 1rem;
 }
@@ -252,24 +252,28 @@ export default {
 
 @media (max-width: 1200px) {
   .action-panel {
-    margin: .75rem .5rem;
+    margin: .75rem .3rem;
     text-align: center;
   }
 
   .action-panel button {
     padding-left: .25rem;
     padding-right: .25rem;
+    width: 30%;
   }
 
   .action-panel span {
     font-size: 12px;
     color: black;
   }
+  .action-panel .small-font span {
+    font-size: 8px;
+  }
 };
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .action-panel {
-    margin: .75rem 0;
+    margin: .75rem 0.2rem;
   }
 
   .action-panel span {
@@ -278,11 +282,10 @@ export default {
   }
 
   .action-panel button {
-    width: 28%;
+    width: 32%;
   }
-
-  .action-panel button.small-font {
-    width: 40%;
+  .action-panel .small-font span {
+    font-size: 8px;
   }
 };
 </style>
