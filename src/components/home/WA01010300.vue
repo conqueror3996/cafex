@@ -192,7 +192,7 @@ export default {
   },
   computed: {
     ...mapState({
-      employee: (state) => state.employee,
+      employees: (state) => state.employees,
       //consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
@@ -206,7 +206,7 @@ export default {
     // console.log(this.changePasswordState)
   },
   methods: {
-    ...mapActions("users", {
+    ...mapActions("consumers", {
       getAllConsumer: "getAll",
       deleteUser: "delete",
     //   deleteItem: "deleteItem"

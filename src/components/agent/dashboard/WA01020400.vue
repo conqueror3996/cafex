@@ -33,7 +33,7 @@
                 hover
                 :responsive="true"
                 :fields="cols"
-                :items="users.items"
+                :items="consumers.items"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
@@ -188,7 +188,7 @@ export default {
   },
   computed: {
     ...mapState({
-      employee: (state) => state.employee,
+      employees: (state) => state.employees,
       consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
@@ -197,7 +197,7 @@ export default {
   created() {
     this.getAllConsumer();
     this.changePasswordState = false
-    console.log(this.users)
+    console.log(this.consumers)
     // console.log(this.changePasswordState)
   },
   methods: {
@@ -224,7 +224,7 @@ export default {
       if(item.consumer_id === this.selectedItem) return 'b-table-row-selected table-active'
     },
     selectedRow(item) {
-        this.$refs.selectableTable.selectRow(this.users.items.indexOf(item))
+        this.$refs.selectableTable.selectRow(this.consumers.items.indexOf(item))
     },
     // Event click button 編集 in edit modal
     okEdit() {

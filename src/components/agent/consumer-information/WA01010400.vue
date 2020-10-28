@@ -71,9 +71,9 @@ export default {
   },
   computed: {
     ...mapState({
-      employee: (state) => state.employee,
+      employees: (state) => state.employees,
       consumers: (state) => state.consumers.all,
-      detail: (state) => state.users.single
+      detail: (state) => state.consumers.single
     }),
   },
   created() {
@@ -82,7 +82,7 @@ export default {
     // console.log(this.detail)
   },
   methods: {
-      ...mapActions("users", {
+      ...mapActions("consumers", {
           getUser: "getUserById",
           goTo: "goToFileManagement",
           // setUserDetail: "setUserDetail",
