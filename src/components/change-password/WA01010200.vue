@@ -4,7 +4,8 @@
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handleSubmit" >
             <div>
-                <p style="font-size: 16px">現在のパスワードと使用するパスワードを入力してください</p>
+                <p style="font-size: 16px">現在のパスワードと新しく使用するパスワードを入力してください
+                </p>
             </div>
             <div class="form-group div-form-input">
                 <label for="currentpassword">現在のパスワード</label>
