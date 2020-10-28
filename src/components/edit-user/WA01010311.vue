@@ -37,13 +37,20 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
     props: [
         'showConfirmEdit',
     ],
     methods: {
+      ...mapActions("consumers", {
+        updateConsumer: "updateConsumer",
+        deleteUser: "deleteConsumer",
+      //   deleteItem: "deleteItem"
+      }),
         handleEdit() {
-
+          this.updateConsumer()
         },
         handleHide() {
             this.$emit("changeModalConfirm", false)

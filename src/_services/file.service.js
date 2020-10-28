@@ -1,33 +1,16 @@
 import config from 'config';
-import { authHeader } from '../_helpers';
+import { authHeader, allAPI } from '../_helpers';
 import Axios from "axios";
 
 export const fileService = {
     // register,
-    getFilesByUserId,
-    // getById,
-    // update,
-    // delete: _delete,
+    getFileList,
+
 };
 
-function getFilesByUserId(user_id) {
-    const data = { user_id }
-    // const headers = new Headers({
-    //     'Accept': 'application/json',
-    //     'Access-Control-Allow-Credentials':true,
-    //     'Access-Control-Allow-Origin':true,
-    //     'Content-Type': 'application/json',
-    // })
-    const requestOptions = {
-        method: 'POST',
-        url: `${config.apiUrl}/v1/agent/get-files`,
-        data: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-         }
-      }
-    return Axios(requestOptions).then(handleResponse)
-    // return fetch(`${config.apiUrl}/v1/agent/get-files`, requestOptions).then(handleResponse);
+function getFileList(fileType) {
+    
+    return auth.sendRequest('GET', allAPI.get_files(fileType), null, null)
 }
 
 

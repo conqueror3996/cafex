@@ -13,7 +13,7 @@ const actions = {
         employeeService.login(username, password)
             .then(
                 info => {
-                    console.log(document.cookie)
+                    console.log(info)
                     if (info.data) {
                         if (info.data.code) {
                             dispatch('alert/error', info.data.code, { root: true });
