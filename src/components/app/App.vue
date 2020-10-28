@@ -151,6 +151,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .logo{display:inline-block;padding:10px 0px 0px 10px;width:15%;float:left;}
 .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);}
 .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;float:left;}
+.logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);}
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;background:url(/src/assets/images/my-account.png) right 40px center no-repeat;}
