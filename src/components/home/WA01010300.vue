@@ -158,8 +158,8 @@ export default {
   data() {
     return {
       imgSearchIcon: './static/img/search-icon.png',
-      imgEditIcon: './static/img/edit-icon.png',
-      imgDeleteIcon: './static/img/delete-icon.png',
+      imgEditIcon: './static/img/pen.svg',
+      imgDeleteIcon: './static/img/trash.svg',
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
@@ -327,6 +327,7 @@ export default {
 }
 .col-spec a {
   padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .col-check {
   width: 3rem;

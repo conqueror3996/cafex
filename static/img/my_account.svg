@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>My account 2</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.294118 0 0 0 0 0.294118 0 0 0 0 0.294118 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="営業側画面（営業員）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ログアウト/PW変更" transform="translate(-1348.000000, -36.000000)">
+            <g id="Group-17" transform="translate(1348.000000, 36.000000)">
+                <rect id="Rectangle" stroke="#4B4B4B" stroke-width="2" fill="#FFFFFF" x="1" y="1" width="48" height="48" rx="24"></rect>
+                <g filter="url(#filter-1)" id="人物アイコン">
+                    <g transform="translate(10.000000, 7.000000)">
+                        <path d="M18.3461275,19 C17.2925618,19.357834 16.1699207,19.5589529 15,19.5589529 C13.8300793,19.5589529 12.7073712,19.357834 11.6539395,19 C4.00354989,20.282981 0,26.0276496 0,33 L14.9999329,33 L30,33 C30,26.0276496 25.9971207,20.282981 18.3461275,19 Z" id="Path" fill="#4B4B4B" fill-rule="nonzero"></path>
+                        <path d="M14.9999673,19 C19.4187921,19 23,15.2749722 23,10.6802751 L23,8.31972487 C23,3.72509577 19.4188575,0 14.9999673,0 C10.5812079,0 7,3.72509577 7,8.31972487 L7,10.6802751 C7,15.2749722 10.5812079,19 14.9999673,19 Z" id="Path" fill="#4B4B4B" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
