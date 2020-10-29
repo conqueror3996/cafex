@@ -5,12 +5,12 @@
         </div> 
         <div class="div-space-title"></div>
         <div>
-            <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+            <b-button class="bg-transparent border-0" variant="primary" href="/WA01020400">
                 <img :src="imgEmployeeMode">
             </b-button>
             <div class="div-space">
             </div>
-            <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+            <b-button class="bg-transparent border-0" variant="primary" href="/WA01010300">
                 <img :src="imgConsumerMode">
             </b-button>
         </div>
@@ -26,6 +26,9 @@ export default {
             imgConsumerMode:'./static/img/consumer-mode.png'
 
         }
+    },
+    methods: {
+
     }
 }
 </script>

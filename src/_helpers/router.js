@@ -10,7 +10,9 @@ import WA01010201 from '../components/change-password/WA01010201'
 import WA01010400 from '../components/consumer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
 import WA01010600 from '../components/contact/WA01010600'
-import WA01020300 from '../components/contact/WA01010600' //update name component
+import WA01020300 from '../components/agent/manage-mode/WA01020300'
+import WA01020400 from '../components/agent/dashboard/WA01020400'
+import WA01020501 from '../components/agent/registration-employee/WA01020501'
 import { auth } from './auth';
 
 Vue.use(Router);
@@ -93,6 +95,22 @@ export const router = new Router({
         authRequired : true
       }  
     }, //manage-file
+    { 
+      path: '/WA01020400', 
+      name: 'WA01020400',
+      component: WA01020400,
+      meta : { 
+        // authRequired : true
+      }  
+    }, //manage-employee
+    { 
+      path: '/WA01020501', 
+      name: 'WA01020501',
+      component: WA01020501,
+      meta : { 
+        // authRequired : true
+      }  
+    }, //complete-register-employee
 
     // otherwise redirect to home
     { path: '*', redirect: '/WA01010300' }

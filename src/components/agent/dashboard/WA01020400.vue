@@ -2,9 +2,9 @@
   <div class="home-screen">
     <b-tabs card align="right">
       <template #tabs-start>
-        <li role="presentation" class="nav-item align-self-center">
-          <button style="border: none;" @click="ok()"><img :src="imgManageMode" alt=""></button>
-        </li>
+        <div class="div-back-button nav-item align-self-center">
+          <b-button class="button-manage-mode" href="/WA01020300"><img class="img-back-icon" :src="imgManageMode" alt=""><label>モード選択画面に戻る</label></b-button>
+        </div>
       </template>
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
@@ -137,9 +137,9 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table">
+            <!-- <div class="bottom-table">
                 <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
-            </div>
+            </div> -->
           </div>
           <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
         </b-card-text>
@@ -161,7 +161,7 @@ import WA01020410 from '../edit-user/WA01020410.vue';
 export default {
   data() {
     return {
-      imgManageMode: './static/img/button_manage_mode.png',
+      imgManageMode: './static/img/back-icon.png',
       imgSearchIcon: './static/img/search-icon.png',
       imgEditIcon: './static/img/edit-icon.png',
       imgDeleteIcon: './static/img/delete-icon.png',
@@ -244,6 +244,32 @@ export default {
 </script>
 
 <style>
+
+.inner .alert {
+    white-space: pre-line;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .5rem;
+}
+
+.button-manage-mode img {
+  padding-right: 5px;
+}
+
+.div-back-button {
+  margin-right: 18px;
+  margin-bottom: 1px;
+}
+
+.button-manage-mode {
+  background-color: #0091FF;
+  border-radius: 10px;
+  width: 230px;
+  height: 37px;
+  border: none;
+}
+
 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
