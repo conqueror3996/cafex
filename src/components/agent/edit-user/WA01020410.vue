@@ -11,7 +11,7 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email"></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.mailaddress"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">所属 :</label></div>
@@ -53,7 +53,7 @@ import { mapState, mapActions } from "vuex";
 import WA01020411 from './WA01020411.vue';
 
 import validate from '../../../validate/validate'
-import userValidatePattern from '../../../validate/consumer/consumer-validate'
+import userValidatePattern from '../../../validate/employee/employee-validate'
 import errormessage from '../../../validate/errormessage';
 
 export default {
@@ -63,9 +63,9 @@ export default {
             submited: false,
             user:{
                 fullname: 'Khang',
-                namekana: '',
+                namekana: 'KHANG',
                 mailaddress: 'manhkhang@vn-cubesystem.com',
-                branch: '',
+                branch: '1',
                 password: '123456'
             },
         }
@@ -83,21 +83,22 @@ export default {
             error: "error",
         }),
         handleShowEdit() {
-        //     // validate
-        //     const errorCode = validate.validateInput(userValidatePattern, this.user);
-        //     console.log(errorCode)
-        //     if(errorCode.length > 0) {
-        //         const messageError = validate.getArrayMessageError(errorCode);
-        //         this.error(messageError.join("\n"));
-        //         return;
-        //     }
+            // validate
+            console.log( this.user)
+            const errorCode = validate.validateInput(userValidatePattern, this.user);
+            console.log(errorCode)
+            if(errorCode.length > 0) {
+                const messageError = validate.getArrayMessageError(errorCode);
+                this.error(messageError.join("\n"));
+                return;
+            }
             
-        //     // reset slert message
-        //     if(this.alert.message !== '') {
-        //         this.error('');
-        //     }
+            // reset slert message
+            if(this.alert.message !== '') {
+                this.error('');
+            }
 
-        //     // show modal confirm
+            // show modal confirm
             this.showConfirmEdit = true;
         },
         handleCancle() {

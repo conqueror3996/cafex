@@ -22,8 +22,8 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data () {
         return {
-            imgEmployeeMode: './static/img/employee-mode.png',
-            imgConsumerMode:'./static/img/consumer-mode.png'
+            imgEmployeeMode: './static/img/btn_employee_manage.svg',
+            imgConsumerMode:'./static/img/btn_consumer_manage.svg'
 
         }
     },

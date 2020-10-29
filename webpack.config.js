@@ -65,7 +65,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://192.168.11.110:4000',
+            apiUrl: 'http://192.168.11.75:8000',
             API_KEY: '82e29d468d7f4b518347a2eab84b478719027367c67f4e00bfd84244067101f0',
             VERSION: '1.0.0'
         })

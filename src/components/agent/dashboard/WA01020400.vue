@@ -3,7 +3,7 @@
     <b-tabs card align="right">
       <template #tabs-start>
         <div class="div-back-button nav-item align-self-center">
-          <b-button class="button-manage-mode" href="/WA01020300"><img class="img-back-icon" :src="imgManageMode" alt=""><label>モード選択画面に戻る</label></b-button>
+          <button class="button-manage-mode" href="/WA01020300"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
       <b-tab title="従業員一覧">
@@ -161,7 +161,7 @@ import WA01020410 from '../edit-user/WA01020410.vue';
 export default {
   data() {
     return {
-      imgManageMode: './static/img/back-icon.png',
+      imgManageMode: './static/img/btn_back_consumer_select.svg',
       imgSearchIcon: './static/img/search-icon.png',
       imgEditIcon: './static/img/edit-icon.png',
       imgDeleteIcon: './static/img/delete-icon.png',
@@ -263,10 +263,9 @@ export default {
 }
 
 .button-manage-mode {
-  background-color: #0091FF;
-  border-radius: 10px;
-  width: 230px;
-  height: 37px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  margin-right: -5px;
   border: none;
 }
 
