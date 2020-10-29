@@ -14,11 +14,9 @@ function validateInput(validatePattern, validateObject) {
     let errorElementString = [];
     let blankValue = false;
     
-    console.log(elementName);
     condition.forEach((rule) => {
       if(blankValue) return;
       
-    console.log(rule);
       switch (rule) {
         case "required":
           if (item.validations[rule].value === true) {
