@@ -3,7 +3,7 @@
         <div class="title-information">
            <p >顧客情報</p>
            <b-button @click="$router.push('/WA01010300')">
-             <img :src="imgBackIcon" /><p>モード選択画面に戻る</p>
+             <img :src="imgBackIcon" />
            </b-button>
         </div>
         <div class="content-information">
@@ -42,9 +42,9 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-        imgButtonFile: './static/img/button_file.png',
-        imgButtonRemote: './static/img/button_remote.png',
-        imgBackIcon: './static/img/back-icon.png',
+        imgButtonFile: './static/img/btn_start_file_manage.svg',
+        imgButtonRemote: './static/img/btn_start_remote_consul.svg',
+        imgBackIcon: './static/img/btn_back_consumer_select.svg',
         customer_detail: {
           fullname: 'Khang',
           name_kana: 'Khang',
@@ -151,23 +151,14 @@ export default {
 }
 
 .title-information button {
-  background-color: #0091FF;
   float: right;
-  border-radius: .5rem;
-  width: 175px;
-  height: 41px;
-  font-size: 12px;
+  padding: 0;
+  border-radius: .7rem;
+  border: none;
 }
 
 .title-information button img {
-  float: left;
-}
-
-.title-information button p {
-  color: #fff;
-  font-size: 11px;
-  padding: .4rem 0 .75rem .25rem;
-  margin-bottom: 0px;
+  float: right;
 }
 
 /* .title-information button:hover {

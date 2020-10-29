@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="288px" height="66px" viewBox="0 0 288 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>button_file</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <filter x="-30.0%" y="-25.0%" width="160.0%" height="150.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="営業側画面（営業員）" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ファイル管理画面--WA01010500" transform="translate(-299.000000, -711.000000)">
+            <g id="button_file" transform="translate(299.000000, 711.000000)">
+                <g id="Group-2">
+                    <rect id="Rectangle" fill="#0091FF" x="0" y="0" width="288" height="66" rx="8"></rect>
+                    <text id="ファイルアップロード" font-family="HiraginoSans-W3, Hiragino Sans" font-size="18" font-weight="300" fill="#FFFFFF">
+                        <tspan x="25" y="39">ファイルアップロード</tspan>
+                    </text>
+                </g>
+                <g id="文書ファイルのフリーアイコン" transform="translate(228.000000, 9.000000)" filter="url(#filter-1)">
+                    <g filter="url(#filter-2)">
+                        <path d="M31.7533534,0 L15.4194471,0 L14.1543366,0 L13.2600409,0.873185795 L0.894391689,12.9470372 L0,13.820223 L0,15.0554706 L0,39.9472657 C0,44.3873508 3.6993154,48 8.24741476,48 L31.7533534,48 C36.3006846,48 40,44.3873508 40,39.9472657 L40,8.05264052 C40,3.61199295 36.3006846,0 31.7533534,0 Z M36.9462981,39.947172 C36.9462981,42.7481353 34.6213598,45.0182871 31.7533534,45.0182871 L8.24741476,45.0182871 C5.37873623,45.0182871 3.05379792,42.7481353 3.05379792,39.947172 L3.05379792,15.0553768 L11.0919932,15.0553768 C13.4812624,15.0553768 15.4194471,13.1635993 15.4194471,10.8300726 L15.4194471,2.98161918 L31.7533534,2.98161918 C34.6213598,2.98161918 36.9462981,5.25167724 36.9462981,8.05264052 L36.9462981,39.947172 Z" id="Shape" fill="#4B4B4B" fill-rule="nonzero"></path>
+                        <rect id="Rectangle" fill="#4B4B4B" fill-rule="nonzero" x="22.5" y="8.81632653" width="8.5" height="8.32653061"></rect>
+                        <rect id="Rectangle" fill="#4B4B4B" fill-rule="nonzero" x="9" y="21.5510204" width="21.5" height="2.44897959"></rect>
+                        <rect id="Rectangle" fill="#4B4B4B" fill-rule="nonzero" x="9" y="28.4081633" width="21.5" height="2.44897959"></rect>
+                        <rect id="Rectangle" fill="#4B4B4B" fill-rule="nonzero" x="9" y="34.7755102" width="21.5" height="2.44897959"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

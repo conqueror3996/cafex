@@ -154,7 +154,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);}
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
-.account{position:absolute;right:0px;top:20px;width:170px;height:50px;background:url(/src/assets/images/my-account.png) right 40px center no-repeat;}
+.account{position:absolute;right:0px;top:20px;width:170px;height:50px;background:url(/static/img/my_account.svg) right 40px center no-repeat;}
 .account:hover .list_account-action{opacity:1;transition:0.2s all;visibility:visible;}
 .alert-message{max-width:500px;position: relative;;left:0px;right:0px;bottom:0px;top:10px;margin:auto;z-index:99}
 .alert-message p {margin-bottom: 0px;}

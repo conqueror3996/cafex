@@ -4,7 +4,7 @@
       <div class="info-title">
         <p>お客様情報</p>
         <b-button variant="primary" @click="$router.push('/WA01010400')">
-          <img :src="imgBackIcon" /><p>モード選択画面に戻る</p>
+          <img :src="imgBackIcon" />
         </b-button>
       </div>
       <div class="info-table">
@@ -68,12 +68,9 @@
         </div>
         <div class="file-footer">
           <label variant="primary" class="btn btn-upload" for="file">
-            <span class="content-btn">ファイルアップロード</span>
             <img
               class="img-btn"
               :src="imgUploadIcon"
-              width="40"
-              height="48"
             />
           </label>
           <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" />
@@ -92,9 +89,9 @@ import validate from '../../validate/validate.js';
 export default {
   data() {
     return {
-      imgDeleteIcon: './static/img/delete-icon.png',
-      imgUploadIcon: './static/img/upload-icon.png',
-      imgBackIcon: './static/img/back-icon.png',
+      imgDeleteIcon: './static/img/trash.svg',
+      imgUploadIcon: './static/img/btn_file_upload.svg',
+      imgBackIcon: './static/img/btn_back_mode_select.svg',
       userCols: [
         { key: "fullname", label: "氏名" },
         { key: "age", label: "年齢" },
@@ -320,24 +317,10 @@ export default {
 }
 
 .manage-file-conent .info-title button {
-  background-color: #0091FF;
   float: right;
-  border-radius: .5rem;
-  width: 175px;
-  height: 41px;
-}
-
-.info-title button img {
-  float: left;
-}
-
-.info-title button p {
-  color: #fff;
-  font-size: 12px;
-  padding: .4rem 0 .75rem .25rem !important;
-  margin-bottom: 0px;
-  float: unset !important;
-  font-size: 11px;
+  border-radius: .7rem;
+  padding: 0;
+  border: none;
 }
 
 /* .info-title button:hover {
@@ -392,11 +375,11 @@ export default {
 }
 
 .btn-upload {
-  width: 288px;
-  height: 66px;
   border-radius: 0.5rem;
-  background-color:#0091FF;
   color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
 }
 
 .content-btn {
