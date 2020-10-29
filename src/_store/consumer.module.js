@@ -70,7 +70,7 @@ const actions = {
                 // commit('getAllSuccessGet', datas)
             }
         })
-    }
+    },
 
     setUserDetail({ commit }, detail) {
         commit('setUserSingle', detail);
