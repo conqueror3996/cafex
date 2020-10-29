@@ -26,7 +26,6 @@ function sendRequestForm(method, url, requestData, inputHeader = {}) {
         'X-CX-Channel' : '0',
         'X-CX-Client-Version' : config.VERSION,
         'X-CX-Interaction-Id' : formatDateTime(new Date()),
-        'Access-Control-Expose-Headers': 'set-cookie'
     };
     
     const requestOptions = {
@@ -34,8 +33,12 @@ function sendRequestForm(method, url, requestData, inputHeader = {}) {
         url,
         data: requestData,
         headers,
+        // maxRedirects: 0,
+        // validateStatus: function(status) {
+        //     return status >= 200 && status <= 303;
+        // },
     };
-
+    axios.defaults.withCredentials = true
     // const configAxios = {
     //     withCredentials: true,
     //     maxRedirects: 0,
@@ -64,10 +67,11 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         method,
         url,
         body: requestData,
-        headers 
+        headers,
     };
-    // return axios(requestOptions)
-    return axios.post(url, requestData, { withCredentials: true, headers: headers})
+    axios.defaults.withCredentials = true
+    
+    return axios(requestOptions)
 }
 
 function setAuthToken(token) {

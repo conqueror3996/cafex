@@ -18,4 +18,7 @@ export const allAPI = {
 
     //Files
     get_files: (fileType) => `${REST_ENDPOINT}v1/files/${fileType}`, // Ap010401_ファイル一覧覧取得API
+    add_files: (fileType) => `${REST_ENDPOINT}v1/files/${fileType}`, // Ap010402_ファイル登録API
+    delete_files: (fileType, fileId) => `${REST_ENDPOINT}v1/files/${fileType}/${fileId}`, // Ap010403_ファイル削除API
+    
 }

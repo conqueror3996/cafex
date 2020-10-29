@@ -1,29 +1,33 @@
 import { fileService } from '../_services';
 
 const state = {
-    files: {}
+    all: {}
 };
 
 const actions = {
-    editItem({ commit }, id) {
-        commit('getAllRequest');
 
-        fileService.getFilesByUserId(id)
+    addFile({ dispatch, commit }, fileType, input) {
+
+        fileService.addFile(fileType, input)
             .then(
-                files => commit('getAllSuccess', files),
-                error => commit('getAllFailure', error)
+                info => {
+                    if (info.error.code) {
+                        dispatch('alert/error', info.error.code, { root: true });
+                    } else {
+                        
+                    }
+                }
             );
     },
 
-    // delete({ commit }, id) {
-    //     commit('deleteRequest', id);
+    deleteFile({ commit }, fileType, fileId) {
+        commit('deleteRequest', fileId);
 
-    //     fileService.delete(id)
-    //         .then(
-    //             user => commit('deleteSuccess', id),
-    //             error => commit('deleteFailure', { id, error: error.toString() })
-    //         );
-    // }
+        fileService.deleteFile(fileType, fileId)
+            .then(
+                user => commit('deleteSuccess', id),
+            );
+    }
 };
 
 const mutations = {
@@ -31,7 +35,7 @@ const mutations = {
         state.files = { loading: true };
     },
     getAllSuccess(state, files) {
-        state.files = { items: files.FilesList };
+        state.files = { items: files };
     },
     getAllFailure(state, error) {
         state.files = { error };
@@ -46,20 +50,20 @@ const mutations = {
     },
     deleteSuccess(state, id) {
         // remove deleted user from state
-        state.all.items = state.all.items.filter(user => user.id !== id)
+        // state.all.items = state.all.items.filter(file => file.id !== id)
     },
     deleteFailure(state, { id, error }) {
         // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
-        state.all.items = state.items.map(user => {
-            if (user.id === id) {
-                // make copy of user without 'deleting:true' property
-                const { deleting, ...userCopy } = user;
-                // return copy of user with 'deleteError:[error]' property
-                return { ...userCopy, deleteError: error };
-            }
+        // state.all.items = state.items.map(user => {
+        //     if (user.id === id) {
+        //         // make copy of user without 'deleting:true' property
+        //         const { deleting, ...userCopy } = user;
+        //         // return copy of user with 'deleteError:[error]' property
+        //         return { ...userCopy, deleteError: error };
+        //     }
 
-            return user;
-        })
+        //     return user;
+        // })
     }
 };
 

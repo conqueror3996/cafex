@@ -9,13 +9,14 @@ const actions = {
         employeeService.login(username, password)
             .then(
                 info => {
+                    console.log(info)
                     if (info) {
-                        if (info.error.code) {
+                        if (info.error) {
                             dispatch('alert/error', info.error.code, { root: true });
                             commit('loginFailure', info.error);
                         } else {
                             commit('loginSuccess', info);
-                            this.userInfo();
+                            dispatch('userInfo')
                             //check permission (first login, manager, sale)
                             // router.push('/WA01010300');
                         }
