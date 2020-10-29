@@ -1,7 +1,7 @@
 <template>
     <div class="box-login">
         <div>
-            <p class="div-manage-mode">管理モードを選択してください</p>
+            <p style="font-family: 'Hiragino-Sans-W3';" class="div-manage-mode">管理モードを選択してください</p>
         </div> 
         <div class="div-space-title"></div>
         <div>

@@ -1,15 +1,15 @@
 <template>
     <div class="div-registration-content">
         <div>
-            <p>ファイルをアップロード</p>
+            <p style="font-family: 'Hiragino-Sans-W3';">ファイルをアップロード</p>
         </div>
         <div class="alert alert-primary div-custom-alert" role="alert">
             <p>・CSVデータから従業員データを登録できます。</p>
             <p>・一度にアップロードできる従業員データの上限は1,000件です。</p>
         </div>
         <div class="div-button-confirm">
-            <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button>
-            <b-button style="margin-top: 50px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
+            <b-button style="font-family: 'Hiragino-Sans-W3';" class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button>
+            <b-button style="margin-top: 50px; font-family: 'Hiragino-Sans-W3';" class="button-custom" variant="primary" @click="ok()">登録</b-button>
         </div>
     </div>
 </template>
@@ -69,7 +69,12 @@ export default {
 }
 
 .div-custom-alert {
+    font-family: 'Hiragino-Sans-W3';
     margin-bottom: 150px;
+}
+
+.div-custom-alert p {
+    font-family: 'Hiragino-Sans-W3';
 }
 
 .div-button-confirm {

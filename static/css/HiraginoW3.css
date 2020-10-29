@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Hiragino-Sans-W3';
+    src: url('../fonts/Hiragino\ Sans\ GB\ W3.eot');
+    src: url('../fonts/Hiragino\ Sans\ GB\ W3.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Hiragino\ Sans\ GB\ W3.woff2') format('woff2'),
+        url('../fonts/Hiragino\ Sans\ GB\ W3.woff') format('woff'),
+        url('../fonts/Hiragino\ Sans\ GB\ W3.ttf') format('truetype'),
+        url('../fonts/Hiragino\ Sans\ GB\ W3.svg#Hiragino-Sans-W3') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -11,7 +11,7 @@
         :visible="showConfirmEdit"
       >
         <div class="confirm-info">
-          <ul class="div-information">
+          <ul class="ul-information">
             <li>氏名：</li>
             <li>氏名（カナ）：</li>
             <li>ID：</li>
@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style>
+
 .modal-backdrop {
   opacity: 0.5 !important;
 }
@@ -89,10 +90,11 @@ div.modal#modal-confirm .modal-dialog .modal-content {
   margin: auto
 }
 
-.div-information li {
+.ul-information li {
   margin-top: 10px;
   list-style: none;
   font-size: 16px;
+  font-family: 'Hiragino-Sans-W3'
 }
 
 .confirm-info p {

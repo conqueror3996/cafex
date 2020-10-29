@@ -9,7 +9,7 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p class="title">顧客を選択して「次へ」を押してください</p>
+            <p style="font-family: 'Hiragino-Sans-W3';" class="title">顧客を選択して「次へ」を押してください</p>
             <div class="content-search">
               <b-input-group>
                 <b-form-input
@@ -112,13 +112,14 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div>選択した営業員にはお客様情報が紐付いています。削除しますか？</div>
+                        <div style="font-family: 'Hiragino-Sans-W3';">選択した営業員にはお客様情報が紐付いています。削除しますか？</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
                               size="sm"
                               variant="primary"
                               @click="ok()"
+                              style="font-family: 'Hiragino-Sans-W3';"
                             >
                               削除
                             </b-button>
@@ -126,6 +127,7 @@
                               size="sm"
                               variant="danger"
                               @click="cancel()"
+                              style="font-family: 'Hiragino-Sans-W3';"
                             >
                               キャンセル
                             </b-button>
