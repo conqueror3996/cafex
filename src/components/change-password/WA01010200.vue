@@ -73,9 +73,9 @@ export default {
         handleSubmit (e) {
             this.msg = ''
             const data = {
-                employee_current_password: this.currentPassword,
-                employee_new_password: this.newPassword,
-                employee_confirm_password: this.confirmPassword
+                currentPassword: this.currentPassword,
+                newPassword: this.newPassword,
+                confirmationNewPassword: this.confirmPassword
             }
 
             if(!this.currentPassword || !this.newPassword || !this.confirmPassword)
