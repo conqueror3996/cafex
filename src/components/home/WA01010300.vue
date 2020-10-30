@@ -35,7 +35,7 @@
                 hover
                 :responsive="true"
                 :fields="computedFields"
-                :items="users.items"
+                :items="consumers"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
@@ -47,26 +47,26 @@
                       type="radio"
                       name="checked"
                       v-model="selectedItem"
-                      :value="data.item.consumer_id"
+                      :value="data.item.consumerId"
                       @click="selectedRow(data.item)"
                     />
                   </div>
                     
                 </template>
                 <template #cell(username)="data">
-                  {{ data.item.consumer_name }}
+                  {{ data.item.consumerName }}
                 </template>
 
                 <template #cell(birthday)="data">
-                  {{ data.item.company_id }}
+                  {{ data.item.birthdate }} ({{ data.item.age }})
                 </template>
 
                 <template #cell(phone)="data">
-                  {{ data.item.phone_number_1 }}
+                  {{ data.item.phoneNumber1 }}
                 </template>
 
                 <template #cell(memo)="data">
-                  {{ data.item.mail_address }}
+                  {{ data.item.consumerMemo }}
                 </template>
 
                 <template
@@ -75,7 +75,7 @@
                 >
                   <div
                     style="padding: 0.5rem"
-                    v-if="selectedItem === data.item.consumer_id"
+                    v-if="selectedItem === data.item.consumerId"
                   >
                     <a v-b-modal.modal-edit>
                       <!-- <b-icon icon="pencil" /> -->
@@ -159,6 +159,7 @@
 import { mapState, mapActions } from "vuex";
 import WA01010320 from './WA01010320.vue';
 import WA01010310 from '../edit-user/WA01010310.vue';
+import fileJson from '../../../static/file.json'
 
 export default {
   props: {
@@ -193,14 +194,15 @@ export default {
           consumerNameKana: '',
           age: '24',
           birthdate: '1996/03/09',
-          postalcode: '3424',
+          postalCode: '3424',
           address: '32/2',
           phoneNumber1: '19001560',
-          phoneNumber: '19001560',
-          memo: 'manhkhang@vn-cubesystem.com'
+          phoneNumber2: '19001560',
+          consumerMemo: 'manhkhang@vn-cubesystem.com'
         },]
       },
       tabSelected: '',
+      consumers: []
     };
   },
   components: {
@@ -210,7 +212,7 @@ export default {
   computed: {
     ...mapState({
       employees: (state) => state.employees,
-      consumers: (state) => state.consumers.all,
+      // consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
     }),
@@ -224,7 +226,9 @@ export default {
   created() {
     this.getAllConsumer();
     this.changePasswordState = false
-    console.log(this.$router)
+    // console.log(this.$router)
+    this.consumers = fileJson.consumer
+    console.log(fileJson)
     // console.log(this.changePasswordState)
   },
   methods: {
@@ -245,6 +249,7 @@ export default {
         console.log('success')
     },
     onRowSelected(items) {
+      console.log(items)
         this.selectedItem = items[0]? items[0].consumer_id : null
     },
     rowActive(item, type) {
