@@ -8,8 +8,12 @@
             <p>・一度にアップロードできる従業員データの上限は1,000件です。</p>
         </div>
         <div class="div-button-confirm">
-            <b-button style="font-family: 'Hiragino-Sans-W3';" class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button>
-            <b-button style="margin-top: 50px; font-family: 'Hiragino-Sans-W3';" class="button-custom" variant="primary" @click="ok()">登録</b-button>
+                <label variant="primary" class="btn btn-primary btn-upload" for="file">
+                    <p>ファイルアップロード</p>
+                </label>
+                <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".csv"/>
+            <!-- <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button> -->
+            <b-button style="margin-top: 50px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
         </div>
     </div>
 </template>
@@ -53,6 +57,19 @@ export default {
             // show modal confirm
             this.showModal = true;
         },
+      uploadFile(event) {
+        const files = event.target.files;
+        let errorMessage = '';
+        for (var i = 0; i < files.length; i++)
+        {
+          const filename = files[i].name;
+          const filetype = filename.substring(filename.length - 3, filename.length);
+          if(filetype !== 'csv') {
+            alert("unsupport file type");
+            return;
+          }
+        }
+      }
     }
 }
 </script>
@@ -60,7 +77,7 @@ export default {
 <style scoped>
 .div-registration-content {
     flex-direction: column;
-    margin: 80px;
+    margin: 0 80px 80px 80px;
     padding-top: 34px;
 }
 
@@ -92,6 +109,37 @@ export default {
     border-radius: 10px;
 }
 
+.div-button-confirm button {
+  width: 172px;
+  height: 44px;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+.btn-upload {
+  border-radius: 0.5rem;
+  color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 172px;
+  height: 44px;
+  text-align: center;
+}
+
+.btn-upload p{
+  font-size: 14px;
+  padding-top: .5rem;
+}
+
+.img-btn {
+  float: right;
+  margin-right: 0.5rem;
+}
+
+input[type="file"] {
+	display: none;
+}
 /* .main-content {
     display: flex;
     justify-content: center;

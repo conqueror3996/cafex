@@ -1,11 +1,17 @@
 <template>
   <div class="home-screen">
     <b-tabs card align="right">
-      <b-tab title="顧客選択"  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
+      <template #tabs-start v-if="isAgent">
+        <div class="div-back-button nav-item align-self-center">
+          <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
+        </div>
+      </template>
+
+      <b-tab :title="isAgent ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p class="title">顧客を選択して「次へ」を押してください</p>
-            <div class="content-search">
+            <p class="title" v-if="!isAgent">顧客を選択して「次へ」を押してください</p>
+            <div :class="!isAgent ? 'content-search' : 'content-search agent-search'">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -28,7 +34,7 @@
                 ref="selectableTable"
                 hover
                 :responsive="true"
-                :fields="cols"
+                :fields="computedFields"
                 :items="users.items"
                 selectable
                 select-mode="single"
@@ -133,14 +139,14 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table">
+            <div class="bottom-table" v-if="!isAgent">
                 <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')">
+      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!isAgent">
         <b-card-text class="selected-content">
           <WA01010320></WA01010320>
         </b-card-text>
@@ -155,33 +161,43 @@ import WA01010320 from './WA01010320.vue';
 import WA01010310 from '../edit-user/WA01010310.vue';
 
 export default {
+  props: {
+    isAgent: {
+      type: Boolean,
+      default: false,
+    }
+  }, // remove if have info login
   data() {
     return {
       imgSearchIcon: './static/img/search-icon.png',
       imgEditIcon: './static/img/pen.svg',
       imgDeleteIcon: './static/img/trash.svg',
+      imgManageMode: './static/img/btn_back_mode_select.svg',
       searchString: '',
       cols: [
-        { key: "checked", label: "", class: "col-check" },
+        { key: "checked", label: "", class: "col-check" }, // column only display both agent and not
         { key: "username", label: "氏名" },
         { key: "birthday", label: "年齢" },
         { key: "phone", label: "電話番号1" },
-        { key: "memo", label: "メモ" },
-        { key: "action", label: "" , class: "col-spec" },
+        { key: "memo", label: "メモ", isAgentCols: false }, // column only display if not agent
+        { key: "salesperson", label: "担当営業員", isAgentCols: true }, // column only display if is agent
+        { key: "belonging", label: "所属", isAgentCols: true },
+        { key: "action", label: "" , class: "col-spec", isAgentCols: false },
       ],
       selectedItem: '',
       isEdit: false,
       users: {
         items: [{
-          fullname: 'Khang',
-                namekana: '',
-                age: '24',
-                birthday: '1996/03/09',
-                postalcode: '3424',
-                address: '32/2',
-                phone1: '19001560',
-                phone2: '19001560',
-                memo: 'manhkhang@vn-cubesystem.com'
+          consumerId: '4565645561',
+          consumerName: 'Khang',
+          consumerNameKana: '',
+          age: '24',
+          birthdate: '1996/03/09',
+          postalcode: '3424',
+          address: '32/2',
+          phoneNumber1: '19001560',
+          phoneNumber: '19001560',
+          memo: 'manhkhang@vn-cubesystem.com'
         },]
       },
       tabSelected: '',
@@ -194,16 +210,21 @@ export default {
   computed: {
     ...mapState({
       employees: (state) => state.employees,
-      //consumers: (state) => state.consumers.all,
+      consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
-      
     }),
+    computedFields() {
+      if(!this.isAgent)
+        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || !field.isAgentCols);
+      else
+        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || field.isAgentCols);;
+    }
   },
   created() {
     this.getAllConsumer();
     this.changePasswordState = false
-    console.log(this.users)
+    console.log(this.$router)
     // console.log(this.changePasswordState)
   },
   methods: {
@@ -278,6 +299,21 @@ export default {
     color: #0091FF;
 }
 
+.home-screen .div-back-button {
+  margin-right: 18px;
+  margin-bottom: 1px;
+}
+
+.home-screen .div-back-button button {
+  outline: unset;
+}
+.home-screen .button-manage-mode {
+  cursor: pointer;
+  margin-bottom: 1px;
+  margin-right: -5px;
+  border: none;
+}
+
 .home-screen .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
@@ -303,6 +339,10 @@ export default {
   text-align: center;
   font-size: 24px;
   padding-top: 0.75rem;
+}
+
+.agent-search {
+  padding-top: 3rem;
 }
 
 .content-search {

@@ -3,7 +3,7 @@
     <b-tabs card align="right">
       <template #tabs-start>
         <div class="div-back-button nav-item align-self-center">
-          <button class="button-manage-mode" href="/WA01020300"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
+          <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
       <b-tab title="従業員一覧">
@@ -163,10 +163,10 @@ import WA01020410 from '../edit-user/WA01020410.vue';
 export default {
   data() {
     return {
-      imgManageMode: './static/img/btn_back_consumer_select.svg',
+      imgManageMode: './static/img/btn_back_mode_select.svg',
       imgSearchIcon: './static/img/search-icon.png',
-      imgEditIcon: './static/img/edit-icon.png',
-      imgDeleteIcon: './static/img/delete-icon.png',
+      imgEditIcon: './static/img/pen.svg',
+      imgDeleteIcon: './static/img/trash.svg',
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
@@ -264,6 +264,11 @@ export default {
   margin-bottom: 1px;
 }
 
+.div-back-button button {
+  outline: unset;
+}
+
+
 .button-manage-mode {
   cursor: pointer;
   margin-bottom: 1px;
@@ -274,10 +279,12 @@ export default {
 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
+  background-color: #D8D8D8;
 }
 
 .home-screen .nav-link.active {
-  color: #007bff !important;
+  color: #0091FF !important;
+  background-color: #ffffff;
 }
 
 .home-screen .card-header {

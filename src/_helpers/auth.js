@@ -4,7 +4,7 @@ import config from 'config';
 
 const AUTH_TOKEN_KEY = 'authToken';
 axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
-//axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 export const auth = {
     sendRequest,
     setAuthToken,
