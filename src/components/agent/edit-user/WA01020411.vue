@@ -93,6 +93,7 @@ div.modal#modal-confirm .modal-dialog .modal-content {
   margin-top: 10px;
   list-style: none;
   font-size: 16px;
+  font-family: 'HiraginoSan-W3';
 }
 
 .confirm-info p {

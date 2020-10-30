@@ -152,6 +152,7 @@ export default {
     text-align: right;
     padding-right: 2rem;
     font-size: 18px;
+    font-family: 'HiraginoSan-W3';
 }
 
 .main-content .form-button {
