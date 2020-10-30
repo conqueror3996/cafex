@@ -4,13 +4,13 @@
             <p class="div-manage-mode">管理モードを選択してください</p>
         </div> 
         <div class="div-space-title"></div>
-        <div>
-            <b-button class="bg-transparent border-0" variant="primary" href="/WA01020400">
+        <div class="selection-mode">
+            <b-button class="bg-transparent border-0" variant="primary" @click="$router.push({path:'/WA01020400'})">
                 <img :src="imgEmployeeMode">
             </b-button>
             <div class="div-space">
             </div>
-            <b-button class="bg-transparent border-0" variant="primary" href="/WA01010300">
+            <b-button class="bg-transparent border-0" variant="primary" @click="$router.push({name: 'WA01010300',  params: { isAgent: true } })">
                 <img :src="imgConsumerMode">
             </b-button>
         </div>
@@ -46,5 +46,8 @@ export default {
     .box-login {
         width: 460px;
         height: 390px;
+    }
+    .selection-mode button, .selection-mode a{
+        box-shadow: unset !important;
     }
 </style>

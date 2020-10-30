@@ -31,7 +31,8 @@ export const router = new Router({
       component: WA01010300, 
       meta : { 
         authRequired : true
-      } 
+      },
+      props: true
     }, // dashboard
     { 
       path: '/WA01010310/:consumerId', 

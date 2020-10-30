@@ -10,8 +10,9 @@
       </div>
         <!-- employees.employee &&  -->
       <div class="account" v-if="$router.currentRoute.path !== '/WA01010600'">
-        <img class="mw100" :src="imgMyAccountIcon" alt="account" v-if="$router.currentRoute.path === '/WA01010300'"/>
-        <img class="mw100" :src="imgMyAccountIconGreen" alt="account" v-if="$router.currentRoute.path !== '/WA01010300'"/>
+        <!-- <img class="mw100" :src="imgMyAccountIcon" alt="account" v-if="$router.currentRoute.path === '/WA01010300'"/> -->
+         <!-- v-if="$router.currentRoute.path !== '/WA01010300'" -->
+        <img class="mw100" :src="imgMyAccountIconGreen" alt="account"/>
         <ul class="list_account-action">
           <li><a href="/WA01010200">パスワード変更</a></li>
           <li><a href="/WA01010100">ログアウト</a></li>
@@ -65,9 +66,9 @@ export default {
   name: "app",
   data() {
     return {
-      imgLogo: './static/img/logocafex.svg',
+      imgLogo: './static/img/logo-green-JA.svg',
       imgMyAccountIcon: './static/img/my_account.svg',
-      imgMyAccountIconGreen: './static/img/account-green.png',
+      imgMyAccountIconGreen: './static/img/account-green.svg',
     };
   },
   computed: {
@@ -152,10 +153,10 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 #container{width:100%;margin:auto;}
 .inner{max-width: 1327px;margin:auto;}
 .inner .alert{white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
-.logo{display:inline-block;padding:10px 0px 0px 10px;width:15%;float:left;}
-.logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);}
+.logo{display:inline-block;padding:10px 0px 0px 10px;width:12%;float:left;}
+/* .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;float:left;}
-.logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);}
+/* .logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;}
