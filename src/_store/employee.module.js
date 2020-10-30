@@ -38,12 +38,11 @@ const actions = {
         });
     },
     changePassword({commit, dispatch}, input) {
-        
         employeeService.changePassword(input).then(
             info => {
                 if (info) {
                     if (info.error) {
-                        dispatch('alert/error', "S" + info.error.code, { root: true });
+                        dispatch('alert/error', info.error.code, { root: true });
                         commit('changePasswordFailed', info.error);
                     } else {
                         router.push('/WA01010201');
@@ -65,6 +64,7 @@ const actions = {
                         dispatch('alert/error', info.error.code, { root: true });
                         commit('getUserInfoFailed', info.error);
                     }else{
+                        localStorage.setItem('userInfo', info);
                         commit("getUserInfoSuccess", info);
                     }
                 }

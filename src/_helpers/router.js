@@ -127,14 +127,5 @@ router.beforeEach((to, from, next) => {
   }else{
     next();
   }
-  // const publicPages = ['/WA01010100', '/register'];
-  // const authRequired = !publicPages.includes(to.path);
-  // // const loggedIn = localStorage.getItem('user');
-  // const loggedIn = connectAPI.getToken()
-
-  // if (authRequired && !loggedIn) {
-  //   return next('/WA01010100'); //LOGIN
-  // }
-
-  // next();
+  
 })

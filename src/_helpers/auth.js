@@ -2,9 +2,9 @@ import axios from "axios";
 import moment from 'moment';
 import config from 'config';
 
-const AUTH_TOKEN_KEY = 'CXSESSIONID';
+const AUTH_TOKEN_KEY = 'authToken';
 axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 export const auth = {
     sendRequest,
     setAuthToken,
@@ -17,10 +17,9 @@ export const auth = {
 }
 
 function sendRequestForm(method, url, requestData, inputHeader = {}) {
-    
     var headers =  { 
         ...inputHeader,
-        'User-Agent' : '',
+        'User-Agent' : navigator.userAgent,
         'X-API-Key' : config.API_KEY,
         'X-CX-Date' : formatDateTime(new Date()),
         'X-CX-Channel' : '0',
@@ -57,11 +56,11 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
 }
 
 function setAuthToken(token) {
-    document.cookie = token;
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
 }
 
 function getAuthToken() {  
-    return document.cookie['CXSESSIONID'];  
+    return localStorage.getItem(AUTH_TOKEN_KEY);
 }
 
 function clearAuthToken() {
