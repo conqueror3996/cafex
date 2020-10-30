@@ -1,7 +1,7 @@
 <template>
   <div class="home-screen">
     <b-tabs card align="right">
-      <b-tab title="顧客選択">
+      <b-tab title="顧客選択"  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
             <p class="title">顧客を選択して「次へ」を押してください</p>
@@ -140,7 +140,7 @@
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録">
+      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')">
         <b-card-text class="selected-content">
           <WA01010320></WA01010320>
         </b-card-text>
@@ -158,8 +158,8 @@ export default {
   data() {
     return {
       imgSearchIcon: './static/img/search-icon.png',
-      imgEditIcon: './static/img/edit-icon.png',
-      imgDeleteIcon: './static/img/delete-icon.png',
+      imgEditIcon: './static/img/pen.svg',
+      imgDeleteIcon: './static/img/trash.svg',
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
@@ -184,6 +184,7 @@ export default {
                 memo: 'manhkhang@vn-cubesystem.com'
         },]
       },
+      tabSelected: '',
     };
   },
   components: {
@@ -215,6 +216,7 @@ export default {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
     }),
+    ...mapActions("alert", { error: "error" }),
     deleteItem(consumer_id) {
         if(consumer_id !== this.selectedItem) {
             return
@@ -242,6 +244,13 @@ export default {
     // Event click button search
     handleSearch() {
       
+    },
+    changeTab(tab) {
+      // Set error message empty when change tab
+      if (this.tabSelected !== tab) {
+        this.error('');
+      }
+      this.tabSelected = tab;
     }
   },
   
@@ -318,6 +327,7 @@ export default {
 }
 .col-spec a {
   padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 .col-check {
   width: 3rem;
@@ -339,6 +349,7 @@ export default {
 .modal-content {
   width: 501px;
   height: 149px;
+  margin: 0 auto
 }
 
 .modal-body {

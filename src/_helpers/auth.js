@@ -1,11 +1,10 @@
 import axios from "axios";
 import moment from 'moment';
 import config from 'config';
-import decode from 'jwt-decode';
-const Axios = require("axios").default;
 
 const AUTH_TOKEN_KEY = 'authToken';
-
+axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
+//axios.defaults.withCredentials = true;
 export const auth = {
     sendRequest,
     setAuthToken,
@@ -20,33 +19,21 @@ export const auth = {
 function sendRequestForm(method, url, requestData, inputHeader = {}) {
     var headers =  { 
         ...inputHeader,
-        'User-Agent' : '',
+        'User-Agent' : navigator.userAgent,
         'X-API-Key' : config.API_KEY,
         'X-CX-Date' : formatDateTime(new Date()),
         'X-CX-Channel' : '0',
         'X-CX-Client-Version' : config.VERSION,
         'X-CX-Interaction-Id' : formatDateTime(new Date()),
-        'Access-Control-Expose-Headers': 'set-cookie'
     };
-    
     const requestOptions = {
         method,
         url,
         data: requestData,
-        headers,
+        headers
     };
-
-    // const configAxios = {
-    //     withCredentials: true,
-    //     maxRedirects: 0,
-    //     validateStatus: function(status) {
-    //         return status >= 200 && status <= 303;
-    //     },
-    //     headers
-    // }
     
-    return axios(requestOptions)
-    // return Axios.post(url, requestData, configAxios)
+    return axios.request(requestOptions)
 }
 
 function sendRequest(method, url, requestData, inputHeader = {}) {
@@ -59,29 +46,25 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         'X-CX-Client-Version' : config.VERSION,
         'X-CX-Interaction-Id' : formatDateTime(new Date())
     };
-    
     const requestOptions = {
         method,
         url,
         body: requestData,
-        headers 
+        headers
     };
-    // return axios(requestOptions)
-    return axios.post(url, requestData, { withCredentials: true, headers: headers})
+    return axios.request(requestOptions)
 }
 
 function setAuthToken(token) {
-    axios.defaults.headers.common['Cookie'] = `${token}`
-    localStorage.setItem(AUTH_TOKEN_KEY, token)
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
 }
 
-function getAuthToken() {
-    return localStorage.getItem(AUTH_TOKEN_KEY)    
+function getAuthToken() {  
+    return localStorage.getItem(AUTH_TOKEN_KEY);
 }
 
 function clearAuthToken() {
-    axios.defaults.headers.common['Cookie'] = ''
-    localStorage.removeItem(AUTH_TOKEN_KEY)
+    document.cookie = "CXSESSIONID=; Path=/; HttpOnly; Secure";
 }
 
 function isLoggedIn() {

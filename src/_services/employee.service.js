@@ -1,5 +1,5 @@
 import config from 'config';
-import { authHeader, auth, allAPI } from '../_helpers';
+import { auth, allAPI } from '../_helpers';
 
 export const employeeService = {
     login,
@@ -43,7 +43,6 @@ function changePassword(input) {
 
 /** Ap010202_従業員情報取得API */
 function getEmployeeUserinfo() {
-    
     return auth.sendRequest('GET', allAPI.get_employee_userinfo, null, {})
 }
 

@@ -6,8 +6,8 @@ export const consumerService = {
     getAll,
     getConsumerById,
     postConsumer,
-    update,
-    delete: _delete,
+    updateConsumer,
+    deleteConsumer,
 };
 
 
@@ -37,24 +37,15 @@ function postConsumer(input) {
     return auth.sendRequest('POST', allAPI.post_consumers_info, input, {'Content-Type': 'application/json'})
 }
 
-function update(user) {
-    const requestOptions = {
-        method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
+function updateConsumer(id, input) {
 
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);
+    return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, {'Content-Type': 'application/json'})
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
+function deleteConsumer(id,) {
 
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+    return auth.sendRequest('DELETE', allAPI.delete_consumers_by_id(id), null, null)
 }
 
 function handleResponse(response) {

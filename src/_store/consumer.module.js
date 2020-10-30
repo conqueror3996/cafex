@@ -42,18 +42,28 @@ const actions = {
             );
     },
 
-    delete({ commit }, id) {
+    deleteConsumer({ commit }, id) {
         commit('deleteRequest', id);
 
-        // consumerService.delete(id)
-        //     .then(
-        //         user => commit('deleteSuccess', id),
-        //         error => commit('deleteFailure', { id, error: error.toString() })
-        //     );
+        consumerService.deleteConsumer(id)
+            .then(
+                user => commit('deleteSuccess', id),
+                error => commit('deleteFailure', { id, error: error.toString() })
+            );
     },
 
     postConsumer({ commit, dispatch }, input) {
         consumerService.postConsumer(input).then((info) => {
+            if (info.data.code) {
+                dispatch('alert/error', info.data.message, { root: true });
+            } else {
+                // commit('getAllSuccessGet', datas)
+            }
+        })
+    },
+
+    updateConsumer({commit, dispatch}, employeeId, input) {
+        consumerService.updateConsumer(employeeId, input).then((info) => {
             if (info.data.code) {
                 dispatch('alert/error', info.data.message, { root: true });
             } else {

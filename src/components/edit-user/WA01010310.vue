@@ -129,6 +129,7 @@ export default {
             this.showConfirmEdit = true;
         },
         handleCancle() {
+            this.error(''); // reset error message
             this.$emit("changeEdit", false)
         }
     }
