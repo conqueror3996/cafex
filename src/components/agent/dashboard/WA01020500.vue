@@ -9,11 +9,11 @@
         </div>
         <div class="div-button-confirm">
                 <label variant="primary" class="btn btn-primary btn-upload" for="file">
-                    <p>ファイルアップロード</p>
+                    <p>ファイル選択</p>
                 </label>
-                <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".csv"/>
+                <input type="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
             <!-- <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button> -->
-            <b-button style="margin-top: 50px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
+            <b-button style="margin-top: 30px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
         </div>
     </div>
 </template>
@@ -57,19 +57,19 @@ export default {
             // show modal confirm
             this.showModal = true;
         },
-      uploadFile(event) {
-        const files = event.target.files;
-        let errorMessage = '';
-        for (var i = 0; i < files.length; i++)
-        {
-          const filename = files[i].name;
-          const filetype = filename.substring(filename.length - 3, filename.length);
-          if(filetype !== 'csv') {
-            alert("unsupport file type");
-            return;
-          }
+        uploadFile(event) {
+            const files = event.target.files;
+            let errorMessage = '';
+            for (var i = 0; i < files.length; i++)
+            {
+                const filename = files[i].name;
+                const filetype = filename.substring(filename.length - 3, filename.length);
+                if(filetype !== 'csv') {
+                    alert("unsupport file type");
+                    return;
+                }
+            }
         }
-      }
     }
 }
 </script>
@@ -77,12 +77,13 @@ export default {
 <style scoped>
 .div-registration-content {
     flex-direction: column;
-    margin: 0 80px 80px 80px;
+    margin: 0 70px 80px 70px;
     padding-top: 34px;
 }
 
 .div-registration-content p {
     font-size: 24px;
+    font-family: 'HiraginoSan-W3';
 }
 
 .div-custom-alert {
@@ -97,6 +98,10 @@ export default {
     margin: auto;
 }
 
+.div-button-confirm label p {
+    font-family: 'HiraginoSan-W3';
+}
+
 .button-custom {
     width: 250px;
     height: 60px;
@@ -107,8 +112,9 @@ export default {
 .div-button-confirm button {
   width: 172px;
   height: 44px;
-  font-size: 14px;
+  font-size: 20px;
   margin: 0 auto;
+  font-family: 'HiraginoSan-W3';
 }
 
 .btn-upload {
@@ -123,7 +129,7 @@ export default {
 }
 
 .btn-upload p{
-  font-size: 14px;
+  font-size: 20px;
   padding-top: .5rem;
 }
 
