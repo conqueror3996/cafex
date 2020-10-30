@@ -48,22 +48,20 @@ function deleteConsumer(id,) {
     return auth.sendRequest('DELETE', allAPI.delete_consumers_by_id(id), null, null)
 }
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        console.log(data)
-        // console.log(text)
-        if (!response.ok) {
-            if (response.status === 401) {
-                // auto logout if 401 response returned from api
-                logout();
-                location.reload(true);
-            }
+// function handleResponse(response) {
+//     return response.text().then(text => {
+//         const data = text && JSON.parse(text);
+//         if (!response.ok) {
+//             if (response.status === 401) {
+//                 // auto logout if 401 response returned from api
+//                 logout();
+//                 location.reload(true);
+//             }
 
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
+//             const error = (data && data.message) || response.statusText;
+//             return Promise.reject(error);
+//         }
 
-        return data;
-    });
-}
+//         return data;
+//     });
+// }

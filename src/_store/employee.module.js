@@ -9,7 +9,6 @@ const actions = {
         employeeService.login(username, password)
             .then(
                 info => {
-                    console.log(info)
                     if (info) {
                         if (info.error) {
                             dispatch('alert/error', info.error.code, { root: true });
@@ -18,8 +17,12 @@ const actions = {
                             dispatch('alert/success', info.status + " Login Success", { root: true });
                             commit('loginSuccess', info);
                             dispatch("userInfo");
-                            //check permission (first login, manager, sale)
-                            // router.push('/WA01010300');
+                            console.log(state.employee)
+                            // if (state.employee.rollCode === '23') {
+                            //     router.push('/WA01010300')
+                            // } else {
+                            //     router.push('/WA01020300')
+                            // }
                         }
                     }
                 }
@@ -31,6 +34,7 @@ const actions = {
             if (info.error.code) {
                 dispatch('alert/error', info.error.code, { root: true });
             } else {
+                console.log(info)
                 commit('logout');
                 auth.clearAuthToken();
             }
@@ -64,14 +68,13 @@ const actions = {
                         dispatch('alert/error', info.error.code, { root: true });
                         commit('getUserInfoFailed', info.error);
                     }else{
-                        localStorage.setItem('userInfo', info);
-                        commit("getUserInfoSuccess", info);
+                        console.log('test', info.data)
+                        localStorage.setItem('authToken', JSON.stringify(info.data));
+                        commit("getUserInfoSuccess", info.data);
+                        
                     }
                 }
             },
-            error => {
-                commit("getUserInfoFailed", error);
-            }
         )
     }
 };

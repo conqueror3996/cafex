@@ -64,12 +64,21 @@ function getAuthToken() {
 }
 
 function clearAuthToken() {
+    console.log('testsdesds')
     document.cookie = "CXSESSIONID=; Path=/; HttpOnly; Secure";
+    localStorage.removeItem(AUTH_TOKEN_KEY)
 }
 
 function isLoggedIn() {
     let authToken = getAuthToken()
-    return !!authToken && !isTokenExpired(authToken)
+    if (authToken) {
+        if (authToken.employeeId === '') {
+            return false
+        }
+        return true
+    }
+    return false
+    // return !!authToken && !isTokenExpired(authToken)
 }
 
 function getUserInfo() {

@@ -14,6 +14,7 @@ import WA01020300 from '../components/agent/manage-mode/WA01020300'
 import WA01020400 from '../components/agent/dashboard/WA01020400'
 import WA01020501 from '../components/agent/registration-employee/WA01020501'
 import { auth } from './auth';
+import vuex from "vuex";
 
 Vue.use(Router);
 
@@ -24,6 +25,9 @@ export const router = new Router({
       path: '/WA01010100', 
       name: 'WA01010100',
       component: WA01010100,
+      meta : { 
+        authRequired : false
+      } 
     },// login
     { 
       path: '/WA01010300', 
@@ -31,8 +35,7 @@ export const router = new Router({
       component: WA01010300, 
       meta : { 
         authRequired : true
-      },
-      props: true
+      } 
     }, // dashboard
     { 
       path: '/WA01010310/:consumerId', 
@@ -118,15 +121,33 @@ export const router = new Router({
   ]
 });
 
+
 router.beforeEach((to, from, next) => {
+  // const store = useStore()
   // redirect to login page if not logged in and trying to access a restricted page
-  if(!to.meta.authRequired && !auth.isLoggedIn){
-    next({
-      path: '/WA01010100', //Login
-      params: { nextUrl: to.fullPath }
-    })
-  }else{
-    next();
-  }
+  console.log(auth.isLoggedIn())
   
+  // if(!auth.isLoggedIn()) {
+  //   if(to.name === 'WA01010100') {
+  //     next()
+  //   }
+  //   return next({
+  //     path: '/WA01010100', //Login
+  //     params: { nextUrl: to.fullPath }
+  //   })
+  // } 
+  
+  // next();
+  if (!auth.isLoggedIn()) {
+    if (to.path !== "/WA01010100") {
+        next('/WA01010100');
+    } else {
+        next()
+    }
+} else if (to.path === "/WA01010100") {
+   
+    next('/WA01010300')
+}
+next();
+
 })

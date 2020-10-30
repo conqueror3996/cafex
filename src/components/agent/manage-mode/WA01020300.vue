@@ -27,8 +27,13 @@ export default {
 
         }
     },
+    created() {
+        this.getUserInfo()
+    },
     methods: {
-
+        ...mapActions("employees", {
+            getUserInfo: "userInfo",
+        }),
     }
 }
 </script>

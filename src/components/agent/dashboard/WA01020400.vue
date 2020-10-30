@@ -202,8 +202,7 @@ export default {
   created() {
     this.getAllConsumer();
     this.changePasswordState = false
-    console.log(this.consumers)
-    // console.log(this.changePasswordState)
+    // console.log(this.consumers)
   },
   methods: {
     ...mapActions("consumers", {

@@ -15,7 +15,6 @@ const actions = {
         consumerService.getAll(input)
             .then(
                 datas => {
-                    // console.log(datas.data.code)
                     if (datas.data.code) {
                         dispatch('alert/error', datas.data.message, { root: true });
                     } else {
@@ -31,7 +30,6 @@ const actions = {
         consumerService.getConsumerById(id)
             .then(
                 datas => {
-                    // console.log(datas.data.code)
                     if (datas.data.code) {
                         dispatch('alert/error', datas.data.message, { root: true });
                     } else {

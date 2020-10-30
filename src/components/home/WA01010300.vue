@@ -160,6 +160,7 @@ import { mapState, mapActions } from "vuex";
 import WA01010320 from './WA01010320.vue';
 import WA01010310 from '../edit-user/WA01010310.vue';
 import fileJson from '../../../static/file.json'
+import moment from 'moment';
 
 export default {
   props: {
@@ -224,12 +225,11 @@ export default {
     }
   },
   created() {
+    this.getUserInfo()
     this.getAllConsumer();
     this.changePasswordState = false
-    // console.log(this.$router)
-    this.consumers = fileJson.consumer
-    console.log(fileJson)
-    // console.log(this.changePasswordState)
+    this.formatConsumerData(fileJson.consumer)
+    // console.log(this.consumers)
   },
   methods: {
     ...mapActions("consumers", {
@@ -240,6 +240,9 @@ export default {
     ...mapActions("files", {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
+    }),
+    ...mapActions("employees", {
+      getUserInfo: "userInfo",
     }),
     ...mapActions("alert", { error: "error" }),
     deleteItem(consumerId) {
@@ -277,6 +280,14 @@ export default {
         this.error('');
       }
       this.tabSelected = tab;
+    },
+    formatConsumerData(arrInput) {
+      this.consumers = arrInput.map((e) => {
+        return {
+          ...e,
+          birthdate: moment(e.birthdate).format('yyyy/MM/DD')
+        }
+      })
     }
   },
   
