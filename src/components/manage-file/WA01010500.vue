@@ -73,7 +73,7 @@
               :src="imgUploadIcon"
             />
           </label>
-          <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" />
+          <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".pdf" />
            <!-- multiple="multiple" -->
         </div>
       </div>
@@ -210,6 +210,12 @@ export default {
         let errorMessage = '';
         for (var i = 0; i < files.length; i++)
         {
+          const filename = files[i].name;
+          const filetype = filename.substring(filename.length - 3, filename.length);
+          if(filetype !== 'pdf') {
+            alert("unsupport file type");
+            return;
+          }
           if(files[i].size/1024/1024 > 100)
           {
             errorMessage = validate.getMessageErrorFromCode("S02011");
