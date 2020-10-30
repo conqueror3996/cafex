@@ -173,15 +173,16 @@ export default {
       isEdit: false,
       users: {
         items: [{
-          fullname: 'Khang',
-                namekana: '',
-                age: '24',
-                birthday: '1996/03/09',
-                postalcode: '3424',
-                address: '32/2',
-                phone1: '19001560',
-                phone2: '19001560',
-                memo: 'manhkhang@vn-cubesystem.com'
+          consumerId: '4565645561',
+          consumerName: 'Khang',
+          consumerNameKana: '',
+          age: '24',
+          birthdate: '1996/03/09',
+          postalcode: '3424',
+          address: '32/2',
+          phoneNumber1: '19001560',
+          phoneNumber: '19001560',
+          memo: 'manhkhang@vn-cubesystem.com'
         },]
       },
       tabSelected: '',
@@ -194,7 +195,7 @@ export default {
   computed: {
     ...mapState({
       employees: (state) => state.employees,
-      //consumers: (state) => state.consumers.all,
+      consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
       

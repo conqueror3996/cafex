@@ -6,12 +6,12 @@
         <img class="mw100" :src="imgLogo" alt="logo CafeX"
       /></a>
       <div class="contact" v-if="$router.currentRoute.path === '/WA01010600'">
-        <p>お客様対応画面 &nbsp;&nbsp;&nbsp;   <a href="#">ヘルプ</a></p>
+        <p>お客様対応画面<a href="#" style="padding-left:3rem;">ヘルプ</a></p>
       </div>
-      <div class="account" v-if="employees.employee && !ignorePath.includes($router.currentRoute.path)">
+      <div class="account" v-if="employees.employeeId && !ignorePath.includes($router.currentRoute.path)">
         <ul class="list_account-action">
-          <li><a href="/WA01010200">パスワード変更</a></li>
-          <li><a href="/WA01010100">ログアウト</a></li>
+          <li><router-link :to="{ name: 'WA01010200' }" tag="a"></router-link>パスワード変更</li>
+          <li><router-link :to="{ name: 'WA01010100' }" tag="a">ログアウト</router-link></li>
         </ul>
       </div>
 			<div v-if="alert.message" :class="`alert alert-message pre-formatted ${alert.type}`">
