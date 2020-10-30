@@ -34,7 +34,7 @@
                 ref="selectableTable"
                 hover
                 :responsive="true"
-                :fields="cols"
+                :fields="computedFields"
                 :items="users.items"
                 selectable
                 select-mode="single"
@@ -75,7 +75,7 @@
                 >
                   <div
                     style="padding: 0.5rem"
-                    v-if="selectedItem === data.item.consumer_id && !isAgent"
+                    v-if="selectedItem === data.item.consumer_id"
                   >
                     <a v-b-modal.modal-edit>
                       <!-- <b-icon icon="pencil" /> -->
@@ -175,12 +175,14 @@ export default {
       imgManageMode: './static/img/btn_back_mode_select.svg',
       searchString: '',
       cols: [
-        { key: "checked", label: "", class: "col-check" },
+        { key: "checked", label: "", class: "col-check" }, // column only display both agent and not
         { key: "username", label: "氏名" },
         { key: "birthday", label: "年齢" },
         { key: "phone", label: "電話番号1" },
-        { key: "memo", label: "メモ" },
-        { key: "action", label: "" , class: "col-spec" },
+        { key: "memo", label: "メモ", isAgentCols: false }, // column only display if not agent
+        { key: "salesperson", label: "担当営業員", isAgentCols: true }, // column only display if is agent
+        { key: "belonging", label: "所属", isAgentCols: true },
+        { key: "action", label: "" , class: "col-spec", isAgentCols: false },
       ],
       selectedItem: '',
       isEdit: false,
@@ -210,8 +212,13 @@ export default {
       //consumers: (state) => state.consumers.all,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
-      
     }),
+    computedFields() {
+      if(!this.isAgent)
+        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || !field.isAgentCols);
+      else
+        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || field.isAgentCols);;
+    }
   },
   created() {
     this.getAllConsumer();
