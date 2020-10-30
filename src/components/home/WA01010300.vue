@@ -242,22 +242,22 @@ export default {
     //   deleteItem: "deleteItem"
     }),
     ...mapActions("alert", { error: "error" }),
-    deleteItem(consumer_id) {
-        if(consumer_id !== this.selectedItem) {
+    deleteItem(consumerId) {
+        if(consumerId !== this.selectedItem) {
             return
         }
         console.log('success')
     },
     onRowSelected(items) {
       console.log(items)
-        this.selectedItem = items[0]? items[0].consumer_id : null
+        this.selectedItem = items[0]? items[0].consumerId : null
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
-      if(item.consumer_id === this.selectedItem) return 'b-table-row-selected table-active'
+      if(item.consumerId === this.selectedItem) return 'b-table-row-selected table-active'
     },
     selectedRow(item) {
-        this.$refs.selectableTable.selectRow(this.users.items.indexOf(item))
+      this.$refs.selectableTable.selectRow(this.consumers.indexOf(item))
     },
     // Event click button 編集 in edit modal
     okEdit() {
