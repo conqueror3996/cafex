@@ -11,7 +11,7 @@
                 <label variant="primary" class="btn btn-primary btn-upload" for="file">
                     <p>ファイルアップロード</p>
                 </label>
-                <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" />
+                <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".csv"/>
             <!-- <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button> -->
             <b-button style="margin-top: 50px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
         </div>
@@ -57,6 +57,19 @@ export default {
             // show modal confirm
             this.showModal = true;
         },
+      uploadFile(event) {
+        const files = event.target.files;
+        let errorMessage = '';
+        for (var i = 0; i < files.length; i++)
+        {
+          const filename = files[i].name;
+          const filetype = filename.substring(filename.length - 3, filename.length);
+          if(filetype !== 'csv') {
+            alert("unsupport file type");
+            return;
+          }
+        }
+      }
     }
 }
 </script>
