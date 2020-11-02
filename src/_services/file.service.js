@@ -6,19 +6,24 @@ export const fileService = {
     getFileList,
     addFile,
     deleteFile,
+    getFileInternal
 };
 
-function getFileList(fileType) {
-    
-    return auth.sendRequest('GET', allAPI.get_files(fileType), null, null)
+function getFileList(fileType, params) {
+
+    return auth.sendRequestParams('GET', allAPI.get_files(fileType), params, null)
 }
 
 function addFile(fileType, input) {
-    
-    return auth.sendRequest('POST', allAPI.get_files(fileType), input, null)
+    let headers = { 'Content-Type': 'multipart/form-data' }
+    return auth.sendRequest('POST', allAPI.get_files(fileType), input, headers)
 }
 
 function deleteFile(fileType, fileId) {
     
     return auth.sendRequest('DELETE', allAPI.get_files(fileType, fileId), null, null)
+}
+
+function getFileInternal(url) {
+    return Axios.get(url, { baseURL: config.apiInternalUrl});
 }

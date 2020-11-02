@@ -140,7 +140,7 @@
               </b-table>
             </div>
             <div class="bottom-table" v-if="!isAgent">
-                <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
+                <b-button variant="primary" class="btn-next" @click="$router.push('/WA01010400')">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
