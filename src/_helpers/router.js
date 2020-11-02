@@ -144,10 +144,11 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-} else if (to.path === "/WA01010100") {
+} 
+// else if (to.path === "/WA01010100") {
    
-    next('/WA01010300')
-}
+//     next('/WA01010300')
+// }
 next();
 
 })

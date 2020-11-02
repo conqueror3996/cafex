@@ -50,7 +50,6 @@ export default {
     }
     .box-login {
         width: 460px;
-        height: 390px;
     }
     .selection-mode button, .selection-mode a{
         box-shadow: unset !important;

@@ -171,7 +171,7 @@ export default {
   }, // remove if have info login
   data() {
     return {
-      imgSearchIcon: './static/img/search-icon.png',
+      imgSearchIcon: './static/img/search-icon.svg',
       imgEditIcon: './static/img/pen.svg',
       imgDeleteIcon: './static/img/trash.svg',
       imgManageMode: './static/img/btn_back_mode_select.svg',
