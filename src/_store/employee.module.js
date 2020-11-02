@@ -2,7 +2,7 @@ import { employeeService } from '../_services';
 import { auth, router } from '../_helpers';
 
 
-const state = { status: {}, employee: null, err: '' };
+const state = { status: {}, employee: null, err: '', all: null };
 const actions = {
     login({ dispatch, commit }, { username, password }) {
         commit('loginRequest', { username });
@@ -65,13 +65,36 @@ const actions = {
         return employeeService.getEmployeeUserinfo().then(
             info => {
                 if(info){
+                    
+                        localStorage.setItem('authToken', JSON.stringify(info.data));
+                        commit("getUserInfoSuccess", info.data);
+                        
+                }
+            },
+        )
+        .catch((err) => {
+            if (err.response) {
+                const { status, data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+                commit('getUserInfoFailed', data.error);
+                
+                if(status === 401) {
+                    auth.clearAuthToken();
+                    router.push('/WA01010100')
+                }
+            }
+        })
+    },
+    getAll({commit, dispatch}, input){
+        return employeeService.getAllEmployees(input).then(
+            info => {
+                if(info){
                     if(info.error){
                         dispatch('alert/error', info.error.code, { root: true });
                         commit('getUserInfoFailed', info.error);
-                    }else{
-                        console.log('test', info.data)
+                    }else{ 
                         localStorage.setItem('authToken', JSON.stringify(info.data));
-                        commit("getUserInfoSuccess", info.data);
+                        commit("getAllEmployeesSuccess", info.data);
                         
                     }
                 }
@@ -109,7 +132,11 @@ const mutations = {
     getUserInfoFailed(state, error){
         state.status = {};
         state.err = error;
-    }
+    },
+    getAllEmployeesSuccess(state, data){
+        state.status = {};
+        state.all = data;
+    },
 };
 
 export const employees = {
