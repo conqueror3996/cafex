@@ -36,7 +36,7 @@ const actions = {
                         dispatch('alert/error', info.data.message, { root: true });
                     } else {
                         
-                        commit('getAllSuccessGet', info)
+                        commit('getSingleSuccessGet', info)
                     }
                 }
                 
@@ -63,8 +63,8 @@ const actions = {
         })
     },
 
-    updateConsumer({commit, dispatch}, employeeId, input) {
-        consumerService.updateConsumer(employeeId, input).then((info) => {
+    updateConsumer({commit, dispatch}, input) {
+        consumerService.updateConsumer(input.params, input.body).then((info) => {
             if (info.data.code) {
                 dispatch('alert/error', info.data.message, { root: true });
             } else {

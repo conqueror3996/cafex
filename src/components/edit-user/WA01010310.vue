@@ -2,41 +2,41 @@
     <div class="main-content">
         <b-form @submit.stop.prevent="handleShowEdit()" class="form-info">
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname" autofocus></b-input></div>
+                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="consumerName">氏名 :</label></div>
+                <div><b-input class="input-form" type="text" id="consumerName" maxlength=38 v-model="localConsumer.consumerName" autofocus></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="namekana">カナ :</label></div>
-                <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
+                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="consumerNameKana">カナ :</label></div>
+                <div><b-input class="input-form" type="text" id="consumerNameKana" maxlength=38 v-model="localConsumer.consumerNameKana"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="birthday">生年月日 :</label></div>
-                <div><b-input class="input-form" type="text" id="birthday" maxlength=10 v-model="user.birthday"></b-input></div>
+                <div class="label-form"><label for="birthdate">生年月日 :</label></div>
+                <div><b-input class="input-form" type="text" id="birthdate" maxlength=10 v-model="localConsumer.birthdate"></b-input></div>
             </div>
             
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phone1">電話番号1 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="user.phone1"></b-input></div>
+                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phoneNumber1">電話番号1 :</label></div>
+                <div><b-input class="input-form" type="text" id="phoneNumber1" maxlength=12  v-model="localConsumer.phoneNumber1"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="phone2">電話番号2 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone2" maxlength=12 v-model="user.phone2"></b-input></div>
+                <div class="label-form"><label for="phoneNumber2">電話番号2 :</label></div>
+                <div><b-input class="input-form" type="text" id="phoneNumber2" maxlength=12 v-model="localConsumer.phoneNumber2"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.email"></b-input></div>
+                <div class="label-form"><label for="mailAddress">メールアドレス :</label></div>
+                <div><b-input class="input-form" type="text" id="mailAddress" maxlength=190 v-model="localConsumer.mailAddress"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="postal">郵便番号 :</label></div>
-                <div><b-input class="input-form" type="text" id="postal" maxlength=7 v-model="user.postalcode"></b-input></div>
+                <div class="label-form"><label for="postalCode">郵便番号 :</label></div>
+                <div><b-input class="input-form" type="text" id="postalCode" maxlength=7 v-model="localConsumer.postalCode"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="address">住所 : </label></div>
-                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="user.address"></b-input></div>
+                <div><b-input class="input-form" type="text" id="address" maxlength=100 v-model="localConsumer.address"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="memo">メモ :</label></div>
-                <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="user.memo"></b-input></div>
+                <div class="label-form"><label for="consumerMemo">メモ :</label></div>
+                <div><b-input class="input-form" type="text" id="consumerMemo" maxlength=100 v-model="localConsumer.consumerMemo"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button type="submit" variant="primary" >変更</b-button>
@@ -44,7 +44,7 @@
                 <b-button variant="danger" @click="handleCancle()">キャンセル</b-button>
             </div>
         </b-form>
-        <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event"></WA01010311>
+        <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localConsumer="localConsumer"></WA01010311>
         <!-- <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">
             <div>           
                 <div class="error" v-if="!$v.user.fullname.required ">氏名は必須項目です。</div>
@@ -72,23 +72,26 @@ import WA01010311 from './WA01010311.vue';
 import validate from '../../validate/validate.js'
 import userValidatePattern from '../../validate/consumer/consumer-validate'
 import errormessage from '../../validate/errormessage';
+import { Consumer } from '../../models'
+import moment from 'moment';
 
 export default {
     data() {
         return {
             showConfirmEdit: false,
             submited: false,
-            user:{
-                fullname: 'Khang',
-                namekana: '',
-                age: '24',
-                birthday: '1996/03/09',
-                postalcode: '3424',
-                address: '32/2',
-                phone1: '19001560',
-                phone2: '19001560',
-                memo: 'manhkhang@vn-cubesystem.com'
-            },
+            // user:{
+            //     fullname: 'Khang',
+            //     namekana: '',
+            //     age: '24',
+            //     birthday: '1996/03/09',
+            //     postalcode: '3424',
+            //     address: '32/2',
+            //     phone1: '19001560',
+            //     phone2: '19001560',
+            //     memo: 'manhkhang@vn-cubesystem.com'
+            // },
+            localConsumer: new Consumer
         }
     },
     components: {
@@ -96,23 +99,33 @@ export default {
     },
     computed: {
         ...mapState({
+            consumers: (state) => state.consumers.single.item,
             alert: state => state.alert
         })
     },
     created() {
-        this.getConsumerById(this.$route.params.consumerId)
+        console.log(this.$route.params.consumerId)
+        this.getConsumerById(this.$route.params.consumerId).then(() => {
+            console.log(this.consumers)
+            // this.localConsumer = this.formatConsumerData(this.consumers)
+            this.localConsumer = {
+                ...this.consumers, 
+                birthdate: moment(this.consumers.birthdate).format('yyyy/MM/DD')
+                }
+            console.log(this.localConsumer)
+        })
     },
     methods: {
         ...mapActions("alert", {
             error: "error",
         }),
         ...mapActions("consumers", {
-            getConsumerById: "getConsumerById",
+            getConsumerById: "getConsumerByID",
             //   deleteItem: "deleteItem"
         }),
         handleShowEdit() {
             // validate
-            const errorCode = validate.validateInput(userValidatePattern, this.user);
+            const errorCode = validate.validateInput(userValidatePattern, this.localConsumer);
             console.log(errorCode)
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
@@ -131,7 +144,15 @@ export default {
         handleCancle() {
             this.error(''); // reset error message
             this.$emit("changeEdit", false)
-        }
+        },
+        formatConsumerData(arrInput) {
+            return arrInput.map((e) => {
+                return {
+                    ...e,
+                    birthdate: moment(e.birthdate).format('yyyy/MM/DD')
+                    }
+                })
+        },
     }
 }
 </script>

@@ -39,7 +39,7 @@ function addConsumer(input) {
 }
 
 function updateConsumer(id, input) {
-
+    
     return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, {'Content-Type': 'application/json'})
 }
 

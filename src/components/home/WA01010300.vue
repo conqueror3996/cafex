@@ -203,7 +203,8 @@ export default {
         },]
       },
       tabSelected: '',
-      localConsumers: []
+      localConsumers: [],
+      consumerSelected: ''
     };
   },
   components: {
@@ -268,6 +269,8 @@ export default {
     // Event click button 編集 in edit modal
     okEdit() {
       this.isEdit = true;
+      // console.log(this.selectedItem)
+      this.$route.params.consumerId = this.selectedItem
     },
     // Event click button 編集 in delete modal
     okDelete() {
@@ -291,7 +294,7 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    }
+    },
   },
   
 };
