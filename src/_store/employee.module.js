@@ -10,24 +10,27 @@ const actions = {
             .then(
                 info => {
                     if (info) {
-                        if (info.error) {
-                            dispatch('alert/error', info.error.code, { root: true });
-                            commit('loginFailure', info.error);
-                        } else {
-                            dispatch('alert/success', info.status + " Login Success", { root: true });
-                            commit('loginSuccess', info);
-                            dispatch("userInfo").then(() => {
-                                console.log("into user info", state.employee)
-                                if (state.employee.rollCode === '23') {
-                                    router.push('/WA01020300')
-                                } else {
-                                    router.push('/WA01010300')
-                                }
-                            })
-                        }
+                        dispatch('alert/success', info.status + " Login Success", { root: true });
+                        commit('loginSuccess', info);
+                        dispatch("userInfo").then(() => {
+                            console.log("into user info", state.employee)
+                            if (state.employee.rollCode === '23') {
+                                router.push('/WA01020300')
+                            } else {
+                                router.push('/WA01010300')
+                            }
+                        })
                     }
                 }
-            );
+            ).catch((err) => {
+                console.log(err)
+                if (err.response) {
+                    const { data } = err.response
+                    
+                    dispatch('alert/error', data.error.code, { root: true });
+                    commit('loginFailure', data.error);
+                }
+            });
         
     },
     logout({ commit }) {
@@ -78,10 +81,10 @@ const actions = {
                 dispatch('alert/error', data.error.code, { root: true });
                 commit('getUserInfoFailed', data.error);
                 
-                if(status === 401) {
-                    auth.clearAuthToken();
-                    router.push('/WA01010100')
-                }
+                // if(status === 401) {
+                //     auth.clearAuthToken();
+                //     router.push('/WA01010100')
+                // }
             }
         })
     },
@@ -89,17 +92,15 @@ const actions = {
         return employeeService.getAllEmployees(input).then(
             info => {
                 if(info){
-                    if(info.error){
-                        dispatch('alert/error', info.error.code, { root: true });
-                        commit('getUserInfoFailed', info.error);
-                    }else{ 
-                        localStorage.setItem('authToken', JSON.stringify(info.data));
-                        commit("getAllEmployeesSuccess", info.data);
-                        
-                    }
+                    localStorage.setItem('authToken', JSON.stringify(info.data));
+                    commit("getAllEmployeesSuccess", info.data);
                 }
             },
-        )
+        ).catch((err) => {
+            const { data } = err.response
+            dispatch('alert/error', data.error.code, { root: true });
+            commit('getUserInfoFailed', data.error);
+        })
     }
 };
 
