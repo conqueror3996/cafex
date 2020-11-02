@@ -27,7 +27,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data () {
         return {
-            imgChangePassword: './static/img/change-password.png',
+            imgChangePassword: './static/img/change-password.svg',
             currentPassword: '',
             newPassword: '',
             confirmPassword: '',
