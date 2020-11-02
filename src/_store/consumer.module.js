@@ -28,13 +28,15 @@ const actions = {
     getConsumerByID({ dispatch, commit }, id) {
         commit('getAllRequest');
 
-        consumerService.getConsumerById(id)
+        return consumerService.getConsumerById(id)
             .then(
-                datas => {
-                    if (datas.data.code) {
-                        dispatch('alert/error', datas.data.message, { root: true });
+                info => {
+                    console.log(info)
+                    if (info.data.code) {
+                        dispatch('alert/error', info.data.message, { root: true });
                     } else {
-                        commit('getAllSuccessGet', datas)
+                        
+                        commit('getAllSuccessGet', info)
                     }
                 }
                 
@@ -97,6 +99,12 @@ const mutations = {
     },
     getAllFailurePost(state, error) {
         state.all = { error };
+    },
+    getSingleSuccessGet(state, users) {
+        state.single = { item: users.data };
+    },
+    getSingleFailureGet(state, error) {
+        state.single = { error };
     },
     deleteRequest(state, id) {
         // add 'deleting:true' property to user being deleted
