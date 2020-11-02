@@ -27,9 +27,8 @@ function login(username, password) {
 
 /** Ap010102_従業員ログアウトAPI */ 
 function logout() {
-    
     let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
-    return auth.sendRequest('POST', allAPI.employee_login, null, headers)
+    return auth.sendRequest('POST', allAPI.employee_logout, null, headers)
 }
 
 /** Ap010201_従業員パスワード変更API */

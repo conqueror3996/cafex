@@ -8,12 +8,11 @@
       <div class="contact" v-if="$router.currentRoute.path === '/WA01010600'">
         <p>お客様対応画面<a href="#" style="padding-left:3rem;">ヘルプ</a></p>
       </div>
-        <!-- employees.employee &&  -->
-      <div class="account" v-if="employees.employeeId && !ignorePath.includes($router.currentRoute.path)">
+      <div class="account" v-if="employee && !ignorePath.includes($router.currentRoute.path)">
         <img class="mw100" :src="imgMyAccountIconGreen" alt="account"/>
         <ul class="list_account-action">
           <li><router-link :to="{ name: 'WA01010200' }" tag="a"></router-link>パスワード変更</li>
-          <li><router-link :to="{ name: 'WA01010100' }" tag="a">ログアウト</router-link></li>
+          <li @click="loggingOut()"><router-link :to="{ name: 'WA01010100' }" tag="a" >ログアウト</router-link></li>
         </ul>
       </div>
 			<div v-if="alert.message" :class="`alert alert-message pre-formatted ${alert.type}`">
@@ -73,14 +72,26 @@ export default {
   computed: {
     ...mapState({
       alert: (state) => state.alert,
-      employees: (state) => state.employees,
+      employee: (state) => {
+        // console.log(state)
+        return state.employees.employee
+      },
       // changePasswordState: (state) => state.changePasswordState
     }),
+  },
+  created() {
+
+      // this.userInfo()
   },
   methods: {
     ...mapActions({
       clearAlert: "alert/clear",
     }),
+    ...mapActions('employees', ['userInfo', 'logout']),
+    loggingOut() {
+      console.log('dm')
+      this.logout()
+    },
   },
   watch: {
     $route(to, from) {
