@@ -11,15 +11,15 @@
         :visible="showConfirmEdit"
       >
         <div class="confirm-info">
-          <p>氏名：</p>
-          <p>氏名（カナ）：</p>
-          <p>生年月日：</p>
-          <p>電話番号１：</p>
-          <p>電話番号２：</p>
-          <p>メールアドレス：</p>
-          <p>郵便番号：</p>
-          <p>住所：</p>
-          <p>メモ：</p>
+          <p>氏名：{{ this.localConsumer.consumerName }}</p>
+          <p>氏名（カナ）：{{ this.localConsumer.consumerNameKana }}</p>
+          <p>生年月日：{{ this.localConsumer.birthdate }}</p>
+          <p>電話番号１：{{ this.localConsumer.phoneNumber1 }}</p>
+          <p>電話番号２：{{ this.localConsumer.phoneNumber2 }}</p>
+          <p>メールアドレス：{{ this.localConsumer.mailAddress }}</p>
+          <p>郵便番号：{{ this.localConsumer.postalCode }}</p>
+          <p>住所：{{ this.localConsumer.address }}</p>
+          <p>メモ：{{ this.localConsumer.consumerMemo }}</p>
         </div>
         <template #modal-footer="{ ok, cancel }">
           <div>
@@ -40,22 +40,32 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-    props: [
-        'showConfirmEdit',
-    ],
+    props: {
+      showConfirmEdit: Boolean,
+      localConsumer: {}
+    },
+    created() {
+      console.log(this.localConsumer)
+      console.log(this.$route.params.consumerId)
+    },
+
     methods: {
       ...mapActions("consumers", {
-        updateConsumer: "updateConsumer",
+        update: "updateConsumer",
         deleteUser: "deleteConsumer",
       //   deleteItem: "deleteItem"
       }),
-        handleEdit() {
-          this.updateConsumer()
-        },
-        handleHide() {
-            this.$emit("changeModalConfirm", false)
+      handleEdit() {
+        const data = {
+          body: this.localConsumer,
+          params: this.$route.params.consumerId
         }
-    }
+        this.update(data)
+      },
+      handleHide() {
+          this.$emit("changeModalConfirm", false)
+      }
+    },
 };
 </script>
 
