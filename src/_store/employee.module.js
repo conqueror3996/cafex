@@ -16,13 +16,14 @@ const actions = {
                         } else {
                             dispatch('alert/success', info.status + " Login Success", { root: true });
                             commit('loginSuccess', info);
-                            dispatch("userInfo");
-                            console.log(state.employee)
-                            // if (state.employee.rollCode === '23') {
-                            //     router.push('/WA01010300')
-                            // } else {
-                            //     router.push('/WA01020300')
-                            // }
+                            dispatch("userInfo").then(() => {
+                                console.log("into user info", state.employee)
+                                if (state.employee.rollCode === '23') {
+                                    router.push('/WA01020300')
+                                } else {
+                                    router.push('/WA01010300')
+                                }
+                            })
                         }
                     }
                 }
@@ -31,12 +32,12 @@ const actions = {
     },
     logout({ commit }) {
         employeeService.logout().then((info) => {
-            if (info.error.code) {
-                dispatch('alert/error', info.error.code, { root: true });
+            if (info.status !== 200) {
+                dispatch('alert/error', info.statusText, { root: true });
             } else {
                 console.log(info)
-                commit('logout');
                 auth.clearAuthToken();
+                commit('logout');
             }
             // remove user from local storage to log user out
         });
@@ -61,7 +62,7 @@ const actions = {
 
     },
     userInfo({commit, dispatch}){
-        employeeService.getEmployeeUserinfo().then(
+        return employeeService.getEmployeeUserinfo().then(
             info => {
                 if(info){
                     if(info.error){
