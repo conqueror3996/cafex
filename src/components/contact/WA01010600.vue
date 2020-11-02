@@ -112,11 +112,13 @@ export default {
     }),
     changeDoc(event) {
       this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
-      this.docSubPageIndex = '';
+      this.docSubPageIndex = 0;
+      this.changeSubPage();
     },
     changeSubPage(event) {
-      this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
-      console.log(this.docPageObj)
+      if(this.docSubPageIndex !== '') {
+        this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
+      }
     },
     pushDocUrl() {
       if(this.docSubPageIndex != '') {
