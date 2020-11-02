@@ -13,7 +13,8 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
-    sendRequestForm
+    sendRequestForm,
+    sendRequestParams
 }
 
 function sendRequestForm(method, url, requestData, inputHeader = {}) {
@@ -50,6 +51,25 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         method,
         url,
         body: requestData,
+        headers
+    };
+    return axios.request(requestOptions)
+}
+
+function sendRequestParams(method, url, requestData, inputHeader = {}) {
+    var headers =  { 
+        ...inputHeader,
+        'User-Agent' : '',
+        'X-API-Key' : config.API_KEY,
+        'X-CX-Date' : formatDateTime(new Date()),
+        'X-CX-Channel' : '0',
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date())
+    };
+    const requestOptions = {
+        method,
+        url,
+        params: requestData,
         headers
     };
     return axios.request(requestOptions)

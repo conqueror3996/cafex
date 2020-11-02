@@ -22,8 +22,9 @@ function register(user) {
 }
 
 function getAll(input) {
+    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
 
-    return auth.sendRequest('GET', allAPI.get_consumers, input, null)
+    return auth.sendRequestParams('GET', allAPI.get_consumers, input, headers)
 }
 
 
