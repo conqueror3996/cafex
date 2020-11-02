@@ -1,0 +1,21 @@
+{
+    "docList": [
+        {
+            "groupName": "▼ 資料",
+            "list": [
+                {
+                    "label": "トータルアシスト自動車保険",
+                    "value": "static/params/TNK/doc/tortal_assist.png"
+                },
+                {
+                    "label": "火災保険・地震保険",
+                    "value": "static/params/TNK/doc/kasai_jishin.png"
+                },
+                {
+                    "label": "超保険",
+                    "value": "static/params/TNK/doc/super.png"
+                }
+            ]
+        }
+    ]
+}
