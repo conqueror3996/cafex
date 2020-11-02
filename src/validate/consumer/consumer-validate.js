@@ -1,40 +1,40 @@
 export default  {
-  fullname: {
+  consumerName: {
     validations: {
       required: { value: true, message: "S02003" },
     },
   },
-  namekana: {
+  consumerNameKana: {
     validations: {
       required: { value: true, message: "S02004" },
       type: { value: "KanaFull", message: "S02005" },
     },
   },
-  birthday: {
+  birthdate: {
     validations: {
       required: { value: false },
       type: { value: "Date", message: "S02006" },
     },
   },
-  phone1: {
+  phoneNumber1: {
     validations: {
       required: { value: true, message: "S02007" },
       type: { value: "NumberHalfWidth", message: "S02008" },
     },
   },
-  phone2: {
+  phoneNumber2: {
     validations: {
       required: { value: false },
       type: { value: "NumberHalfWidth", message: "S02008" },
     },
   },
-  email: {
+  mailAddress: {
     validations: {
       required: { value: false },
       type: { value: "Email", message: "S02009" },
     },
   },
-  postalcode: {
+  postalCode: {
     validations: {
       required: { value: false },
       type: { value: "NumberHalfWidth", message: "S02010" },
