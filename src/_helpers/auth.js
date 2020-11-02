@@ -72,7 +72,7 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         body: requestData,
         headers
     };
-
+    console.log(requestOptions)
     return axios.request(requestOptions)
 }
 
@@ -104,7 +104,6 @@ function getAuthToken() {
 }
 
 function clearAuthToken() {
-    console.log('testsdesds')
     document.cookie = "CXSESSIONID=; Path=/; HttpOnly; Secure";
     localStorage.removeItem(AUTH_TOKEN_KEY)
 }

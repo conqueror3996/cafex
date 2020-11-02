@@ -53,8 +53,8 @@ const actions = {
             );
     },
 
-    postConsumer({ commit, dispatch }, input) {
-        consumerService.postConsumer(input).then((info) => {
+    addConsumer({ commit, dispatch }, input) {
+        consumerService.addConsumer(input).then((info) => {
             if (info.data.code) {
                 dispatch('alert/error', info.data.message, { root: true });
             } else {

@@ -37,17 +37,23 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
     props: [
         'showModal',
+        'data'
     ],
     methods: {
-        handleReg() {
-
-        },
-        handleHide() {
-            this.$emit("changeShowModal", false)
-        }
+      ...mapActions("consumers", {
+            addConsumer: "addConsumer",
+      }),
+      handleReg() {
+        this.addConsumer(this.data)
+      },
+      handleHide() {
+          this.$emit("changeShowModal", false)
+      }
     }
 };
 </script>

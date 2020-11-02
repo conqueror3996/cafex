@@ -5,7 +5,7 @@ export const consumerService = {
     register,
     getAll,
     getConsumerById,
-    postConsumer,
+    addConsumer,
     updateConsumer,
     deleteConsumer,
 };
@@ -33,7 +33,7 @@ function getConsumerById(id) {
     return auth.sendRequest('GET', allAPI.get_consumers_by_id(id), null, null)
 }
 
-function postConsumer(input) {
+function addConsumer(input) {
     
     return auth.sendRequest('POST', allAPI.post_consumers_info, input, {'Content-Type': 'application/json'})
 }
