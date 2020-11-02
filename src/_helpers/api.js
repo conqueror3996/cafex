@@ -4,6 +4,7 @@ export const allAPI = {
     employee_logout: `v1/employee/logout`, // Ap010102_従業員ログアウトAPI
     employee_change_password: `v1/employee/password`, // Ap010201_従業員パスワード変更API
     get_employee_userinfo: `v1/employee/userinfo`, // Ap010202_従業員情報取得API
+    get_employees: `/v1/employees`, // Ap010501_従業員一覧取得API
 
     // Consumers
     get_consumers: `v1/consumers`, // Ap010301_顧客一覧取得API

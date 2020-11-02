@@ -12,13 +12,14 @@ const actions = {
     getAll({ dispatch, commit }, input) {
         commit('getAllRequest');
 
-        consumerService.getAll(input)
+        return consumerService.getAll(input)
             .then(
-                datas => {
-                    if (datas.data.code) {
-                        dispatch('alert/error', datas.data.message, { root: true });
+                info => {
+                    if (info.data.code) {
+                        dispatch('alert/error', info.data.message, { root: true });
                     } else {
-                        commit('getAllSuccessGet', datas)
+                        console.log('cons', info)
+                        commit('getAllSuccessGet', info)
                     }
                 }
             );
@@ -86,13 +87,13 @@ const mutations = {
         state.all = { loading: true };
     },
     getAllSuccessGet(state, users) {
-        state.all = { items: users.data.Customers };
+        state.all = { items: users.data.consumer };
     },
     getAllFailureGet(state, error) {
         state.all = { error };
     },
     getAllSuccessPost(state, users) {
-        state.all = { items: users.data.Customers };
+        state.all = { items: users.data.consumer };
     },
     getAllFailurePost(state, error) {
         state.all = { error };

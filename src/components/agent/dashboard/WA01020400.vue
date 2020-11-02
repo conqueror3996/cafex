@@ -167,7 +167,7 @@ export default {
   data() {
     return {
       imgManageMode: './static/img/btn_back_mode_select.svg',
-      imgSearchIcon: './static/img/search-icon.png',
+      imgSearchIcon: './static/img/search-icon.svg',
       imgEditIcon: './static/img/pen.svg',
       imgDeleteIcon: './static/img/trash.svg',
       searchString: '',
@@ -200,15 +200,18 @@ export default {
     }),
   },
   created() {
-    this.getAllConsumer();
+    this.getAllEmployees({ page: 1, maximumRecordsPerPage: 40 });
     this.changePasswordState = false
     // console.log(this.consumers)
   },
   methods: {
-    ...mapActions("consumers", {
-      getAllConsumer: "getAll",
-      deleteUser: "delete",
+    // ...mapActions("consumers", {
+      // getAllConsumer: "getAll",
+      // deleteUser: "delete",
     //   deleteItem: "deleteItem"
+    // }),
+    ...mapActions("employees", {
+      getAllEmployees: "getAll",
     }),
     ...mapActions("files", {
       editItem: "editItem",

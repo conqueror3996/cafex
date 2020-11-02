@@ -35,7 +35,7 @@
                 hover
                 :responsive="true"
                 :fields="computedFields"
-                :items="consumers"
+                :items="localConsumers"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
@@ -171,7 +171,7 @@ export default {
   }, // remove if have info login
   data() {
     return {
-      imgSearchIcon: './static/img/search-icon.png',
+      imgSearchIcon: './static/img/search-icon.svg',
       imgEditIcon: './static/img/pen.svg',
       imgDeleteIcon: './static/img/trash.svg',
       imgManageMode: './static/img/btn_back_mode_select.svg',
@@ -203,7 +203,7 @@ export default {
         },]
       },
       tabSelected: '',
-      consumers: []
+      localConsumers: []
     };
   },
   components: {
@@ -213,7 +213,7 @@ export default {
   computed: {
     ...mapState({
       employees: (state) => state.employees,
-      // consumers: (state) => state.consumers.all,
+      consumers: (state) => state.consumers.all.items,
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
     }),
@@ -225,11 +225,14 @@ export default {
     }
   },
   created() {
-    this.getUserInfo()
-    this.getAllConsumer();
-    this.changePasswordState = false
-    this.formatConsumerData(fileJson.consumer)
-    // console.log(this.consumers)
+    this.getUserInfo().then(() => {
+      this.getAllConsumer({ employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }).then(() => {
+        this.localConsumers = this.formatConsumerData(this.consumers)
+      });
+    })
+    
+    // this.changePasswordState = false
+    // console.log(this.employees.employee)
   },
   methods: {
     ...mapActions("consumers", {
@@ -260,7 +263,7 @@ export default {
       if(item.consumerId === this.selectedItem) return 'b-table-row-selected table-active'
     },
     selectedRow(item) {
-      this.$refs.selectableTable.selectRow(this.consumers.indexOf(item))
+      this.$refs.selectableTable.selectRow(this.localConsumers.indexOf(item))
     },
     // Event click button 編集 in edit modal
     okEdit() {
@@ -282,7 +285,7 @@ export default {
       this.tabSelected = tab;
     },
     formatConsumerData(arrInput) {
-      this.consumers = arrInput.map((e) => {
+      return arrInput.map((e) => {
         return {
           ...e,
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')

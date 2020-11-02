@@ -5,6 +5,25 @@ import config from 'config';
 const AUTH_TOKEN_KEY = 'authToken';
 axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
 axios.defaults.withCredentials = true;
+// Add a response interceptor
+axios.interceptors.response.use((response) => {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  }, (err) => {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    if (err.response) {
+        const { status, data } = err.response
+        
+        if(status === 401) {
+            auth.clearAuthToken();
+            router.push('/WA01010100')
+        }
+    }
+    return Promise.reject(err);
+  });
+  
 export const auth = {
     sendRequest,
     setAuthToken,
@@ -13,7 +32,8 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
-    sendRequestForm
+    sendRequestForm,
+    sendRequestParams
 }
 
 function sendRequestForm(method, url, requestData, inputHeader = {}) {
@@ -50,6 +70,26 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         method,
         url,
         body: requestData,
+        headers
+    };
+
+    return axios.request(requestOptions)
+}
+
+function sendRequestParams(method, url, requestData, inputHeader = {}) {
+    var headers =  { 
+        ...inputHeader,
+        'User-Agent' : '',
+        'X-API-Key' : config.API_KEY,
+        'X-CX-Date' : formatDateTime(new Date()),
+        'X-CX-Channel' : '0',
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date())
+    };
+    const requestOptions = {
+        method,
+        url,
+        params: requestData,
         headers
     };
     return axios.request(requestOptions)
