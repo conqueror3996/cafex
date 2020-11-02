@@ -5,7 +5,8 @@ export const employeeService = {
     login,
     logout,
     getEmployeeUserinfo,
-    changePassword
+    changePassword,
+    getAllEmployees,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -43,5 +44,10 @@ function changePassword(input) {
 /** Ap010202_従業員情報取得API */
 function getEmployeeUserinfo() {
     return auth.sendRequest('GET', allAPI.get_employee_userinfo, null, {})
+}
+
+function getAllEmployees(input) {
+    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+    return auth.sendRequestParams('GET', allAPI.get_employees, input, headers)
 }
 

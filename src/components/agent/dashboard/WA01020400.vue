@@ -200,15 +200,18 @@ export default {
     }),
   },
   created() {
-    this.getAllConsumer();
+    this.getAllEmployees({ page: 1, maximumRecordsPerPage: 40 });
     this.changePasswordState = false
     // console.log(this.consumers)
   },
   methods: {
-    ...mapActions("consumers", {
-      getAllConsumer: "getAll",
-      deleteUser: "delete",
+    // ...mapActions("consumers", {
+      // getAllConsumer: "getAll",
+      // deleteUser: "delete",
     //   deleteItem: "deleteItem"
+    // }),
+    ...mapActions("employees", {
+      getAllEmployees: "getAll",
     }),
     ...mapActions("files", {
       editItem: "editItem",
