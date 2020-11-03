@@ -8,11 +8,11 @@
         </div>
         <div class="content-information">
             <div class="information">
-                <p style="margin: 0;">氏名：{{ customer_detail.fullname }}</p> 
-                <p style="margin: 0;">氏名（カナ）: {{ customer_detail.name_kana }} </p> 
+                <p style="margin: 0;">氏名：{{ this.localConsumer.item.consumerName }}</p> 
+                <p style="margin: 0;">氏名（カナ）: {{ this.localConsumer.item.consumerNameKana }} </p> 
                 <span for="contractor">契約者情報</span> 
                 <ul id="v-for-object" class="contractor-info">
-                  <li v-for="(value, name) in customer_detail" :key="name" style="margin-top: 0.5rem;">
+                  <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
                     <span v-if="Object.keys(labels).includes(name)" > 
                       {{ labels[name] }} : {{ value }} 
                     </span>
@@ -38,6 +38,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { Consumer } from '../../models';
 
 export default {
   data() {
@@ -45,54 +46,61 @@ export default {
         imgButtonFile: './static/img/btn_start_file_manage.svg',
         imgButtonRemote: './static/img/btn_start_remote_consul.svg',
         imgBackIcon: './static/img/btn_back_consumer_select.svg',
-        customer_detail: {
-          fullname: 'Khang',
-          name_kana: 'Khang',
-          age: '24',
-          birthday: '1996/03/09',
-          post_code: '3424',
-          address: '32/2',
-          phone1: '0914957644',
-          phone2: '19001560',
-          email: 'test@mail.com',
-          memo: 'manhkhang@vn-cubesystem.com'
-        },
-        requestJson: {
-            user_id: 1
-        },
+        // customer_detail: {
+        //   fullname: 'Khang',
+        //   name_kana: 'Khang',
+        //   age: '24',
+        //   birthday: '1996/03/09',
+        //   post_code: '3424',
+        //   address: '32/2',
+        //   phone1: '0914957644',
+        //   phone2: '19001560',
+        //   memo: 'manhkhang@vn-cubesystem.com'
+        // },
+        // requestJson: {
+        //     user_id: 1
+        // },
         labels: {
           age: '年齢',
-          birthday: '生年月日',
-          post_code: '郵便番号',
+          birthdate: '生年月日',
+          postalCode: '郵便番号',
           address: '住所',
-          phone1: '電話番号１',
-          phone2: '電話番号２',
           email: 'メールアドレス',
           memo: 'メモ',
-        }
+          phoneNumber1: '電話番号１',
+          phoneNumber2: '電話番号２',
+        },
+        localConsumerId: '',
+        localConsumer: {}
     };
   },
   computed: {
     ...mapState({
       employees: (state) => state.employees,
-      consumers: (state) => state.consumers.all,
+      consumers: (state) => state.consumers.single,
       detail: (state) => state.consumers.single
     }),
   },
   created() {
-    this.getUser(this.requestJson);
-    // this.setUserDetail(this.customer_detail)
-    // console.log(this.detail)
+    this.initInfo()
+    this.getConsumerByID(this.localConsumerId).then(() => {
+            this.localConsumer = this.consumers
+            console.log(this.localConsumer.item)
+        })
   },
   methods: {
       ...mapActions("consumers", {
-          getUser: "getUserById",
+          getConsumerByID: "getConsumerByID",
           goTo: "goToFileManagement",
           // setUserDetail: "setUserDetail",
       }),
       goContact(){
         this.$router.push('/WA01010600');
       },
+      initInfo () {
+        this.localConsumerId = localStorage.getItem('consumerId')
+        console.log(this.localConsumerId)
+      }
       // goToFileManagement() {
       //   this.detail = this.customer_detail
       // }
