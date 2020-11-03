@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <header class="clearfix header">
-      <a :class="($router.currentRoute.path !== '/WA01010600')?'logo':'logo-small'" @click="$router.push({path:'/WA01010300'})"
+      <a :class="($router.currentRoute.path !== '/WA01010600')?'logo':'logo-small'" @click="goHome"
         >
         <img class="mw100" :src="imgLogo" alt="logo CafeX"
       /></a>
@@ -92,6 +92,14 @@ export default {
       console.log('dm')
       this.logout()
     },
+    goHome() {
+      if(!this.employee) return;
+      if(this.employee.rollCode == "23") {
+        if (this.$router.currentRoute.path !== '/WA01020300') this.$router.push('/WA01020300')
+      } else {
+        if (this.$router.currentRoute.path !== '/WA01010300') this.$router.push('/WA01010300')
+      }
+    }
   },
   watch: {
     $route(to, from) {
@@ -219,6 +227,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 /* modal */
 .modal-backdrop {
   opacity: 0.5 !important;
+  background-color: #ffffff;
 }
 
 @media(max-width: 800px){
