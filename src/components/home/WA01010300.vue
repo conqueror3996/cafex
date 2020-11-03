@@ -250,7 +250,7 @@ export default {
     ...mapActions("alert", { error: "error" }),
     funcGetAllConsumer(input) {
       this.getAllConsumer(input).then(() => {
-        this.localConsumers = this.formatConsumerData(this.consumers)
+        this.localConsumers = this.consumers ? this.formatConsumerData(this.consumers) : []
       });
     },
     deleteItem(consumerId) {
