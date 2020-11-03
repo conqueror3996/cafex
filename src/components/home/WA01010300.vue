@@ -151,8 +151,8 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="!this.employees.employee">
-                <b-button variant="primary" class="btn-next" @click="$router.push('/WA01010400')">次へ</b-button>
+            <div class="bottom-table" v-if="this.employees.employee">
+                <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
@@ -173,6 +173,7 @@ import WA01010320 from './WA01010320.vue';
 import WA01010310 from '../edit-user/WA01010310.vue';
 import fileJson from '../../../static/file.json'
 import moment from 'moment';
+import { Consumer } from '../../models';
 
 export default {
   props: {
@@ -201,6 +202,7 @@ export default {
         { key: "action", label: "" , class: "col-spec", isAdminCols: false },
       ],
       selectedItem: '',
+      selectedConsumer: {},
       isEdit: false,
       // users: {
       //   items: [{
@@ -241,6 +243,7 @@ export default {
     }
   },
   created() {
+    
     this.getUserInfo().then(() => {
       this.inputData = { employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }
         this.funcGetAllConsumer(this.inputData)
@@ -274,6 +277,8 @@ export default {
     },
     onRowSelected(items) {
         this.selectedItem = items[0]? items[0].consumerId : null
+        this.selectedConsumer= items[0]
+        console.log(this.selectedConsumer)
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
@@ -313,6 +318,14 @@ export default {
         }
       })
     },
+    information() {
+      localStorage.setItem('consumerId', this.selectedItem)
+      // var tempConsumer = new Consumer;
+      // tempConsumer.setItem(this.selectedConsumer)
+      this.$router.push({
+        name: 'WA01010400',
+      })
+    }
   },
   
 };
