@@ -6,7 +6,7 @@
                 <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="consumer.consumerName" placeholder="山田太郎" autofocus></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><label for="namekana">カナ :</label></div>
+                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="namekana">カナ :</label></div>
                 <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="consumer.consumerNameKana" placeholder="ヤマダタロウ"></b-input></div>
             </div>
             <div class="input-row">
@@ -19,11 +19,11 @@
             
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phone1">電話番号1 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone1" maxlength=12  v-model="consumer.phoneNumber1" placeholder="000xxxxxxxx"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone1" maxlength=11  v-model="consumer.phoneNumber1" placeholder="000xxxxxxxx"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="phone2">電話番号2 :</label></div>
-                <div><b-input class="input-form" type="text" id="phone2" maxlength=12  v-model="consumer.phoneNumber2" placeholder="000xxxxxxxx"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phone2" maxlength=11  v-model="consumer.phoneNumber2" placeholder="000xxxxxxxx"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="email">メールアドレス :</label></div>
@@ -42,7 +42,7 @@
                 <div><b-input class="input-form" type="text" id="memo" maxlength=100 v-model="consumer.consumerMemo" placeholder="コメントコメントコメントコメントコメント"></b-input></div>
             </div>
             <div class="form-button">
-                <b-button variant="primary" @click="handleShow()">確認</b-button>
+                <b-button variant="primary" @click="handleShow()" :disabled="showModal">確認</b-button>
             </div>
             <WA01010321 
                 v-if="showModal" 

@@ -9,6 +9,7 @@
         @hide="handleHide()"
         @cancel="handleHide()"
         :visible="showConfirmEdit"
+        :hide-backdrop="true"
       >
         <div class="confirm-info">
           <p>氏名：{{ localConsumer.consumerName }}</p>
@@ -75,8 +76,8 @@ export default {
 </script>
 
 <style>
-.modal-backdrop {
-  opacity: 0.5 !important;
+div#modal-confirm .modal-dialog {
+  margin-top: 4rem;
 }
 
 div.modal#modal-confirm .modal-dialog .modal-content {

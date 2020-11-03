@@ -19,11 +19,11 @@
             
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="phoneNumber1">電話番号1 :</label></div>
-                <div><b-input class="input-form" type="text" id="phoneNumber1" maxlength=12  v-model="localConsumer.phoneNumber1"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phoneNumber1" maxlength=11  v-model="localConsumer.phoneNumber1"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="phoneNumber2">電話番号2 :</label></div>
-                <div><b-input class="input-form" type="text" id="phoneNumber2" maxlength=12 v-model="localConsumer.phoneNumber2"></b-input></div>
+                <div><b-input class="input-form" type="text" id="phoneNumber2" maxlength=11 v-model="localConsumer.phoneNumber2"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="mailAddress">メールアドレス :</label></div>
@@ -44,7 +44,7 @@
             <div class="form-button">
                 <b-button type="submit" variant="primary" >変更</b-button>
                 
-                <b-button variant="danger" @click="handleCancel()">キャンセル</b-button>
+                <b-button variant="danger" @click="handleCancel()" v-if="!showConfirmEdit">キャンセル</b-button>
             </div>
         </b-form>
         <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localConsumer="localConsumer" :backHome="handleCancel"></WA01010311>

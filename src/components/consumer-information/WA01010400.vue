@@ -214,6 +214,7 @@ export default {
   width: 100%;
   text-align: center;
   display: inline-block;
+  margin-bottom: 4rem;
 }
 
 .customer-info-screen .form-group button{

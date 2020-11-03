@@ -51,7 +51,7 @@
                     v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
-                    <div>選択したお客様情報を削除しますか？</div>
+                    <div>選択したファイルを削除してもよろしいでしょうか</div>
                     <template #modal-footer="{ ok, cancel }">
                       <div>
                         <b-button size="sm" variant="primary" @click="ok()">
@@ -94,7 +94,7 @@ export default {
       imgBackIcon: './static/img/btn_back_mode_select.svg',
       userCols: [
         { key: "fullname", label: "氏名" },
-        { key: "age", label: "年齢" },
+        { key: "age", label: "生年月日（年齢）" },
         { key: "phone1", label: "電話番号1" },
         { key: "memo", label: "メモ" },
       ],
@@ -114,7 +114,7 @@ export default {
       ],
       hoveredItem: '',
       modalItem: '',
-      files: []
+      files: [],
     };
   },
   computed: {
@@ -224,13 +224,15 @@ export default {
 
 .manage-file-conent .table td.col-action {
     padding: unset;
-    width: 0.5rem;
 }
 .manage-file-conent .table th.col-action {
     padding: unset;
-    width: 0.5rem;
 }
 
+.manage-file-conent .table .col-action div.action-link{
+  width: 50%;
+  float:right;
+}
 /* .action-link {
     display: none;
 } */
@@ -338,6 +340,15 @@ export default {
   border: 1px solid #97989c;
   overflow: auto;
 }
+.file-table table {
+  position: sticky;
+}
+.file-table .table.b-table>thead>tr>th {
+  background-color: #ffffff;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
 
 .file-footer {
   margin-top: 1.75rem;
@@ -370,8 +381,8 @@ input[type="file"] {
 .panel {
   width: 466.43px;
   height: 490px;
-  background-color: #d2d4d9;
-  border: 2px solid #bebfc2;
+  background-color: #ececec;
+  border: 2px solid #e2e3e7;
   border-radius: 0.6rem;
   margin: auto;
 }

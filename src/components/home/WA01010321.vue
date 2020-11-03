@@ -9,6 +9,7 @@
         cancel-disabled
         size="lg"
         :visible="showModal"
+        :hide-backdrop="true"
       >
         <div class="confirm-info">
           <p>氏名：{{ data.consumerName }}</p>
@@ -66,14 +67,15 @@ export default {
 </script>
 
 <style>
-.modal-backdrop {
-  opacity: 0.5 !important;
-}
 
 div.modal#modal-reg .modal-content {
   width: 594px;
   height: 528px;
   margin: 0 auto;
+}
+
+div#modal-reg .modal-dialog {
+  margin-top: 4rem;
 }
 
 .modal-body {
