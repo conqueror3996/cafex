@@ -21,7 +21,13 @@ const actions = {
                         commit('getAllSuccessGet', info)
                     }
                 }
-            );
+            ).catch((err) => {
+                console.log(err)
+                if (err.response) {
+                    const { data } = err.response
+                    dispatch('alert/error', data.error.code, { root: true });
+                }
+            });
     },
 
     getConsumerByID({ dispatch, commit }, id) {
