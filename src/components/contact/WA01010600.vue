@@ -49,20 +49,25 @@
             </b-button>
           </div>
           <div class="description" v-if="showDescription">
+            <label>ファイル</label>
+            <div class="input-group">
+              <select class="select-page" id="select-page" name="doc-page" v-model="docPageIndex" @change="changeDoc">
+                    <option v-bind:key="gIdx" :value="gIdx" v-for="(obj, gIdx) in docFiles">{{obj.groupName}}
+                    </option>
+                </select>
+            </div>
             <label>ページ</label>
             <div class="input-group">
-              <select class="custom-select" id="select-page">
-                <option value=""></option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
+                <option v-bind:key="gIdx" :value="gIdx" v-for="(obj, gIdx) in docSubPage">{{obj.label}}
+                </option>
               </select>
             </div>
-            <b-button variant="primary">
+            <b-button variant="primary" @click="pushDocUrl">
               <span>共有</span>
             </b-button>
             <div class="document-preview">
-
+              <img :src="docPageObj.value" />
             </div>
           </div>
           <div class="contract" v-if="showContract">
@@ -81,14 +86,47 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       showSimulation: true,
       showDescription: false,
-      showContract: false
+      showContract: false,
+      docFiles: [],
+      docPageIndex: '',
+      docSubPageIndex: '',
+      docSubPage: [],
+      docPageObj: {}
     }
-  }
+  },
+  created() {
+    console.log("route", this.$router)
+    this.getDocFile("NRI").then((res) => {
+      this.docFiles = res.data.docList;
+    });
+  },
+  methods: {
+    ...mapActions("files", {
+      getDocFile: "getDocFile",
+    }),
+    changeDoc(event) {
+      this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
+      this.docSubPageIndex = 0;
+      this.changeSubPage();
+    },
+    changeSubPage(event) {
+      if(this.docSubPageIndex !== '') {
+        this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
+      }
+    },
+    pushDocUrl() {
+      if(this.docSubPageIndex != '') {
+
+      }
+    }
+  },
+
 };
 </script>
 
@@ -232,17 +270,31 @@ export default {
   margin-bottom: 0px;
 }
 
+.description select{
+  height: 34px;
+  width: 100%;
+  border: 1px solid #dbdad7;
+}
+
 .description button{
   margin-top: 0.5rem;
   width: 100%;
   border-radius: 1rem;
+  height: 25px;
+  font-size: 14px;
+  padding-top: 0px;
 }
 
 .description .document-preview {
-  margin-top: .75rem;
+  margin-top: .5rem;
   background-color: #cacfce;
   width: 100%;
-  height: 200px;
+  height: 165px;
+  overflow: auto;
+}
+
+.description .document-preview img {
+  width: 100%;
 }
 @media (max-width: 1400px) {
   .screen-contact {

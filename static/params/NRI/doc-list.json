@@ -1,0 +1,58 @@
+{
+    "docList": [
+        {
+            "groupName": "▼ PC用PDF",
+            "list": [
+                {
+                    "label": "がん_P.1",
+                    "value": "static/params/NRI/doc/gan_1.jpg"
+                },
+                {
+                    "label": "がん_P.2",
+                    "value": "static/params/NRI/doc/gan_2.jpg"
+                },
+                {
+                    "label": "終身_P.1",
+                    "value": "static/params/NRI/doc/shushin_1.jpg"
+                },
+                {
+                    "label": "終身_P.2",
+                    "value": "static/params/NRI/doc/shushin_2.jpg"
+                },
+                {
+                    "label": "養老_P.1",
+                    "value": "static/params/NRI/doc/yourou_1.jpg"
+                },
+                {
+                    "label": "養老_P.2",
+                    "value": "static/params/NRI/doc/yourou_2.jpg"
+                }
+            ]
+        },
+        {
+            "groupName": "▼ スマホ用PDF",
+            "list": [
+                {
+                    "label": "終身_契約例_P.1",
+                    "value": "static/params/NRI/doc/shushin_contract_smartphone.jpg",
+                    "type": "portlate"
+                },
+                {
+                    "label": "終身_ポイント_P.1",
+                    "value": "static/params/NRI/doc/shushin_point_smartphone.jpg",
+                    "type": "portlate"
+                }
+            ]
+        },
+        {
+            "groupName": "▼ HPリンク",
+            "list": [
+                {
+                    "label": "トップページ",
+                    "value": "https://www.ja-kyosai.or.jp/",
+                    "type": "url"
+                }
+            ]
+        }
+    ]
+}
