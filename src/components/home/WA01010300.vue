@@ -1,17 +1,17 @@
 <template>
   <div class="home-screen">
     <b-tabs card align="right">
-      <template #tabs-start v-if="isAdmin">
+      <template #tabs-start v-if="this.employees.employee">
         <div class="div-back-button nav-item align-self-center">
           <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
 
-      <b-tab :title="isAdmin ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
+      <b-tab :title="this.employees.employee ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p class="title" v-if="!isAdmin">顧客を選択して「次へ」を押してください</p>
-            <div :class="!isAdmin ? 'content-search' : 'content-search admin-search'">
+            <p class="title" v-if="!this.employees.employee">顧客を選択して「次へ」を押してください</p>
+            <div :class="!this.employees.employee ? 'content-search' : 'content-search admin-search'">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -53,16 +53,28 @@
                   </div>
                     
                 </template>
-                <template #cell(username)="data">
+                <template #cell(fullname)="data">
                   {{ data.item.consumerName }}
                 </template>
 
-                <template #cell(birthday)="data">
+                <template #cell(kana)="data">
+                  {{ data.item.consumerNameKana }}
+                </template>
+
+                <template #cell(age)="data">
                   {{ data.item.birthdate }} ({{ data.item.age }})
                 </template>
 
-                <template #cell(phone)="data">
+                <template #cell(phone1)="data">
                   {{ data.item.phoneNumber1 }}
+                </template>
+
+                <template #cell(salesperson)="data">
+                  {{ data.item.employeeId }}
+                </template>
+
+                <template #cell(branch)="data">
+                  {{ data.item.branchNumber }}
                 </template>
 
                 <template #cell(memo)="data">
@@ -139,14 +151,14 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="!isAdmin">
+            <div class="bottom-table" v-if="!this.employees.employee">
                 <b-button variant="primary" class="btn-next" @click="$router.push('/WA01010400')">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!isAdmin">
+      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!this.employees.employee">
         <b-card-text class="selected-content">
           <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
         </b-card-text>
@@ -164,10 +176,10 @@ import moment from 'moment';
 
 export default {
   props: {
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    }
+    // isAdmin: {
+    //   type: Boolean,
+    //   default: false,
+    // }
   }, // remove if have info login
   data() {
     return {
@@ -178,30 +190,32 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" }, // column only display both admin and not
-        { key: "username", label: "氏名" },
-        { key: "birthday", label: "年齢" },
-        { key: "phone", label: "電話番号1" },
+        { key: "fullname", label: "氏名" },
+        { key: "age", label: "年齢", isAdminCols: false },
+        { key: "birthdate", label: "生年月日（年齢）", isAdminCols: true },
+        { key: "phone1", label: "電話番号1" },
+        { key: "kana", label: "氏名（カナ）", isAdminCols: true },
         { key: "memo", label: "メモ", isAdminCols: false }, // column only display if not admin
         { key: "salesperson", label: "担当営業員", isAdminCols: true }, // column only display if is admin
-        { key: "belonging", label: "所属", isAdminCols: true },
+        { key: "branch", label: "所属", isAdminCols: true },
         { key: "action", label: "" , class: "col-spec", isAdminCols: false },
       ],
       selectedItem: '',
       isEdit: false,
-      users: {
-        items: [{
-          consumerId: '4565645561',
-          consumerName: 'Khang',
-          consumerNameKana: '',
-          age: '24',
-          birthdate: '1996/03/09',
-          postalCode: '3424',
-          address: '32/2',
-          phoneNumber1: '19001560',
-          phoneNumber2: '19001560',
-          consumerMemo: 'manhkhang@vn-cubesystem.com'
-        },]
-      },
+      // users: {
+      //   items: [{
+      //     consumerId: '4565645561',
+      //     consumerName: 'Khang',
+      //     consumerNameKana: '',
+      //     age: '24',
+      //     birthdate: '1996/03/09',
+      //     postalCode: '3424',
+      //     address: '32/2',
+      //     phoneNumber1: '19001560',
+      //     phoneNumber2: '19001560',
+      //     consumerMemo: 'manhkhang@vn-cubesystem.com'
+      //   },]
+      // },
       tabSelected: '',
       localConsumers: [],
       consumerSelected: '',
@@ -220,10 +234,10 @@ export default {
       // changePasswordState: (state) => state.changePasswordState
     }),
     computedFields() {
-      if(!this.isAdmin)
+      if(!this.employees.employee)
         return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || !field.isAdminCols);
       else
-        return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || field.isAdminCols);;
+        return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || field.isAdminCols);
     }
   },
   created() {
