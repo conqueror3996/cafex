@@ -73,11 +73,9 @@ const actions = {
     },
 
     updateConsumer({commit, dispatch}, input) {
-        consumerService.updateConsumer(input.params, input.body).then((info) => {
-            if (info.status === 200) {
-                // console.log(router.currentRoute)
-                // router.push('/WA01010300')
-            }
+        return consumerService.updateConsumer(input.params, input.body).then((info) => {
+            console.log(info)
+            return info
         }).catch((err) => {
             if (err.response) {
                 const { data } = err.response
