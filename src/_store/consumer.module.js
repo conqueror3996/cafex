@@ -15,9 +15,7 @@ const actions = {
         return consumerService.getAll(input)
             .then(
                 info => {
-                    if (info) {
-                        commit('getAllSuccessGet', info)
-                    }
+                    commit('getAllSuccessGet', info)
                 }
             ).catch((err) => {
                 if (err.response) {
@@ -33,9 +31,7 @@ const actions = {
         return consumerService.getConsumerById(id)
             .then(
                 info => {
-                    if (info) {
-                        commit('getSingleSuccessGet', info)
-                    }
+                    commit('getSingleSuccessGet', info)
                 }
             ).catch((err) => {
                 if (err.response) {
@@ -50,9 +46,7 @@ const actions = {
 
         return consumerService.deleteConsumer(id)
             .then((info) => {
-                if (info) {
-                    commit('deleteSuccess', info)
-                }
+                commit('deleteSuccess', info)
             }).catch((err) => {
                 if (err.response) {
                     const { data } = err.response
