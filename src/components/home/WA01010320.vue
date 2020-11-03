@@ -66,7 +66,7 @@ export default {
     data() {
         return {
             showModal: false,
-            consumer: new Consumer
+            consumer: {}
         }
     },
     components: {
@@ -83,8 +83,6 @@ export default {
         }),
         
         handleShow() {
-            // this.consumer.consumerName = 'test'
-            console.log(this.consumer)
             // validate
             const errorCode = validate.validateInput(consumerValidatePattern, this.consumer);
             

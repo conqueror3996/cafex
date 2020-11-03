@@ -18,7 +18,6 @@ const actions = {
                     if (info.data.code) {
                         dispatch('alert/error', info.data.message, { root: true });
                     } else {
-                        console.log('cons', info)
                         commit('getAllSuccessGet', info)
                     }
                 }
@@ -31,7 +30,6 @@ const actions = {
         return consumerService.getConsumerById(id)
             .then(
                 info => {
-                    console.log(info)
                     if (info.data.code) {
                         dispatch('alert/error', info.data.message, { root: true });
                     } else {
@@ -46,11 +44,16 @@ const actions = {
     deleteConsumer({ commit }, id) {
         commit('deleteRequest', id);
 
-        consumerService.deleteConsumer(id)
-            .then(
-                user => commit('deleteSuccess', id),
-                error => commit('deleteFailure', { id, error: error.toString() })
-            );
+        return consumerService.deleteConsumer(id)
+            .then((info) => {
+                    commit('deleteSuccess', info)
+                }
+            ).catch((err) => {
+                if (err.response) {
+                    const { data } = err.response
+                    commit('deleteFailure', { id, error: data.error.code })
+                }
+            });
     },
 
     addConsumer({ commit, dispatch }, input) {
@@ -65,11 +68,16 @@ const actions = {
 
     updateConsumer({commit, dispatch}, input) {
         consumerService.updateConsumer(input.params, input.body).then((info) => {
-            if (info.data.code) {
-                dispatch('alert/error', info.data.message, { root: true });
-            } else {
-                // commit('getAllSuccessGet', datas)
+            if (info.status === 200) {
+                // console.log(router.currentRoute)
+                // router.push('/WA01010300')
             }
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+            
         })
     },
 

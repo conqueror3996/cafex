@@ -72,7 +72,11 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         body: requestData,
         headers
     };
-    console.log(requestOptions)
+    if (method === 'POST') {
+        return axios.post(url, requestData, { headers })
+    } else if (method === 'PATCH') {
+        return axios.patch(url, requestData, { headers })
+    }
     return axios.request(requestOptions)
 }
 

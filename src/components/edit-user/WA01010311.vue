@@ -11,15 +11,15 @@
         :visible="showConfirmEdit"
       >
         <div class="confirm-info">
-          <p>氏名：{{ this.localConsumer.consumerName }}</p>
-          <p>氏名（カナ）：{{ this.localConsumer.consumerNameKana }}</p>
-          <p>生年月日：{{ this.localConsumer.birthdate }}</p>
-          <p>電話番号１：{{ this.localConsumer.phoneNumber1 }}</p>
-          <p>電話番号２：{{ this.localConsumer.phoneNumber2 }}</p>
-          <p>メールアドレス：{{ this.localConsumer.mailAddress }}</p>
-          <p>郵便番号：{{ this.localConsumer.postalCode }}</p>
-          <p>住所：{{ this.localConsumer.address }}</p>
-          <p>メモ：{{ this.localConsumer.consumerMemo }}</p>
+          <p>氏名：{{ localConsumer.consumerName }}</p>
+          <p>氏名（カナ）：{{ localConsumer.consumerNameKana }}</p>
+          <p>生年月日：{{ formatDateItem(localConsumer.birthdate) }}</p>
+          <p>電話番号１：{{ localConsumer.phoneNumber1 }}</p>
+          <p>電話番号２：{{ localConsumer.phoneNumber2 }}</p>
+          <p>メールアドレス：{{ localConsumer.mailAddress }}</p>
+          <p>郵便番号：{{ localConsumer.postalCode }}</p>
+          <p>住所：{{ localConsumer.address }}</p>
+          <p>メモ：{{ localConsumer.consumerMemo }}</p>
         </div>
         <template #modal-footer="{ ok, cancel }">
           <div>
@@ -38,6 +38,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { commonFunctions } from '../../common';
 
 export default {
     props: {
@@ -45,8 +46,7 @@ export default {
       localConsumer: {}
     },
     created() {
-      console.log(this.localConsumer)
-      console.log(this.$route.params.consumerId)
+      
     },
 
     methods: {
@@ -64,6 +64,9 @@ export default {
       },
       handleHide() {
           this.$emit("changeModalConfirm", false)
+      },
+      formatDateItem(input) {
+        return commonFunctions.formatDate(input)
       }
     },
 };

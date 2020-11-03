@@ -11,7 +11,7 @@
       <div class="account" v-if="employee && !ignorePath.includes($router.currentRoute.path)">
         <img class="mw100" :src="imgMyAccountIconGreen" alt="account"/>
         <ul class="list_account-action">
-          <li><router-link :to="{ name: 'WA01010200' }" tag="a"></router-link>パスワード変更</li>
+          <li><router-link :to="{ name: 'WA01010200' }" tag="a">パスワード変更</router-link></li>
           <li @click="loggingOut()"><router-link :to="{ name: 'WA01010100' }" tag="a" >ログアウト</router-link></li>
         </ul>
       </div>

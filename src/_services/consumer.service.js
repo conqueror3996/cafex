@@ -34,13 +34,15 @@ function getConsumerById(id) {
 }
 
 function addConsumer(input) {
-    
-    return auth.sendRequest('POST', allAPI.post_consumers_info, input, {'Content-Type': 'application/json'})
+    let headers = { 'Content-Type': 'application/json' }
+
+    return auth.sendRequest('POST', allAPI.post_consumers_info, input, headers)
 }
 
 function updateConsumer(id, input) {
-    
-    return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, {'Content-Type': 'application/json'})
+    let headers = { 'Content-Type': 'application/json' }
+
+    return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, headers)
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

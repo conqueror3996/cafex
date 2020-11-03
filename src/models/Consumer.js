@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { commonFunctions } from '../common'
 
 export class Consumer {
     consumerName = '';
@@ -17,7 +17,7 @@ export class Consumer {
     setItem(input) {
         this.consumerName = input.consumerName;
         this.consumerNameKana = input.consumerNameKana;
-        this.birthdate = formatDate(input.birthdate);
+        this.birthdate = commonFunctions.formatDate(input.birthdate);
         this.phoneNumber1 = input.phoneNumber1;
         this.phoneNumber2 = input.phoneNumber2;
         this.mailAddress = input.mailAddress;
@@ -26,7 +26,5 @@ export class Consumer {
         this.consumerMemo = input.consumerMemo;
     }
 
-    formatDate(input) {
-        return moment(input).format('yyyy/MM/DD')
-    }
+    
 }

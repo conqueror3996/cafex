@@ -11,7 +11,10 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="birthdate">生年月日 :</label></div>
-                <div><b-input class="input-form" type="text" id="birthdate" maxlength=10 v-model="localConsumer.birthdate"></b-input></div>
+                <div>
+                    <!-- <b-input class="input-form" type="text" id="birthdate" maxlength=10 v-model="localConsumer.birthdate"></b-input> -->
+                    <b-input class="input-form" type="date" id="birthday" v-model="localConsumer.birthdate" placeholder="YYYY/MM/DD"></b-input>
+                </div>
             </div>
             
             <div class="input-row">
@@ -41,7 +44,7 @@
             <div class="form-button">
                 <b-button type="submit" variant="primary" >変更</b-button>
                 
-                <b-button variant="danger" @click="handleCancle()">キャンセル</b-button>
+                <b-button variant="danger" @click="handleCancel()">キャンセル</b-button>
             </div>
         </b-form>
         <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localConsumer="localConsumer"></WA01010311>
@@ -104,15 +107,12 @@ export default {
         })
     },
     created() {
-        console.log(this.$route.params.consumerId)
         this.getConsumerById(this.$route.params.consumerId).then(() => {
-            console.log(this.consumers)
-            // this.localConsumer = this.formatConsumerData(this.consumers)
-            this.localConsumer = {
-                ...this.consumers, 
-                birthdate: moment(this.consumers.birthdate).format('yyyy/MM/DD')
-                }
-            console.log(this.localConsumer)
+            this.localConsumer = this.consumers
+            // this.localConsumer = {
+            //     ...this.consumers, 
+            //     birthdate: moment(this.consumers.birthdate).format('yyyy/MM/DD')
+            //     }
         })
     },
     methods: {
@@ -141,7 +141,7 @@ export default {
             // show modal confirm
             this.showConfirmEdit = true;
         },
-        handleCancle() {
+        handleCancel() {
             this.error(''); // reset error message
             this.$emit("changeEdit", false)
         },
