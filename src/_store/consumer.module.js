@@ -14,7 +14,9 @@ const actions = {
 
         return consumerService.getAll(input)
             .then(
+                
                 info => {
+                    console.log(info)
                     commit('getAllSuccessGet', info)
                 }
             ).catch((err) => {
