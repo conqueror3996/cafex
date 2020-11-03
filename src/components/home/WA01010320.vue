@@ -48,7 +48,8 @@
                 v-if="showModal" 
                 :showModal="showModal" 
                 :data="consumer"
-                @changeShowModal="showModal = $event">
+                @changeShowModal="showModal = $event"
+                :backHome="handleBackHome">
             </WA01010321>
         </b-form>
     </div>
@@ -100,6 +101,9 @@ export default {
             // show modal confirm
             this.showModal = true;
         },
+        handleBackHome() {
+          this.$emit("changeSelectedTab", 'selection');
+        }
     }
 }
 </script>

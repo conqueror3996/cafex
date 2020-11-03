@@ -44,14 +44,16 @@ import { commonFunctions } from '../../common';
 export default {
     props: {
         showModal: Boolean,
-        data: {}
+        data: {},
+        backHome: Function,
     },
     methods: {
       ...mapActions("consumers", {
             addConsumer: "addConsumer",
       }),
       handleReg() {
-        this.addConsumer(this.data)
+        this.addConsumer(this.data);
+        this.backHome();
       },
       handleHide() {
           this.$emit("changeShowModal", false)

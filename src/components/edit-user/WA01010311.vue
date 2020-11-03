@@ -43,7 +43,8 @@ import { commonFunctions } from '../../common';
 export default {
     props: {
       showConfirmEdit: Boolean,
-      localConsumer: {}
+      localConsumer: {},
+      backHome: Function,
     },
     created() {
       
@@ -61,6 +62,7 @@ export default {
           params: this.$route.params.consumerId
         }
         this.update(data)
+        this.backHome();
       },
       handleHide() {
           this.$emit("changeModalConfirm", false)
