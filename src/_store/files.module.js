@@ -19,13 +19,16 @@ const actions = {
         fileService.addFile(fileType, input)
             .then(
                 info => {
-                    if (info.error.code) {
-                        dispatch('alert/error', info.error.code, { root: true });
-                    } else {
+                    // if (info.error.code) {
+                    //     dispatch('alert/error', info.error.code, { root: true });
+                    // } else {
                         
-                    }
+                    // }
                 }
-            );
+            ).catch((err) => {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            });
     },
 
     deleteFile({ commit }, fileType, fileId) {
@@ -34,7 +37,11 @@ const actions = {
         fileService.deleteFile(fileType, fileId)
             .then(
                 user => commit('deleteSuccess', id),
-            );
+            ).catch((err) => {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+                // commit('deleteFailure', data.error);
+            });
     }
 };
 

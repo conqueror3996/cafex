@@ -15,14 +15,9 @@ const actions = {
         return consumerService.getAll(input)
             .then(
                 info => {
-                    if (info.data.code) {
-                        dispatch('alert/error', info.data.message, { root: true });
-                    } else {
-                        commit('getAllSuccessGet', info)
-                    }
+                    commit('getAllSuccessGet', info)
                 }
             ).catch((err) => {
-                console.log(err)
                 if (err.response) {
                     const { data } = err.response
                     dispatch('alert/error', data.error.code, { root: true });
@@ -36,15 +31,14 @@ const actions = {
         return consumerService.getConsumerById(id)
             .then(
                 info => {
-                    if (info.data.code) {
-                        dispatch('alert/error', info.data.message, { root: true });
-                    } else {
-                        
-                        commit('getSingleSuccessGet', info)
-                    }
+                    commit('getSingleSuccessGet', info)
                 }
-                
-            );
+            ).catch((err) => {
+                if (err.response) {
+                    const { data } = err.response
+                    dispatch('alert/error', data.error.code, { root: true });
+                }
+            });
     },
 
     deleteConsumer({ commit }, id) {
@@ -52,11 +46,11 @@ const actions = {
 
         return consumerService.deleteConsumer(id)
             .then((info) => {
-                    commit('deleteSuccess', info)
-                }
-            ).catch((err) => {
+                commit('deleteSuccess', info)
+            }).catch((err) => {
                 if (err.response) {
                     const { data } = err.response
+                    dispatch('alert/error', data.error.code, { root: true });
                     commit('deleteFailure', { id, error: data.error.code })
                 }
             });
@@ -64,12 +58,13 @@ const actions = {
 
     addConsumer({ commit, dispatch }, input) {
         consumerService.addConsumer(input).then((info) => {
-            if (info.data.code) {
-                dispatch('alert/error', info.data.message, { root: true });
-            } else {
-                // commit('getAllSuccessGet', datas)
+            commit('getAllSuccessGet', info)
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
             }
-        })
+        }) 
     },
 
     updateConsumer({commit, dispatch}, input) {
