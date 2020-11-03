@@ -6,6 +6,14 @@ const state = {
 
 const actions = {
 
+    getDocFile({ dispatch, commit },orgCd) {
+        return fileService.getFileInternal(`static/params/${orgCd}/doc-list.json`);
+    },
+
+    getAllFile({ dispatch, commit }, input) {
+        return fileService.getFileList("0001", input)
+    },
+
     addFile({ dispatch, commit }, fileType, input) {
 
         fileService.addFile(fileType, input)

@@ -1,0 +1,29 @@
+{
+    "docList": [
+        {
+            "groupName": "▼ PC用PDF",
+            "list": [
+                {
+                    "label": "きずなサポート_P.1",
+                    "value": "static/params/MYL/doc/kizuna_support_1.jpg"
+                },
+                {
+                    "label": "きずなサポート_P.2",
+                    "value": "static/params/MYL/doc/kizuna_support_2.jpg"
+                },
+                {
+                    "label": "きずなサポート_P.3",
+                    "value": "static/params/MYL/doc/kizuna_support_3.jpg"
+                },
+                {
+                    "label": "きずなサポート_P.4",
+                    "value": "static/params/MYL/doc/kizuna_support_4.jpg"
+                },
+                {
+                    "label": "きずなサポート_P.5",
+                    "value": "static/params/MYL/doc/kizuna_support_5.jpg"
+                }
+            ]
+        }
+    ]
+}

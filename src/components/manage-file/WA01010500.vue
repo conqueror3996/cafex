@@ -28,17 +28,17 @@
       <div class="file-content">
         <div class="file-table">
           <b-table hover :fields="fileCols" :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered">
-            <template #cell(filename)="data">
-              {{ data.item.filename }}
+            <template #cell(fileName)="data">
+              {{ data.item.fileName }}
             </template>
-            <template #cell(totalpage)="data">
-              {{ data.item.totalpage }}
+            <template #cell(fileTotalPages)="data">
+              {{ data.item.fileTotalPages }}
             </template>
-            <template #cell(createddate)="data">
-              {{ data.item.createddate }}
+            <template #cell(fileRegistrationDate)="data">
+              {{ data.item.fileRegistrationDate }}
             </template>
             <template #cell(action)="data">
-              <div class="action-link" v-if="hoveredItem === data.item.filename">
+              <div class="action-link" v-if="hoveredItem === data.item.fileId">
                 <a v-b-modal.modal-delete @click="openModal(data.item)">
                   <img :src="imgDeleteIcon" width="25" height="28" />
                 </a>
@@ -47,8 +47,8 @@
                     id="modal-delete"
                     hide-header
                     centered
-                    @ok="deleteFile(data.item.filename)"
-                    v-if="modalItem === data.item.filename"
+                    @ok="deleteFile(data.item)"
+                    v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
                     <div>選択したお客様情報を削除しますか？</div>
@@ -99,9 +99,9 @@ export default {
         { key: "memo", label: "メモ" },
       ],
       fileCols: [
-        { key: "filename", label: "ファイル名" },
-        { key: "totalpage", label: "総ページ数" },
-        { key: "createddate", label: "登録日時" },
+        { key: "fileName", label: "ファイル名" },
+        { key: "fileTotalPages", label: "総ページ数" },
+        { key: "fileRegistrationDate", label: "登録日時" },
         { key: "action", label: "", tdClass: "col-action" },
       ],
       user: [
@@ -112,123 +112,87 @@ export default {
           lastName: "demo",
         },
       ],
-      files: [
-        {
-          filename: "file 1",
-          totalpage: "1 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 2",
-          totalpage: "2 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 3",
-          totalpage: "3 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 4",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 5",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 6",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 7",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 8",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 9",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 10",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 11",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-        {
-          filename: "file 12",
-          totalpage: "4 page",
-          createddate: "2020-10-20",
-        },
-      ],
       hoveredItem: '',
       modalItem: '',
+      files: []
     };
   },
   computed: {
     ...mapState({
       detail: (state) => state.consumers.single
     }),
+    ...mapState({
+      employees: (state) => state.employees,
+    }),
   },
   created() {
+    this.getUserInfo().then(() => {
+      console.log("this.employees", this.employees)
+      this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId :'02f68b58f74d419da790892c784801e3', page: 1, maximumRecordsPerPage: 20}).then((res) => {
+        
+        console.log("res",res)
+        this.files = res.data.file;
+      });
+    })
     this.user[0] = this.detail 
   },
   methods: {
-      ...mapActions("alert", {
-          error: "error",
-      }),
-      deleteFile(filename) {
-          console.log(filename)
-      },
-      rowHovered(item) {
-          this.hoveredItem = item.filename;
-      },
-      rowUnhovered() {
-          this.hoveredItem = '';
-      },
-      openModal(item) {
-          this.modalItem = item.filename;
-      },
-      closeModal() {
-          this.modalItem = '';
-      },
-      uploadFile(event) {
-        const files = event.target.files;
-        let errorMessage = '';
-        for (var i = 0; i < files.length; i++)
-        {
-          const filename = files[i].name;
-          const filetype = filename.substring(filename.length - 3, filename.length);
-          if(filetype !== 'pdf') {
-            alert("unsupport file type");
-            return;
-          }
-          if(files[i].size/1024/1024 > 100)
-          {
-            errorMessage = validate.getMessageErrorFromCode("S02011");
-            break;
-          }
+    ...mapActions("alert", {
+        error: "error",
+    }),
+    ...mapActions("files", {
+        getAllFile: "getAllFile",
+        addFile: "addFile",
+        deleteFile: "deleteFile"
+    }),
+    ...mapActions("employees", {
+      getUserInfo: "userInfo",
+    }),
+    deleteFile(file) {
+      console.log("file", file)
+      // this.deleteFile(file.fileType, file.fileId).then(() => {
+
+      // })
+    },
+    rowHovered(item) {
+        this.hoveredItem = item.fileId;
+    },
+    rowUnhovered() {
+        this.hoveredItem = '';
+    },
+    openModal(item) {
+        this.modalItem = item.fileId;
+    },
+    closeModal() {
+        this.modalItem = '';
+    },
+    uploadFile(event) {
+      const files = event.target.files;
+      let errorMessage = '';
+      for (var i = 0; i < files.length; i++)
+      {
+        const filename = files[i].name;
+        const filetype = filename.substring(filename.length - 3, filename.length);
+        if(filetype !== 'pdf') {
+          alert("unsupport file type");
+          return;
         }
-        
-        if(errorMessage !== '') {
-            this.error(errorMessage)
-        } else {
-            this.error('')
+        if(files[i].size/1024/1024 > 100)
+        {
+          errorMessage = validate.getMessageErrorFromCode("S02011");
+          break;
         }
       }
+      
+      if(errorMessage !== '') {
+          this.error(errorMessage)
+      } else {
+          this.error('')
+          let formData = new FormData();
+          formData.append('file', event.target.files[0])
+          this.addFile("pdf", formData).then()
+      }
+    }
   },
 };
 </script>

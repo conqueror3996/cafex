@@ -8,12 +8,17 @@
             <p>・一度にアップロードできる従業員データの上限は1,000件です。</p>
         </div>
         <div class="div-button-confirm">
+            <div class="button-confirm">
                 <label variant="primary" class="btn btn-primary btn-upload" for="file">
                     <p>ファイル選択</p>
                 </label>
                 <input type="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
             <!-- <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button> -->
-            <b-button style="margin-top: 30px;" class="button-custom" variant="primary" @click="ok()">登録</b-button>
+            <b-button style="margin-top: 30px;" class="button-custom" variant="primary" @click="ok()" :disabled="fileName === ''">登録</b-button>
+            </div>
+            <div class="info-file" v-if="fileName !== ''">
+                <label>{{fileName}}</label>
+            </div>
         </div>
     </div>
 </template>
@@ -27,7 +32,8 @@ export default {
     data() {
         return {
             showModal: false,
-            user: {}
+            user: {},
+            fileName: '',
         }
     },
     computed: {
@@ -66,8 +72,10 @@ export default {
                 const filetype = filename.substring(filename.length - 3, filename.length);
                 if(filetype !== 'csv') {
                     alert("unsupport file type");
+                    this.fileName = '';
                     return;
                 }
+                this.fileName = `${filename}    を選択`;
             }
         }
     }
@@ -93,13 +101,22 @@ export default {
 .div-button-confirm {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    width: 20%;
-    margin: auto;
+    flex-direction: row;
 }
 
-.div-button-confirm label p {
+.div-button-confirm .button-confirm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.div-button-confirm div label p {
     font-family: 'HiraginoSan-W3';
+}
+
+.div-button-confirm .info-file {
+    padding: .75rem 0 0 3rem;
+    width: auto;
 }
 
 .button-custom {

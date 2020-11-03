@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <header class="clearfix header">
-      <a :class="($router.currentRoute.path !== '/WA01010600')?'logo':'logo-small'" href="/WA01010300"
+      <a :class="($router.currentRoute.path !== '/WA01010600')?'logo':'logo-small'" @click="$router.push({path:'/WA01010300'})"
         >
         <img class="mw100" :src="imgLogo" alt="logo CafeX"
       /></a>
