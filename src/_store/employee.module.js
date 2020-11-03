@@ -13,7 +13,7 @@ const actions = {
                     commit('loginSuccess', info);
                     dispatch("userInfo").then(() => {
                         console.log("into user info", state.employee)
-                        if (state.employee.rollCode === '23') {
+                        if (state.employee.rollCode !== '23') {
                             router.push('/WA01020300')
                         } else {
                             router.push('/WA01010300')
@@ -34,6 +34,7 @@ const actions = {
         employeeService.logout().then((info) => {
             auth.clearAuthToken();
             commit('logout');
+            router.push('/WA01010100');
             // remove user from local storage to log user out
         }).catch((err) => {
             if (err.response) {

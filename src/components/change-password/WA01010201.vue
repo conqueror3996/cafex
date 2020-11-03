@@ -41,15 +41,18 @@ export default {
             employees: state => state.employees,
             consumers: state => state.consumers.all
         }),
-        ...mapActions("employees", {
-            logout: "logout",
-        }),
+        
     },
     created () {
         
     },
     methods: {
-        
+        ...mapActions("employees", {
+            logout: "logout",
+        }),
+        // loggingOut() {
+        //     this.logout()
+        // }
     }
 };
 </script>
