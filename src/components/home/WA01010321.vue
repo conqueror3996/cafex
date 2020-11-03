@@ -11,15 +11,15 @@
         :visible="showModal"
       >
         <div class="confirm-info">
-          <p>氏名：</p>
-          <p>氏名（カナ）：</p>
-          <p>生年月日：</p>
-          <p>電話番号１：</p>
-          <p>電話番号２：</p>
-          <p>メールアドレス：</p>
-          <p>郵便番号：</p>
-          <p>住所：</p>
-          <p>メモ：</p>
+          <p>氏名：{{ data.consumerName }}</p>
+          <p>氏名（カナ）：{{ data.consumerNameKana }}</p>
+          <p>生年月日：{{ formatDateItem(data.birthdate) }}</p>
+          <p>電話番号１：{{ data.phoneNumber1 }}</p>
+          <p>電話番号２：{{ data.phoneNumber2 }}</p>
+          <p>メールアドレス：{{ data.mailAddress }}</p>
+          <p>郵便番号：{{ data.postalCode }}</p>
+          <p>住所：{{ data.address }}</p>
+          <p>メモ：{{ data.consumerMemo }}</p>
         </div>
         <template #modal-footer="{ ok, cancel }">
           <div>
@@ -37,17 +37,28 @@
 </template>
 
 <script>
-export default {
-    props: [
-        'showModal',
-    ],
-    methods: {
-        handleReg() {
+import { mapState, mapActions } from "vuex";
+import { Consumer } from '../../models';
+import { commonFunctions } from '../../common';
 
-        },
-        handleHide() {
-            this.$emit("changeShowModal", false)
-        }
+export default {
+    props: {
+        showModal: Boolean,
+        data: {}
+    },
+    methods: {
+      ...mapActions("consumers", {
+            addConsumer: "addConsumer",
+      }),
+      handleReg() {
+        this.addConsumer(this.data)
+      },
+      handleHide() {
+          this.$emit("changeShowModal", false)
+      },
+      formatDateItem(input) {
+        return commonFunctions.formatDate(input)
+      }
     }
 };
 </script>

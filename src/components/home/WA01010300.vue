@@ -203,7 +203,9 @@ export default {
         },]
       },
       tabSelected: '',
-      localConsumers: []
+      localConsumers: [],
+      consumerSelected: '',
+      inputData: {}
     };
   },
   components: {
@@ -226,18 +228,16 @@ export default {
   },
   created() {
     this.getUserInfo().then(() => {
-      this.getAllConsumer({ employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }).then(() => {
-        this.localConsumers = this.formatConsumerData(this.consumers)
-      });
+      this.inputData = { employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }
+        this.funcGetAllConsumer(this.inputData)
     })
     
     // this.changePasswordState = false
-    // console.log(this.employees.employee)
   },
   methods: {
     ...mapActions("consumers", {
       getAllConsumer: "getAll",
-      deleteUser: "delete",
+      deleteConsumer: "deleteConsumer",
     //   deleteItem: "deleteItem"
     }),
     ...mapActions("files", {
@@ -248,14 +248,17 @@ export default {
       getUserInfo: "userInfo",
     }),
     ...mapActions("alert", { error: "error" }),
+    funcGetAllConsumer(input) {
+      this.getAllConsumer(input).then(() => {
+        this.localConsumers = this.formatConsumerData(this.consumers)
+      });
+    },
     deleteItem(consumerId) {
         if(consumerId !== this.selectedItem) {
             return
         }
-        console.log('success')
     },
     onRowSelected(items) {
-      console.log(items)
         this.selectedItem = items[0]? items[0].consumerId : null
     },
     rowActive(item, type) {
@@ -268,10 +271,14 @@ export default {
     // Event click button 編集 in edit modal
     okEdit() {
       this.isEdit = true;
+      this.$route.params.consumerId = this.selectedItem
     },
     // Event click button 編集 in delete modal
     okDelete() {
-      console.log("delete success");
+      this.deleteConsumer(this.selectedItem).then(() => {
+        console.log("delete success", this.selectedItem);
+        this.funcGetAllConsumer(this.inputData)
+      })
     },
     // Event click button search
     handleSearch() {
@@ -291,7 +298,7 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    }
+    },
   },
   
 };

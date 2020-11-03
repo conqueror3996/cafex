@@ -5,7 +5,7 @@ export const consumerService = {
     register,
     getAll,
     getConsumerById,
-    postConsumer,
+    addConsumer,
     updateConsumer,
     deleteConsumer,
 };
@@ -33,14 +33,16 @@ function getConsumerById(id) {
     return auth.sendRequest('GET', allAPI.get_consumers_by_id(id), null, null)
 }
 
-function postConsumer(input) {
-    
-    return auth.sendRequest('POST', allAPI.post_consumers_info, input, {'Content-Type': 'application/json'})
+function addConsumer(input) {
+    let headers = { 'Content-Type': 'application/json' }
+
+    return auth.sendRequest('POST', allAPI.post_consumers_info, input, headers)
 }
 
 function updateConsumer(id, input) {
+    let headers = { 'Content-Type': 'application/json' }
 
-    return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, {'Content-Type': 'application/json'})
+    return auth.sendRequest('PATCH', allAPI.update_consumers_by_id(id), input, headers)
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

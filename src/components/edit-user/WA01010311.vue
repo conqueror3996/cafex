@@ -11,15 +11,15 @@
         :visible="showConfirmEdit"
       >
         <div class="confirm-info">
-          <p>氏名：</p>
-          <p>氏名（カナ）：</p>
-          <p>生年月日：</p>
-          <p>電話番号１：</p>
-          <p>電話番号２：</p>
-          <p>メールアドレス：</p>
-          <p>郵便番号：</p>
-          <p>住所：</p>
-          <p>メモ：</p>
+          <p>氏名：{{ localConsumer.consumerName }}</p>
+          <p>氏名（カナ）：{{ localConsumer.consumerNameKana }}</p>
+          <p>生年月日：{{ formatDateItem(localConsumer.birthdate) }}</p>
+          <p>電話番号１：{{ localConsumer.phoneNumber1 }}</p>
+          <p>電話番号２：{{ localConsumer.phoneNumber2 }}</p>
+          <p>メールアドレス：{{ localConsumer.mailAddress }}</p>
+          <p>郵便番号：{{ localConsumer.postalCode }}</p>
+          <p>住所：{{ localConsumer.address }}</p>
+          <p>メモ：{{ localConsumer.consumerMemo }}</p>
         </div>
         <template #modal-footer="{ ok, cancel }">
           <div>
@@ -38,24 +38,37 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { commonFunctions } from '../../common';
 
 export default {
-    props: [
-        'showConfirmEdit',
-    ],
+    props: {
+      showConfirmEdit: Boolean,
+      localConsumer: {}
+    },
+    created() {
+      
+    },
+
     methods: {
       ...mapActions("consumers", {
-        updateConsumer: "updateConsumer",
+        update: "updateConsumer",
         deleteUser: "deleteConsumer",
       //   deleteItem: "deleteItem"
       }),
-        handleEdit() {
-          this.updateConsumer()
-        },
-        handleHide() {
-            this.$emit("changeModalConfirm", false)
+      handleEdit() {
+        const data = {
+          body: this.localConsumer,
+          params: this.$route.params.consumerId
         }
-    }
+        this.update(data)
+      },
+      handleHide() {
+          this.$emit("changeModalConfirm", false)
+      },
+      formatDateItem(input) {
+        return commonFunctions.formatDate(input)
+      }
+    },
 };
 </script>
 
