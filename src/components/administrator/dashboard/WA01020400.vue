@@ -257,8 +257,7 @@ export default {
     funcGetAllEmployee() {
       this.inputData = { page: 1, maximumRecordsPerPage: 40 }
       this.getAllEmployees(this.inputData).then(() => {
-        console.log(this.employees.all)
-        this.localEmployees = this.employees ? this.formatConsumerData(this.employees.all) : []
+        this.localEmployees = this.employees.all ? this.formatConsumerData(this.employees.all) : []
       });
     },
   },
