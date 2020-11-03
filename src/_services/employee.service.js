@@ -22,7 +22,7 @@ function login(username, password) {
     
     let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
     
-    return auth.sendRequestForm('POST', allAPI.employee_login, form, headers)
+    return auth.sendRequest('POST', allAPI.employee_login, form, headers)
     
 }
 

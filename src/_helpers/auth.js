@@ -32,29 +32,29 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
-    sendRequestForm,
+    // sendRequestForm,
     sendRequestParams
 }
 
-function sendRequestForm(method, url, requestData, inputHeader = {}) {
-    var headers =  { 
-        ...inputHeader,
-        'User-Agent' : navigator.userAgent,
-        'X-API-Key' : config.API_KEY,
-        'X-CX-Date' : formatDateTime(new Date()),
-        'X-CX-Channel' : '0',
-        'X-CX-Client-Version' : config.VERSION,
-        'X-CX-Interaction-Id' : formatDateTime(new Date()),
-    };
-    const requestOptions = {
-        method,
-        url,
-        data: requestData,
-        headers
-    };
+// function sendRequestForm(method, url, requestData, inputHeader = {}) {
+//     var headers =  { 
+//         ...inputHeader,
+//         'User-Agent' : navigator.userAgent,
+//         'X-API-Key' : config.API_KEY,
+//         'X-CX-Date' : formatDateTime(new Date()),
+//         'X-CX-Channel' : '0',
+//         'X-CX-Client-Version' : config.VERSION,
+//         'X-CX-Interaction-Id' : formatDateTime(new Date()),
+//     };
+//     const requestOptions = {
+//         method,
+//         url,
+//         data: requestData,
+//         headers
+//     };
     
-    return axios.request(requestOptions)
-}
+//     return axios.request(requestOptions)
+// }
 
 function sendRequest(method, url, requestData, inputHeader = {}) {
     var headers =  { 
@@ -67,16 +67,12 @@ function sendRequest(method, url, requestData, inputHeader = {}) {
         'X-CX-Interaction-Id' : formatDateTime(new Date())
     };
     const requestOptions = {
-        method,
         url,
-        body: requestData,
+        method,
+        data: requestData,
         headers
     };
-    if (method === 'POST') {
-        return axios.post(url, requestData, { headers })
-    } else if (method === 'PATCH') {
-        return axios.patch(url, requestData, { headers })
-    }
+
     return axios.request(requestOptions)
 }
 
