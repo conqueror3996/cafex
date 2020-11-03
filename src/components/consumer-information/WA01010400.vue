@@ -54,6 +54,7 @@ export default {
           address: '32/2',
           phone1: '0914957644',
           phone2: '19001560',
+          email: 'test@mail.com',
           memo: 'manhkhang@vn-cubesystem.com'
         },
         requestJson: {
@@ -66,6 +67,8 @@ export default {
           address: '住所',
           phone1: '電話番号１',
           phone2: '電話番号２',
+          email: 'メールアドレス',
+          memo: 'メモ',
         }
     };
   },
