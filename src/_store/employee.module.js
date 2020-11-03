@@ -43,17 +43,10 @@ const actions = {
         });
     },
     changePassword({commit, dispatch}, input) {
-        employeeService.changePassword(input).then(
-            info => {
+        employeeService.changePassword(input).then((info) => {
                 router.push('/WA01010201');
-                // if (info.error) {
-                //     dispatch('alert/error', info.error.code, { root: true });
-                //     commit('changePasswordFailed', info.error);
-                // } else {
-                // }
-            },
-            
-        ).catch((err) => {
+                auth.clearAuthToken();
+            }).catch((err) => {
             if (err.response) {
                 const { data } = err.response
                 commit('changePasswordFailed', data.error);

@@ -34,7 +34,7 @@
                 hover
                 :responsive="true"
                 :fields="cols"
-                :items="consumers.items"
+                :items="employees.items"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
@@ -46,7 +46,7 @@
                       type="radio"
                       name="checked"
                       v-model="selectedItem"
-                      :value="data.item.consumer_id"
+                      :value="data.item.employeeId"
                       @click="selectedRow(data.item)"
                     />
                   </div>

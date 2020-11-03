@@ -1,17 +1,17 @@
 <template>
   <div class="home-screen">
     <b-tabs card align="right">
-      <template #tabs-start v-if="isAgent">
+      <template #tabs-start v-if="isAdmin">
         <div class="div-back-button nav-item align-self-center">
           <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
 
-      <b-tab :title="isAgent ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
+      <b-tab :title="isAdmin ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p class="title" v-if="!isAgent">顧客を選択して「次へ」を押してください</p>
-            <div :class="!isAgent ? 'content-search' : 'content-search agent-search'">
+            <p class="title" v-if="!isAdmin">顧客を選択して「次へ」を押してください</p>
+            <div :class="!isAdmin ? 'content-search' : 'content-search admin-search'">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -139,14 +139,14 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="!isAgent">
+            <div class="bottom-table" v-if="!isAdmin">
                 <b-button variant="primary" class="btn-next" @click="$router.push('/WA01010400')">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!isAgent">
+      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!isAdmin">
         <b-card-text class="selected-content">
           <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
         </b-card-text>
@@ -164,7 +164,7 @@ import moment from 'moment';
 
 export default {
   props: {
-    isAgent: {
+    isAdmin: {
       type: Boolean,
       default: false,
     }
@@ -177,14 +177,14 @@ export default {
       imgManageMode: './static/img/btn_back_mode_select.svg',
       searchString: '',
       cols: [
-        { key: "checked", label: "", class: "col-check" }, // column only display both agent and not
+        { key: "checked", label: "", class: "col-check" }, // column only display both admin and not
         { key: "username", label: "氏名" },
         { key: "birthday", label: "年齢" },
         { key: "phone", label: "電話番号1" },
-        { key: "memo", label: "メモ", isAgentCols: false }, // column only display if not agent
-        { key: "salesperson", label: "担当営業員", isAgentCols: true }, // column only display if is agent
-        { key: "belonging", label: "所属", isAgentCols: true },
-        { key: "action", label: "" , class: "col-spec", isAgentCols: false },
+        { key: "memo", label: "メモ", isAdminCols: false }, // column only display if not admin
+        { key: "salesperson", label: "担当営業員", isAdminCols: true }, // column only display if is admin
+        { key: "belonging", label: "所属", isAdminCols: true },
+        { key: "action", label: "" , class: "col-spec", isAdminCols: false },
       ],
       selectedItem: '',
       isEdit: false,
@@ -220,10 +220,10 @@ export default {
       // changePasswordState: (state) => state.changePasswordState
     }),
     computedFields() {
-      if(!this.isAgent)
-        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || !field.isAgentCols);
+      if(!this.isAdmin)
+        return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || !field.isAdminCols);
       else
-        return this.cols.filter(field => !field.hasOwnProperty('isAgentCols') || field.isAgentCols);;
+        return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || field.isAdminCols);;
     }
   },
   created() {
@@ -367,7 +367,7 @@ export default {
   padding-top: 0.75rem;
 }
 
-.agent-search {
+.admin-search {
   padding-top: 3rem;
 }
 

@@ -10,9 +10,9 @@ import WA01010201 from '../components/change-password/WA01010201'
 import WA01010400 from '../components/consumer-information/WA01010400'
 import WA01010500 from '../components/manage-file/WA01010500'
 import WA01010600 from '../components/contact/WA01010600'
-import WA01020300 from '../components/agent/manage-mode/WA01020300'
-import WA01020400 from '../components/agent/dashboard/WA01020400'
-import WA01020501 from '../components/agent/registration-employee/WA01020501'
+import WA01020300 from '../components/administrator/manage-mode/WA01020300'
+import WA01020400 from '../components/administrator/dashboard/WA01020400'
+import WA01020501 from '../components/administrator/registration-employee/WA01020501'
 import { auth } from './auth';
 import vuex from "vuex";
 

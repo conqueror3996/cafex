@@ -10,7 +10,7 @@
             </b-button>
             <div class="div-space">
             </div>
-            <b-button class="bg-transparent border-0" variant="primary" @click="$router.push({name: 'WA01010300',  params: { isAgent: true } })">
+            <b-button class="bg-transparent border-0" variant="primary" @click="$router.push({name: 'WA01010300',  params: { isAdmin: true } })">
                 <img :src="imgConsumerMode">
             </b-button>
         </div>

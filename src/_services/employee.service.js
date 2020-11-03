@@ -35,10 +35,8 @@ function logout() {
 /** Ap010201_従業員パスワード変更API */
 function changePassword(input) {
     
-    const inputHeader = {
-        'Content-Type': 'application/json'
-    }
-    return auth.sendRequest('POST', allAPI.employee_change_password, input, inputHeader)
+    const headers = { 'Content-Type': 'application/json' }
+    return auth.sendRequest('POST', allAPI.employee_change_password, input, headers)
 }
 
 /** Ap010202_従業員情報取得API */
