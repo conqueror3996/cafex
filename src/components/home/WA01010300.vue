@@ -148,7 +148,7 @@
       </b-tab>
       <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!isAgent">
         <b-card-text class="selected-content">
-          <WA01010320></WA01010320>
+          <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
         </b-card-text>
       </b-tab>
     </b-tabs>

@@ -47,7 +47,7 @@
                 <b-button variant="danger" @click="handleCancel()">キャンセル</b-button>
             </div>
         </b-form>
-        <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localConsumer="localConsumer"></WA01010311>
+        <WA01010311 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localConsumer="localConsumer" :backHome="handleCancel"></WA01010311>
         <!-- <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">
             <div>           
                 <div class="error" v-if="!$v.user.fullname.required ">氏名は必須項目です。</div>
