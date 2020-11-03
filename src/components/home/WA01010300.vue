@@ -319,12 +319,15 @@ export default {
       })
     },
     information() {
-      localStorage.setItem('consumerId', this.selectedItem)
-      // var tempConsumer = new Consumer;
-      // tempConsumer.setItem(this.selectedConsumer)
-      this.$router.push({
-        name: 'WA01010400',
+      if(this.selectedItem)
+      {
+        localStorage.setItem('consumerId', this.selectedItem)
+        // var tempConsumer = new Consumer;
+        // tempConsumer.setItem(this.selectedConsumer)
+        this.$router.push({
+          name: 'WA01010400',
       })
+      }
     }
   },
   

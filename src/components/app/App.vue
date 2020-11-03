@@ -171,9 +171,9 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 #container{width:100%;margin:auto;}
 .inner{max-width: 1327px;margin:auto;}
 .inner .alert{white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
-.logo{display:inline-block;padding:10px 0px 0px 10px;width:12%;float:left;}
+.logo{display:inline-block;padding:10px 0px 0px 10px;width:10%;}
 /* .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
-.logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;float:left;}
+.logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;}
 /* .logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}

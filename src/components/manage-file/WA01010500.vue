@@ -8,18 +8,18 @@
         </b-button>
       </div>
       <div class="info-table">
-        <b-table :fields="userCols" :items="user">
-          <template #cell(fullname)="data">
-            {{ data.item.fullname }}
+        <b-table :fields="userCols" :items="consumer">
+          <template #cell(consumerName)="data">
+            {{ data.item.consumerName }}
           </template>
           <template #cell(age)="data">
-            {{ data.item.age }}
+            {{ data.item.birthdate }} {{ data.item.age ? `(${data.item.age})` : null}}
           </template>
-          <template #cell(phone1)="data">
-            {{ data.item.phone1 }}
+          <template #cell(phoneNumber1)="data">
+            {{ data.item.phoneNumber1 }}
           </template>
-          <template #cell(memo)="data">
-            {{ data.item.memo }}
+          <template #cell(consumerMemo)="data">
+            {{ data.item.consumerMemo }}
           </template>
         </b-table>
       </div>
@@ -93,10 +93,10 @@ export default {
       imgUploadIcon: './static/img/btn_file_upload.svg',
       imgBackIcon: './static/img/btn_back_mode_select.svg',
       userCols: [
-        { key: "fullname", label: "氏名" },
+        { key: "consumerName", label: "氏名" },
         { key: "age", label: "生年月日（年齢）" },
-        { key: "phone1", label: "電話番号1" },
-        { key: "memo", label: "メモ" },
+        { key: "phoneNumber1", label: "電話番号1" },
+        { key: "consumerMemo", label: "メモ" },
       ],
       fileCols: [
         { key: "fileName", label: "ファイル名" },
@@ -104,14 +104,7 @@ export default {
         { key: "fileRegistrationDate", label: "登録日時" },
         { key: "action", label: "", tdClass: "col-action" },
       ],
-      user: [
-        {
-          user_id: "123",
-          user_name: "test",
-          firstName: "tertet",
-          lastName: "demo",
-        },
-      ],
+      consumer: [],
       hoveredItem: '',
       modalItem: '',
       files: [],
@@ -128,13 +121,13 @@ export default {
   created() {
     this.getUserInfo().then(() => {
       console.log("this.employees", this.employees)
-      this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId :'02f68b58f74d419da790892c784801e3', page: 1, maximumRecordsPerPage: 20}).then((res) => {
+      this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer.consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
         
         console.log("res",res)
         this.files = res.data.file;
       });
     })
-    this.user[0] = this.detail 
+    this.consumer[0] = this.detail 
   },
   methods: {
     ...mapActions("alert", {
@@ -404,7 +397,7 @@ input[type="file"] {
   .panel {
     width: 30%;
     height: 490px;
-    background-color: #d2d4d9;
+    background-color: #ececec;
     border: 2px solid #bebfc2;
     border-radius: 0.6rem;
     margin: 2rem;

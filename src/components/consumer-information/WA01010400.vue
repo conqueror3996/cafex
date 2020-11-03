@@ -8,8 +8,8 @@
         </div>
         <div class="content-information">
             <div class="information">
-                <p style="margin: 0;">氏名：{{ this.localConsumer.item.consumerName }}</p> 
-                <p style="margin: 0;">氏名（カナ）: {{ this.localConsumer.item.consumerNameKana }} </p> 
+                <p style="margin: 0;">氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
+                <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
                 <span for="contractor">契約者情報</span> 
                 <ul id="v-for-object" class="contractor-info">
                   <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
@@ -28,7 +28,7 @@
                 -->
             </div>
             <div class="form-group"> 
-                <b-button variant="link" class="button-file" @click="goTo(customer_detail)"><img :src="imgButtonFile"></b-button>
+                <b-button variant="link" class="button-file" @click="goManageFile"><img :src="imgButtonFile"></b-button>
                 <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonRemote"></b-button>
             </div>
         </div>
@@ -65,6 +65,8 @@ export default {
           birthdate: '生年月日',
           postalCode: '郵便番号',
           address: '住所',
+          mailAddress: 'メールアドレス',
+          consumerMemo: 'メモ',
           phoneNumber1: '電話番号１',
           phoneNumber2: '電話番号２',
         },
@@ -74,7 +76,7 @@ export default {
   },
   computed: {
     ...mapState({
-      employees: (state) => state.employees,
+      employee: (state) => state.employees.employee,
       consumers: (state) => state.consumers.single,
       detail: (state) => state.consumers.single
     }),
@@ -82,6 +84,7 @@ export default {
   created() {
     this.initInfo()
     this.getConsumerByID(this.localConsumerId).then(() => {
+            console.log("this.consumers", this.consumers);
             this.localConsumer = this.consumers
             console.log(this.localConsumer.item)
         })
@@ -98,6 +101,9 @@ export default {
       initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
         console.log(this.localConsumerId)
+      },
+      goManageFile() {
+        this.goTo(this.localConsumer.item)
       }
       // goToFileManagement() {
       //   this.detail = this.customer_detail
