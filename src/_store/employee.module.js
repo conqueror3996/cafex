@@ -23,7 +23,6 @@ const actions = {
                     }
                 }
             ).catch((err) => {
-                console.log(err)
                 if (err.response) {
                     const { data } = err.response
                     
@@ -35,47 +34,50 @@ const actions = {
     },
     logout({ commit }) {
         employeeService.logout().then((info) => {
-            if (info.status !== 200) {
-                dispatch('alert/error', info.statusText, { root: true });
-            } else {
+            if (info.status === 200) {
                 console.log(info)
                 auth.clearAuthToken();
                 commit('logout');
             }
             // remove user from local storage to log user out
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
         });
     },
     changePassword({commit, dispatch}, input) {
         employeeService.changePassword(input).then(
             info => {
                 if (info) {
-                    if (info.error) {
-                        dispatch('alert/error', info.error.code, { root: true });
-                        commit('changePasswordFailed', info.error);
-                    } else {
-                        router.push('/WA01010201');
-                    }
+                    router.push('/WA01010201');
+                    // if (info.error) {
+                    //     dispatch('alert/error', info.error.code, { root: true });
+                    //     commit('changePasswordFailed', info.error);
+                    // } else {
+                    // }
                 }
             },
-            error => {
-                commit('changePasswordFailed', error);
-                dispatch('alert/error', error, { root: true });
+            
+        ).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                commit('changePasswordFailed', data.error);
+                dispatch('alert/error', data.error.code, { root: true });
             }
-        );
+        });
 
     },
     userInfo({commit, dispatch}){
         return employeeService.getEmployeeUserinfo().then(
             info => {
-                if(info){
-                    
-                        localStorage.setItem('authToken', JSON.stringify(info.data));
-                        commit("getUserInfoSuccess", info.data);
-                        
+                if (info) {
+                    localStorage.setItem('authToken', JSON.stringify(info.data));
+                    commit("getUserInfoSuccess", info.data);
                 }
             },
-        )
-        .catch((err) => {
+        ).catch((err) => {
             if (err.response) {
                 const { status, data } = err.response
                 dispatch('alert/error', data.error.code, { root: true });
