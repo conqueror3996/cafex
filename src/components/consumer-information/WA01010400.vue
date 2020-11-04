@@ -28,7 +28,7 @@
                 -->
             </div>
             <div class="form-group"> 
-                <b-button variant="link" class="button-file" @click="goManageFile"><img :src="imgButtonFile"></b-button>
+                <b-button variant="link" class="button-file" @click="$router.push('/WA01010500')"><img :src="imgButtonFile"></b-button>
                 <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonRemote"></b-button>
             </div>
         </div>
