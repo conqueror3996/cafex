@@ -97,7 +97,7 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div>選択したお客様情報を編集しますか？</div>
+                        <div>{{errorMess.WA0101030001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -126,7 +126,7 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div>選択したお客様情報を削除しますか？</div>
+                        <div>{{errorMess.WA0101030002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -174,6 +174,7 @@ import WA01010310 from '../edit-user/WA01010310.vue';
 import fileJson from '../../../static/file.json'
 import moment from 'moment';
 import { Consumer } from '../../models';
+import errorMessage from '../../validate/errormessage'
 
 export default {
   props: {
@@ -222,7 +223,8 @@ export default {
       localEmployee: {},
       localConsumers: [],
       consumerSelected: '',
-      inputData: {}
+      inputData: {},
+      errorMess: errorMessage
     };
   },
   components: {

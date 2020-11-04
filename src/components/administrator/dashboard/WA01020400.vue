@@ -84,7 +84,7 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div style="font-family: 'HiraginoSan-W3'">選択した営業員情報を編集しますか？</div>
+                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -115,7 +115,7 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div style="font-family: 'HiraginoSan-W3'">選択した営業員にはお客様情報が紐付いています。削除しますか？</div>
+                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -163,10 +163,12 @@ import { mapState, mapActions } from "vuex";
 import WA01020500 from './WA01020500.vue';
 import WA01020410 from '../edit-user/WA01020410.vue';
 import moment from 'moment';
+import errorMessage from '../../../validate/errormessage'
 
 export default {
   data() {
     return {
+      errorMess: errorMessage,
       imgManageMode: './static/img/btn_back_mode_select.svg',
       imgSearchIcon: './static/img/search-icon.svg',
       imgEditIcon: './static/img/pen.svg',
@@ -376,7 +378,7 @@ export default {
 
 .modal-content {
   width: 501px;
-  height: 149px;
+  height: auto;
 }
 
 .modal-body {

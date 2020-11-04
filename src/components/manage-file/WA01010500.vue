@@ -51,7 +51,7 @@
                     v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
-                    <div>選択したファイルを削除してもよろしいでしょうか</div>
+                    <div>{{errorMess.WA01010500}}</div>
                     <template #modal-footer="{ ok, cancel }">
                       <div>
                         <b-button size="sm" variant="primary" @click="ok()">
@@ -85,10 +85,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import validate from '../../validate/validate.js';
+import errorMessage from '../../validate/errormessage';
 
 export default {
   data() {
     return {
+      errorMess: errorMessage,
       imgDeleteIcon: './static/img/trash.svg',
       imgUploadIcon: './static/img/btn_file_upload.svg',
       imgBackIcon: './static/img/btn_back_mode_select.svg',
