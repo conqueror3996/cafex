@@ -9,12 +9,8 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-<<<<<<< HEAD
-            <!-- <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p> -->
-=======
             <p style="font-family: 'HiraginoSan-W3'" class="title"></p>
             <!-- 顧客を選択して「次へ」を押してください -->
->>>>>>> 7297c6e375b453ff665b1c69d67aec0b1e38a9b9
             <div class="content-search">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
