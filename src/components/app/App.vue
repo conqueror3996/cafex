@@ -77,9 +77,9 @@ export default {
     }),
   },
   created() {
-      this.userInfo().then(() => {
-        console.log(this.employees)
-      })
+      // this.userInfo().then(() => {
+      //   console.log(this.employees)
+      // })
   },
   methods: {
     ...mapActions({
