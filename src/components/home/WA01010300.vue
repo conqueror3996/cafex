@@ -151,7 +151,7 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="this.employees.employee">
+            <div class="bottom-table" v-if="this.employees.rollCode === '21'">
                 <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
             </div>
           </div>

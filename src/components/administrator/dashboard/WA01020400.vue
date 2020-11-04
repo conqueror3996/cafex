@@ -34,7 +34,7 @@
                 hover
                 :responsive="true"
                 :fields="cols"
-                :items="employees.items"
+                :items="localEmployees"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
@@ -52,20 +52,20 @@
                   </div>
                     
                 </template>
-                <template #cell(company)="data">
-                  {{ data.item.consumer_name_kana }}
+                <template #cell(branchName)="data">
+                  {{ data.item.branchName }}
                 </template>
 
-                <template #cell(username)="data">
-                  {{ data.item.consumer_name_kana }}
+                <template #cell(employeeName)="data">
+                  {{ data.item.employeeName }}
                 </template>
 
-                <!-- <template #cell(phone)="data">
-                  {{ data.item.phone_number_1 }}
-                </template> -->
+                <template #cell(mailAddress)="data">
+                  {{ data.item.mailAddress }}
+                </template>
 
-                <template #cell(mailaddress)="data">
-                  {{ data.item.mail_address }}
+                <template #cell(rollName)="data">
+                  {{ data.item.rollName }}
                 </template>
 
                 <template
@@ -74,7 +74,7 @@
                 >
                   <div
                     style="padding: 0.5rem"
-                    v-if="selectedItem === data.item.consumer_id"
+                    v-if="selectedItem === data.item.employeeId"
                   >
                     <a v-b-modal.modal-edit>
                       <!-- <b-icon icon="pencil" /> -->
@@ -162,6 +162,7 @@
 import { mapState, mapActions } from "vuex";
 import WA01020500 from './WA01020500.vue';
 import WA01020410 from '../edit-user/WA01020410.vue';
+import moment from 'moment';
 
 export default {
   data() {
@@ -173,18 +174,16 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
-        { key: "username", label: "氏名" },
-        { key: "company", label: "所属" },
-        { key: "mailaddress", label: "メールアドレス" },
-        { key: "roll", label: "ロール" },
-
-        // { key: "birthday", label: "年齢" },
-        // { key: "phone", label: "電話番号1" },
-        // { key: "memo", label: "メモ" },
+        { key: "employeeName", label: "氏名" },
+        { key: "branchName", label: "所属" },
+        { key: "mailAddress", label: "メールアドレス" },
+        { key: "rollName", label: "ロール" },
         { key: "action", label: "" , class: "col-spec" },
       ],
       selectedItem: '',
       isEdit: false,
+      localEmployees: [],
+      inputData: {}
     };
   },
   components: {
@@ -200,9 +199,11 @@ export default {
     }),
   },
   created() {
-    this.getAllEmployees({ page: 1, maximumRecordsPerPage: 40 });
+    
+    this.funcGetAllEmployee()
+    // this.getAllEmployees({ page: 1, maximumRecordsPerPage: 40 });
     this.changePasswordState = false
-    // console.log(this.consumers)
+    // console.log(this.employees.all)
   },
   methods: {
     // ...mapActions("consumers", {
@@ -217,21 +218,21 @@ export default {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
     }),
-    deleteItem(consumer_id) {
-        if(consumer_id !== this.selectedItem) {
+    deleteItem(employeeId) {
+        if(employeeId !== this.selectedItem) {
             return
         }
         console.log('success')
     },
     onRowSelected(items) {
-        this.selectedItem = items[0]? items[0].consumer_id : null
+        this.selectedItem = items[0]? items[0].employeeId : null
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
-      if(item.consumer_id === this.selectedItem) return 'b-table-row-selected table-active'
+      if(item.employeeId === this.selectedItem) return 'b-table-row-selected table-active'
     },
     selectedRow(item) {
-        this.$refs.selectableTable.selectRow(this.consumers.items.indexOf(item))
+        this.$refs.selectableTable.selectRow(this.employees.items.indexOf(item))
     },
     // Event click button 編集 in edit modal
     okEdit() {
@@ -244,7 +245,21 @@ export default {
     // Event click button search
     handleSearch() {
       
-    }
+    },
+    formatConsumerData(arrInput) {
+      return arrInput.map((e) => {
+        return {
+          ...e,
+          birthdate: moment(e.birthdate).format('yyyy/MM/DD')
+        }
+      })
+    },
+    funcGetAllEmployee() {
+      this.inputData = { page: 1, maximumRecordsPerPage: 40 }
+      this.getAllEmployees(this.inputData).then(() => {
+        this.localEmployees = this.employees.all ? this.formatConsumerData(this.employees.all) : []
+      });
+    },
   },
   
 };

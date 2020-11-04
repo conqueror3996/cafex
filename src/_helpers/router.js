@@ -26,45 +26,16 @@ export const router = new Router({
       name: 'WA01010100',
       component: WA01010100,
       meta : { 
-        authRequired : false
+        guest: true,
+        requiresAuth : false
       } 
     },// login
-    { 
-      path: '/WA01010300', 
-      name: 'WA01010300',
-      component: WA01010300, 
-      meta : { 
-        authRequired : true
-      } 
-    }, // dashboard
-    { 
-      path: '/WA01010310/:consumerId', 
-      name: 'WA01010310',
-      component: WA01010310, 
-      meta : { 
-        authRequired : true
-      } 
-    }, // edit user
-    { 
-      path: '/WA01020300', 
-      name: 'WA01020300',
-      component: WA01020300, 
-      meta : { 
-        authRequired : true,
-        is_admin: true
-      } 
-    }, // home admin
-    { 
-      path: '/register', 
-      name: 'register',
-      component: RegisterPage,
-    },
     { 
       path: '/WA01010200', 
       name: 'WA01010200',
       component: WA01010200,
       meta : { 
-        authRequired : true
+        requiresAuth : true
       }  
     }, //change-password
     { 
@@ -72,15 +43,36 @@ export const router = new Router({
       name: 'WA01010201',
       component: WA01010201,
       meta : { 
-        authRequired : true
+        requiresAuth : true
       }  
     }, //complete-change-password
+    { 
+      path: '/WA01010300', 
+      name: 'WA01010300',
+      component: WA01010300, 
+      meta : { 
+        requiresAuth : true
+      } 
+    }, // dashboard
+    { 
+      path: '/WA01010310/:consumerId', 
+      name: 'WA01010310',
+      component: WA01010310, 
+      meta : { 
+        requiresAuth : true
+      } 
+    }, // edit user
+    { 
+      path: '/register', 
+      name: 'register',
+      component: RegisterPage,
+    },
     { 
       path: '/WA01010400', 
       name: 'WA01010400',
       component: WA01010400,
       meta : { 
-        authRequired : true
+        requiresAuth : true
       }  
     }, //customer-info
     { 
@@ -88,7 +80,7 @@ export const router = new Router({
       name: 'WA01010500',
       component: WA01010500,
       meta : { 
-        authRequired : true
+        requiresAuth : true
       }  
     }, //manage-file
     { 
@@ -96,15 +88,25 @@ export const router = new Router({
       name: 'WA01010600',
       component: WA01010600,
       meta : { 
-        authRequired : true
+        requiresAuth : true
       }  
     }, //manage-file
+    { 
+      path: '/WA01020300', 
+      name: 'WA01020300',
+      component: WA01020300, 
+      meta : { 
+        requiresAuth : true,
+        is_admin: true
+      } 
+    }, // dashboard admin
     { 
       path: '/WA01020400', 
       name: 'WA01020400',
       component: WA01020400,
       meta : { 
-        // authRequired : true
+        requiresAuth : true,
+        is_admin: true
       }  
     }, //manage-employee
     { 
@@ -112,7 +114,8 @@ export const router = new Router({
       name: 'WA01020501',
       component: WA01020501,
       meta : { 
-        // authRequired : true
+        requiresAuth : true,
+        is_admin: true
       }  
     }, //complete-register-employee
 
@@ -123,32 +126,55 @@ export const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  // const store = useStore()
-  // redirect to login page if not logged in and trying to access a restricted page
-  console.log(auth.isLoggedIn())
-  
-  // if(!auth.isLoggedIn()) {
-  //   if(to.name === 'WA01010100') {
-  //     next()
-  //   }
-  //   return next({
-  //     path: '/WA01010100', //Login
-  //     params: { nextUrl: to.fullPath }
-  //   })
-  // } 
-  
-  // next();
-  if (!auth.isLoggedIn()) {
-    if (to.path !== "/WA01010100") {
-        next('/WA01010100');
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!auth.isLoggedIn()) {
+      next({
+        path: '/WA01010100',
+        params: { nextUrl: to.fullPath }
+      });
+      // if (to.path !== "/WA01010100") {
+      //     next({
+      //       path: '/WA01010100',
+      //       params: { nextUrl: to.fullPath }
+      //     });
+      // } else {
+      //     next()
+      // }
     } else {
-        next()
+      const employee = auth.getAuthToken()
+      if (to.matched.some(record2 => record2.meta.is_admin)) {
+        if (employee.rollCode === 21) {
+          next();
+        } else {
+          next({ name: 'WA01010300' });
+        }
+      } else {
+        next();
+      }
     }
-} 
-// else if (to.path === "/WA01010100") {
-   
-//     next('/WA01010300')
-// }
-next();
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (!auth.isLoggedIn()) {
+      next();
+    } else {
+      next({ name: 'WA01010300'})
+    }
+  } else {
+    next();
+  }
+
+
+  // if (!auth.isLoggedIn()) {
+  //   if (to.path !== "/WA01010100") {
+  //       next({
+  //         path: '/WA01010100',
+  //         params: { nextUrl: to.fullPath }
+  //       });
+  //   } else {
+  //       next()
+  //   }
+  // } 
+
+  // next();
 
 })
