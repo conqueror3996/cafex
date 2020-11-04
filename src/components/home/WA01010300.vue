@@ -1,17 +1,17 @@
 <template>
   <div class="home-screen">
     <b-tabs card align="right">
-      <template #tabs-start v-if="this.employees.employee">
+      <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
         <div class="div-back-button nav-item align-self-center">
           <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
 
-      <b-tab :title="this.employees.employee ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
+      <b-tab :title="this.localEmployee.rollCode === '21' ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p class="title" v-if="!this.employees.employee">顧客を選択して「次へ」を押してください</p>
-            <div :class="!this.employees.employee ? 'content-search' : 'content-search admin-search'">
+            <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
+            <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -151,14 +151,14 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="this.employees.rollCode === '21'">
+            <div class="bottom-table" v-if="this.employees.employee.rollCode !== '21'">
                 <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="!this.employees.employee">
+      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="this.localEmployee.rollCode !== '21'">
         <b-card-text class="selected-content">
           <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
         </b-card-text>
@@ -219,6 +219,7 @@ export default {
       //   },]
       // },
       tabSelected: '',
+      localEmployee: {},
       localConsumers: [],
       consumerSelected: '',
       inputData: {}
@@ -236,19 +237,19 @@ export default {
       // changePasswordState: (state) => state.changePasswordState
     }),
     computedFields() {
-      if(!this.employees.employee)
+      if(this.localEmployee.rollCode !== '21')
         return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || !field.isAdminCols);
       else
         return this.cols.filter(field => !field.hasOwnProperty('isAdminCols') || field.isAdminCols);
     }
   },
   created() {
-    
     this.getUserInfo().then(() => {
       this.inputData = { employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }
-        this.funcGetAllConsumer(this.inputData)
+      this.localEmployee = this.employees.employee
+      // console.log(this.localEmployee)
+      this.funcGetAllConsumer(this.inputData)
     })
-    
     // this.changePasswordState = false
   },
   methods: {
