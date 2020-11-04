@@ -8,7 +8,7 @@
       <div class="contact" v-if="$router.currentRoute.path === '/WA01010600'">
         <p>お客様対応画面<a href="#" style="padding-left:3rem;">ヘルプ</a></p>
       </div>
-      <div class="account" v-if="employee && !ignorePath.includes($router.currentRoute.path)">
+      <div class="account" v-if="this.employees.employee && !ignorePath.includes($router.currentRoute.path)">
         <img class="mw100" :src="imgMyAccountIconGreen" alt="account"/>
         <ul class="list_account-action">
           <li><router-link :to="{ name: 'WA01010200' }" tag="a">パスワード変更</router-link></li>
@@ -72,16 +72,14 @@ export default {
   computed: {
     ...mapState({
       alert: (state) => state.alert,
-      employee: (state) => {
-        // console.log(state)
-        return state.employees.employee
-      },
+      employees: (state) => state.employees
       // changePasswordState: (state) => state.changePasswordState
     }),
   },
   created() {
-
-      // this.userInfo()
+      // this.userInfo().then(() => {
+      //   console.log(this.employees)
+      // })
   },
   methods: {
     ...mapActions({
@@ -92,8 +90,8 @@ export default {
       this.logout()
     },
     goHome() {
-      if(!this.employee) return;
-      if(this.employee.rollCode == "23") {
+      if(!this.employees.employee.rollCode) return;
+      if(this.employees.employee.rollCode) {
         if (this.$router.currentRoute.path !== '/WA01020300') this.$router.push('/WA01020300')
       } else {
         if (this.$router.currentRoute.path !== '/WA01010300') this.$router.push('/WA01010300')

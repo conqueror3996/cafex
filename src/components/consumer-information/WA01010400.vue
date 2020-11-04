@@ -76,12 +76,13 @@ export default {
   },
   computed: {
     ...mapState({
-      employee: (state) => state.employees.employee,
+      employees: (state) => state.employees,
       consumers: (state) => state.consumers.single,
       detail: (state) => state.consumers.single
     }),
   },
   created() {
+    this.getUserInfo()
     this.initInfo()
     this.getConsumerByID(this.localConsumerId).then(() => {
             console.log("this.consumers", this.consumers);
@@ -94,6 +95,9 @@ export default {
           getConsumerByID: "getConsumerByID",
           goTo: "goToFileManagement",
           // setUserDetail: "setUserDetail",
+      }),
+      ...mapActions("employees", {
+          getUserInfo: "userInfo"
       }),
       goContact(){
         this.$router.push('/WA01010600');
