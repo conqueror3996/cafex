@@ -12,6 +12,7 @@
           <div v-if="!isEdit">
             <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
+              <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -22,12 +23,13 @@
                   autofocus
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                  <b-button class="bg-transparent border-0" variant="primary" type="submit">
                     <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
+              </b-form>
             </div>
             <div class="table-main">
               <b-table
@@ -97,7 +99,7 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div>選択したお客様情報を編集しますか？</div>
+                        <div>{{errorMess.WA0101030001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -126,7 +128,7 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div>選択したお客様情報を削除しますか？</div>
+                        <div>{{errorMess.WA0101030002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -174,6 +176,7 @@ import WA01010310 from '../edit-user/WA01010310.vue';
 import fileJson from '../../../static/file.json'
 import moment from 'moment';
 import { Consumer } from '../../models';
+import errorMessage from '../../validate/errormessage'
 
 export default {
   props: {
@@ -222,7 +225,8 @@ export default {
       localEmployee: {},
       localConsumers: [],
       consumerSelected: '',
-      inputData: {}
+      inputData: {},
+      errorMess: errorMessage
     };
   },
   components: {
@@ -302,7 +306,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      
+      this.localConsumers = this.consumers.filter((item) => item.consumerName.includes(this.searchString) || item.consumerNameKana.includes(this.searchString) )
     },
     changeTab(tab) {
       // Set error message empty when change tab
