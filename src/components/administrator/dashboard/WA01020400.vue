@@ -11,6 +11,7 @@
           <div v-if="!isEdit">
             <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p>
             <div class="content-search">
+              <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -21,12 +22,13 @@
                   style="font-family: 'HiraginoSan-W3'"
                   autofocus></b-form-input>
                 <b-input-group-append>
-                  <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                  <b-button class="bg-transparent border-0" variant="primary" type="submit">
                     <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
+              </b-form>
             </div>
             <div class="table-main">
               <b-table
@@ -246,7 +248,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      
+      this.localEmployees = this.employees.all.filter((item) => item.employeeName.includes(this.searchString))
     },
     formatConsumerData(arrInput) {
       return arrInput.map((e) => {

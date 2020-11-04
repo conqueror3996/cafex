@@ -12,6 +12,7 @@
           <div v-if="!isEdit">
             <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
+              <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -22,12 +23,13 @@
                   autofocus
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                  <b-button class="bg-transparent border-0" variant="primary" type="submit">
                     <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
+              </b-form>
             </div>
             <div class="table-main">
               <b-table
@@ -304,7 +306,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      
+      this.localConsumers = this.consumers.filter((item) => item.consumerName.includes(this.searchString) || item.consumerNameKana.includes(this.searchString) )
     },
     changeTab(tab) {
       // Set error message empty when change tab
