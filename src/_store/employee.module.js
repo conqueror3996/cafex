@@ -27,6 +27,7 @@ const actions = {
             ).catch((err) => {
                 if (err.response) {
                     const { data } = err.response
+                    commit('loginFailure', data.error);
                     if(data.status !== 422) {
                         return;
                     }else {
