@@ -9,7 +9,8 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p>
+            <p style="font-family: 'HiraginoSan-W3'" class="title"></p>
+            <!-- 顧客を選択して「次へ」を押してください -->
             <div class="content-search">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -381,6 +382,7 @@ export default {
 .modal-content {
   width: 501px;
   height: auto;
+  border-radius: .5rem;
 }
 
 .modal-body {
