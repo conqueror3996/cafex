@@ -47,23 +47,31 @@ export default {
       localConsumer: {},
       backHome: Function,
     },
-    created() {
-      
+    computed: {
+      ...mapState({
+        employees: (state) => state.employees,
+      })
     },
-
+    created() {
+    },
     methods: {
+      ...mapActions("employees", {
+      getUserInfo: "userInfo",
+      }),
       ...mapActions("consumers", {
         update: "updateConsumer",
         deleteUser: "deleteConsumer",
-      //   deleteItem: "deleteItem"
+        getAll: "getAll"
       }),
       handleEdit() {
         const data = {
           body: this.localConsumer,
           params: this.$route.params.consumerId
         }
-        this.update(data)
-        this.backHome();
+        this.update(data).then(() => {
+          this.backHome();
+        })
+        
       },
       handleHide() {
           this.$emit("changeModalConfirm", false)

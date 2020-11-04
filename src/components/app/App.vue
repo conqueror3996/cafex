@@ -177,7 +177,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;}
 .account img{float:right;padding-right: 3rem;}
 .account:hover .list_account-action{opacity:1;transition:0.2s all;visibility:visible;}
-.alert-message{max-width:500px;position: relative;;left:0px;right:0px;bottom:0px;top:10px;margin:auto;z-index:99}
+.alert-message{max-width:500px;position:absolute;left:0px;right:0px;bottom:0px;margin:auto;z-index:99}
 .alert-message p {margin-bottom: 0px;}
 .list_account-action{width:162px;position:absolute;background:#fff;border-radius:5px;right:20px;top:55px;list-style:none;border:1px solid #b1acac;padding:0px;visibility:hidden; opacity:0;transition:0.2s all;}
 .list_account-action li{padding:10px 0px 10px 15px;border-bottom:1px solid #e0e0e0;}

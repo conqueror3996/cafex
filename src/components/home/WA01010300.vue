@@ -12,6 +12,7 @@
           <div v-if="!isEdit">
             <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
+              <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -22,12 +23,13 @@
                   autofocus
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                  <b-button class="bg-transparent border-0" variant="primary" type="submit">
                     <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
+              </b-form>
             </div>
             <div class="table-main">
               <b-table
@@ -97,7 +99,7 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div>選択したお客様情報を編集しますか？</div>
+                        <div>{{errorMess.WA0101030001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -126,7 +128,7 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div>選択したお客様情報を削除しますか？</div>
+                        <div>{{errorMess.WA0101030002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -155,12 +157,12 @@
                 <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
             </div>
           </div>
-          <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
+          <WA01010310 v-if="isEdit" @changeEdit="isEdit = afterChanges($event)"></WA01010310>
         </b-card-text>
       </b-tab>
       <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="this.localEmployee.rollCode !== '21'">
         <b-card-text class="selected-content">
-          <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
+          <WA01010320 @changeSelectedTab="tabSelected = afterChanges($event)"></WA01010320>
         </b-card-text>
       </b-tab>
     </b-tabs>
@@ -174,6 +176,7 @@ import WA01010310 from '../edit-user/WA01010310.vue';
 import fileJson from '../../../static/file.json'
 import moment from 'moment';
 import { Consumer } from '../../models';
+import errorMessage from '../../validate/errormessage'
 
 export default {
   props: {
@@ -222,7 +225,8 @@ export default {
       localEmployee: {},
       localConsumers: [],
       consumerSelected: '',
-      inputData: {}
+      inputData: {},
+      errorMess: errorMessage
     };
   },
   components: {
@@ -302,7 +306,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      
+      this.localConsumers = this.consumers.filter((item) => item.consumerName.includes(this.searchString) || item.consumerNameKana.includes(this.searchString) )
     },
     changeTab(tab) {
       // Set error message empty when change tab
@@ -329,7 +333,11 @@ export default {
           name: 'WA01010400',
       })
       }
-    }
+    },
+    afterChanges(event) {
+      this.funcGetAllConsumer(this.inputData)
+      return event
+    } 
   },
   
 };

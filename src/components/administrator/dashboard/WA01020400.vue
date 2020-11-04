@@ -9,8 +9,14 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
+<<<<<<< HEAD
             <!-- <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p> -->
+=======
+            <p style="font-family: 'HiraginoSan-W3'" class="title"></p>
+            <!-- 顧客を選択して「次へ」を押してください -->
+>>>>>>> 7297c6e375b453ff665b1c69d67aec0b1e38a9b9
             <div class="content-search">
+              <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
                   type="text"
@@ -21,12 +27,13 @@
                   style="font-family: 'HiraginoSan-W3'"
                   autofocus></b-form-input>
                 <b-input-group-append>
-                  <b-button class="bg-transparent border-0" variant="primary" @click="handleSearch">
+                  <b-button class="bg-transparent border-0" variant="primary" type="submit">
                     <img :src="imgSearchIcon" width="30" height="30">
                     <!-- <b-icon icon="search" /> -->
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
+              </b-form>
             </div>
             <div class="table-main">
               <b-table
@@ -84,7 +91,7 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div style="font-family: 'HiraginoSan-W3'">選択した営業員情報を編集しますか？</div>
+                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -115,7 +122,7 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div style="font-family: 'HiraginoSan-W3'">選択した営業員にはお客様情報が紐付いています。削除しますか？</div>
+                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
@@ -163,10 +170,12 @@ import { mapState, mapActions } from "vuex";
 import WA01020500 from './WA01020500.vue';
 import WA01020410 from '../edit-user/WA01020410.vue';
 import moment from 'moment';
+import errorMessage from '../../../validate/errormessage'
 
 export default {
   data() {
     return {
+      errorMess: errorMessage,
       imgManageMode: './static/img/btn_back_mode_select.svg',
       imgSearchIcon: './static/img/search-icon.svg',
       imgEditIcon: './static/img/pen.svg',
@@ -242,7 +251,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      
+      this.localEmployees = this.employees.all.filter((item) => item.employeeName.includes(this.searchString))
     },
     formatConsumerData(arrInput) {
       return arrInput.map((e) => {
@@ -369,7 +378,8 @@ export default {
 
 .modal-content {
   width: 501px;
-  height: 149px;
+  height: auto;
+  border-radius: .5rem;
 }
 
 .modal-body {
