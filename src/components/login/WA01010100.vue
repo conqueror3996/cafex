@@ -68,7 +68,7 @@ export default {
             if (username && password) {
                 await this.login({ username, password })
             } else {
-                this.employee.err = 'メールアドレス、もしくはパスワードが間違'
+                //this.employee.err = 'メールアドレス、もしくはパスワードが間違'
                 return
             }
         }
