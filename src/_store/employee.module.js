@@ -27,9 +27,11 @@ const actions = {
             ).catch((err) => {
                 if (err.response) {
                     const { data } = err.response
-                    
-                    dispatch('alert/error', data.error.code, { root: true });
-                    commit('loginFailure', data.error);
+                    if(data.status !== 422) {
+                        return;
+                    }else {
+                        dispatch('alert/error', data.error.code, { root: true });
+                    }
                 }
             });
         

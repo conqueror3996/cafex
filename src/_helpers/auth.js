@@ -1,6 +1,7 @@
 import axios from "axios";
 import moment from 'moment';
 import config from 'config';
+import { router } from './router';
 
 const AUTH_TOKEN_KEY = 'authToken';
 axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
@@ -19,6 +20,10 @@ axios.interceptors.response.use((response) => {
         if(status === 401) {
             auth.clearAuthToken();
             router.push('/WA01010100')
+        }
+        
+        if(status === 422) {
+            router.push('/WA01010200')
         }
     }
     return Promise.reject(err);

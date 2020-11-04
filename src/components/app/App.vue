@@ -12,7 +12,8 @@
         <img class="mw100" :src="imgMyAccountIconGreen" alt="account"/>
         <ul class="list_account-action">
           <li><router-link :to="{ name: 'WA01010200' }" tag="a">パスワード変更</router-link></li>
-          <li @click="loggingOut()"><router-link :to="{ name: 'WA01010100' }" tag="a" >ログアウト</router-link></li>
+          <li @click="loggingOut()"><span>ログアウト</span></li>
+          <!-- <router-link :to="{ name: 'WA01010100' }" tag="a" >ログアウト</router-link> -->
         </ul>
       </div>
 			<div v-if="alert.message" :class="`alert alert-message pre-formatted ${alert.type}`">
@@ -90,7 +91,7 @@ export default {
       this.logout()
     },
     goHome() {
-      if(!this.employees.employee.rollCode) return;
+      if(!this.employees.employee || !this.employees.employee.rollCode) return;
       if(this.employees.employee.rollCode) {
         if (this.$router.currentRoute.path !== '/WA01020300') this.$router.push('/WA01020300')
       } else {
@@ -185,6 +186,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .list_account-action li:hover{background:#eee;}
 .list_account-action li a{color:#000;}
 .list_account-action li a:hover{text-decoration:none;}
+.list_account-action li span {cursor: pointer;}
 .contact {max-width: 500px; float: left; margin-left: 3rem;}
 .contact p{font-size: 34px; font-weight: 200; font-family: "HiraginoSans-W3"; padding-top: 2.75rem; margin-bottom: 0px;}
 .contact a {color: #000; text-decoration: underline; font-size: 20px;}

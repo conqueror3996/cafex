@@ -35,7 +35,7 @@ export const router = new Router({
       name: 'WA01010200',
       component: WA01010200,
       meta : { 
-        requiresAuth : true
+        requiresAuth : false
       }  
     }, //change-password
     { 
