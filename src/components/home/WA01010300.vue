@@ -155,12 +155,12 @@
                 <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
             </div>
           </div>
-          <WA01010310 v-if="isEdit" @changeEdit="isEdit = $event"></WA01010310>
+          <WA01010310 v-if="isEdit" @changeEdit="isEdit = afterChanges($event)"></WA01010310>
         </b-card-text>
       </b-tab>
       <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="this.localEmployee.rollCode !== '21'">
         <b-card-text class="selected-content">
-          <WA01010320 @changeSelectedTab="tabSelected = $event"></WA01010320>
+          <WA01010320 @changeSelectedTab="tabSelected = afterChanges($event)"></WA01010320>
         </b-card-text>
       </b-tab>
     </b-tabs>
@@ -329,7 +329,11 @@ export default {
           name: 'WA01010400',
       })
       }
-    }
+    },
+    afterChanges(event) {
+      this.funcGetAllConsumer(this.inputData)
+      return event
+    } 
   },
   
 };

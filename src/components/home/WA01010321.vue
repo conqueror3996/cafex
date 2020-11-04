@@ -53,8 +53,10 @@ export default {
             addConsumer: "addConsumer",
       }),
       handleReg() {
-        this.addConsumer(this.data);
-        this.backHome();
+        this.addConsumer(this.data).then(() => {
+          this.backHome();
+        });
+        
       },
       handleHide() {
           this.$emit("changeShowModal", false)

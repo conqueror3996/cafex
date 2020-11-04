@@ -59,7 +59,7 @@ const actions = {
     },
 
     addConsumer({ commit, dispatch }, input) {
-        consumerService.addConsumer(input).then((info) => {
+        return consumerService.addConsumer(input).then((info) => {
             commit('getAllSuccessGet', info)
         }).catch((err) => {
             if (err.response) {
