@@ -72,7 +72,7 @@ export default {
         ...mapActions("alert", { error: "error" }),
         handleSubmit (e) {
             if(this.submitted == false) {
-                this.$router.push('/WA01010300')
+                this.$router.push('/WA01010300').catch(() => {})
                 return;
             }
             this.msg = ''
