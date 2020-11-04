@@ -13,7 +13,6 @@ function isKanaHalf(value) {
 }
 
 function isDate(value) {
-    console.log(moment(value).format('yyyy/MM/DD'))
     const reg = new RegExp("((?:19|20)\\d\\d)/(0?[1-9]|1[012])/([12][0-9]|3[01]|0?[1-9])");
 
     return reg.test(moment(value).format('yyyy/MM/DD'));

@@ -89,7 +89,6 @@ export default {
     }),
     ...mapActions('employees', ['userInfo', 'logout']),
     loggingOut() {
-      console.log('dm')
       this.logout()
     },
     goHome() {

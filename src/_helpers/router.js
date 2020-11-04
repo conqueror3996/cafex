@@ -142,9 +142,9 @@ router.beforeEach((to, from, next) => {
       //     next()
       // }
     } else {
-      const employee = auth.getAuthToken()
+      const employee = JSON.parse(auth.getAuthToken())
       if (to.matched.some(record2 => record2.meta.is_admin)) {
-        if (employee.rollCode === 21) {
+        if (employee.rollCode === '21') {
           next();
         } else {
           next({ name: 'WA01010300' });
