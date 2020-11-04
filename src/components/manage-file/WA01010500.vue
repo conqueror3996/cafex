@@ -104,10 +104,11 @@ export default {
         { key: "fileRegistrationDate", label: "登録日時" },
         { key: "action", label: "", tdClass: "col-action" },
       ],
-      consumer: [],
+      consumer:[],
       hoveredItem: '',
       modalItem: '',
       files: [],
+      localConsumerId: '',
     };
   },
   computed: {
@@ -119,15 +120,17 @@ export default {
     }),
   },
   created() {
+    this.initInfo()
     this.getUserInfo().then(() => {
-      console.log("this.employees", this.employees)
-      this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer.consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-        
-        console.log("res",res)
+      return this.getConsumerByID(this.localConsumerId).then(() => {
+        this.consumer = [...this.consumer, this.detail.item]
+        console.log("this.consumer", this.consumer)
+      })
+    }).then(() => {
+        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
         this.files = res.data.file;
       });
     })
-    this.consumer[0] = this.detail 
   },
   methods: {
     ...mapActions("alert", {
@@ -141,6 +144,12 @@ export default {
     ...mapActions("employees", {
       getUserInfo: "userInfo",
     }),
+    ...mapActions("consumers", {
+        getConsumerByID: "getConsumerByID",
+    }),
+    initInfo () {
+      this.localConsumerId = localStorage.getItem('consumerId')
+    },
     deleteFile(file) {
       console.log("file", file)
       // this.deleteFile(file.fileType, file.fileId).then(() => {
@@ -182,8 +191,10 @@ export default {
       } else {
           this.error('')
           let formData = new FormData();
+          formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])
-          this.addFile("pdf", formData).then()
+          console.log('consumerId', this.consumer[0].consumerId)
+          // this.addFile("pdf", formData).then()
       }
     }
   },
