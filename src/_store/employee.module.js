@@ -82,8 +82,6 @@ const actions = {
     getAll({commit, dispatch}, input){
         return employeeService.getAllEmployees(input).then(
             info => {
-                // console.log(info)
-                localStorage.setItem('authToken', JSON.stringify(info.data));
                 commit("getAllEmployeesSuccess", info.data.employee);
             },
         ).catch((err) => {
