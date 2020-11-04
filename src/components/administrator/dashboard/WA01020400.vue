@@ -199,20 +199,18 @@ export default {
     }),
   },
   created() {
-    
-    this.funcGetAllEmployee()
-    // this.getAllEmployees({ page: 1, maximumRecordsPerPage: 40 });
+    this.getUserInfo().then(() => {
+      this.inputData = { page: 1, maximumRecordsPerPage: 40 }
+      this.getAllEmployees(this.inputData).then(() => {
+        this.localEmployees = this.employees.all ? this.formatConsumerData(this.employees.all) : []
+      });
+    })
     this.changePasswordState = false
-    // console.log(this.employees.all)
   },
   methods: {
-    // ...mapActions("consumers", {
-      // getAllConsumer: "getAll",
-      // deleteUser: "delete",
-    //   deleteItem: "deleteItem"
-    // }),
     ...mapActions("employees", {
       getAllEmployees: "getAll",
+      getUserInfo: "userInfo"
     }),
     ...mapActions("files", {
       editItem: "editItem",
@@ -253,12 +251,6 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    },
-    funcGetAllEmployee() {
-      this.inputData = { page: 1, maximumRecordsPerPage: 40 }
-      this.getAllEmployees(this.inputData).then(() => {
-        this.localEmployees = this.employees.all ? this.formatConsumerData(this.employees.all) : []
-      });
     },
   },
   
