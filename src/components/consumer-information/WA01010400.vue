@@ -39,6 +39,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { Consumer } from '../../models';
+import moment from 'moment';
 
 export default {
   data() {
@@ -85,10 +86,9 @@ export default {
     this.getUserInfo()
     this.initInfo()
     this.getConsumerByID(this.localConsumerId).then(() => {
-            console.log("this.consumers", this.consumers);
-            this.localConsumer = this.consumers
-            console.log(this.localConsumer.item)
-        })
+      this.localConsumer = this.consumers
+      this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
+    })
   },
   methods: {
       ...mapActions("consumers", {

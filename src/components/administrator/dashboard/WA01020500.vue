@@ -98,35 +98,35 @@ export default {
     margin-bottom: 150px;
 }
 
-.div-button-confirm {
+.div-registration-content .div-button-confirm {
     display: flex;
     justify-content: center;
     flex-direction: row;
 }
 
-.div-button-confirm .button-confirm{
+.div-registration-content .div-button-confirm .button-confirm{
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
-.div-button-confirm div label p {
+.div-registration-content .div-button-confirm div label p {
     font-family: 'HiraginoSan-W3';
 }
 
-.div-button-confirm .info-file {
+.div-registration-content .div-button-confirm .info-file {
     padding: .75rem 0 0 3rem;
     width: auto;
 }
 
-.button-custom {
+.div-registration-content .button-custom {
     width: 250px;
     height: 60px;
     font-size: 24px;
     border-radius: 10px;
 }
 
-.div-button-confirm button {
+.div-registration-content .div-button-confirm button {
   width: 172px;
   height: 44px;
   font-size: 20px;
@@ -134,7 +134,7 @@ export default {
   font-family: 'HiraginoSan-W3';
 }
 
-.btn-upload {
+.div-registration-content .btn-upload {
   border-radius: 0.5rem;
   color: #ffffff;
   margin-left: auto;
@@ -145,17 +145,17 @@ export default {
   text-align: center;
 }
 
-.btn-upload p{
+.div-registration-content .btn-upload p{
   font-size: 20px;
   padding-top: .5rem;
 }
 
-.img-btn {
+.div-registration-content .img-btn {
   float: right;
   margin-right: 0.5rem;
 }
 
-input[type="file"] {
+.div-registration-content input[type="file"] {
 	display: none;
 }
 /* .main-content {
