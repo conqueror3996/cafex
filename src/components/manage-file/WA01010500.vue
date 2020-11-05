@@ -47,7 +47,7 @@
                     id="modal-delete"
                     hide-header
                     centered
-                    @ok="deleteFile(data.item)"
+                    @ok="handledeleteFile(data.item)"
                     v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
@@ -154,11 +154,11 @@ export default {
     initInfo () {
       this.localConsumerId = localStorage.getItem('consumerId')
     },
-    deleteFile(file) {
+    handledeleteFile(file) {
       console.log("file", file)
-      // this.deleteFile(file.fileType, file.fileId).then(() => {
+      this.deleteFile(file.fileType, file.fileId).then(() => {
 
-      // })
+      })
     },
     rowHovered(item) {
         this.hoveredItem = item.fileId;
@@ -198,7 +198,7 @@ export default {
           formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])
           console.log('consumerId', this.consumer[0].consumerId)
-          // this.addFile("pdf", formData).then()
+          this.addFile("0001", formData).then()
       }
     }
   },
