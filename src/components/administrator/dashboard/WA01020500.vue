@@ -108,6 +108,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    position: absolute;
 }
 
 .div-registration-content .div-button-confirm div label p {
@@ -117,6 +118,7 @@ export default {
 .div-registration-content .div-button-confirm .info-file {
     padding: .75rem 0 0 3rem;
     width: auto;
+    margin-left: 450px;
 }
 
 .div-registration-content .button-custom {

@@ -9,7 +9,7 @@ const actions = {
         employeeService.login(username, password)
             .then(
                 info => {
-                    dispatch('alert/success', info.status + " Login Success", { root: true });
+                    // dispatch('alert/success', info.status + " Login Success", { root: true });
                     commit('loginSuccess', info);
                     dispatch("userInfo").then(() => {
                         console.log("into user info", state.employee)
