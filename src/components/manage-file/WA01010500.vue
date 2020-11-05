@@ -47,11 +47,11 @@
                     id="modal-delete"
                     hide-header
                     centered
-                    @ok="deleteFile(data.item)"
+                    @ok="handledeleteFile(data.item)"
                     v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
-                    <div>{{errorMess.WA01010500}}</div>
+                    <div>{{errorMess.WA0101050002}}</div>
                     <template #modal-footer="{ ok, cancel }">
                       <div>
                         <b-button size="sm" variant="primary" @click="ok()">
@@ -86,6 +86,7 @@
 import { mapState, mapActions } from "vuex";
 import validate from '../../validate/validate.js';
 import errorMessage from '../../validate/errormessage';
+import moment from 'moment';
 
 export default {
   data() {
@@ -125,7 +126,8 @@ export default {
     this.initInfo()
     this.getUserInfo().then(() => {
       return this.getConsumerByID(this.localConsumerId).then(() => {
-        this.consumer = [...this.consumer, this.detail.item]
+        this.consumer = [this.detail.item]
+        this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
         console.log("this.consumer", this.consumer)
       })
     }).then(() => {
@@ -152,11 +154,11 @@ export default {
     initInfo () {
       this.localConsumerId = localStorage.getItem('consumerId')
     },
-    deleteFile(file) {
+    handledeleteFile(file) {
       console.log("file", file)
-      // this.deleteFile(file.fileType, file.fileId).then(() => {
+      this.deleteFile(file.fileType, file.fileId).then(() => {
 
-      // })
+      })
     },
     rowHovered(item) {
         this.hoveredItem = item.fileId;
@@ -196,7 +198,7 @@ export default {
           formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])
           console.log('consumerId', this.consumer[0].consumerId)
-          // this.addFile("pdf", formData).then()
+          this.addFile("0001", formData).then()
       }
     }
   },
@@ -356,12 +358,12 @@ export default {
   top: 0;
 }
 
-.file-footer {
+.manage-file-conent .file-footer {
   margin-top: 1.75rem;
   text-align: center;
 }
 
-.btn-upload {
+.manage-file-conent .btn-upload {
   border-radius: 0.5rem;
   color: #ffffff;
   margin-left: auto;
@@ -369,22 +371,22 @@ export default {
   padding: 0;
 }
 
-.content-btn {
+.manage-file-conent .content-btn {
   float: left;
   padding-left: 0.25rem;
   padding-top: 0.75rem;
 }
 
-.img-btn {
+.manage-file-conent .img-btn {
   float: right;
   margin-right: 0.5rem;
 }
 
-input[type="file"] {
+.manage-file-conent input[type="file"] {
 	display: none;
 }
 
-.panel {
+.manage-file-conent .panel {
   width: 466.43px;
   height: 490px;
   background-color: #ececec;
@@ -398,16 +400,16 @@ input[type="file"] {
     width: 96%;
   }
   
-  .file-content {
+  .manage-file-conent .file-content {
     width: 70%;
   }
-  .file-table {
+  .manage-file-conent .file-table {
     width: 100%;
     height: 401px;
     border: 1px solid #97989c;
     overflow: auto;
   }
-  .panel {
+  .manage-file-conent .panel {
     width: 30%;
     height: 490px;
     background-color: #ececec;

@@ -28,7 +28,7 @@
                   </b-button>
                 </b-input-group-append>
               </b-input-group>
-              </b-form>
+              </b-form> 
             </div>
             <div class="table-main">
               <b-table
@@ -333,7 +333,6 @@ export default {
 .content-search {
   margin: auto;
   width: 495px;
-  padding-top: 55px;
 }
 
 .content-search .input-group-append {

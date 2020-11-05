@@ -16,12 +16,12 @@ function getFileList(fileType, params) {
 
 function addFile(fileType, input) {
     let headers = { 'Content-Type': 'multipart/form-data' }
-    return auth.sendRequest('POST', allAPI.get_files(fileType), input, headers)
+    return auth.sendRequest('POST', allAPI.add_files(fileType), input, headers)
 }
 
 function deleteFile(fileType, fileId) {
     
-    return auth.sendRequest('DELETE', allAPI.get_files(fileType, fileId), null, null)
+    return auth.sendRequest('DELETE', allAPI.delete_files(fileType, fileId), null, null)
 }
 
 function getFileInternal(url) {
