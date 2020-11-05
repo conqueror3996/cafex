@@ -4,8 +4,8 @@
             <p>ファイルをアップロード</p>
         </div>
         <div class="alert alert-primary div-custom-alert" role="alert">
-            <p>・CSVデータから従業員データを登録できます。</p>
-            <p>・一度にアップロードできる従業員データの上限は1,000件です。</p>
+            <p>・CSVデータから営業員データを登録できます。</p>
+            <p>・一度にアップロードできるファイルの上限は100MBです。</p>
         </div>
         <div class="div-button-confirm">
             <div class="button-confirm">

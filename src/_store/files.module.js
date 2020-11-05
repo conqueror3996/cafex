@@ -14,21 +14,22 @@ const actions = {
         return fileService.getFileList("0001", input)
     },
 
-    addFile({ dispatch, commit }, fileType, input) {
-
-        return fileService.addFile(fileType, input).catch((err) => {
+    addFile({ dispatch, commit }, input) {
+        console.log("input", input)
+        return fileService.addFile(input.fileType, input.data).catch((err) => {
                 const { data } = err.response
                 dispatch('alert/error', data.error.code, { root: true });
             });
     },
 
-    deleteFile({ commit }, fileType, fileId) {
+    deleteFile({ commit }, file) {
         // commit('deleteRequest', fileId);
 
-        return fileService.deleteFile(fileType, fileId).catch((err) => {
-                const { data } = err.response
-                dispatch('alert/error', data.error.code, { root: true });
-            });
+        return fileService.deleteFile(file.fileType, file.fileId)
+        .catch((err) => {
+            const { data } = err.response
+            dispatch('alert/error', data.error.code, { root: true });
+        });
     }
 };
 

@@ -156,8 +156,10 @@ export default {
     },
     handledeleteFile(file) {
       console.log("file", file)
-      this.deleteFile(file.fileType, file.fileId).then(() => {
-
+      this.deleteFile(file).then(() => {
+        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+          this.files = res.data.file;
+        });
       })
     },
     rowHovered(item) {
@@ -180,8 +182,10 @@ export default {
         const filename = files[i].name;
         const filetype = filename.substring(filename.length - 3, filename.length);
         if(filetype !== 'pdf') {
-          alert("unsupport file type");
-          return;
+          console.log("into file type incorrect")
+          errorMessage = validate.getMessageErrorFromCode("S02014");
+          console.log("errorMessage", errorMessage)
+          break;
         }
         if(files[i].size/1024/1024 > 100)
         {
@@ -197,8 +201,11 @@ export default {
           let formData = new FormData();
           formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])
-          console.log('consumerId', this.consumer[0].consumerId)
-          this.addFile("0001", formData).then()
+          this.addFile({ fileType: "0001", data: formData}).then(() => {
+            this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+              this.files = res.data.file;
+            });
+          })
       }
     }
   },
