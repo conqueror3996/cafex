@@ -51,7 +51,7 @@
                     v-if="modalItem === data.item.fileId"
                     @close="closeModal()"
                   >
-                    <div>{{errorMess.WA01010500}}</div>
+                    <div>{{errorMess.WA0101050002}}</div>
                     <template #modal-footer="{ ok, cancel }">
                       <div>
                         <b-button size="sm" variant="primary" @click="ok()">
