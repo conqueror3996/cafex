@@ -15,7 +15,6 @@ const actions = {
     },
 
     addFile({ dispatch, commit }, input) {
-        console.log("input", input)
         return fileService.addFile(input.fileType, input.data).catch((err) => {
                 const { data } = err.response
                 dispatch('alert/error', data.error.code, { root: true });

@@ -67,14 +67,15 @@
           </b-table>
         </div>
         <div class="file-footer">
-          <label variant="primary" class="btn btn-upload" for="file">
+          <label variant="primary" :class="isUploading ? 'btn btn-upload disabled' : 'btn btn-upload'" for="file" >
             <img
               class="img-btn"
               :src="imgUploadIcon"
             />
           </label>
-          <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".pdf" />
+          <input type="file" value="ファイルアップロード" id="file" @change="uploadFile" accept=".pdf" :disabled="isUploading" />
            <!-- multiple="multiple" -->
+           <img v-show="isUploading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
       </div>
       <div class="panel"></div>
@@ -112,6 +113,7 @@ export default {
       modalItem: '',
       files: [],
       localConsumerId: '',
+      isUploading: false
     };
   },
   computed: {
@@ -155,7 +157,6 @@ export default {
       this.localConsumerId = localStorage.getItem('consumerId')
     },
     handledeleteFile(file) {
-      console.log("file", file)
       this.deleteFile(file).then(() => {
         this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
           this.files = res.data.file;
@@ -177,14 +178,14 @@ export default {
     uploadFile(event) {
       const files = event.target.files;
       let errorMessage = '';
+      if(files.length < 1) return;
+      this.isUploading = true;
       for (var i = 0; i < files.length; i++)
       {
         const filename = files[i].name;
         const filetype = filename.substring(filename.length - 3, filename.length);
         if(filetype !== 'pdf') {
-          console.log("into file type incorrect")
           errorMessage = validate.getMessageErrorFromCode("S02014");
-          console.log("errorMessage", errorMessage)
           break;
         }
         if(files[i].size/1024/1024 > 100)
@@ -203,7 +204,11 @@ export default {
           formData.append('file', event.target.files[0])
           this.addFile({ fileType: "0001", data: formData}).then(() => {
             this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+              this.isUploading = false;
               this.files = res.data.file;
+            })
+            .catch(() => {
+              this.isUploading = false;
             });
           })
       }

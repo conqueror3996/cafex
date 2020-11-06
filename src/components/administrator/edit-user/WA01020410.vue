@@ -148,7 +148,7 @@ export default {
 }
 
 .main-content .label-form {
-    width: 12rem;
+    width: 13rem;
     text-align: right;
     padding-right: 2rem;
     font-size: 18px;
