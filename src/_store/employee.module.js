@@ -13,10 +13,10 @@ const actions = {
                     commit('loginSuccess', info);
                     dispatch("userInfo").then(() => {
                         console.log("into user info", state.employee)
-                        if(state.employee.lastLoginDate === "") {
-                            router.push('/WA01010200')
-                            return;
-                        }
+                        // if(state.employee.lastLoginDate === "") {
+                        //     router.push('/WA01010200')
+                        //     return;
+                        // }
                         if (state.employee.rollCode !== '23') {
                             router.push('/WA01020300')
                         } else {
@@ -28,7 +28,7 @@ const actions = {
                 if (err.response) {
                     const { data } = err.response
                     commit('loginFailure', data.error);
-                    if(data.status !== 422) {
+                    if(data.error.status === 422) {
                         return;
                     }else {
                         dispatch('alert/error', data.error.code, { root: true });
