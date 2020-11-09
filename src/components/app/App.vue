@@ -172,7 +172,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .logo{display:inline-block;padding:10px 0px 0px 10px;width:10%;}
 /* .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;}
-/* .logo-small img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
+.logo-small img {vertical-align: unset;}
 .mw100{max-width:100%;}
 .header{position:relative;left:0px;right:0px;width:100%;}
 .account{position:absolute;right:0px;top:20px;width:170px;height:50px;}
@@ -187,8 +187,8 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .list_account-action li a{color:#000;}
 .list_account-action li a:hover{text-decoration:none;}
 .list_account-action li span {cursor: pointer;}
-.contact {max-width: 500px; float: left; margin-left: 3rem;}
-.contact p{font-size: 34px; font-weight: 200; font-family: "HiraginoSans-W3"; padding-top: 2.75rem; margin-bottom: 0px;}
+.contact {max-width: 500px; display: inline-block; margin-left: 3rem; vertical-align: top;}
+.contact p{font-size: 34px; font-weight: 200; font-family: "HiraginoSans-W3"; padding-top: 2rem; margin-bottom: 0px;}
 .contact a {color: #000; text-decoration: underline; font-size: 20px;}
 
 /*login*/
@@ -227,6 +227,11 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .modal-backdrop {
   opacity: 0.5 !important;
   background-color: #ffffff;
+}
+
+@media(max-width: 1200px){
+  .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:10%;}
+  .contact p{padding-top: 2.75rem;}
 }
 
 @media(max-width: 800px){
