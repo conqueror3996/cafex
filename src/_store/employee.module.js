@@ -92,6 +92,20 @@ const actions = {
             dispatch('alert/error', data.error.code, { root: true });
             commit('getUserInfoFailed', data.error);
         })
+    },
+    getEmployeeByID({commit , dispatch}, id) {
+        return employeeService.getEmployeeByID(id).then(
+            info => {
+                console.log(info.data)
+                commit("getUserByIdSuccess", info.data);
+            }
+        ).catch((err) => {
+            if (err.response) {
+                const { status, data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+                commit('getUserByIdFailed', data.error);
+            }
+        })
     }
 };
 
@@ -128,6 +142,14 @@ const mutations = {
     getAllEmployeesSuccess(state, data){
         state.status = {};
         state.all = data;
+    },
+    getUserByIdSuccess(state, employee){
+        state.status = {};
+        state.employee = employee;
+    },
+    getUserByIdFailed(state, error){
+        state.status = {};
+        state.err = error;
     },
 };
 
