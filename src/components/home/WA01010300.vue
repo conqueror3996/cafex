@@ -249,7 +249,11 @@ export default {
   },
   created() {
     this.getUserInfo().then(() => {
-      this.inputData = { employeeId: this.employees.employee.employeeId, page: 1, maximumRecordsPerPage: 40 }
+      this.inputData = { 
+          employeeId: this.employees.employee && this.employees.employee.rollCode === '23' ? this.employees.employee.employeeId : null, 
+          page: 1, 
+          maximumRecordsPerPage: 40 
+        }
       this.localEmployee = this.employees.employee
       // console.log(this.localEmployee)
       this.funcGetAllConsumer(this.inputData)
