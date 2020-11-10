@@ -7,6 +7,7 @@ export const employeeService = {
     getEmployeeUserinfo,
     changePassword,
     getAllEmployees,
+    getEmployeeByID,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -49,3 +50,6 @@ function getAllEmployees(input) {
     return auth.sendRequestParams('GET', allAPI.get_employees, input, headers)
 }
 
+function getEmployeeByID(id) {
+    return auth.sendRequest('GET', allAPI.get_employee_by_id(id), null, {})
+}

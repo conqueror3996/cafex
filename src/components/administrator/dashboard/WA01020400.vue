@@ -239,6 +239,7 @@ export default {
     // Event click button 編集 in edit modal
     okEdit() {
       this.isEdit = true;
+      this.$route.params.employeeId = this.selectedItem
     },
     // Event click button 編集 in delete modal
     okDelete() {

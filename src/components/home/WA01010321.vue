@@ -48,12 +48,16 @@ export default {
         data: {},
         backHome: Function,
     },
+    created() {
+      
+    },
     methods: {
       ...mapActions("consumers", {
             addConsumer: "addConsumer",
       }),
       handleReg() {
         this.addConsumer(this.data).then(() => {
+          this.refreshData()
           this.backHome();
         });
         
@@ -63,6 +67,19 @@ export default {
       },
       formatDateItem(input) {
         return commonFunctions.formatDate(input)
+      },
+      refreshData() {
+        if (this.data) {
+            this.data.consumerName = ''
+            this.data.consumerNameKana = ''
+            this.data.birthdate = ''
+            this.data.phoneNumber1 = ''
+            this.data.phoneNumber2 = ''
+            this.data.mailAddress = ''
+            this.data.postalCode = ''
+            this.data.address = ''
+            this.data.consumerMemo = ''
+          }
       }
     }
 };

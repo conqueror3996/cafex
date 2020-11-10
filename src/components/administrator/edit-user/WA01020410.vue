@@ -3,24 +3,24 @@
         <b-form @submit.stop.prevent="handleShowEdit()" class="form-info">
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.fullname" autofocus></b-input></div>
+                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.employeeName" autofocus></b-input></div>
             </div>
-            <div class="input-row">
+            <!-- <div class="input-row">
                 <div class="label-form"><label for="namekana">カナ :</label></div>
                 <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
-            </div>
+            </div> -->
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="user.mailaddress"></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="localEmployee.mailAddress"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">所属 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="user.branch"></b-input></div>
+                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.branchNumber"></b-input></div>
             </div>
-            <div class="input-row">
+            <!-- <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">パスワード :</label></div>
                 <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="user.password"></b-input></div>
-            </div>
+            </div> -->
             <div class="form-button">
                 <b-button class="div-comfirm-change" type="submit" variant="primary">変更</b-button>
                 
@@ -61,13 +61,14 @@ export default {
         return {
             showConfirmEdit: false,
             submited: false,
-            user:{
-                fullname: 'Khang',
-                namekana: 'KHANG',
-                mailaddress: 'manhkhang@vn-cubesystem.com',
-                branch: '1',
-                password: '123456'
-            },
+            // user:{
+            //     fullname: 'Khang',
+            //     namekana: 'KHANG',
+            //     mailaddress: 'manhkhang@vn-cubesystem.com',
+            //     branch: '1',
+            //     password: '123456'
+            // },
+            localEmployee: {}
         }
     },
     components: {
@@ -75,17 +76,26 @@ export default {
     },
     computed: {
         ...mapState({
-            alert: state => state.alert
+            alert: state => state.alert,
+            employees: (state) => state.employees,
+        })
+    },
+    created() {
+        this.getEmployeeByID(this.$route.params.employeeId).then(() => {
+            this.localEmployee = this.employees.employee
+            console.log(this.localEmployee)
         })
     },
     methods: {
         ...mapActions("alert", {
             error: "error",
         }),
+        ...mapActions("employees", {
+            getEmployeeByID: "getEmployeeByID",
+        }),
         handleShowEdit() {
             // validate
-            console.log( this.user)
-            const errorCode = validate.validateInput(userValidatePattern, this.user);
+            const errorCode = validate.validateInput(userValidatePattern, this.localEmployee);
             console.log(errorCode)
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
@@ -151,7 +161,7 @@ export default {
     width: 13rem;
     text-align: right;
     padding-right: 2rem;
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'HiraginoSan-W3';
 }
 
