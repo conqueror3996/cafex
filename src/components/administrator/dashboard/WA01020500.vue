@@ -71,10 +71,17 @@ export default {
                 const filename = files[i].name;
                 const filetype = filename.substring(filename.length - 3, filename.length);
                 if(filetype !== 'csv') {
-                    alert("unsupport file type");
+                    errorMessage = validate.getMessageErrorFromCode("S02013")
                     this.fileName = '';
-                    return;
+                    break;
                 }
+                
+            }
+
+            if (errorMessage !== '') {
+                this.error(errorMessage)
+            } else {
+                this.error('')
                 this.fileName = `${filename}    を選択`;
             }
         }

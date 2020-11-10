@@ -785,7 +785,10 @@ export const errorMsg = {
             "message": "Not Found",
             "detail": "該当する従業員情報が存在しない"
         },
-
+        "0100004220712": {
+            "message": "Unprocessable Entity",
+            "detail": "ロックアウト"
+        }
 
         
         // "0110014000102": {
@@ -844,10 +847,10 @@ export const errorMsg = {
         //     "message": "Bad Request",
         //     "detail": "Any case where a parameter is invalid, or a required parameter is missing. Please check the data you are trying to send."
         // },
-        "500": {
-            "message": "Internal Server Error",
-            "detail": "bla bla"
-        }
+        // "500": {
+        //     "message": "Internal Server Error",
+        //     "detail": "bla bla"
+        // }
     }
 }
 
