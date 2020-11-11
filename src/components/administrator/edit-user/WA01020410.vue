@@ -17,10 +17,10 @@
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">所属 :</label></div>
                 <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.branchNumber"></b-input></div>
             </div>
-            <!-- <div class="input-row">
+            <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">パスワード :</label></div>
                 <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="user.password"></b-input></div>
-            </div> -->
+            </div>
             <div class="form-button">
                 <b-button class="div-comfirm-change" type="submit" variant="primary">変更</b-button>
                 
