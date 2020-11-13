@@ -4,7 +4,7 @@ import config from 'config';
 import { router } from './router';
 
 const AUTH_TOKEN_KEY = 'authToken';
-axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
+axios.defaults.baseURL = config.apiUrl;
 // axios.defaults.baseURL = 'http://192.168.11.127:1323';
 axios.defaults.withCredentials = true;
 // Add a response interceptor

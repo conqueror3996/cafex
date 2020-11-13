@@ -2,27 +2,27 @@
   <div id="main" class="clearfix">
       <div id="left">
         <div class="box-search border-box">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="ショートコード" maxlength="4" v-model="shortCode">
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="button" 
+          <div class="input-search">
+            <input type="text" class="txt-search" placeholder="ショートコード" maxlength="4" v-model="shortCode">
+            <div class="input-group-btn">
+              <button class="btn-send_code" type="button" 
                 @click="start" :disabled="shortCode.length!=4" v-show="!isSharing">
                   送信
               </button>
-              <button class="btn btn-outline-primary" type="button" 
+              <button class="btn-send_code" type="button" 
                 @click="end" v-show="isSharing">
                   終了
               </button>
             </div>
           </div>
         </div>
-        <div class="box-info border-box scroll-bar">
-          <div style="font-size: 14px">
+        <div class="box-info border-box">
+          <div>
             <p style="margin: 0;"><span class="new-title new-title-block">お客様コード</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerName }}</span></p> 
             <p style="margin: 0;"><span class="new-title new-title-block">氏名</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
             <span for="contractor">属性情報</span> 
             <ul id="v-for-object" class="contractor-info">
-              <li v-for="(value, name) in this.localConsumer" :key="name" style="margin-top: 0.5rem;">
+              <li v-for="(value, name) in this.localConsumer" :key="name">
                 <div v-if="Object.keys(labels).includes(name)" > 
                   <span class="new-title">{{ labels[name] }}</span> : {{ value }} 
                 </div>
@@ -582,7 +582,7 @@ export default {
 </script>
 
 <style>
-    body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
+    body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden !important;width:100%;height:100vh;}
 		.clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
 		
 		.inner{width:calc(100% - 40px);margin:auto;max-width:unset !important}
@@ -591,17 +591,26 @@ export default {
 		.mw100{max-width:100%;}
 		/* #main{margin-top:30px;} */
 		.border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
-		#left{width:calc(25% - 5px);float:left;height:calc(100vh - 150px);}
-		.box-search{background:#fff;border-radius:10px;width:100%;height:calc(100% - 90%); padding: 2px 2px 0 2px;} /*10%*/
-		.box-info{background:#fff;border-radius:10px;width:100%;height:calc(100% - 60% - 20px);margin-top:20px;}
-		.box-tab{background:#fff;border-radius:10px;width:100%;height:calc(100% - 50% - 20px);margin-top:20px;}
-		#right{width:calc(75% - 15px);float:right;height:calc(100vh - 150px);background:#fff;border-radius:10px;}
+		#left{width:calc(20% - 5px);float:left;height:calc(100vh - 150px);}
+		.box-search{background:#fff;border-radius:10px;width:100%;height:65px;padding:13px;} /*10%*/
+    .input-search{position:relative;width:100%;height:65px;}
+    .txt-search{width:100%;height:35px;border:none;border-radius:25px;padding-left:15px;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D)";/*IE 8*/
+-moz-box-shadow: 1px 1px 4px #4D4D4D inset;/*FF 3.5+*/
+-webkit-box-shadow: 1px 1px 4px #4D4D4D inset;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+box-shadow: 1px 1px 4px #4D4D4D inset;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D); /*IE 5.5-7*/
+    }
+    .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
+		.box-info{background:#fff;border-radius:10px;width:100%;height:calc(100% - 60% - 20px);margin-top:20px;padding:15px;font-size:15px;line-height:27px;}
+		.box-tab{background:#fff;border-radius:10px;width:100%;height:calc(100% - 49% - 20px);margin-top:20px;}
+		#right{width:calc(80% - 15px);float:right;height:calc(100vh - 150px);background:#fff;border-radius:10px;}
     .contractor-info {
       list-style: none;
       padding: 0;
       margin: 0;
-      padding-left: 15px;
     }
+    .contractor-info li div > span{padding-left:15px;}
     .scroll-bar {
       overflow: hidden;
       overflow-y: scroll;
@@ -620,13 +629,12 @@ export default {
       outline: 1px solid slategrey;
     }
     .new-title {
-      width: 25%;
+      width: 35%;
       display: inline-block;
     }
-    .new-title.new-title-block{
-      width: calc(25% + 15px);
-    }
+    
 		@media(max-width:1366px){
+      
 			.inner{width:calc(100% - 40px)}
 			.logo{width:9%;}
 			#header{height:100px;}
@@ -634,9 +642,10 @@ export default {
 			#left,#right{height:calc(100vh - 120px);}
 			#left{width:calc(25% - 10px);}
 			#right{width:calc(75% - 10px);}
-			.box-search{height: calc(100% - 90%); padding: 5px 5px 0 5px;}
-			.box-info{height: calc(100% - 60% - 20px);margin-top:15px;}
-			.box-tab{height: calc(100% - 50% - 10px);margin-top:15px;}
+      .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
+      .input-search{position:relative;width:100%;height:55px;}
+			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:22px;font-size:14px;padding:10px 15px;}
+			.box-tab{height: calc(100% - 52% - 10px);margin-top:10px;padding:0px 15px}
 		}
  .screen-contact {
   display: flex;
