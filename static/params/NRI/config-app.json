@@ -1,4 +1,4 @@
 {
-    "defaultConnectionType": "code2",
-    "defaultEnvType": "aws-pub"
+    "defaultConnectionType": "code",
+    "defaultEnvType": "aws"
 }

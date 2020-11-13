@@ -12,6 +12,8 @@
     "copy-webpack-plugin": "^6.2.1",
     "jwt-decode": "^3.0.0",
     "moment": "^2.29.1",
+    "querystring": "^0.2.0",
+    "rxjs": "^6.6.3",
     "validator": "^13.1.17",
     "vee-validate": "^2.2.8",
     "vue": "^2.6.10",
