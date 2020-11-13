@@ -569,9 +569,9 @@ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Colo
 			#left,#right{height:calc(100vh - 120px);}
 			#left{width:calc(25% - 10px);}
 			#right{width:calc(75% - 10px);}
-			
-			.box-info{height: calc(100% - 59% - 20px);margin-top:15px;}
-			.box-tab{height: calc(100% - 50% - 10px);margin-top:15px;}
+			.box-info{line-height:23px;font-size:14px;padding:10px 15px;}
+			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;}
+			.box-tab{height: calc(100% - 51% - 10px);margin-top:10px;}
 		}
  .screen-contact {
   display: flex;
