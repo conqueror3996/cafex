@@ -175,6 +175,7 @@ export default {
         address: this.consumers.item.address,
         phoneNumber1: this.consumers.item.phoneNumber1,
         phoneNumber2: this.consumers.item.phoneNumber2,
+        consumerId: this.consumers.consumerId,
       }
       // this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
     })
