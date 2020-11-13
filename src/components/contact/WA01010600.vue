@@ -531,7 +531,7 @@ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Colo
     }
     .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
 		.box-info{background:#fff;border-radius:10px;width:100%;height:calc(100% - 60% - 20px);margin-top:20px;padding:15px;font-size:15px;line-height:27px;}
-		.box-tab{background:#fff;border-radius:10px;width:100%;height:calc(100% - 48% - 20px);margin-top:20px;}
+		.box-tab{background:#fff;border-radius:10px;width:100%;height:calc(100% - 49% - 20px);margin-top:20px;}
 		#right{width:calc(80% - 15px);float:right;height:calc(100vh - 150px);background:#fff;border-radius:10px;}
     .contractor-info {
       list-style: none;
@@ -570,9 +570,10 @@ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Colo
 			#left,#right{height:calc(100vh - 120px);}
 			#left{width:calc(25% - 10px);}
 			#right{width:calc(75% - 10px);}
-			.box-info{line-height:23px;font-size:14px;padding:10px 15px;}
-			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;}
-			.box-tab{height: calc(100% - 51% - 10px);margin-top:10px;}
+      .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
+      .input-search{position:relative;width:100%;height:55px;}
+			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
+			.box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
 		}
  .screen-contact {
   display: flex;
