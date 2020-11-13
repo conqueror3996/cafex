@@ -80,7 +80,41 @@
           </div>
         </div>
       </div>
-      <div id="right" class="border-box"></div>
+      <div id="right" class="border-box">
+        <div ref="remoteView" class="remote-view">
+            <div v-show="!isSharing">{{isSharing?'':'Not shared...'}}</div>
+            <div v-show="!isSharing" style="position: relative;">
+                <video id="previewvideo" style="background: black;width: 500px;margin-bottom: 20px;" autoplay
+                    playsinline></video>
+                <button type="button" name="camera-setting" class="single-button" title="カメラ設定"
+                     @click="loadDevice()"
+                    style="margin: 0;position: absolute;width: 50px;height: 50px;right: 0;cursor: pointer;"
+                    v-show="gService.isDisplayMediaMode">
+                    <!-- [matMenuTriggerFor]="camMenu" -->
+                    <em class="material-icons">videocam</em>
+                </button>
+                <!-- <mat-menu #camMenu="matMenu">
+                    <button mat-menu-item *ngFor="let cam of cams;let index=index;" style="cursor: pointer;"
+                        (click)="setCam(cam)">{{cam.label}}</button>
+                </mat-menu> -->
+            </div>
+            <div v-show="!isSharing"></div>
+            <!-- width: 200px;height: 150px; -->
+            <!-- display: none; -->
+            <div id="localvideo" v-show="isSharing || (!gService.isDisplayMediaMode && appView)" :class="previewStyle"
+                style="background: black;position: absolute;z-index: 3;">
+            </div>
+        </div>
+        <div class="form-frame" v-show="isShowFormContainer">
+            <div class="form-container">
+                <div class="form-container--title">
+                    代行入力フォーム
+                    <em class="material-icons" @click="isShowFormContainer=false">close</em>
+                </div>
+                <div class="form-container--body" ref="formBody"></div>
+            </div>
+        </div>
+      </div>
   </div>
   <!-- <div class="screen-contact">
     <div class="side-right">
@@ -121,9 +155,6 @@ export default {
       targetLink: '#/consumer/app',
       selectedTool: null,
       ctrlType: 'doc',
-      remoteView: {},
-      remoteVideo: {},
-      formBody: {},
       config: {
         autoanswer: true,
         username: `N27-01`,
@@ -149,7 +180,8 @@ export default {
           phoneNumber2: '電話番号２',
         },
       localConsumerId: '',
-      localConsumer: {}
+      localConsumer: {},
+      previewStyle: ''
     }
   },
   computed: {
@@ -299,6 +331,8 @@ export default {
     initDom() {
       
       this.AssistAgentSDK.setLocale('ja');
+      this.AssistAgentSDK.setRemoteView(this.$refs.remoteView);
+      this.config.autoanswer = false;
       this.AssistAgentSDK.setScreenShareActiveCallback(isActive => {
         this.isSharing = isActive;
         if (isActive) {
@@ -340,7 +374,7 @@ export default {
         let flg = false;
         if (!formElement) {
           // フォーム無しの場合はフォームコンテナの中身を消して非表示にする。
-          this.formBody.nativeElement.innerHTML = '';
+          this.$refs.formBody.innerHTML = '';
           this.isShowFormContainer = false;
         } else if (!this.beforeFormElement) {
           // 新たにフォーム追加のパターン
@@ -364,7 +398,7 @@ export default {
         console.log(`setFormCallBack:${flg}`);
         console.log(formElement);
         if (flg) {
-          this.formBody.nativeElement.appendChild(formElement);
+          this.$refs.formBody.appendChild(formElement);
         } else {
         }
         this.beforeFormElement = formElement;
@@ -456,6 +490,44 @@ export default {
         }
 
         return res;
+    },
+    consumerResize(width, height) {
+      const remoteView = this.$refs.remoteView;
+      const remoteaspect = height / width;
+      const localAspect = remoteView.parentElement.offsetHeight / remoteView.parentElement.offsetWidth;
+      if (localAspect >= remoteaspect) {
+        // ローカルの方が縦長の時
+        const scaled = remoteView.parentElement.offsetWidth * remoteaspect;
+        this.scale = scaled / height;
+        remoteView.style.height = `${scaled}px`;
+        remoteView.style.width = '100%';
+      } else {
+        // リモートの方が縦長の時
+        const scaled = remoteView.parentElement.offsetHeight * (1 / remoteaspect);
+        this.scale = scaled / width;
+        remoteView.style.height = '100%';
+        remoteView.style.width = `${scaled}px`;
+      }
+      // if (width > 480) {
+      //   this.previewStyle.top = `calc(20px * ${this.scale})`;
+      //   this.previewStyle.right = `calc(20px * ${this.scale})`;
+      //   delete this.previewStyle.bottom;
+      //   delete this.previewStyle.left;
+
+      //   if (this.g.isDisplayMediaMode) {
+      //     this.previewStyle.width = `calc( (${width}px - 40px ) * ${this.scale})`;
+      //   } else {
+      //     this.previewStyle.width = `calc(200px * ${this.scale})`;
+      //   }
+      //   delete this.previewStyle.height;
+      // } else {
+      //   this.previewStyle.top = `calc(20px * ${this.scale})`;
+      //   delete this.previewStyle.right;
+      //   delete this.previewStyle.bottom;
+      //   delete this.previewStyle.left;
+      //   delete this.previewStyle.width;
+      //   this.previewStyle.height = `calc(${height / 4}px * ${this.scale})`;
+      // }
     },
     end() {
       this.isSharing = false;
