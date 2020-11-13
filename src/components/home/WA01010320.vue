@@ -27,7 +27,7 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="email">メールアドレス :</label></div>
-                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="consumer.mailAddress" placeholder="example@piyo.com"></b-input></div>
+                <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="consumer.mailAddress" placeholder="example@mail.com"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="postal">郵便番号 :</label></div>

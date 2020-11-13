@@ -151,7 +151,7 @@ export const errorMsg = {
         },
         "0100004000704": {
             "message": "Bad Request",
-            "detail": "パスワードが間違っている"
+            "detail": "現在のパスワードが間違っています。"
         },
         "0100004000705": {
             "message": "Bad Request",
@@ -243,7 +243,7 @@ export const errorMsg = {
         },
         "0100004011002": {
             "message": "Unauthorized",
-            "detail": "セッション切れ／未ログイン"
+            "detail": "セッションがタイムアウトになりました。再度ログインをし直してください。"
         },
         "0100005001003": {
             "message": "Internal Server Error",

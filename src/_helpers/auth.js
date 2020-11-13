@@ -5,6 +5,7 @@ import { router } from './router';
 
 const AUTH_TOKEN_KEY = 'authToken';
 axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
+// axios.defaults.baseURL = 'http://192.168.11.127:1323';
 axios.defaults.withCredentials = true;
 // Add a response interceptor
 axios.interceptors.response.use((response) => {
@@ -38,9 +39,10 @@ export const auth = {
     getUserInfo,
     getTokenExpirationDate,
     // sendRequestForm,
-    sendRequestParams
+    sendRequestParams,
+    formatDateTime
 }
-
+//
 // function sendRequestForm(method, url, requestData, inputHeader = {}) {
 //     var headers =  { 
 //         ...inputHeader,
