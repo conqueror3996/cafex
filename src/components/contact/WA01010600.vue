@@ -3,35 +3,43 @@
       <div id="left">
         <div class="box-search border-box">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="ショートコード" maxlength="4" >
+            <input type="text" class="form-control" placeholder="ショートコード" maxlength="4" v-model="shortCode">
             <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="button">送信</button>
+              <button class="btn btn-outline-primary" type="button" 
+                @click="start" :disabled="shortCode.length!=4" v-show="!isSharing">
+                  送信
+              </button>
+              <button class="btn btn-outline-primary" type="button" 
+                @click="end" v-show="isSharing">
+                  終了
+              </button>
             </div>
           </div>
         </div>
         <div class="box-info border-box scroll-bar">
           <div style="font-size: 14px">
-            <p style="margin: 0;">お客様コード：<span v-if="this.localConsumer">{{ this.localConsumer.consumerName }}</span></p> 
-            <p style="margin: 0;">氏名　     ： <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
+            <p style="margin: 0;"><span class="new-title new-title-block">お客様コード</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerName }}</span></p> 
+            <p style="margin: 0;"><span class="new-title new-title-block">氏名</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
             <span for="contractor">属性情報</span> 
             <ul id="v-for-object" class="contractor-info">
               <li v-for="(value, name) in this.localConsumer" :key="name" style="margin-top: 0.5rem;">
-                <span v-if="Object.keys(labels).includes(name)" > 
-                  {{ labels[name] }} : {{ value }} 
-                </span>
+                <div v-if="Object.keys(labels).includes(name)" > 
+                  <span class="new-title">{{ labels[name] }}</span> : {{ value }} 
+                </div>
               </li>
             </ul>
           </div>
         </div>
         <div class="box-tab border-box scroll-bar">
           <div class="action-panel">
-            <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false">
+            <button class="btn btn-outline-primary small-font" @click="pushLink('share-plan1')">
+            <!-- <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false"> -->
               <span>ライフプラン<br /> シミュレーション</span>
             </button>
             <button class="btn btn-outline-primary" @click="showSimulation = false; showDescription = true; showContract = false">
               <span>商品説明</span>
             </button>
-            <button class="btn btn-outline-primary" @click="showSimulation = false; showDescription = false; showContract = true">
+            <button class="btn btn-outline-primary" @click="pushLink('share-form1')">
               <span>契約申込</span>
             </button>
           </div>
@@ -83,9 +91,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 import { auth } from '../../_helpers/'
 import moment from 'moment';
+import { mapActions, mapState } from 'vuex'
+import GServer from '../../_services/g.service'
+import agentService from '../../_services/agent.service'
+import apiService from '../../_services/api.service'
+import Assist from '../../models/AssistAgentSDK'
 
 export default {
   data() {
@@ -98,6 +110,37 @@ export default {
       docSubPageIndex: '',
       docSubPage: [],
       docPageObj: {},
+      // remote data
+      agent: {},
+      AssistAgentSDK: {},
+      CallManager: {},
+      UC: {},
+      gServiceTemp: {},
+      isSharing: false,
+      isShowFormContainer: false,
+      targetLink: '#/consumer/app',
+      selectedTool: null,
+      ctrlType: 'doc',
+      remoteView: {},
+      remoteVideo: {},
+      formBody: {},
+      config: {
+        autoanswer: true,
+        username: `N27-01`,
+        password: 'none',
+        name: 'Agent',
+        locale: 'ja',
+        type: 'create',
+        targetServer: null,
+      },
+      shortCode: '',
+      beforeFormElement: null,
+      drawStyles: [
+        { label: '赤ペン', colour: '#FF0000', width: 1, opacity: 1 },
+        { label: '蛍光ペン', colour: '#78F54E', width: 25, opacity: 0.4 }
+      ],
+      isInit: false,
+      appView: false,
       labels: {
           age: '年齢',
           birthdate: '生年月日',
@@ -113,7 +156,10 @@ export default {
     ...mapState({
       employees: (state) => state.employees,
       consumers: (state) => state.consumers.single,
-      detail: (state) => state.consumers.single
+      detail: (state) => state.consumers.single,
+      gService: (state) => {
+        return state.service.serviceConfig;
+        },
     }),
   },
   created() {
@@ -135,6 +181,47 @@ export default {
     this.getDocFile("NRI").then((res) => {
       this.docFiles = res.data.docList;
     });
+        // Get GService Info
+    this.agent = agentService
+    console.log("this.agent", this.agent)
+    this.AssistAgentSDK = Assist.AssistAgentSDK;
+    this.CallManager = Assist.CafexCallManager,
+    this.UC = Assist.UC;
+    
+    // Init GService
+    this.gServiceTemp = GServer;
+    this.gServiceTemp.urlParamMap = this.$route.query;
+    this.gServiceTemp.isMock = !(this.gServiceTemp.urlParamMap['isMock'] === undefined || this.gServiceTemp.urlParamMap['isMock'] === 'false');
+    this.gServiceTemp.orgCd = this.gServiceTemp.urlParamMap['orgCd'] || 'NRI';
+    
+    // load default config from json file
+    console.log("before loadConfig")
+    apiService.loadConfig(this.gServiceTemp.orgCd).then((res) => {
+      console.log("get success");
+      console.log("after loadConfig")
+      this.gServiceTemp.appConfig = res.data;
+      console.log("after set appCOnfig")
+      // ユーザー別デフォルト設定値をロードする。URLで指定がある場合はそちらを優先する。
+      this.gServiceTemp.connectionType = ['dial', 'code', 'code2'].indexOf(this.gServiceTemp.urlParamMap['connectionType']) === -1 ? res.data.defaultConnectionType : this.gServiceTemp.urlParamMap['connectionType'];
+      this.gServiceTemp.envType = this.gServiceTemp.urlParamMap['envType'] || res.data.defaultEnvType;
+      apiService.loadEnvConfig(this.gServiceTemp.envType).then((resEnv) => {
+        this.gServiceTemp.envConfig = resEnv.data;
+        
+        console.log("this.gServiceTemp", this.gServiceTemp)
+        this.setConfig(this.gServiceTemp)
+        this.ready(); // add js file to body
+      });
+    });
+  },
+    mounted() {
+    // console.log("window['AssistAgentSDK']", window['AssistAgentSDK'])
+    // this.AssistAgentSDK = window['AssistAgentSDK'];
+    // this.AssistAgentSDK.sdkUrl = './assets/sdk/';
+    // this.initDom();
+    // const url = new URL(this.gService.envConfig.cafexDomain || location.origin);
+    // this.config.targetServer = this.getEncodedServerAddr(url);
+    // this.config.url = this.gService.envConfig.cafexDomain || location.origin;
+    // console.log(this.config.targetServer);
   },
   methods: {
     ...mapActions("employees", {
@@ -146,6 +233,249 @@ export default {
     ...mapActions("consumers", {
       getConsumerByID: "getConsumerByID",
     }),
+    ...mapActions("service", {
+      setConfig: "setServiceConfig",
+    }),
+
+    // function add sdk js file to body
+    ready() {
+      console.log("this.gService", this.gService)
+      this.agent.init(this.gService);
+      // Load script js
+      this.loadStyle(`${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/shared/css/shared-window.css`);
+      this.loadStyle(`${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/agent/css/assist-console.css`);
+      const scriptSrcList = [
+        `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/shared/js/thirdparty/i18next-1.7.4.min.js`,
+        `./static/js/custom-adapter-new.js`,
+        `./static/js/sub.js`,
+        `${this.gService.envConfig.cafexDomain}/gateway/csdk-phone.js`,
+        `${this.gService.envConfig.cafexDomain}/gateway/csdk-aed.js`,
+        `${this.gService.envConfig.cafexDomain}/gateway/csdk-common.js`,
+        `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/shared/js/assist-aed.js`,
+        `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/shared/js/shared-windows.js`,
+        `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/agent/js/assist-console.js`,
+        `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/agent/js/assist-console-callmanager.js`,
+      ];
+      scriptSrcList.forEach(scriptUrl => {
+        this.loadScripts(scriptUrl);
+      });
+      // console.log("window", window)
+      // this.AssistAgentSDK.sdkUrl = './assets/sdk/';
+      // this.initDom();
+
+      // const url = new URL(this.gService.envConfig.cafexDomain || location.origin);
+      // this.config.targetServer = this.getEncodedServerAddr(url);
+      // this.config.url = this.gService.envConfig.cafexDomain || location.origin;
+      // console.log(this.config.targetServer);
+    },
+
+    getEncodedServerAddr(url) {
+      var protocol = url.protocol;
+        var port = url.port;
+        var hostname = url.hostname;
+        if (port === "") { if (protocol === "https:") { port = "443"; } else { port = "80"; } }
+        const uri = protocol + "//" + hostname + ":" + port;
+        console.log(`getEncodedServerAddr(${uri})`);
+        return btoa(uri);
+    },
+
+    //Load script SDK
+    loadScripts(scriptUrl) {
+      let jsElement = document.createElement('script')
+      jsElement.setAttribute('src', scriptUrl)
+      document.body.appendChild(jsElement)
+    },
+
+    //Load style SDK
+    loadStyle(styleUrl) {
+      let styleElement = document.createElement('link')
+      styleElement.rel = 'stylesheet';
+      styleElement.href = styleUrl;
+      document.body.appendChild(styleElement);
+    },
+
+    //init DOM SDK
+    initDom() {
+      
+      this.AssistAgentSDK.setLocale('ja');
+      this.AssistAgentSDK.setScreenShareActiveCallback(isActive => {
+        this.isSharing = isActive;
+        if (isActive) {
+          console.log("###Screen Share Active.###");
+          this.selectedTool = 'control-selected';
+          AssistAgentSDK.controlSelected();
+          this.pushLink('share-doc');
+        } else {
+        }
+      });
+      this.AssistAgentSDK.setConsumerLeftCallback(() => {
+        console.log("### Consumer Left ###");
+      });
+      this.AssistAgentSDK.setConsumerEndedSupportCallback(() => {
+        console.log("### Consumer Ended Support ###");
+        this.end();
+      });
+      this.AssistAgentSDK.setConnectionLostCallback(() => {
+        alert("通信が切断されました。");
+        console.log("### Connection Down ###");
+        // this.end();
+      });
+      this.AssistAgentSDK.setConnectionEstablishedCallback(() => {
+        console.log("### Connection Established ###");
+      });
+      this.AssistAgentSDK.setCallEndedCallback(() => {
+        console.log("### Call Ended ###");
+      });
+      this.AssistAgentSDK.setConsumerJoinedCallback(() => {
+        console.log("### Consumer Joined ###");
+        AssistAgentSDK.requestScreenShare();
+      });
+      this.AssistAgentSDK.setRemoteViewCallBack((width, height) => {
+        this.consumerResize(width, height);
+        console.log(`resize${width}:${height}`);
+      });
+      this.AssistAgentSDK.setFormCallBack((formElement) => {
+        this.isShowFormContainer = false;
+        let flg = false;
+        if (!formElement) {
+          // フォーム無しの場合はフォームコンテナの中身を消して非表示にする。
+          this.formBody.nativeElement.innerHTML = '';
+          this.isShowFormContainer = false;
+        } else if (!this.beforeFormElement) {
+          // 新たにフォーム追加のパターン
+          flg = true;
+        } else {
+          // フォーム更新のパターン
+          // TODO 何故か同じフォームが二回飛んできてしまう。何かのバグのような気がする。
+          if (this.beforeFormElement === formElement) {
+            console.log('Equal');
+          } else if (this.beforeFormElement.id === formElement.id) {
+            this.beforeFormElement.remove();
+            flg = true;
+            console.log('EqualId');
+          } else {
+            this.beforeFormElement.remove();
+            flg = true;
+            console.log('Else');
+            flg = true;
+          }
+        }
+        console.log(`setFormCallBack:${flg}`);
+        console.log(formElement);
+        if (flg) {
+          this.formBody.nativeElement.appendChild(formElement);
+        } else {
+        }
+        this.beforeFormElement = formElement;
+      });
+    },
+
+    // start sharing
+    start() {
+      
+      console.log("window", window)
+      
+      console.log("window['AssistAgentSDK']", window['AssistAgentSDK'])
+      this.AssistAgentSDK = window['AssistAgentSDK'];
+      this.AssistAgentSDK.sdkUrl = './assets/sdk/';
+      this.initDom();
+
+      const url = new URL(this.gService.envConfig.cafexDomain || location.origin);
+      this.config.targetServer = this.getEncodedServerAddr(url);
+      this.config.url = this.gService.envConfig.cafexDomain || location.origin;
+      console.log(this.config.targetServer);
+
+      switch (this.gService.connectionType) {
+        case 'code':
+          this.startCode(this.shortCode);
+          break;
+        case 'code2':
+          // this.startCode2(this.shortCode);
+          break;
+      }
+    },
+
+    // startCode
+    async startCode(code) {
+      const res = await this.makeSession();
+        this.agent.startWithExistingShortCode(this.shortCode).then((resCode) => {
+          this.isSharing = true;
+          this.isShowFormContainer = false;
+          const configSupport = {
+            correlationId: resCode.cid,
+            sessionToken: res.token,
+            retryIntervals: [1.0, 2.0],
+            url: this.gService.envConfig.cafexDomain || location.origin,
+            shadowCursor: true,
+          };
+          console.log(`startSupport:configSupport(${JSON.stringify(configSupport)})`);
+          this.AssistAgentSDK.startSupport(configSupport);
+        })
+    },
+
+    // make session
+    async makeSession() {
+      console.log(`assistserver/agent ${JSON.stringify(this.config)}`);
+      const res = await this.agent.makeAgentSession(this.config);
+        
+        console.log(res);
+        this.config.sessionToken = res.token;
+        if (['dial', 'code2'].indexOf(this.gService.connectionType) !== -1) {
+          this.CallManager.init(this.config);
+          this.CallManager.configureStartCall = () => {
+            this.AssistAgentSDK.requestScreenShare();
+          };
+          this.CallManager.configureEndCall = () => {
+            console.log("### End Call ###");
+            this.isSharing = false;
+            this.isShowFormContainer = false;
+          };
+            
+          // CallManager.setRemoteVideoElement(document.getElementById("remotevideo"));
+          this.CallManager.setLocalVideoElement(document.getElementById("previewvideo"));
+
+          this.UC.phone.onIncomingCall = ((newCall) => {
+            this.agent.callObj = newCall;
+            newCall.enableLocalAudio(true);
+            newCall.enableLocalVideo(true);
+            newCall.enableScreenshare(true);
+            var response = confirm("Call from: " + newCall.getRemoteAddress() + " - Would you like to answer?");
+            if (response === true) {
+              //What to do when the remote party ends the call
+              newCall.onEnded = function () {
+                alert("Call Ended");
+                this.end();
+              };
+              newCall.answer('enabled', 'disabled');
+            } else {
+              //Reject the call
+              newCall.end();
+            }
+          }).bind(this);
+        }
+
+        return res;
+    },
+    end() {
+      this.isSharing = false;
+      this.isShowFormContainer = false;
+      this.agent.agentInfo = {};
+      this.shortCode = '';
+      if (this.agent.callObj) {
+        try {
+          this.agent.callObj.enableLocalAudio(false);
+          this.agent.callObj.enableLocalVideo(false);
+          this.agent.callObj.enableScreenshare(false);
+          this.agent.callObj.end();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      this.AssistAgentSDK.endSupport();
+      document.cookie = '';
+      location.reload();
+    },
+    // change doc
     changeDoc(event) {
       this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
       this.docSubPageIndex = 0;
@@ -159,7 +489,15 @@ export default {
     initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
         console.log(this.localConsumerId)
-      },
+    },
+    pushLink(targetLink){
+      console.log("into pushlink")
+      if (this.isSharing && targetLink) {
+        this.appView = targetLink === 'share-app';
+        const obj = { type: 'link', body: { path: targetLink } };
+        this.AssistAgentSDK.pushLink(`javascript:receiver.next(${JSON.stringify(obj)})`);
+      }
+    },
     pushDocUrl() {
       if(this.docSubPageIndex != '') {
 
@@ -171,7 +509,7 @@ export default {
 </script>
 
 <style>
-body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden !important;width:100%;height:100vh;}
+body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 		.clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
 		
 		.inner{width:calc(100% - 40px);margin:auto;}
@@ -207,6 +545,13 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden !important;width:
     .scroll-bar::-webkit-scrollbar-thumb {
       background-color: darkgrey;
       outline: 1px solid slategrey;
+    }
+    .new-title {
+      width: 25%;
+      display: inline-block;
+    }
+    .new-title.new-title-block{
+      width: calc(25% + 15px);
     }
 		@media(max-width:1366px){
 			.inner{width:calc(100% - 40px)}
