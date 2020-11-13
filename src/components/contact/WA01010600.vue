@@ -54,7 +54,7 @@
               <label>ファイル</label>
               <div class="input-group">
                 <select class="select-page" id="select-page" name="doc-page" v-model="docPageIndex" @change="changeDoc">
-                      <option v-bind:key="gIdx" :value="gIdx" v-for="(obj, gIdx) in docFiles">{{obj.groupName}}
+                      <option v-bind:key="file.fileId" :value="file.fileId" v-for="file in files">{{file.fileName}}
                       </option>
                   </select>
               </div>
@@ -181,7 +181,8 @@ export default {
         },
       localConsumerId: '',
       localConsumer: {},
-      previewStyle: ''
+      previewStyle: '',
+      files: []
     }
   },
   computed: {
@@ -195,25 +196,29 @@ export default {
     }),
   },
   created() {
-    this.getUserInfo()
-    this.initInfo()
-    this.getConsumerByID(this.localConsumerId).then(() => {
-      // this.localConsumer = this.consumers
-      this.localConsumer = {
-        consumerName: this.consumers.item.consumerName,
-        consumerNameKana: this.consumers.item.consumerNameKana,
-        birthdate: auth.formatDateTime(this.consumers.item.birthdate, 'yyyy/MM/DD'),
-        age: this.consumers.item.age,
-        address: this.consumers.item.address,
-        phoneNumber1: this.consumers.item.phoneNumber1,
-        phoneNumber2: this.consumers.item.phoneNumber2,
-        consumerId: this.consumers.consumerId,
-      }
-      // this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
+    this.getUserInfo().then(() => {
+      this.initInfo()
+      this.getConsumerByID(this.localConsumerId).then(() => {
+        // this.localConsumer = this.consumers
+        this.localConsumer = {
+          consumerName: this.consumers.item.consumerName,
+          consumerNameKana: this.consumers.item.consumerNameKana,
+          birthdate: auth.formatDateTime(this.consumers.item.birthdate, 'yyyy/MM/DD'),
+          age: this.consumers.item.age,
+          address: this.consumers.item.address,
+          phoneNumber1: this.consumers.item.phoneNumber1,
+          phoneNumber2: this.consumers.item.phoneNumber2,
+          consumerId: this.consumers.item.consumerId,
+        }
+        // this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
+        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.localConsumer.consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+          this.files = res.data.file;
+        });
+      })
     })
-    this.getDocFile("NRI").then((res) => {
-      this.docFiles = res.data.docList;
-    });
+    // this.getDocFile("NRI").then((res) => {
+    //   this.docFiles = res.data.docList;
+    // });
         // Get GService Info
     this.agent = agentService
     console.log("this.agent", this.agent)
@@ -229,6 +234,7 @@ export default {
     
     // load default config from json file
     console.log("before loadConfig")
+    console.log("window.location", window.location)
     apiService.loadConfig(this.gServiceTemp.orgCd).then((res) => {
       console.log("get success");
       console.log("after loadConfig")
@@ -261,7 +267,8 @@ export default {
       getUserInfo: "userInfo"
     }),
     ...mapActions("files", {
-      getDocFile: "getDocFile",
+      // getDocFile: "getDocFile",
+      getAllFile: "getAllFile",
     }),
     ...mapActions("consumers", {
       getConsumerByID: "getConsumerByID",
@@ -280,7 +287,6 @@ export default {
       const scriptSrcList = [
         `${this.gService.envConfig.cafexDomain}/assistserver/sdk/web/shared/js/thirdparty/i18next-1.7.4.min.js`,
         `./static/js/custom-adapter-new.js`,
-        `./static/js/sub.js`,
         `${this.gService.envConfig.cafexDomain}/gateway/csdk-phone.js`,
         `${this.gService.envConfig.cafexDomain}/gateway/csdk-aed.js`,
         `${this.gService.envConfig.cafexDomain}/gateway/csdk-common.js`,
@@ -550,9 +556,9 @@ export default {
     },
     // change doc
     changeDoc(event) {
-      this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
-      this.docSubPageIndex = 0;
-      this.changeSubPage();
+      // this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
+      // this.docSubPageIndex = 0;
+      // this.changeSubPage();
     },
     changeSubPage(event) {
       if(this.docSubPageIndex !== '') {

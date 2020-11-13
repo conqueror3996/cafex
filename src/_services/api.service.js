@@ -9,14 +9,14 @@ export default {
 };
 
 function loadConfig(orgCd) {
-    console.log("into loadConfig");
-    return axios.get(`static/params/${orgCd}/config-app.json`, { baseURL: config.apiInternalUrl});
+    console.log("into loadConfig", window.location.origin);
+    return axios.get(`static/params/${orgCd}/config-app.json`, { baseURL: window.location.origin});
 }
 
 function loadEnvConfig(envType) {
-    return axios.get(`static/config/env/config-${envType}.json`, { baseURL: config.apiInternalUrl});
+    return axios.get(`static/config/env/config-${envType}.json`, { baseURL: window.location.origin});
 }
 
 function  loadAgentConfig(orgCd) {
-  return axios.get(`static/params/${orgCd}/config-agent.json`, { baseURL: config.apiInternalUrl});
+  return axios.get(`static/params/${orgCd}/config-agent.json`, { baseURL: window.location.origin});
 }
