@@ -7,6 +7,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.png', '.jpg']
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
