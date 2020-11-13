@@ -22,7 +22,7 @@
             <p style="margin: 0;"><span class="new-title new-title-block">氏名</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
             <span for="contractor">属性情報</span> 
             <ul id="v-for-object" class="contractor-info">
-              <li v-for="(value, name) in this.localConsumer" :key="name" style="margin-top: 0.5rem;">
+              <li v-for="(value, name) in this.localConsumer" :key="name">
                 <div v-if="Object.keys(labels).includes(name)" > 
                   <span class="new-title">{{ labels[name] }}</span> : {{ value }} 
                 </div>
@@ -572,8 +572,8 @@ filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Colo
 			#right{width:calc(75% - 10px);}
       .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
       .input-search{position:relative;width:100%;height:55px;}
-			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
-			.box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
+			.box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:22px;font-size:14px;padding:10px 15px;}
+			.box-tab{height: calc(100% - 52% - 10px);margin-top:10px;padding:0px 15px}
 		}
  .screen-contact {
   display: flex;
