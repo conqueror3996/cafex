@@ -510,10 +510,10 @@ export default {
 </script>
 
 <style>
-body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
+    body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 		.clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
 		
-		.inner{width:calc(100% - 40px);margin:auto;}
+		.inner{width:calc(100% - 40px);margin:auto;max-width:unset !important}
 		.logo{display:inline-block;padding:10px 0px 0px 10px;width:25%;float:left;}
 		#header{width:100%;height:120px;}
 		.mw100{max-width:100%;}
