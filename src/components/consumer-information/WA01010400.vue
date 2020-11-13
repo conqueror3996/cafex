@@ -214,7 +214,7 @@ export default {
 }
 
 .contractor-info {
-    list-style-type: none;
+    list-style: none;
 }
 .information {
   width: 100%;

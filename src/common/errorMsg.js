@@ -151,7 +151,7 @@ export const errorMsg = {
         },
         "0100004000704": {
             "message": "Bad Request",
-            "detail": "パスワードが間違っている"
+            "detail": "現在のパスワードが間違っています。"
         },
         "0100004000705": {
             "message": "Bad Request",
@@ -243,7 +243,7 @@ export const errorMsg = {
         },
         "0100004011002": {
             "message": "Unauthorized",
-            "detail": "セッション切れ／未ログイン"
+            "detail": "セッションがタイムアウトになりました。再度ログインをし直してください。"
         },
         "0100005001003": {
             "message": "Internal Server Error",
@@ -785,7 +785,10 @@ export const errorMsg = {
             "message": "Not Found",
             "detail": "該当する従業員情報が存在しない"
         },
-
+        "0100004220712": {
+            "message": "Unprocessable Entity",
+            "detail": "ロックアウト"
+        }
 
         
         // "0110014000102": {
@@ -844,10 +847,10 @@ export const errorMsg = {
         //     "message": "Bad Request",
         //     "detail": "Any case where a parameter is invalid, or a required parameter is missing. Please check the data you are trying to send."
         // },
-        "500": {
-            "message": "Internal Server Error",
-            "detail": "bla bla"
-        }
+        // "500": {
+        //     "message": "Internal Server Error",
+        //     "detail": "bla bla"
+        // }
     }
 }
 
