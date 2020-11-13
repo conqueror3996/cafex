@@ -177,6 +177,7 @@ import fileJson from '../../../static/file.json'
 import moment from 'moment';
 import { Consumer } from '../../models';
 import errorMessage from '../../validate/errormessage'
+import { auth } from '../../_helpers/'
 
 export default {
   props: {
@@ -195,7 +196,7 @@ export default {
       cols: [
         { key: "checked", label: "", class: "col-check" }, // column only display both admin and not
         { key: "fullname", label: "氏名" },
-        { key: "age", label: "年齢", isAdminCols: false },
+        { key: "age", label: "年齢", isAdminCols: true },
         { key: "birthdate", label: "生年月日（年齢）", isAdminCols: true },
         { key: "phone1", label: "電話番号1" },
         { key: "kana", label: "氏名（カナ）", isAdminCols: true },
@@ -277,6 +278,7 @@ export default {
     funcGetAllConsumer(input) {
       this.getAllConsumer(input).then(() => {
         this.localConsumers = this.consumers ? this.formatConsumerData(this.consumers) : []
+        console.log(this.localConsumers)
       });
     },
     deleteItem(consumerId) {
@@ -323,7 +325,7 @@ export default {
       return arrInput.map((e) => {
         return {
           ...e,
-          birthdate: moment(e.birthdate).format('yyyy/MM/DD')
+          birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') 
         }
       })
     },

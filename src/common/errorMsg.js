@@ -151,7 +151,7 @@ export const errorMsg = {
         },
         "0100004000704": {
             "message": "Bad Request",
-            "detail": "パスワードが間違っている"
+            "detail": "現在のパスワードが間違っています。"
         },
         "0100004000705": {
             "message": "Bad Request",
