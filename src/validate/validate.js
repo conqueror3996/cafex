@@ -48,7 +48,12 @@ function validateInput(validatePattern, validateObject) {
           if (!checkType(validateObject[elementName], item.validations[rule].value))
             errorElementString.push(item.validations[rule].message);
           break;
-
+        
+        case "type2":
+            if (!checkType(validateObject[elementName], item.validations[rule].value))
+              errorElementString.push(item.validations[rule].message);
+            break;
+        
         case "maxlength":
           if (
             !validator.isLength(validateObject[elementName], {
@@ -125,9 +130,10 @@ function checkType(value, type) {
         return false;
       return validator.isNumeric(value);
 
+    case "EmailHalfWidth":
+      return !validator.isFullWidth(value.replace("@",''));
+    
     case "Email":
-      if (validator.isFullWidth(value.replace("@",'')))
-        return false
       return validator.isEmail(value);
 
     case "Password":

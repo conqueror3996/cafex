@@ -4,8 +4,8 @@ import config from 'config';
 import { router } from './router';
 
 const AUTH_TOKEN_KEY = 'authToken';
-axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
-// axios.defaults.baseURL = 'http://192.168.11.127:1323';
+// axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
+axios.defaults.baseURL = 'http://192.168.11.127:1323';
 axios.defaults.withCredentials = true;
 // Add a response interceptor
 axios.interceptors.response.use((response) => {
@@ -40,7 +40,8 @@ export const auth = {
     getTokenExpirationDate,
     // sendRequestForm,
     sendRequestParams,
-    formatDateTime
+    formatDateTime,
+    formatPhoneNumber
 }
 //
 // function sendRequestForm(method, url, requestData, inputHeader = {}) {
@@ -161,4 +162,9 @@ function formatDateTime(value, strFormat = 'YYYYMMDDhhmmss'){
     if(value){
         return moment(String(value)).format(strFormat);
     }
+}
+
+function formatPhoneNumber(value){
+    var x = value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,3})/);
+    return !x[2] ? x[1] : x[1] + '-' + x[2] + '-' + x[3];
 }
