@@ -19,15 +19,15 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">パスワード :</label></div>
-                <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="user.password"></b-input></div>
+                <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="localEmployee.loginPassword"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button class="div-comfirm-change" type="submit" variant="primary">変更</b-button>
                 
-                <b-button class="div-cancel-change" variant="danger" @click="handleCancle()">キャンセル</b-button>
-            </div>
+                <b-button class="div-cancel-change" variant="danger" @click="handleCancel()">キャンセル</b-button>
+            </div>Home
         </b-form>
-        <WA01020411 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event"></WA01020411>
+        <WA01020411 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localEmployee="localEmployee" :backHome="handleCancel"></WA01020411>
         <!-- <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">
             <div>           
                 <div class="error" v-if="!$v.user.fullname.required ">氏名は必須項目です。</div>
@@ -68,7 +68,8 @@ export default {
             //     branch: '1',
             //     password: '123456'
             // },
-            localEmployee: {}
+            localEmployee: {},
+            loginPassword: '',
         }
     },
     components: {
@@ -83,8 +84,9 @@ export default {
     created() {
         this.getEmployeeByID(this.$route.params.employeeId).then(() => {
             this.localEmployee = this.employees.employee
+            this.$set(this.localEmployee, 'loginPassword', this.loginPassword)
             console.log(this.localEmployee)
-        })
+        })        
     },
     methods: {
         ...mapActions("alert", {
@@ -111,9 +113,10 @@ export default {
             // show modal confirm
             this.showConfirmEdit = true;
         },
-        handleCancle() {
+        handleCancel() {
+            this.error(''); // reset error message
             this.$emit("changeEdit", false)
-        }
+        },
     }
 }
 </script>

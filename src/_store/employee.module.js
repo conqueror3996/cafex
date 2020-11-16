@@ -119,7 +119,20 @@ const actions = {
                 dispatch('alert/error', data.error.code, { root: true });
             }
         })
-    }
+    },
+
+    updateEmployee({commit, dispatch}, input) {
+        return employeeService.updateEmployee(input.params, input.body).then((info) => {
+            console.log(info)
+            return info
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+            
+        })
+    },
 
 };
 

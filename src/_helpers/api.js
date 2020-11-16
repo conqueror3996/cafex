@@ -7,6 +7,7 @@ export const allAPI = {
     get_employees: `/v1/employees`, // Ap010501_従業員一覧取得API
     get_employee_by_id: (employeeId) => `/v1/employees/${employeeId}`,
     register_employees: `v1/employees/csv`, // ... 
+    update_employee_by_id: (employeeId) => `/v1/employees/${employeeId}`, // ...
 
     // Consumers
     get_consumers: `v1/consumers`, // Ap010301_顧客一覧取得API

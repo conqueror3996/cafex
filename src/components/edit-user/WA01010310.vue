@@ -83,17 +83,6 @@ export default {
         return {
             showConfirmEdit: false,
             submited: false,
-            // user:{
-            //     fullname: 'Khang',
-            //     namekana: '',
-            //     age: '24',
-            //     birthday: '1996/03/09',
-            //     postalcode: '3424',
-            //     address: '32/2',
-            //     phone1: '19001560',
-            //     phone2: '19001560',
-            //     memo: 'manhkhang@vn-cubesystem.com'
-            // },
             localConsumer: new Consumer
         }
     },

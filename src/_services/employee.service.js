@@ -9,6 +9,7 @@ export const employeeService = {
     getAllEmployees,
     getEmployeeByID,
     registerEmployees,
+    updateEmployee,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -64,4 +65,10 @@ function registerEmployees(inputFile) {
     let headers = { 'Content-Type': 'multipart/form-data' }
 
     return auth.sendRequest('POST' , allAPI.register_employees, form, headers)
+}
+
+function updateEmployee(id, input) {
+    let headers = { 'Content-Type': 'application/json' }
+
+    return auth.sendRequest('PATCH', allAPI.update_employee_by_id(id), input, headers)
 }
