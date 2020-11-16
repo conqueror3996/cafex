@@ -134,7 +134,7 @@ function checkType(value, type) {
       return !validator.isFullWidth(value.replace("@",''));
     
     case "Email":
-      return validator.isEmail(value);
+      return common.isEmail(value);
 
     case "Password":
       return common.isPassword(value);

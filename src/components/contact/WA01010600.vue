@@ -53,15 +53,15 @@
             <div class="description" v-if="showDescription">
               <label>ファイル</label>
               <div class="input-group">
-                <select class="select-page" id="select-page" name="doc-page" v-model="docFileIndex" @change="changeDoc">
-                      <option v-bind:key="file.fileId" :value="file.fileId" v-for="file in files">{{file.fileName}}
+                <select class="select-page" id="select-page" name="doc-page" v-model="docFileObj" @change="changeDoc">
+                      <option v-bind:key="file.fileId" :value="{fileId: file.fileId, totalPage: file.fileTotalPages}" v-for="file in files">{{file.fileName}}
                       </option>
                   </select>
               </div>
               <label>ページ</label>
               <div class="input-group">
                 <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
-                  <option v-bind:key="obj.id" :value="obj.id" v-for="obj in docSubPage">{{obj.name}}
+                  <option v-bind:key="idx" :value="obj" v-for="(obj, idx) in docSubPage">{{obj}}
                   </option>
                 </select>
               </div>
@@ -139,10 +139,12 @@ export default {
       showSimulation: true,
       showDescription: false,
       showContract: false,
-      docFiles: [],
-      docFileIndex: '',
+      // docFiles: [],
+      files: [],
+      //docFileIndex: '',
       docSubPageIndex: '',
       docSubPage: [],
+      docFileObj: {},
       docPageObj: {},
       // remote data
       agent: {},
@@ -181,8 +183,7 @@ export default {
         },
       localConsumerId: '',
       localConsumer: {},
-      previewStyle: '',
-      files: []
+      previewStyle: ''
     }
   },
   computed: {
@@ -413,10 +414,6 @@ export default {
 
     // start sharing
     start() {
-      
-      console.log("window", window)
-      
-      console.log("window['AssistAgentSDK']", window['AssistAgentSDK'])
       this.AssistAgentSDK = window['AssistAgentSDK'];
       this.AssistAgentSDK.sdkUrl = './assets/sdk/';
       this.initDom();
@@ -424,7 +421,6 @@ export default {
       const url = new URL(this.gService.envConfig.cafexDomain || location.origin);
       this.config.targetServer = this.getEncodedServerAddr(url);
       this.config.url = this.gService.envConfig.cafexDomain || location.origin;
-      console.log(this.config.targetServer);
 
       switch (this.gService.connectionType) {
         case 'code':
@@ -440,7 +436,7 @@ export default {
     async startCode(code) {
       const res = await this.makeSession();
         this.agent.startWithExistingShortCode(this.shortCode).then((resCode) => {
-          this.isSharing = true;
+          this.isSharing = false;
           this.isShowFormContainer = false;
           const configSupport = {
             correlationId: resCode.cid,
@@ -449,7 +445,6 @@ export default {
             url: this.gService.envConfig.cafexDomain || location.origin,
             shadowCursor: true,
           };
-          console.log(`startSupport:configSupport(${JSON.stringify(configSupport)})`);
           this.AssistAgentSDK.startSupport(configSupport);
         })
     },
@@ -556,11 +551,13 @@ export default {
     },
     // change doc
     changeDoc(event) {
-      this.docSubPage = [];
-      const fileSelected =  this.files.filter((item) => item.fileId === this.docFileIndex)[0];
-      for (let index = 1; index <= fileSelected.fileTotalPages; index++) {
-        this.docSubPage.push({ id: `${fileSelected.fileId}-${index}`,  name: `P${index}`});
+      this.docSubPage.length = 0
+      let index = 0;
+      for (let i = 1; i <= this.docFileObj.totalPage; i++) {
+        this.docSubPage[index] = "Page_" + i;
+        index ++;
       }
+      this.docSubPageIndex = this.docSubPage[0];
       // this.docSubPage = this.docFiles[parseInt(this.docFileIndex)].list;
       // this.docSubPageIndex = 0;
       // this.changeSubPage();

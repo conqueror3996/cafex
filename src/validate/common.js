@@ -18,6 +18,10 @@ function isDate(value) {
     return reg.test(moment(value).format('yyyy/MM/DD'));
 }
 
+function isEmail(value) {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+}
+
 function isPassword(value) {
     let count = 0;
     if(value.length >= 8 && value.length <= 20) {
@@ -38,5 +42,6 @@ export default {
     isKanaFull,
     isKanaHalf,
     isDate,
-    isPassword
+    isPassword,
+    isEmail
 }
