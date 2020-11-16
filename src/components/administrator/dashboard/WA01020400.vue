@@ -178,7 +178,7 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
-        { key: "employeeName", label: "氏名" },
+        { key: "employeeName", label: "氏名", class: "col-name" },
         { key: "branchName", label: "所属" },
         { key: "mailAddress", label: "メールアドレス" },
         { key: "rollName", label: "ロール" },
@@ -263,6 +263,9 @@ export default {
 </script>
 
 <style>
+.col-name {
+  width: 20rem;
+}
 
 .inner .alert {
     white-space: pre-line;
