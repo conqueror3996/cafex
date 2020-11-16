@@ -7,19 +7,21 @@
             <p>・CSVデータから営業員データを登録できます。</p>
             <p>・一度にアップロードできるファイルの上限は100MBです。</p>
         </div>
-        <div class="div-button-confirm">
-            <div class="button-confirm">
-                <label variant="primary" class="btn btn-primary btn-upload" for="file">
-                    <p>ファイル選択</p>
-                </label>
-                <input type="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
-            <!-- <b-button class="button-custom" variant="primary" @click="ok()">ファイル選択</b-button> -->
-            <b-button style="margin-top: 30px;" class="button-custom" variant="primary" @click="ok()" :disabled="fileName === ''">登録</b-button>
+        <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
+            <div class="div-button-confirm">
+                <div class="button-confirm">
+                    <label variant="primary" class="btn btn-primary btn-upload" for="file">
+                        <p>ファイル選択</p>
+                    </label>
+                    <input type="file" name="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
+                <b-button type="submit" style="margin-top: 30px;" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
+                </div>
+                <div class="info-file" v-if="fileName !== ''">
+                    <label>{{fileName}}</label>
+                </div>
             </div>
-            <div class="info-file" v-if="fileName !== ''">
-                <label>{{fileName}}</label>
-            </div>
-        </div>
+        </form>
+        
     </div>
 </template>
 
@@ -32,11 +34,14 @@ export default {
     data() {
         return {
             showModal: false,
-            user: {},
+            files: {},
             fileName: '',
         }
     },
     computed: {
+        ...mapState({
+            employees: state => state.employees
+        }),
         ...mapState({
             alert: state => state.alert
         })
@@ -44,6 +49,9 @@ export default {
     methods: {
         ...mapActions("alert", {
             error: "error",
+        }),
+        ...mapActions("employees", {
+            registerEmployeesCsv: "registerEmployees"
         }),
         handleShow() {
             // validate
@@ -64,16 +72,19 @@ export default {
             this.showModal = true;
         },
         uploadFile(event) {
-            const files = event.target.files;
+            this.files = event.target.files;
+            console.log(this.files)
             let errorMessage = '';
-            for (var i = 0; i < files.length; i++)
+            for (var i = 0; i < this.files.length; i++)
             {
-                const filename = files[i].name;
+                const filename = this.files[i].name;
                 const filetype = filename.substring(filename.length - 3, filename.length);
                 if(filetype !== 'csv') {
                     errorMessage = validate.getMessageErrorFromCode("S02013")
                     this.fileName = '';
                     break;
+                } else {
+                    this.fileName = filename;
                 }
                 
             }
@@ -82,8 +93,24 @@ export default {
                 this.error(errorMessage)
             } else {
                 this.error('')
-                this.fileName = `${filename}    を選択`;
+                this.fileName = `${this.fileName}    を選択`;
             }
+        },
+
+        handleSubmit (e) {
+            this.registerEmployeesCsv(this.files[0]).then((res) => {
+                alert("success")
+            })
+            // this.submitted = true;
+            // const { username, password } = this;
+            // if (username && password) {
+            //     await this.login({ username, password })
+            // } else {
+            //     //this.employee.err = 'メールアドレス、もしくはパスワードが間違'
+            //     return
+            // }
+
+            // this.registerEmployeesCsv(file)
         }
     }
 }

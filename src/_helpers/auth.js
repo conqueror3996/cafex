@@ -4,8 +4,8 @@ import config from 'config';
 import { router } from './router';
 
 const AUTH_TOKEN_KEY = 'authToken';
-// axios.defaults.baseURL = 'https://api.cafex.kinsol-bit.com';
-axios.defaults.baseURL = 'http://192.168.11.127:1323';
+axios.defaults.baseURL = config.apiUrl;
+// axios.defaults.baseURL = 'http://192.168.11.127:1323';
 axios.defaults.withCredentials = true;
 // Add a response interceptor
 axios.interceptors.response.use((response) => {
@@ -38,31 +38,31 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
-    // sendRequestForm,
+    sendRequestForm,
     sendRequestParams,
     formatDateTime,
     formatPhoneNumber
 }
-//
-// function sendRequestForm(method, url, requestData, inputHeader = {}) {
-//     var headers =  { 
-//         ...inputHeader,
-//         'User-Agent' : navigator.userAgent,
-//         'X-API-Key' : config.API_KEY,
-//         'X-CX-Date' : formatDateTime(new Date()),
-//         'X-CX-Channel' : '0',
-//         'X-CX-Client-Version' : config.VERSION,
-//         'X-CX-Interaction-Id' : formatDateTime(new Date()),
-//     };
-//     const requestOptions = {
-//         method,
-//         url,
-//         data: requestData,
-//         headers
-//     };
+
+function sendRequestForm(method, url, requestData, inputHeader = {}) {
+    var headers =  { 
+        ...inputHeader,
+        'User-Agent' : navigator.userAgent,
+        'X-API-Key' : config.API_KEY,
+        'X-CX-Date' : formatDateTime(new Date()),
+        'X-CX-Channel' : '0',
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date()),
+    };
+    const requestOptions = {
+        method,
+        url,
+        data: requestData,
+        headers
+    };
     
-//     return axios.request(requestOptions)
-// }
+    return axios.post(url, requestData, { headers })
+}
 
 function sendRequest(method, url, requestData, inputHeader = {}) {
     var headers =  { 

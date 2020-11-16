@@ -8,6 +8,7 @@ export const employeeService = {
     changePassword,
     getAllEmployees,
     getEmployeeByID,
+    registerEmployees,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -52,4 +53,15 @@ function getAllEmployees(input) {
 
 function getEmployeeByID(id) {
     return auth.sendRequest('GET', allAPI.get_employee_by_id(id), null, {})
+}
+
+function registerEmployees(inputFile) {
+    console.log(inputFile)
+    const form = new FormData();
+
+    form.append('file', inputFile);
+
+    let headers = { 'Content-Type': 'multipart/form-data' }
+
+    return auth.sendRequest('POST' , allAPI.register_employees, form, headers)
 }
