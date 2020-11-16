@@ -53,7 +53,7 @@
             <div class="description" v-if="showDescription">
               <label>ファイル</label>
               <div class="input-group">
-                <select class="select-page" id="select-page" name="doc-page" v-model="docPageIndex" @change="changeDoc">
+                <select class="select-page" id="select-page" name="doc-page" v-model="docFileIndex" @change="changeDoc">
                       <option v-bind:key="file.fileId" :value="file.fileId" v-for="file in files">{{file.fileName}}
                       </option>
                   </select>
@@ -61,7 +61,7 @@
               <label>ページ</label>
               <div class="input-group">
                 <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
-                  <option v-bind:key="gIdx" :value="gIdx" v-for="(obj, gIdx) in docSubPage">{{obj.label}}
+                  <option v-bind:key="obj.id" :value="obj.id" v-for="obj in docSubPage">{{obj.name}}
                   </option>
                 </select>
               </div>
@@ -140,7 +140,7 @@ export default {
       showDescription: false,
       showContract: false,
       docFiles: [],
-      docPageIndex: '',
+      docFileIndex: '',
       docSubPageIndex: '',
       docSubPage: [],
       docPageObj: {},
@@ -556,14 +556,19 @@ export default {
     },
     // change doc
     changeDoc(event) {
-      // this.docSubPage = this.docFiles[parseInt(this.docPageIndex)].list;
+      this.docSubPage = [];
+      const fileSelected =  this.files.filter((item) => item.fileId === this.docFileIndex)[0];
+      for (let index = 1; index <= fileSelected.fileTotalPages; index++) {
+        this.docSubPage.push({ id: `${fileSelected.fileId}-${index}`,  name: `P${index}`});
+      }
+      // this.docSubPage = this.docFiles[parseInt(this.docFileIndex)].list;
       // this.docSubPageIndex = 0;
       // this.changeSubPage();
     },
     changeSubPage(event) {
-      if(this.docSubPageIndex !== '') {
-        this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
-      }
+      // if(this.docSubPageIndex !== '') {
+      //   this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
+      // }
     },
     initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
