@@ -312,7 +312,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localConsumers = this.consumers.filter((item) => item.consumerName.includes(this.searchString) || item.consumerNameKana.includes(this.searchString) )
+      this.localConsumers = this.consumers.filter(item => { return item.consumerName.toLowerCase().includes(this.searchString.toLowerCase().trim()) || item.consumerNameKana.toLowerCase().includes(this.searchString.toLowerCase().trim()) })
     },
     changeTab(tab) {
       // Set error message empty when change tab
@@ -419,8 +419,9 @@ export default {
 }
 
 .content-search {
+  /* margin-top: 100px; */
   margin: auto;
-  width: 495px;
+  width: 495px; 
 }
 
 .content-search .input-group-append {

@@ -25,7 +25,7 @@
                 <b-button class="div-comfirm-change" type="submit" variant="primary">変更</b-button>
                 
                 <b-button class="div-cancel-change" variant="danger" @click="handleCancel()">キャンセル</b-button>
-            </div>Home
+            </div>
         </b-form>
         <WA01020411 v-if="showConfirmEdit" :showConfirmEdit="showConfirmEdit" @changeModalConfirm="showConfirmEdit = $event" :localEmployee="localEmployee" :backHome="handleCancel"></WA01020411>
         <!-- <b-modal id="modal-error" hide-header centered :visible="$v.$invalid && submited">

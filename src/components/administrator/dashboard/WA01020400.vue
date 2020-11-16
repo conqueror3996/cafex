@@ -247,7 +247,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localEmployees = this.employees.all.filter((item) => item.employeeName.includes(this.searchString))
+      this.localEmployees = this.employees.all.filter(item => { return item.employeeName.toLowerCase().includes(this.searchString.toLowerCase().trim())})
     },
     formatConsumerData(arrInput) {
       return arrInput.map((e) => {
