@@ -147,7 +147,7 @@ export const errorMsg = {
         },
         "0100004000703": {
             "message": "Bad Request",
-            "detail": "ユーザーのステータスが無効"
+            "detail": "複数回ログインに失敗したため、アカウントがロックされました。管理者にお問い合わせください。"
         },
         "0100004000704": {
             "message": "Bad Request",
@@ -287,11 +287,11 @@ export const errorMsg = {
         },
         "0101014000107": {
             "message": "Bad Request",
-            "detail": "usernameが間違っている"
+            "detail": "メールアドレスもしくはパスワードが間違っています。"
         },
         "0101014000108": {
             "message": "Bad Request",
-            "detail": "passwordが間違っている"
+            "detail": "メールアドレスもしくはパスワードが間違っています。"
         },
         "0101014000109": {
             "message": "Bad Request",
@@ -347,7 +347,7 @@ export const errorMsg = {
         },
         "0102014000106": {
             "message": "Bad Request",
-            "detail": "currentPasswordが間違っている"
+            "detail": "現在のパスワードが間違っています。"
         },
         "0102014000107": {
             "message": "Bad Request",
@@ -593,6 +593,10 @@ export const errorMsg = {
             "message": "Bad Request",
             "detail": "consumerMemoが間違っている"
         },
+        "0103054000116": {
+            "message": "Bad Request",
+            "detail": "consumerIdが間違っている"
+        },
         "0103054040201": {
             "message": "Not Found",
             "detail": "該当する顧客情報が存在しない"
@@ -632,6 +636,10 @@ export const errorMsg = {
         "0104014000109": {
             "message": "Bad Request",
             "detail": "maximumRecordsPerPageが間違っている"
+        },
+        "0104014000110": {
+            "message": "Bad Request",
+            "detail": "employeeIdが間違っている"
         },
         "0104014040201": {
             "message": "Not Found",
@@ -788,9 +796,20 @@ export const errorMsg = {
         "0100004220712": {
             "message": "Unprocessable Entity",
             "detail": "ロックアウト"
-        }
+        },
+        "0100004220710": {
+            "message": "Unprocessable Entity",
+            "detail": "複数回ログインに失敗したため、アカウントがロックされました。10分後に再試行してください。"
+        },
+        "0100004220709": {
+            "message": "Unprocessable Entity",
+            "detail": "アカウントロック中"
+        },
+        "0100014040909": {
+            "message": "Not Found",
+            "detail": "リソースは存在しません"
+        },
 
-        
         // "0110014000102": {
         //     "message": "Bad Request",
         //     "detail": "Any case where a parameter is invalid, or a required parameter is missing. Please check the data you are trying to send."

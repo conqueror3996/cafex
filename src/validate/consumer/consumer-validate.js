@@ -31,7 +31,8 @@ export default  {
   mailAddress: {
     validations: {
       required: { value: false },
-      type: { value: "Email", message: "S02009" },
+      type: { value: "EmailHalfWidth", message: "S02009" },
+      type2: { value: "Email", message: "S02015" }
     },
   },
   postalCode: {

@@ -38,30 +38,31 @@ export const auth = {
     isLoggedIn,
     getUserInfo,
     getTokenExpirationDate,
-    // sendRequestForm,
+    sendRequestForm,
     sendRequestParams,
-    formatDateTime
+    formatDateTime,
+    formatPhoneNumber
 }
-//
-// function sendRequestForm(method, url, requestData, inputHeader = {}) {
-//     var headers =  { 
-//         ...inputHeader,
-//         'User-Agent' : navigator.userAgent,
-//         'X-API-Key' : config.API_KEY,
-//         'X-CX-Date' : formatDateTime(new Date()),
-//         'X-CX-Channel' : '0',
-//         'X-CX-Client-Version' : config.VERSION,
-//         'X-CX-Interaction-Id' : formatDateTime(new Date()),
-//     };
-//     const requestOptions = {
-//         method,
-//         url,
-//         data: requestData,
-//         headers
-//     };
+
+function sendRequestForm(method, url, requestData, inputHeader = {}) {
+    var headers =  { 
+        ...inputHeader,
+        'User-Agent' : navigator.userAgent,
+        'X-API-Key' : config.API_KEY,
+        'X-CX-Date' : formatDateTime(new Date()),
+        'X-CX-Channel' : '0',
+        'X-CX-Client-Version' : config.VERSION,
+        'X-CX-Interaction-Id' : formatDateTime(new Date()),
+    };
+    const requestOptions = {
+        method,
+        url,
+        data: requestData,
+        headers
+    };
     
-//     return axios.request(requestOptions)
-// }
+    return axios.post(url, requestData, { headers })
+}
 
 function sendRequest(method, url, requestData, inputHeader = {}) {
     var headers =  { 
@@ -161,4 +162,9 @@ function formatDateTime(value, strFormat = 'YYYYMMDDhhmmss'){
     if(value){
         return moment(String(value)).format(strFormat);
     }
+}
+
+function formatPhoneNumber(value){
+    var x = value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,3})/);
+    return !x[2] ? x[1] : x[1] + '-' + x[2] + '-' + x[3];
 }

@@ -334,6 +334,7 @@ export default {
 .content-search {
   margin: auto;
   width: 495px;
+  padding-top: 3rem;
 }
 
 .content-search .input-group-append {

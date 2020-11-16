@@ -12,11 +12,10 @@
       >
         <div class="confirm-info">
           <ul class="div-information">
-            <li>氏名：</li>
-            <li>氏名（カナ）：</li>
-            <li>ID：</li>
-            <li>所属：</li>
-            <li>パスワード：</li>
+            <li>氏名：{{ localEmployee.employeeName }}</li>
+            <li>氏名（カナ）：{{ localEmployee.mailAddress }}</li>
+            <li>所属：{{ localEmployee.branchNumber }}</li>
+            <li>パスワード：{{ this.localPassword }}</li>
           </ul>
         </div>
         <template #modal-footer="{ ok, cancel }">
@@ -35,17 +34,48 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 export default {
-    props: [
-        'showConfirmEdit',
-    ],
-    methods: {
-        handleEdit() {
-
-        },
-        handleHide() {
-            this.$emit("changeModalConfirm", false)
+    data() {
+      return {
+        localPassword: '',
+      }
+    },
+    props: {
+      showConfirmEdit: Boolean,
+      localEmployee: {},
+      backHome: Function,
+    },
+    computed: {
+      ...mapState({
+        alert: state => state.alert,
+        employees: (state) => state.employees,
+      })
+    },
+    created() {
+        for (var i = 0; i < this.localEmployee.loginPassword.length; i = i + 1) {
+          this.localPassword = this.localPassword + '*'
         }
+    },
+    methods: {
+      ...mapActions("employees", {
+        updateEmployee: "updateEmployee"
+      }),
+
+      handleEdit() {
+        // this.$set('contacts[' + newPsgId + ']', newObj)
+        
+        const data = {
+          body: this.localEmployee,
+          params: this.$route.params.employeeId
+        }
+        this.updateEmployee(data).then(() => {
+          this.backHome();
+        })
+      },
+      handleHide() {
+        this.$emit("changeModalConfirm", false)
+      },
     }
 };
 </script>

@@ -27,10 +27,10 @@ export default {
             required: { value: true, message: "S02012"},
         }
     },
-//     password: {
-//         validations: {
-//             required: { value: true, message: "S02001" },
-//             type: { value: "Password", message: "S02001" }
-//         }
-//     }
+    loginPassword: {
+        validations: {
+            required: { value: false, message: "S02001" },
+            type: { value: "Password", message: "S02001" }
+        }
+    }
 }

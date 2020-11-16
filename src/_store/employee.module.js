@@ -106,7 +106,34 @@ const actions = {
                 commit('getUserByIdFailed', data.error);
             }
         })
-    }
+    },
+    registerEmployees({commit, dispatch}, inputFile) {
+        console.log(inputFile)
+        return employeeService.registerEmployees(inputFile).then(
+            info => {
+                commit ("getAllEmployeesSuccess", info.data)
+            }
+        ).catch((err) => {
+            if (err.response) {
+                const { status, data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+        })
+    },
+
+    updateEmployee({commit, dispatch}, input) {
+        return employeeService.updateEmployee(input.params, input.body).then((info) => {
+            console.log(info)
+            return info
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+            
+        })
+    },
+
 };
 
 const mutations = {

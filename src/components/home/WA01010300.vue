@@ -63,6 +63,10 @@
                   {{ data.item.consumerNameKana }}
                 </template>
 
+                <template #cell(salesperson)="data">
+                  {{ data.item.employeeName }}
+                </template>
+
                 <template #cell(age)="data">
                   {{ data.item.birthdate }} ({{ data.item.age }})
                 </template>
@@ -71,12 +75,8 @@
                   {{ data.item.phoneNumber1 }}
                 </template>
 
-                <template #cell(salesperson)="data">
-                  {{ data.item.employeeId }}
-                </template>
-
                 <template #cell(branch)="data">
-                  {{ data.item.branchNumber }}
+                  {{ data.item.branchName }}
                 </template>
 
                 <template #cell(memo)="data">
@@ -196,10 +196,10 @@ export default {
       cols: [
         { key: "checked", label: "", class: "col-check" }, // column only display both admin and not
         { key: "fullname", label: "氏名" },
-        { key: "age", label: "年齢", isAdminCols: true },
-        { key: "birthdate", label: "生年月日（年齢）", isAdminCols: true },
-        { key: "phone1", label: "電話番号1" },
         { key: "kana", label: "氏名（カナ）", isAdminCols: true },
+        { key: "age", label: "年齢", isAdminCols: false },
+        { key: "age", label: "生年月日（年齢）", isAdminCols: true },
+        { key: "phone1", label: "電話番号1" },
         { key: "memo", label: "メモ", isAdminCols: false }, // column only display if not admin
         { key: "salesperson", label: "担当営業員", isAdminCols: true }, // column only display if is admin
         { key: "branch", label: "所属", isAdminCols: true },
@@ -256,7 +256,7 @@ export default {
           maximumRecordsPerPage: 40 
         }
       this.localEmployee = this.employees.employee
-      // console.log(this.localEmployee)
+      console.log(this.localEmployee)
       this.funcGetAllConsumer(this.inputData)
     })
     // this.changePasswordState = false
@@ -289,7 +289,7 @@ export default {
     onRowSelected(items) {
         this.selectedItem = items[0]? items[0].consumerId : null
         this.selectedConsumer= items[0]
-        console.log(this.selectedConsumer)
+        // console.log(this.selectedConsumer)
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
@@ -325,7 +325,9 @@ export default {
       return arrInput.map((e) => {
         return {
           ...e,
-          birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') 
+          birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') ,
+          phoneNumber1: auth.formatPhoneNumber(e.phoneNumber1),
+          phoneNumber2: auth.formatPhoneNumber(e.phoneNumber2)
         }
       })
     },
