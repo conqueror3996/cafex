@@ -8,7 +8,7 @@
         </b-button>
       </div>
       <div class="info-table">
-        <b-table :fields="userCols" :items="consumer">
+        <b-table sticky-header :fields="userCols" :items="consumer" table-class="text-nowrap">
           <template #cell(consumerName)="data">
             {{ data.item.consumerName }}
           </template>
@@ -336,7 +336,11 @@ export default {
   width: 100%;
   border: 1px solid #97989c;
   border-radius: 0.5rem;
-  height: 77px;
+  height: auto;
+  overflow: auto;
+}
+.manage-file-conent .info-table .table {
+  margin-bottom: unset;
 }
 
 .detail {

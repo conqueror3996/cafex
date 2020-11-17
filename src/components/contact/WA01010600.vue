@@ -24,7 +24,7 @@
             <ul id="v-for-object" class="contractor-info">
               <li v-for="(value, name) in this.localConsumer" :key="name">
                 <div v-if="Object.keys(labels).includes(name)" > 
-                  <span class="new-title">{{ labels[name] }}</span> : {{ value }} 
+                  <span class="new-title">{{ labels[name] }}</span> : <div class="info-text">{{ value }} </div>
                 </div>
               </li>
             </ul>
@@ -617,7 +617,7 @@ export default {
     padding: 0;
     margin: 0;
   }
-  .box-info .box-parent > p, .contractor-info li{margin-bottom:13px;}
+  .box-info .box-parent > p, .contractor-info li{margin-bottom:8px;}
   .contractor-info li div > span{padding-left:15px;}
   .scroll-bar {
     overflow: hidden;
@@ -636,6 +636,11 @@ export default {
   .new-title {
     width: 35%;
     display: inline-block;
+  }
+  .info-text {
+    width: 60%;
+    display: inline-block;
+    white-space: normal;
   }
   .screen-contact {
     display: flex;
@@ -806,17 +811,38 @@ export default {
     .logo-small{width:5%}
     .box-info .box-parent > p, .contractor-info li{margin-bottom:6px;}
   }
+  @media(max-width:1600px){
+   .logo-small{width:8%}
+   .box-info .box-parent > p, .contractor-info li{margin-bottom:3px;}
+   .new-title { width: 40%; }
+   .info-text { width: 55%; }
+  }
   @media(max-width:1366px){
     .inner{width:calc(100% - 40px)}
-    .logo{width:9%;}
+    .logo-small{width:9%;}
     #header{height:100px;}
     /* #main{margin-top:20px;} */
-    #left,#right{height:calc(100vh - 120px);}
+    #left,#right{height:calc(100vh - 130px);}
     #left{width:calc(25% - 10px);}
     #right{width:calc(75% - 10px);}
     .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
     .input-search{position:relative;width:100%;height:55px;}
-    .box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
-    .box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
+    .box-info{height: calc(100% - 58% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
+    .box-info .box-parent > p, .contractor-info li{margin-bottom:12px;}
+    .box-tab{height: calc(100% - 50% - 10px);margin-top:10px;}
+  }
+  @media(max-width:1100px){
+   .new-title { width: 42%; }
+   .info-text { width: 51%; }
+   .action-panel .small-font span {
+      font-size: 8px;
+    }
+    .action-panel button {
+      width: 31%;
+      padding-left: .5rem;
+    }
+    .action-panel button.small-font {
+      padding-left: .1rem;
+    }
   }
 </style>

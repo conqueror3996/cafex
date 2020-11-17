@@ -1,5 +1,5 @@
 <template>
-  <div class="home-screen">
+  <div class="home-admin">
     <b-tabs card align="right">
       <template #tabs-start>
         <div class="div-back-button nav-item align-self-center">
@@ -34,7 +34,7 @@
               <b-table
                 ref="selectableTable"
                 hover
-                :responsive="true"
+                sticky-header
                 :fields="cols"
                 :items="localEmployees"
                 selectable
@@ -293,30 +293,30 @@ export default {
   border: none;
 }
 
-.home-screen .nav-tabs .nav-link {
+.home-admin .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
   background-color: #D8D8D8;
 }
 
-.home-screen .nav-link.active {
+.home-admin .nav-link.active {
   color: #0091FF !important;
   background-color: #ffffff;
 }
 
-.home-screen .card-header {
+.home-admin .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
 }
-.home-screen .card-body {
+.home-admin .card-body {
   padding: 0px;
 }
 
-.home-screen .form-control {
+.home-admin .form-control {
   border-radius: 0.5rem;
 }
 
-.home-screen .input-group-text {
+.home-admin .input-group-text {
   border-radius: 0.5rem;
 }
 
@@ -331,22 +331,29 @@ export default {
   padding-top: 0.75rem;
 }
 
-.content-search {
+.home-admin .content-search {
   margin: auto;
   width: 495px;
   padding-top: 3rem;
 }
 
-.content-search .input-group-append {
+.home-admin .content-search .input-group-append {
   border: 1px solid #ced4da;
   border-radius: 0 .5rem .5rem 0;
 }
 
-.table-main {
+.home-admin .table-main {
   margin: 1.5rem 0.75rem;
   border: 1px solid;
   height: 397px;
   overflow: auto;
+}
+
+.home-admin .table-main .table.b-table>thead>tr>th {
+  background-color: #ffffff;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 }
 
 .col-spec {
@@ -399,7 +406,7 @@ export default {
 }
 
 @media (max-width: 1327px) {
-  .home-screen {
+  .home-admin {
     width: 96%;
     margin: 0 auto;
   }
@@ -423,13 +430,13 @@ export default {
     text-align: center;
     font-size: 16px;
   }
-  .content-search {
+  .home-admin .content-search {
     width: 375px;
   }
 };
 
 @media (max-width: 414px) {
-  .content-search {
+  .home-admin .content-search {
     width: 305px;
   }
 };

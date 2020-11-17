@@ -33,15 +33,16 @@
             </div>
             <div class="table-main">
               <b-table
+                sticky-header
                 ref="selectableTable"
                 hover
-                :responsive="true"
                 :fields="computedFields"
                 :items="localConsumers"
                 selectable
                 select-mode="single"
                 @row-selected="onRowSelected"
                 :tbody-tr-class="rowActive"
+                table-class="text-nowrap"
               >
                 <template #cell(checked)="data">
                     <div style="padding-left: .75rem;">
@@ -434,7 +435,12 @@ export default {
   height: 397px;
   overflow: auto;
 }
-
+.table-main .table.b-table>thead>tr>th {
+  background-color: #ffffff;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
 .col-spec {
   width: 8rem;
 }
