@@ -554,7 +554,7 @@ export default {
       this.docSubPage.length = 0
       let index = 0;
       for (let i = 1; i <= this.docFileObj.totalPage; i++) {
-        this.docSubPage[index] = "Page_" + i;
+        this.docSubPage[index] = "Page_" + i; 
         index ++;
       }
       this.docSubPageIndex = this.docSubPage[0];
