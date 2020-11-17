@@ -196,14 +196,14 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" }, // column only display both admin and not
-        { key: "fullname", label: "氏名" },
-        { key: "kana", label: "氏名（カナ）", isAdminCols: true },
-        { key: "age", label: "年齢", isAdminCols: false },
-        { key: "age", label: "生年月日（年齢）", isAdminCols: true },
-        { key: "phone1", label: "電話番号1" },
-        { key: "memo", label: "メモ", isAdminCols: false }, // column only display if not admin
-        { key: "salesperson", label: "担当営業員", isAdminCols: true }, // column only display if is admin
-        { key: "branch", label: "所属", isAdminCols: true },
+        { key: "fullname", label: "氏名", class: "col-name" },
+        { key: "kana", label: "氏名（カナ）", class:"col-kana", isAdminCols: true },
+        { key: "age", label: "年齢", class:"col-age", isAdminCols: false },
+        { key: "age", label: "生年月日（年齢）", class:"col-age", isAdminCols: true },
+        { key: "phone1", label: "電話番号1", class: "col-phone1" },
+        { key: "memo", label: "メモ", class: "col-memo", isAdminCols: false }, // column only display if not admin
+        { key: "salesperson", label: "担当営業員", class: "col-sales", isAdminCols: true }, // column only display if is admin
+        { key: "branch", label: "所属", class: "col-branch", isAdminCols: true },
         { key: "action", label: "" , class: "col-spec", isAdminCols: false },
       ],
       selectedItem: '',
@@ -313,7 +313,7 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localConsumers = this.consumers.filter((item) => item.consumerName.includes(this.searchString) || item.consumerNameKana.includes(this.searchString) )
+      this.localConsumers = this.consumers.filter(item => { return item.consumerName.toLowerCase().includes(this.searchString.toLowerCase().trim()) || item.consumerNameKana.toLowerCase().includes(this.searchString.toLowerCase().trim()) })
     },
     changeTab(tab) {
       // Set error message empty when change tab
@@ -353,6 +353,18 @@ export default {
 </script>
 
 <style>
+.col-name {
+  width: 15rem;
+}
+
+.col-age {
+  width: 15rem;
+}
+
+.col-phone1 {
+  width: 15rem;
+}
+
 .home-screen .card-header {
   font-size: 18px;
   color: #0091FF;
@@ -420,8 +432,9 @@ export default {
 }
 
 .content-search {
+  /* margin-top: 100px; */
   margin: auto;
-  width: 495px;
+  width: 495px; 
 }
 
 .content-search .input-group-append {
