@@ -61,6 +61,7 @@
               <label>ページ</label>
               <div class="input-group">
                 <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
+                  <option value=""></option>
                   <option v-bind:key="idx" :value="obj" v-for="(obj, idx) in docSubPage">{{obj}}
                   </option>
                 </select>
@@ -69,7 +70,7 @@
                 <span>共有</span>
               </button>
               <div class="document-preview">
-                <img :src="docPageObj.value" />
+                <img :src="responseImage" />
               </div>
             </div>
             <div class="contract" v-if="showContract">
@@ -184,7 +185,8 @@ export default {
       localConsumerId: '',
       localConsumer: {},
       previewStyle: '',
-      docUrl: ''
+      docUrl: '',
+      responseImage: '',
     }
   },
   computed: {
@@ -266,7 +268,8 @@ export default {
   },
   methods: {
     ...mapActions("employees", {
-      getUserInfo: "userInfo"
+      getUserInfo: "userInfo",
+      shareDoc: "shareDoc",
     }),
     ...mapActions("files", {
       // getDocFile: "getDocFile",
@@ -555,10 +558,10 @@ export default {
       this.docSubPage.length = 0
       let index = 0;
       for (let i = 1; i <= this.docFileObj.totalPage; i++) {
-        this.docSubPage[index] = "Page_" + i; 
+        this.docSubPage[index] = "page_" + i; 
         index ++;
       }
-      this.docSubPageIndex = this.docSubPage[0];
+      //this.docSubPageIndex = this.docSubPage[0];
       // this.docSubPage = this.docFiles[parseInt(this.docFileIndex)].list;
       // this.docSubPageIndex = 0;
       // this.changeSubPage();
@@ -567,6 +570,16 @@ export default {
       // if(this.docSubPageIndex !== '') {
       //   this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
       // }
+      if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
+          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
+          const data = {
+            docUrl: this.docUrl
+          }
+          this.shareDoc(data).then((res) => {
+            console.table(res)
+            this.responseImage = res.docUrl
+          })
+      }
     },
     initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
@@ -581,9 +594,9 @@ export default {
       }
     },
     pushDocUrl() {
-      if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
-          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
-      }
+      // if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
+      //     this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
+      // }
     }
   },
 
