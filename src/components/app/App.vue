@@ -201,7 +201,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 
 /* table */
 .table {
-  display: table;
+  /* display: table; */
   table-layout: fixed;
 }
 .table td {

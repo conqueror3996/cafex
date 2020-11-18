@@ -168,6 +168,30 @@ export default {
     margin-right: .5rem;
 }
 
+
+@media (max-width: 1366px) {
+    .main-content .form-info {
+        margin-top: 1rem;
+        font-size: 15px !important;
+    }
+    .main-content .label-form {
+        width: 12rem;
+        text-align: right;
+        padding-right: 2rem;
+        font-size: 16px;
+    }
+    .main-content .form-button {
+        padding-top: .5rem;
+    }
+    .main-content .input-row {
+        margin: .5rem 0;
+    }
+    .main-content .form-button button{
+        width: 152px;
+        height: 34px;
+    }
+};
+
 @media (max-width: 1200px) {
   .main-content {
       width: 70%;

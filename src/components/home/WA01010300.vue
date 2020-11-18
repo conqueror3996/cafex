@@ -505,6 +505,32 @@ export default {
   font-size: 18px;
 }
 
+@media (max-width: 1366px) {
+  .home-screen {
+    width: 96%;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  
+  .selected-content {
+    height: calc(70vh);
+  }
+  .table-main {
+    height: calc(40vh - 20px);
+  }
+  
+};
+
+@media (max-width: 1024px) {
+  .selected-content {
+    height: calc(75vh - 5px);
+  }
+  
+  .table-main {
+    height: calc(45vh - 20px);
+  }
+};
+
 @media (max-width: 1327px) {
   .home-screen {
     width: 96%;

@@ -263,9 +263,11 @@ export default {
 
 .manage-file-conent .table td.col-action {
     padding: unset;
+    width: 50px;
 }
 .manage-file-conent .table th.col-action {
     padding: unset;
+    width: 50px;
 }
 
 .manage-file-conent .table .col-action div.action-link{
@@ -430,27 +432,61 @@ export default {
   margin: auto;
 }
 
+@media (max-width: 1366px) {
+  .file-table {
+    height: calc(40vh - 20px);
+  }
+  .manage-file-conent .panel {
+    height: calc(50vh - 15px);
+    margin: 1.5rem auto;
+  }
+  .detail {
+    height: calc(55vh - 10px);
+  }
+  .manage-file-conent .file-footer {
+    margin-top: .5rem;
+  }
+}
+
 @media (max-width: 1327px) {
   .manage-file-conent {
     width: 96%;
   }
   
   .manage-file-conent .file-content {
-    width: 70%;
+    width: 65%;
   }
   .manage-file-conent .file-table {
     width: 100%;
-    height: 401px;
     border: 1px solid #97989c;
     overflow: auto;
   }
   .manage-file-conent .panel {
-    width: 30%;
-    height: 490px;
+    width: 28%;
     background-color: #ececec;
     border: 2px solid #bebfc2;
     border-radius: 0.6rem;
-    margin: 2rem;
+    margin: 1.5rem auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .manage-file-conent .file-table {
+    height: calc(40vh - 20px);
+  }
+  .manage-file-conent .file-content {
+    width: 65%;
+  }
+  .manage-file-conent .panel {
+    width: 28%;
+    height: calc(50vh);
+    margin: 1.5rem auto;
+  }
+  .detail {
+    height: calc(60vh - 20px);
+  }
+  .manage-file-conent .file-footer {
+    margin-top: 1.5rem;
   }
 }
 </style>
