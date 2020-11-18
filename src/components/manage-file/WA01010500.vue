@@ -88,6 +88,7 @@ import { mapState, mapActions } from "vuex";
 import validate from '../../validate/validate.js';
 import errorMessage from '../../validate/errormessage';
 import moment from 'moment';
+import { auth } from '../../_helpers';
 
 export default {
   data() {
@@ -134,7 +135,7 @@ export default {
       })
     }).then(() => {
         this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-        this.files = res.data.file;
+          this.files = this.formatFileData(res.data.file);
       });
     })
   },
@@ -174,6 +175,14 @@ export default {
     },
     closeModal() {
         this.modalItem = '';
+    },
+    formatFileData(arrInput) {
+      return arrInput.map((e) => {
+        return {
+          ...e,
+          fileRegistrationDate: auth.formatDateTime(e.fileRegistrationDate, 'yyyy/MM/DD hh:mm')
+        }
+      })
     },
     uploadFile(event) {
       const files = event.target.files;
