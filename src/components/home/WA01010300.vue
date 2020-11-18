@@ -43,7 +43,6 @@
                 select-mode="single"
                 @row-selected="onRowSelected"
                 :tbody-tr-class="rowActive"
-                table-class="text-nowrap"
               >
                 <template #cell(checked)="data">
                     <div style="padding-left: .75rem;">

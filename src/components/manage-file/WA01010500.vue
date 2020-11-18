@@ -8,7 +8,7 @@
         </b-button>
       </div>
       <div class="info-table">
-        <b-table sticky-header :fields="userCols" :items="consumer" table-class="text-nowrap">
+        <b-table sticky-header :fields="userCols" :items="consumer">
           <template #cell(consumerName)="data">
             {{ data.item.consumerName }}
           </template>
@@ -27,7 +27,7 @@
     <div class="detail">
       <div class="file-content">
         <div class="file-table">
-          <b-table hover :fields="fileCols" :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered">
+          <b-table hover :fields="fileCols" select-mode="single" selectable :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered" @row-selected="rowSelected">
             <template #cell(fileName)="data">
               {{ data.item.fileName }}
             </template>
@@ -38,7 +38,7 @@
               {{ data.item.fileRegistrationDate }}
             </template>
             <template #cell(action)="data">
-              <div class="action-link" v-if="hoveredItem === data.item.fileId">
+              <div class="action-link" v-if="hoveredItem === data.item.fileId || selectedItem == data.item.fileId">
                 <a v-b-modal.modal-delete @click="openModal(data.item)">
                   <img :src="imgDeleteIcon" width="25" height="28" />
                 </a>
@@ -110,6 +110,7 @@ export default {
       ],
       consumer:[],
       hoveredItem: '',
+      selectedItem: '',
       modalItem: '',
       files: [],
       localConsumerId: '',
@@ -165,6 +166,14 @@ export default {
     },
     rowHovered(item) {
         this.hoveredItem = item.fileId;
+    },
+    rowSelected(item) {
+      if(item.length > 0) {
+        this.selectedItem = item[0].fileId;
+      }
+      else {
+        this.selectedItem = '';
+      }
     },
     rowUnhovered() {
         this.hoveredItem = '';

@@ -200,6 +200,10 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .btn-login{width:60%;margin:75px auto 0px auto;display:block;}
 
 /* table */
+.table {
+  display: table;
+  table-layout: fixed;
+}
 .table td {
   height: 52px;
 }
@@ -208,6 +212,9 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
   border-top: 0px;
   padding: 0.25rem 0.75rem;
   vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .table thead th {
   border-bottom: 2px solid #9d9fa0;
