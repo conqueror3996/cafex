@@ -10,6 +10,7 @@ export const employeeService = {
     getEmployeeByID,
     registerEmployees,
     updateEmployee,
+    shareDoc,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -81,4 +82,10 @@ function updateEmployee(id, input) {
     let headers = { 'Content-Type': 'application/json' }
 
     return auth.sendRequest('PATCH', allAPI.update_employee_by_id(id), input, headers)
+}
+
+function shareDoc(input) {
+    let headers = { 'Content-Type': 'application/json' }
+
+    return auth.sendRequest('POST', allAPI.share_doc, input, headers)
 }
