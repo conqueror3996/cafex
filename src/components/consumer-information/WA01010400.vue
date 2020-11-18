@@ -102,9 +102,9 @@ export default {
           getUserInfo: "userInfo"
       }),
       goContact(){
-        // this.$router.push('/WA01010600');
-        let routeData = this.$router.resolve({path: '/WA01010600'});
+        let routeData = this.$router.resolve({name: 'WA01010600'});
         window.open(routeData.href, '_blank');
+        // this.$router.push('/');
       },
       initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
