@@ -183,7 +183,8 @@ export default {
         },
       localConsumerId: '',
       localConsumer: {},
-      previewStyle: ''
+      previewStyle: '',
+      docUrl: ''
     }
   },
   computed: {
@@ -580,8 +581,8 @@ export default {
       }
     },
     pushDocUrl() {
-      if(this.docSubPageIndex != '') {
-
+      if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
+          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
       }
     }
   },

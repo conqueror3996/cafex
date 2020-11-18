@@ -49,7 +49,17 @@ function getEmployeeUserinfo() {
 
 function getAllEmployees(input) {
     let headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+    
     return auth.sendRequestParams('GET', allAPI.get_employees, input, headers)
+   
+    // if(resultData !== null && resultData.meta.maximumPage > 0){
+    //     for(let i = 1; i <= resultData.meta.maximumPage; i++){
+    //         let input = { page: i, maximumRecordsPerPage: resultData.meta.maximumRecordsPerPage + 1 }
+    //         let employees = auth.sendRequestParams('GET', allAPI.get_employees, input, headers)
+    //         employeesData.push(employees.employee);
+    //     }
+    // }
+    // return employeesData;
 }
 
 function getEmployeeByID(id) {
