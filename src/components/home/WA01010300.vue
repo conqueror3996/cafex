@@ -1,4 +1,5 @@
 <template>
+  <div class="screen-medium">
   <div class="home-screen">
     <b-tabs card align="right">
       <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
@@ -167,6 +168,7 @@
         </b-card-text>
       </b-tab>
     </b-tabs>
+  </div>
   </div>
 </template>
 

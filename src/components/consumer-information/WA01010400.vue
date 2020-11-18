@@ -1,4 +1,5 @@
 <template>
+  <div class="screen-medium">
   <div class="customer-info-screen">
         <div class="title-information">
            <p >顧客情報</p>
@@ -33,6 +34,7 @@
             </div>
         </div>
     
+  </div>
   </div>
 </template>
 

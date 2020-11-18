@@ -219,6 +219,7 @@ export default {
 
 <style>
 .manage-file-conent {
+  max-width: 1344px;
   margin: 0 auto;
 }
 /* .manage-file-conent {

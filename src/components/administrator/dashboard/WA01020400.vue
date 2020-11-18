@@ -1,4 +1,5 @@
 <template>
+<div class="screen-medium">
   <div class="home-admin">
     <b-tabs card align="right">
       <template #tabs-start>
@@ -158,6 +159,7 @@
       </b-tab>
     </b-tabs>
   </div>
+</div>
 </template>
 
 <script>
