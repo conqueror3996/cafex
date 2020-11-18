@@ -18,8 +18,8 @@
         </div>
         <div class="box-info border-box">
           <div class="box-parent">
-            <p><span class="new-title new-title-block">お客様コード</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerName }}</span></p> 
-            <p><span class="new-title new-title-block">氏名</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
+            <div><span class="new-title new-title-block">お客様コード</span>: <div v-if="this.localConsumer" class="info-text">{{ this.localConsumer.consumerName }}</div></div> 
+            <div><span class="new-title new-title-block">氏名</span>: <div v-if="this.localConsumer"  class="info-text">{{ this.localConsumer.consumerNameKana }}</div> </div> 
             <span for="contractor">属性情報</span> 
             <ul id="v-for-object" class="contractor-info">
               <li v-for="(value, name) in this.localConsumer" :key="name">
@@ -610,7 +610,7 @@ export default {
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D); /*IE 5.5-7*/
   }
   .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
-  .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;}
+  .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
   .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
   
   .contractor-info {
@@ -618,7 +618,8 @@ export default {
     padding: 0;
     margin: 0;
   }
-  .box-info .box-parent > p, .contractor-info li{margin-bottom:8px;}
+  .box-info .box-parent > p, .box-info .box-parent div, .contractor-info li{margin-bottom:8px;}
+  .box-info .box-parent div, .contractor-info li div {vertical-align: middle;}
   .contractor-info li div > span{padding-left:15px;}
   .scroll-bar {
     overflow: hidden;
@@ -829,7 +830,7 @@ export default {
     .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
     .input-search{position:relative;width:100%;height:55px;}
     .box-info{height: calc(100% - 58% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
-    .box-info .box-parent > p, .contractor-info li{margin-bottom:12px;}
+    .box-info .box-parent > p, .contractor-info li{margin-bottom:8px;}
     .box-tab{height: calc(100% - 50% - 10px);margin-top:10px;}
   }
   @media(max-width:1100px){
