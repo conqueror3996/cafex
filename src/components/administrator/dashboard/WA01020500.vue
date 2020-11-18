@@ -194,6 +194,11 @@ export default {
 .div-registration-content input[type="file"] {
 	display: none;
 }
+@media (max-width: 1366px) {
+    .div-custom-alert {
+        margin-bottom: 60px;
+    }
+}
 /* .main-content {
     display: flex;
     justify-content: center;

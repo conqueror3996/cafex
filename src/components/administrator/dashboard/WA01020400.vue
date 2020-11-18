@@ -410,6 +410,31 @@ export default {
   font-size: 18px;
 }
 
+@media (max-width: 1366px) {
+  .home-admin {
+    width: 96%;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  
+  .home-admin .selected-content {
+    height: calc(70vh);
+  }
+  .home-admin .table-main {
+    height: calc(45vh);
+  }
+};
+
+@media (max-width: 1024px) {
+  .home-admin .selected-content {
+    height: calc(75vh - 5px);
+  }
+  
+  .home-admin .table-main {
+    height: calc(50vh);
+  }
+};
+
 @media (max-width: 1327px) {
   .home-admin {
     width: 96%;
