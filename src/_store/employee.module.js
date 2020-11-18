@@ -85,8 +85,7 @@ const actions = {
     getAll({commit, dispatch}, input){
         return employeeService.getAllEmployees(input).then(
             info => {
-                console.log(info);
-                commit("getAllEmployeesSuccess", info.data.employee);
+                commit("getAllEmployeesSuccess", info.data);
             },
         ).catch((err) => {
             const { data } = err.response
