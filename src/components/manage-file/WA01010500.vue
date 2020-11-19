@@ -104,10 +104,10 @@ export default {
         { key: "consumerMemo", label: "メモ" },
       ],
       fileCols: [
-        { key: "fileName", label: "ファイル名" },
-        { key: "fileTotalPages", label: "総ページ数" },
-        { key: "fileRegistrationDate", label: "登録日時" },
-        { key: "action", label: "", tdClass: "col-action" },
+        { key: "fileName", label: "ファイル名", class: "col-medium" },
+        { key: "fileTotalPages", label: "総ページ数", class: "col-small" },
+        { key: "fileRegistrationDate", label: "登録日時", class: "col-medium" },
+        { key: "action", label: "", class: "col-action" },
       ],
       consumer:[],
       hoveredItem: '',
@@ -261,13 +261,24 @@ export default {
   padding: 0.45rem 2rem;
 }
 
-.manage-file-conent .table td.col-action {
+.manage-file-conent .file-table .table td,
+.manage-file-conent .file-table .table th {
+  padding: 0.45rem .75rem;
+}
+
+.manage-file-conent .file-table .table td.col-action,
+.manage-file-conent .file-table .table th.col-action  {
     padding: unset;
     width: 50px;
 }
-.manage-file-conent .table th.col-action {
-    padding: unset;
-    width: 50px;
+.manage-file-conent .file-table .table td.col-small,
+.manage-file-conent .file-table .table th.col-small {
+    width: 20%;
+}
+
+.manage-file-conent .file-table .table td.col-medium,
+.manage-file-conent .file-table .table th.col-medium {
+    width: 30%;
 }
 
 .manage-file-conent .table .col-action div.action-link{

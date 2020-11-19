@@ -15,7 +15,14 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">所属 :</label></div>
-                <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.branchNumber"></b-input></div>
+                <div>
+                    <!-- <b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.branchNumber"></b-input> -->
+                    <select class="custom-select  input-form" v-model="localEmployee.branchNumber">
+                        <option v-for="(branch, BranchNumber) in branches" :key="BranchNumber" :value="branch.BranchNumber">
+                            {{ branch.BranchName }}
+                        </option>
+                    </select>
+                </div>
             </div>
             <div class="input-row">
                 <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">再設定パスワード :</label></div>
@@ -59,6 +66,7 @@ import WA01020411 from './WA01020411.vue';
 import validate from '../../../validate/validate'
 import userValidatePattern from '../../../validate/employee/employee-validate'
 import errormessage from '../../../validate/errormessage';
+import { sharedService } from '../../../_services'
 
 export default {
     data() {
@@ -75,6 +83,8 @@ export default {
             localEmployee: {},
             resetPassword: '',
             confirmPassword: '',
+            branches: []
+            
         }
     },
     components: {
@@ -90,8 +100,13 @@ export default {
         this.getEmployeeByID(this.$route.params.employeeId).then(() => {
             this.localEmployee = this.employees.employee
             this.$set(this.localEmployee, 'loginPassword', this.loginPassword)
-            console.log(this.localEmployee)
-        })        
+            
+        })
+        sharedService.getBranches().then((res) => {
+            console.log(res)
+            this.branches = res.data.branch
+        })
+
     },
     methods: {
         ...mapActions("alert", {
@@ -103,7 +118,7 @@ export default {
         handleShowEdit() {
             // validate
             const errorCode = validate.validateInput(userValidatePattern, this.localEmployee);
-            console.log(errorCode)
+            // console.log(errorCode)
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
                 this.error(messageError.join("\n"));
