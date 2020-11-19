@@ -31,7 +31,7 @@
               </b-input-group>
               </b-form> 
             </div>
-            <div class="table-main">
+            <div class="table-main" >
               <b-table
                 ref="selectableTable"
                 hover
@@ -42,6 +42,7 @@
                 select-mode="single"
                 @row-selected="onRowSelected"
                 :tbody-tr-class="rowActive"
+                
               >
                 <template #cell(checked)="data">
                     <div style="padding-left: .75rem;">
@@ -189,7 +190,8 @@ export default {
       selectedItem: '',
       isEdit: false,
       localEmployees: [],
-      inputData: {}
+      inputData: {},
+      meta: {}
     };
   },
   components: {
@@ -203,16 +205,14 @@ export default {
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
     }),
+    
   },
   created() {
     this.getUserInfo().then(() => {
-      this.inputData = { page: 1, maximumRecordsPerPage: 40 }
-      this.getAllEmployees(this.inputData).then(() => {
-        let meta = this.employees.all.meta;
-        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
-      });
+      this.inputData = { page: 1, maximumRecordsPerPage: 1 }
+      this.funcGetAllEmployee(this.inputData);
     })
-    this.changePasswordState = false
+    this.changePasswordState = false;
   },
   methods: {
     ...mapActions("employees", {
@@ -223,6 +223,15 @@ export default {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
     }),
+    funcGetAllEmployee(input){
+      this.getAllEmployees(input).then(() => {
+        this.meta = this.employees.all.meta;
+        input.maximumRecordsPerPage = this.meta.maximumRecords;
+        this.getAllEmployees(input).then(() => {
+          this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
+        });
+      });
+    },
     deleteItem(employeeId) {
         if(employeeId !== this.selectedItem) {
             return
@@ -263,7 +272,7 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    },
+    }
   },
   
 };

@@ -229,7 +229,8 @@ export default {
       localConsumers: [],
       consumerSelected: '',
       inputData: {},
-      errorMess: errorMessage
+      errorMess: errorMessage,
+      meta: {}
     };
   },
   components: {
@@ -255,11 +256,10 @@ export default {
       this.inputData = { 
           employeeId: this.employees.employee && this.employees.employee.rollCode === '23' ? this.employees.employee.employeeId : null, 
           page: 1, 
-          maximumRecordsPerPage: 40 
+          maximumRecordsPerPage: 1 
         }
       this.localEmployee = this.employees.employee
-      console.log(this.localEmployee)
-      this.funcGetAllConsumer(this.inputData)
+      this.funcGetAllConsumer(this.inputData);
     })
     // this.changePasswordState = false
   },
@@ -279,8 +279,11 @@ export default {
     ...mapActions("alert", { error: "error" }),
     funcGetAllConsumer(input) {
       this.getAllConsumer(input).then(() => {
-        this.localConsumers = this.consumers ? this.formatConsumerData(this.consumers) : []
-        console.log(this.localConsumers)
+        this.meta = this.consumers.meta;
+        input.maximumRecordsPerPage = this.meta.maximumRecords;
+        this.getAllConsumer(input).then(() => {
+          this.localConsumers = this.consumers.consumer ? this.formatConsumerData(this.consumers.consumer) : []
+        });
       });
     },
     deleteItem(consumerId) {
