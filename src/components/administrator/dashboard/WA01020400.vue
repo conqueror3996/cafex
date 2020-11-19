@@ -208,7 +208,8 @@ export default {
     this.getUserInfo().then(() => {
       this.inputData = { page: 1, maximumRecordsPerPage: 40 }
       this.getAllEmployees(this.inputData).then(() => {
-        this.localEmployees = this.employees.all ? this.formatConsumerData(this.employees.all) : []
+        let meta = this.employees.all.meta;
+        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
       });
     })
     this.changePasswordState = false
