@@ -132,11 +132,10 @@ export default {
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
         this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
-        console.log("this.consumer", this.consumer)
       })
     }).then(() => {
         this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-          this.files = this.formatFileData(res.data.file);
+          this.files = res.data.file ? this.formatFileData(res.data.file) : [];
       });
     })
   },
