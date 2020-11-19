@@ -174,7 +174,7 @@ const mutations = {
         state.employee = employee;
     },
     getUserInfoFailed(state, error){
-        state.status = {};
+        state.status = {}; 
         state.err = error;
     },
     getAllEmployeesSuccess(state, data){

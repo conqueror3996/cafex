@@ -154,9 +154,21 @@
                 </template>
               </b-table>
             </div>
-            <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
-                <b-button variant="primary" class="btn-next" :disabled="this.selectedItem === ''" @click="information()">次へ</b-button>
+            <div class="pagination">
+              <div class="box-paging">
+                <span @click="funcGetAllConsumer(inputData, meta.page - 1)" :class="{'disabled' : meta.page === 1 }">
+                  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </span>
+                <span>{{ meta.page }}/{{ meta.maximumPage }}</span>
+                <span @click="funcGetAllConsumer(inputData, meta.page + 1)" :class="{'disabled' : meta.page === meta.maximumPage }">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </span>
+              </div>
             </div>
+            <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
+                <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
+            </div>
+            
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = afterChanges($event)"></WA01010310>
         </b-card-text>
@@ -229,7 +241,8 @@ export default {
       localConsumers: [],
       consumerSelected: '',
       inputData: {},
-      errorMess: errorMessage
+      errorMess: errorMessage,
+      meta: {},
     };
   },
   components: {
@@ -255,11 +268,10 @@ export default {
       this.inputData = { 
           employeeId: this.employees.employee && this.employees.employee.rollCode === '23' ? this.employees.employee.employeeId : null, 
           page: 1, 
-          maximumRecordsPerPage: 40 
+          maximumRecordsPerPage: 30 
         }
       this.localEmployee = this.employees.employee
-      console.log(this.localEmployee)
-      this.funcGetAllConsumer(this.inputData)
+      this.funcGetAllConsumer(this.inputData, 1);
     })
     // this.changePasswordState = false
   },
@@ -277,10 +289,12 @@ export default {
       getUserInfo: "userInfo",
     }),
     ...mapActions("alert", { error: "error" }),
-    funcGetAllConsumer(input) {
+
+    funcGetAllConsumer(input, page) {
+      input.page = page;
       this.getAllConsumer(input).then(() => {
-        this.localConsumers = this.consumers ? this.formatConsumerData(this.consumers) : []
-        console.log(this.localConsumers)
+        this.meta = this.consumers.meta;
+        this.localConsumers = this.consumers.consumer ? this.formatConsumerData(this.consumers.consumer) : []
       });
     },
     deleteItem(consumerId) {
@@ -433,7 +447,7 @@ export default {
 }
 
 .admin-search {
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 
 .content-search {
@@ -448,7 +462,7 @@ export default {
 }
 
 .table-main {
-  margin: 1.5rem 0.75rem;
+  margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
   height: 397px;
   overflow: auto;
@@ -508,7 +522,26 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
-
+.pagination{
+  width:150px;
+  height: 40px;
+  border-bottom: 1px solid #dcdcdb;
+  border-top: 1px solid #dcdcdb;
+  margin:0px auto 10px auto;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.pagination span{
+  display: inline-block;
+  font-size: 15px;
+  font-weight:bold;
+}
+.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
+.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;}
 @media (max-width: 1366px) {
   .home-screen {
     width: 96%;

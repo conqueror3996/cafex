@@ -101,7 +101,7 @@ const mutations = {
         state.all = { loading: true };
     },
     getAllSuccessGet(state, users) {
-        state.all = { items: users.data.consumer };
+        state.all = { items: users.data };
     },
     getAllFailureGet(state, error) {
         state.all = { error };

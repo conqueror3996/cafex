@@ -36,8 +36,8 @@ const mutations = {
     getAllRequest(state) {
         state.files = { loading: true };
     },
-    getAllSuccess(state, files) {
-        state.files = { items: files };
+    getAllSuccess(state, file) {
+        state.files = { items: file };
     },
     getAllFailure(state, error) {
         state.files = { error };

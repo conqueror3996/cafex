@@ -31,7 +31,7 @@
               </b-input-group>
               </b-form> 
             </div>
-            <div class="table-main">
+            <div class="table-main" >
               <b-table
                 ref="selectableTable"
                 hover
@@ -42,6 +42,7 @@
                 select-mode="single"
                 @row-selected="onRowSelected"
                 :tbody-tr-class="rowActive"
+                
               >
                 <template #cell(checked)="data">
                     <div style="padding-left: .75rem;">
@@ -145,6 +146,17 @@
                 </template>
               </b-table>
             </div>
+            <div class="pagination">
+              <div class="box-paging">
+                <span @click="funcGetAllEmployee(inputData, meta.page - 1)" :class="{'disabled' : meta.page === 1 }">
+                  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </span>
+                <span>{{ meta.page }}/{{ meta.maximumPage }}</span>
+                <span @click="funcGetAllEmployee(inputData, meta.page + 1)" :class="{'disabled' : meta.page === meta.maximumPage }">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
             <!-- <div class="bottom-table">
                 <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
             </div> -->
@@ -189,7 +201,8 @@ export default {
       selectedItem: '',
       isEdit: false,
       localEmployees: [],
-      inputData: {}
+      inputData: {},
+      meta: {}
     };
   },
   components: {
@@ -203,16 +216,14 @@ export default {
       files: (state) => state.files,
       // changePasswordState: (state) => state.changePasswordState
     }),
+    
   },
   created() {
     this.getUserInfo().then(() => {
-      this.inputData = { page: 1, maximumRecordsPerPage: 40 }
-      this.getAllEmployees(this.inputData).then(() => {
-        let meta = this.employees.all.meta;
-        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
-      });
+      this.inputData = { page: 1, maximumRecordsPerPage: 30 }
+      this.funcGetAllEmployee(this.inputData, 1);
     })
-    this.changePasswordState = false
+    this.changePasswordState = false;
   },
   methods: {
     ...mapActions("employees", {
@@ -223,6 +234,13 @@ export default {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
     }),
+    funcGetAllEmployee(input, page){
+      input.page = page;
+      this.getAllEmployees(input).then(() => {
+        this.meta = this.employees.all.meta;
+        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
+      });
+    },
     deleteItem(employeeId) {
         if(employeeId !== this.selectedItem) {
             return
@@ -263,7 +281,7 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    },
+    }
   },
   
 };
@@ -414,7 +432,26 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
-
+.pagination{
+  width:150px;
+  height: 40px;
+  border-bottom: 1px solid #dcdcdb;
+  border-top: 1px solid #dcdcdb;
+  margin:0px auto 10px auto;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.pagination span{
+  display: inline-block;
+  font-size: 15px;
+  font-weight:bold;
+}
+.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
+.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;}
 @media (max-width: 1366px) {
   .home-admin {
     width: 96%;
