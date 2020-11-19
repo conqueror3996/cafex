@@ -181,8 +181,8 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
-        { key: "employeeName", label: "氏名", class: "col-name" },
         { key: "branchName", label: "所属" },
+        { key: "employeeName", label: "氏名", class: "col-name" },
         { key: "mailAddress", label: "メールアドレス" },
         { key: "rollName", label: "ロール" },
         { key: "action", label: "" , class: "col-spec" },
