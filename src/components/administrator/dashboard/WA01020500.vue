@@ -4,7 +4,7 @@
             <p>ファイルをアップロード</p>
         </div>
         <div class="alert alert-primary div-custom-alert" role="alert">
-            <p>・CSVデータから営業員データを登録できます。</p>
+            <p class="p-csv">・CSVデータから営業員データを登録できます。</p>
             <p>・一度にアップロードできるファイルの上限は100MBです。</p>
         </div>
         <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
@@ -99,7 +99,7 @@ export default {
 
         handleSubmit (e) {
             this.registerEmployeesCsv(this.files[0]).then((res) => {
-                alert("success")
+                this.$router.push('/WA01020501')
             })
             // this.submitted = true;
             // const { username, password } = this;
@@ -117,6 +117,11 @@ export default {
 </script>
 
 <style scoped>
+
+.p-csv {
+    padding-top: 1rem;
+}
+
 .div-registration-content {
     flex-direction: column;
     margin: 0 70px 80px 70px;

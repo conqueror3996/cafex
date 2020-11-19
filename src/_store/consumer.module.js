@@ -21,9 +21,12 @@ const actions = {
                 }
             ).catch((err) => {
                 if (err.response) {
+                    console.log(err.response)
                     const { data } = err.response
-                    dispatch('alert/error', data.error.code, { root: true });
-                }
+                    if (data.error.code != '0103014040201') {
+                        dispatch('alert/error', data.error.code, { root: true });
+                    }
+                }   
             });
     },
 
