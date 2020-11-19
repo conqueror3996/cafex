@@ -66,6 +66,17 @@
             </template>
           </b-table>
         </div>
+        <div class="pagination">
+          <div class="box-paging">
+            <span @click="funcGetAllFile(inputData, meta.page - 1)" :class="{'disabled' : meta.page === 1 }">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </span>
+            <span>{{ meta.page }}/{{ meta.maximumPage }}</span>
+            <span @click="funcGetAllFile(inputData, meta.page + 1)" :class="{'disabled' : meta.page === meta.maximumPage }">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
         <div class="file-footer">
           <label variant="primary" :class="isUploading ? 'btn btn-upload disabled' : 'btn btn-upload'" for="file" >
             <img
@@ -114,8 +125,10 @@ export default {
       selectedItem: '',
       modalItem: '',
       files: [],
+      inputData: {},
       localConsumerId: '',
-      isUploading: false
+      isUploading: false,
+      meta: {}
     };
   },
   computed: {
@@ -129,14 +142,23 @@ export default {
   created() {
     this.initInfo()
     this.getUserInfo().then(() => {
+      
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
         this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
       })
     }).then(() => {
-        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-          this.files = res.data.file ? this.formatFileData(res.data.file) : [];
-      });
+      this.inputData = {
+        employeeId: this.employees.employee.employeeId, 
+        consumerId : this.consumer[0].consumerId, 
+        page: 1, 
+        maximumRecordsPerPage: 20
+      };
+      //   this.getAllFile(this.inputData).then((res) => {
+      //     this.meta = res.data.meta;
+      //     this.files = res.data.file ? this.formatFileData(res.data.file) : [];
+      // });
+      this.funcGetAllFile(this.inputData, 1);
     })
   },
   methods: {
@@ -154,14 +176,22 @@ export default {
     ...mapActions("consumers", {
         getConsumerByID: "getConsumerByID",
     }),
+    funcGetAllFile(input, page){
+      input.page = page;
+      this.getAllFile(input).then((res) => {
+        this.meta = res.data.meta;
+        this.files = res.data.file ? this.formatFileData(res.data.file) : [];
+      });
+    },
     initInfo () {
       this.localConsumerId = localStorage.getItem('consumerId')
     },
     handledeleteFile(file) {
       this.deleteFile(file).then(() => {
-        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-          this.files = res.data.file;
-        });
+        this.funcGetAllFile(this.inputData, this.meta.page);
+        // this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+        //   this.files = res.data.file;
+        // });
       })
     },
     rowHovered(item) {
@@ -441,7 +471,26 @@ export default {
   border-radius: 0.6rem;
   margin: auto;
 }
-
+.pagination{
+  width:150px;
+  height: 40px;
+  border-bottom: 1px solid #dcdcdb;
+  border-top: 1px solid #dcdcdb;
+  margin:0px auto 10px auto;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.pagination span{
+  display: inline-block;
+  font-size: 15px;
+  font-weight:bold;
+}
+.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
+.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;}
 @media (max-width: 1366px) {
   .file-table {
     height: calc(40vh - 20px);
