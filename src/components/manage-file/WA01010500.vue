@@ -66,6 +66,17 @@
             </template>
           </b-table>
         </div>
+        <div class="pagination">
+          <div class="box-paging">
+            <span @click="funcGetAllFile(inputData, meta.page - 1)" :class="{'disabled' : meta.page === 1 }">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </span>
+            <span>{{ meta.page }}/{{ meta.maximumPage }}</span>
+            <span @click="funcGetAllFile(inputData, meta.page + 1)" :class="{'disabled' : meta.page === meta.maximumPage }">
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
         <div class="file-footer">
           <label variant="primary" :class="isUploading ? 'btn btn-upload disabled' : 'btn btn-upload'" for="file" >
             <img
@@ -78,7 +89,9 @@
            <img v-show="isUploading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
       </div>
-      <div class="panel"></div>
+      <div class="panel">
+        <img :src="this.responseImage">
+      </div>
     </div>
   </div>
 </template>
@@ -114,8 +127,13 @@ export default {
       selectedItem: '',
       modalItem: '',
       files: [],
+      inputData: {},
       localConsumerId: '',
-      isUploading: false
+      isUploading: false,
+      docFileObj: '',
+      docUrl: '',
+      responseImage: '',
+      meta: {}
     };
   },
   computed: {
@@ -129,15 +147,23 @@ export default {
   created() {
     this.initInfo()
     this.getUserInfo().then(() => {
+      
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
         this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
-        console.log("this.consumer", this.consumer)
       })
     }).then(() => {
-        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-          this.files = this.formatFileData(res.data.file);
-      });
+      this.inputData = {
+        employeeId: this.employees.employee.employeeId, 
+        consumerId : this.consumer[0].consumerId, 
+        page: 1, 
+        maximumRecordsPerPage: 20
+      };
+      //   this.getAllFile(this.inputData).then((res) => {
+      //     this.meta = res.data.meta;
+      //     this.files = res.data.file ? this.formatFileData(res.data.file) : [];
+      // });
+      this.funcGetAllFile(this.inputData, 1);
     })
   },
   methods: {
@@ -151,18 +177,27 @@ export default {
     }),
     ...mapActions("employees", {
       getUserInfo: "userInfo",
+      shareDoc: "shareDoc",
     }),
     ...mapActions("consumers", {
         getConsumerByID: "getConsumerByID",
     }),
+    funcGetAllFile(input, page){
+      input.page = page;
+      this.getAllFile(input).then((res) => {
+        this.meta = res.data.meta;
+        this.files = res.data.file ? this.formatFileData(res.data.file) : [];
+      });
+    },
     initInfo () {
       this.localConsumerId = localStorage.getItem('consumerId')
     },
     handledeleteFile(file) {
       this.deleteFile(file).then(() => {
-        this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-          this.files = res.data.file;
-        });
+        this.funcGetAllFile(this.inputData, this.meta.page);
+        // this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+        //   this.files = res.data.file;
+        // });
       })
     },
     rowHovered(item) {
@@ -171,6 +206,15 @@ export default {
     rowSelected(item) {
       if(item.length > 0) {
         this.selectedItem = item[0].fileId;
+        this.docFileObj = item[0];
+        this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + "page_1.png";
+          const data = {
+            docUrl: this.docUrl
+          }
+          this.shareDoc(data).then((res) => {
+            console.table(res)
+            this.responseImage = res.docUrl
+          })
       }
       else {
         this.selectedItem = '';
@@ -230,6 +274,9 @@ export default {
             });
           })
       }
+    },
+    changeDoc(event) {
+      
     }
   },
 };
@@ -442,7 +489,26 @@ export default {
   border-radius: 0.6rem;
   margin: auto;
 }
-
+.pagination{
+  width:150px;
+  height: 40px;
+  border-bottom: 1px solid #dcdcdb;
+  border-top: 1px solid #dcdcdb;
+  margin:0px auto 10px auto;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.pagination span{
+  display: inline-block;
+  font-size: 15px;
+  font-weight:bold;
+}
+.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
+.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;}
 @media (max-width: 1366px) {
   .file-table {
     height: calc(40vh - 20px);
