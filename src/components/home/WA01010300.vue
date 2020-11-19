@@ -1,4 +1,5 @@
 <template>
+  <div class="screen-medium">
   <div class="home-screen">
     <b-tabs card align="right">
       <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
@@ -42,7 +43,6 @@
                 select-mode="single"
                 @row-selected="onRowSelected"
                 :tbody-tr-class="rowActive"
-                table-class="text-nowrap"
               >
                 <template #cell(checked)="data">
                     <div style="padding-left: .75rem;">
@@ -167,6 +167,7 @@
         </b-card-text>
       </b-tab>
     </b-tabs>
+  </div>
   </div>
 </template>
 
@@ -503,6 +504,32 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
+
+@media (max-width: 1366px) {
+  .home-screen {
+    width: 96%;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  
+  .selected-content {
+    height: calc(70vh);
+  }
+  .table-main {
+    height: calc(40vh - 20px);
+  }
+  
+};
+
+@media (max-width: 1024px) {
+  .selected-content {
+    height: calc(75vh - 5px);
+  }
+  
+  .table-main {
+    height: calc(45vh - 20px);
+  }
+};
 
 @media (max-width: 1327px) {
   .home-screen {

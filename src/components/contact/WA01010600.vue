@@ -18,8 +18,8 @@
         </div>
         <div class="box-info border-box">
           <div class="box-parent">
-            <p><span class="new-title new-title-block">お客様コード</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerName }}</span></p> 
-            <p><span class="new-title new-title-block">氏名</span>: <span v-if="this.localConsumer">{{ this.localConsumer.consumerNameKana }}</span> </p> 
+            <div><span class="new-title new-title-block">氏名</span>: <div v-if="this.localConsumer" class="info-text">{{ this.localConsumer.consumerName }}</div></div> 
+            <div><span class="new-title new-title-block">カナ</span>: <div v-if="this.localConsumer"  class="info-text">{{ this.localConsumer.consumerNameKana }}</div> </div> 
             <span for="contractor">属性情報</span> 
             <ul id="v-for-object" class="contractor-info">
               <li v-for="(value, name) in this.localConsumer" :key="name">
@@ -32,21 +32,21 @@
         </div>
         <div class="box-tab border-box scroll-bar">
           <div class="action-panel">
-            <button class="btn btn-outline-primary small-font" @click="pushLink('share-plan1')">
+            <button class="btn btn-outline-secondary small-font" @click="pushLink('share-plan1')">
             <!-- <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false"> -->
               <span>ライフプラン<br /> シミュレーション</span>
             </button>
-            <button class="btn btn-outline-primary" @click="showSimulation = false; showDescription = true; showContract = false">
+            <button class="btn btn-outline-secondary" @click="showSimulation = false; showDescription = true; showContract = false">
               <span>商品説明</span>
             </button>
-            <button class="btn btn-outline-primary" @click="pushLink('share-form1')">
+            <button class="btn btn-outline-secondary" @click="pushLink('share-form1')">
               <span>契約申込</span>
             </button>
           </div>
           
           <div class="content-action">
             <div class="simulation" v-if="showSimulation">
-              <button class="btn btn-outline-primary">
+              <button class="btn btn-outline-secondary">
                 <span>代行入力</span>
               </button>
             </div>
@@ -61,6 +61,7 @@
               <label>ページ</label>
               <div class="input-group">
                 <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
+                  <option value=""></option>
                   <option v-bind:key="idx" :value="obj" v-for="(obj, idx) in docSubPage">{{obj}}
                   </option>
                 </select>
@@ -69,7 +70,7 @@
                 <span>共有</span>
               </button>
               <div class="document-preview">
-                <img :src="docPageObj.value" />
+                <img :src="responseImage" />
               </div>
             </div>
             <div class="contract" v-if="showContract">
@@ -184,7 +185,8 @@ export default {
       localConsumerId: '',
       localConsumer: {},
       previewStyle: '',
-      docUrl: ''
+      docUrl: '',
+      responseImage: '',
     }
   },
   computed: {
@@ -266,7 +268,8 @@ export default {
   },
   methods: {
     ...mapActions("employees", {
-      getUserInfo: "userInfo"
+      getUserInfo: "userInfo",
+      shareDoc: "shareDoc",
     }),
     ...mapActions("files", {
       // getDocFile: "getDocFile",
@@ -555,10 +558,10 @@ export default {
       this.docSubPage.length = 0
       let index = 0;
       for (let i = 1; i <= this.docFileObj.totalPage; i++) {
-        this.docSubPage[index] = "Page_" + i; 
+        this.docSubPage[index] = "page_" + i; 
         index ++;
       }
-      this.docSubPageIndex = this.docSubPage[0];
+      //this.docSubPageIndex = this.docSubPage[0];
       // this.docSubPage = this.docFiles[parseInt(this.docFileIndex)].list;
       // this.docSubPageIndex = 0;
       // this.changeSubPage();
@@ -567,6 +570,16 @@ export default {
       // if(this.docSubPageIndex !== '') {
       //   this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
       // }
+      if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
+          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
+          const data = {
+            docUrl: this.docUrl
+          }
+          this.shareDoc(data).then((res) => {
+            console.table(res)
+            this.responseImage = res.docUrl
+          })
+      }
     },
     initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
@@ -581,9 +594,9 @@ export default {
       }
     },
     pushDocUrl() {
-      if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
-          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
-      }
+      // if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
+      //     this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
+      // }
     }
   },
 
@@ -596,10 +609,10 @@ export default {
   .inner{width:calc(100% - 20px);margin:auto;max-width:unset !important}
   .logo-small{display:inline-block;padding:10px 0px 0px 10px;}
   .mw100{max-width:100%;}
-  header.header{height:125px;}
+  /* header.header{height:125px;} */
   .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
-  #left{width:calc(20% - 5px);float:left;height:calc(100vh - 135px);}
-  #right{width:calc(80% - 5px);float:right;height:calc(100vh - 135px);background:#fff;border-radius:10px;}
+  #left{width:calc(20% - 5px);float:left;height:calc(100vh - 145px);}
+  #right{width:calc(80% - 5px);float:right;height:calc(100vh - 145px);background:#fff;border-radius:10px;}
   .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:13px;} /*10%*/
   .input-search{position:relative;width:100%;height:65px;}
   .txt-search{width:100%;height:35px;border:none;border-radius:25px;padding-left:15px;
@@ -610,7 +623,7 @@ export default {
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D); /*IE 5.5-7*/
   }
   .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
-  .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;}
+  .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
   .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
   
   .contractor-info {
@@ -618,7 +631,8 @@ export default {
     padding: 0;
     margin: 0;
   }
-  .box-info .box-parent > p, .contractor-info li{margin-bottom:8px;}
+  .box-info .box-parent > p, .box-info .box-parent div, .contractor-info li{margin-bottom:3px;}
+  .box-info .box-parent div, .contractor-info li div {vertical-align: middle;}
   .contractor-info li div > span{padding-left:15px;}
   .scroll-bar {
     overflow: hidden;
@@ -814,11 +828,10 @@ export default {
   }
   @media(max-width:1600px){
    .logo-small{width:8%}
-   .box-info .box-parent > p, .contractor-info li{margin-bottom:3px;}
    .new-title { width: 40%; }
    .info-text { width: 55%; }
   }
-  @media(max-width:1366px){
+  @media(max-width:1440px){
     .inner{width:calc(100% - 40px)}
     .logo-small{width:9%;}
     #header{height:100px;}
@@ -828,9 +841,8 @@ export default {
     #right{width:calc(75% - 10px);}
     .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
     .input-search{position:relative;width:100%;height:55px;}
-    .box-info{height: calc(100% - 58% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
-    .box-info .box-parent > p, .contractor-info li{margin-bottom:12px;}
-    .box-tab{height: calc(100% - 50% - 10px);margin-top:10px;}
+    .box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
+    .box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
   }
   @media(max-width:1100px){
    .new-title { width: 42%; }

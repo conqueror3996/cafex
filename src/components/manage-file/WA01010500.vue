@@ -8,7 +8,7 @@
         </b-button>
       </div>
       <div class="info-table">
-        <b-table sticky-header :fields="userCols" :items="consumer" table-class="text-nowrap">
+        <b-table sticky-header :fields="userCols" :items="consumer">
           <template #cell(consumerName)="data">
             {{ data.item.consumerName }}
           </template>
@@ -27,7 +27,7 @@
     <div class="detail">
       <div class="file-content">
         <div class="file-table">
-          <b-table hover :fields="fileCols" :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered">
+          <b-table hover :fields="fileCols" select-mode="single" selectable :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered" @row-selected="rowSelected">
             <template #cell(fileName)="data">
               {{ data.item.fileName }}
             </template>
@@ -38,7 +38,7 @@
               {{ data.item.fileRegistrationDate }}
             </template>
             <template #cell(action)="data">
-              <div class="action-link" v-if="hoveredItem === data.item.fileId">
+              <div class="action-link" v-if="hoveredItem === data.item.fileId || selectedItem == data.item.fileId">
                 <a v-b-modal.modal-delete @click="openModal(data.item)">
                   <img :src="imgDeleteIcon" width="25" height="28" />
                 </a>
@@ -88,6 +88,7 @@ import { mapState, mapActions } from "vuex";
 import validate from '../../validate/validate.js';
 import errorMessage from '../../validate/errormessage';
 import moment from 'moment';
+import { auth } from '../../_helpers';
 
 export default {
   data() {
@@ -103,13 +104,14 @@ export default {
         { key: "consumerMemo", label: "メモ" },
       ],
       fileCols: [
-        { key: "fileName", label: "ファイル名" },
-        { key: "fileTotalPages", label: "総ページ数" },
-        { key: "fileRegistrationDate", label: "登録日時" },
-        { key: "action", label: "", tdClass: "col-action" },
+        { key: "fileName", label: "ファイル名", class: "col-medium" },
+        { key: "fileTotalPages", label: "総ページ数", class: "col-small" },
+        { key: "fileRegistrationDate", label: "登録日時", class: "col-medium" },
+        { key: "action", label: "", class: "col-action" },
       ],
       consumer:[],
       hoveredItem: '',
+      selectedItem: '',
       modalItem: '',
       files: [],
       localConsumerId: '',
@@ -134,7 +136,7 @@ export default {
       })
     }).then(() => {
         this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
-        this.files = res.data.file;
+          this.files = this.formatFileData(res.data.file);
       });
     })
   },
@@ -166,6 +168,14 @@ export default {
     rowHovered(item) {
         this.hoveredItem = item.fileId;
     },
+    rowSelected(item) {
+      if(item.length > 0) {
+        this.selectedItem = item[0].fileId;
+      }
+      else {
+        this.selectedItem = '';
+      }
+    },
     rowUnhovered() {
         this.hoveredItem = '';
     },
@@ -174,6 +184,14 @@ export default {
     },
     closeModal() {
         this.modalItem = '';
+    },
+    formatFileData(arrInput) {
+      return arrInput.map((e) => {
+        return {
+          ...e,
+          fileRegistrationDate: auth.formatDateTime(e.fileRegistrationDate, 'yyyy/MM/DD hh:mm')
+        }
+      })
     },
     uploadFile(event) {
       const files = event.target.files;
@@ -219,6 +237,7 @@ export default {
 
 <style>
 .manage-file-conent {
+  max-width: 1344px;
   margin: 0 auto;
 }
 /* .manage-file-conent {
@@ -242,11 +261,24 @@ export default {
   padding: 0.45rem 2rem;
 }
 
-.manage-file-conent .table td.col-action {
-    padding: unset;
+.manage-file-conent .file-table .table td,
+.manage-file-conent .file-table .table th {
+  padding: 0.45rem .75rem;
 }
-.manage-file-conent .table th.col-action {
+
+.manage-file-conent .file-table .table td.col-action,
+.manage-file-conent .file-table .table th.col-action  {
     padding: unset;
+    width: 50px;
+}
+.manage-file-conent .file-table .table td.col-small,
+.manage-file-conent .file-table .table th.col-small {
+    width: 20%;
+}
+
+.manage-file-conent .file-table .table td.col-medium,
+.manage-file-conent .file-table .table th.col-medium {
+    width: 30%;
 }
 
 .manage-file-conent .table .col-action div.action-link{
@@ -411,27 +443,61 @@ export default {
   margin: auto;
 }
 
+@media (max-width: 1366px) {
+  .file-table {
+    height: calc(40vh - 20px);
+  }
+  .manage-file-conent .panel {
+    height: calc(50vh - 15px);
+    margin: 1.5rem auto;
+  }
+  .detail {
+    height: calc(55vh - 10px);
+  }
+  .manage-file-conent .file-footer {
+    margin-top: .5rem;
+  }
+}
+
 @media (max-width: 1327px) {
   .manage-file-conent {
     width: 96%;
   }
   
   .manage-file-conent .file-content {
-    width: 70%;
+    width: 65%;
   }
   .manage-file-conent .file-table {
     width: 100%;
-    height: 401px;
     border: 1px solid #97989c;
     overflow: auto;
   }
   .manage-file-conent .panel {
-    width: 30%;
-    height: 490px;
+    width: 28%;
     background-color: #ececec;
     border: 2px solid #bebfc2;
     border-radius: 0.6rem;
-    margin: 2rem;
+    margin: 1.5rem auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .manage-file-conent .file-table {
+    height: calc(40vh - 20px);
+  }
+  .manage-file-conent .file-content {
+    width: 65%;
+  }
+  .manage-file-conent .panel {
+    width: 28%;
+    height: calc(50vh);
+    margin: 1.5rem auto;
+  }
+  .detail {
+    height: calc(60vh - 20px);
+  }
+  .manage-file-conent .file-footer {
+    margin-top: 1.5rem;
   }
 }
 </style>

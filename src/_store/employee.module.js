@@ -133,6 +133,17 @@ const actions = {
             
         })
     },
+    shareDoc({commit, dispatch}, input) {
+        return employeeService.shareDoc(input).then((info) => {
+            return info.data
+        }).catch((err) => {
+            if (err.response) {
+                const { data } = err.response
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+            
+        })
+    }
 
 };
 

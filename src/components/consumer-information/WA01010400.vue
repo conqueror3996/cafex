@@ -1,4 +1,5 @@
 <template>
+  <div class="screen-medium">
   <div class="customer-info-screen">
         <div class="title-information">
            <p >顧客情報</p>
@@ -33,6 +34,7 @@
             </div>
         </div>
     
+  </div>
   </div>
 </template>
 
@@ -100,7 +102,9 @@ export default {
           getUserInfo: "userInfo"
       }),
       goContact(){
-        this.$router.push('/WA01010600');
+        let routeData = this.$router.resolve({name: 'WA01010600'});
+        window.open(routeData.href, '_blank');
+        // this.$router.push('/');
       },
       initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
@@ -148,7 +152,7 @@ export default {
   width: 100%;
   height: auto;
   padding: 1.5rem 3rem 0 3rem;
-  margin: 2.5rem auto;
+  margin: auto;
 }
 .title-information {
   width: 100%;
@@ -245,7 +249,34 @@ export default {
 
 .customer-info-screen .form-group button img{
     width: 100%;
-  height: 85px;
+}
+
+@media (max-width: 1366px) {
+  .customer-info-screen {
+    height: calc(80vh - 15px);
+  }
+  .information {
+    height: 50vh;
+    font-size: 14px;
+  }
+  .customer-info-screen .form-group button {
+    margin-top: 20px;
+    width: 298px;
+    height: 77px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .customer-info-screen {
+    height: calc(80vh);
+  }
+  .information {
+    height: 50vh;
+    font-size: 13px;
+  }
+  .customer-info-screen .form-group button {
+    margin: 20px 2rem 0 2rem;
+  }
 }
 
 @media (max-width: 1000px) {

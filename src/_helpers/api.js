@@ -8,6 +8,7 @@ export const allAPI = {
     get_employee_by_id: (employeeId) => `/v1/employees/${employeeId}`,
     register_employees: `v1/employees/csv`, // ... 
     update_employee_by_id: (employeeId) => `/v1/employees/${employeeId}`, // ...
+    share_doc: `/v1/shares`, // shareDoc
 
     // Consumers
     get_consumers: `v1/consumers`, // Ap010301_顧客一覧取得API
@@ -21,5 +22,8 @@ export const allAPI = {
     get_files: (fileType) => `v1/files/${fileType}`, // Ap010401_ファイル一覧覧取得API
     add_files: (fileType) => `v1/files/${fileType}`, // Ap010402_ファイル登録API
     delete_files: (fileType, fileId) => `v1/files/${fileType}/${fileId}`, // Ap010403_ファイル削除API
+
+    get_branches: `v1/branches`,
+    get_rolls: `v1/rolls`
     
 }
