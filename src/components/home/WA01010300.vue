@@ -155,7 +155,7 @@
               </b-table>
             </div>
             <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
-                <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
+                <b-button variant="primary" class="btn-next" :disabled="this.selectedItem === ''" @click="information()">次へ</b-button>
             </div>
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = afterChanges($event)"></WA01010310>
@@ -289,9 +289,12 @@ export default {
         }
     },
     onRowSelected(items) {
+      if (!items[0]) {
+        this.selectedItem = ''
+      } else {
         this.selectedItem = items[0]? items[0].consumerId : null
-        this.selectedConsumer= items[0]
-        // console.log(this.selectedConsumer)
+        this.selectedConsumer= items[0] 
+      }
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
@@ -299,6 +302,7 @@ export default {
     },
     selectedRow(item) {
       this.$refs.selectableTable.selectRow(this.localConsumers.indexOf(item))
+      // console.log('test', this.$refs.selectedItem)
     },
     // Event click button 編集 in edit modal
     okEdit() {

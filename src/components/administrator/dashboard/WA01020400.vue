@@ -229,7 +229,11 @@ export default {
         console.log('success')
     },
     onRowSelected(items) {
+      if (!items[0]) {
+        this.selectedItem = ''
+      } else {
         this.selectedItem = items[0]? items[0].employeeId : null
+      }
     },
     rowActive(item, type) {
       if (!item || type !== 'row') return;
