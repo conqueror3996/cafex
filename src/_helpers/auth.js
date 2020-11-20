@@ -113,7 +113,7 @@ function getAuthToken() {
 
 function clearAuthToken() {
     document.cookie = "CXSESSIONID=; Path=/; HttpOnly; Secure";
-    localStorage.removeItem(AUTH_TOKEN_KEY)
+    localStorage.clear();
 }
 
 function isLoggedIn() {

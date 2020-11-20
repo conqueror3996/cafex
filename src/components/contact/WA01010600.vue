@@ -85,6 +85,7 @@
         <div ref="remoteView" class="remote-view">
             <div v-show="!isSharing">{{isSharing?'':'Not shared...'}}</div>
             <div v-show="!isSharing" style="position: relative;">
+                <img :src="responseImage" />
                 <video id="previewvideo" style="background: black;width: 500px;margin-bottom: 20px;" autoplay
                     playsinline></video>
                 <button type="button" name="camera-setting" class="single-button" title="カメラ設定"
@@ -105,6 +106,7 @@
             <div id="localvideo" v-show="isSharing || (!gService.isDisplayMediaMode && appView)" :class="previewStyle"
                 style="background: black;position: absolute;z-index: 3;">
             </div>
+            
         </div>
         <div class="form-frame" v-show="isShowFormContainer">
             <div class="form-container">
