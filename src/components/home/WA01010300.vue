@@ -268,7 +268,8 @@ export default {
       this.inputData = { 
           employeeId: this.employees.employee && this.employees.employee.rollCode === '23' ? this.employees.employee.employeeId : null, 
           page: 1, 
-          maximumRecordsPerPage: 30 
+          maximumRecordsPerPage: 30,
+          keywords: '%%'
         }
       this.localEmployee = this.employees.employee
       this.funcGetAllConsumer(this.inputData, 1);
@@ -332,7 +333,11 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localConsumers = this.consumers.filter(item => { return item.consumerName.toLowerCase().includes(this.searchString.toLowerCase().trim()) || item.consumerNameKana.toLowerCase().includes(this.searchString.toLowerCase().trim()) })
+      console.log('seach', this.searchString.trim())
+      this.inputData.keywords = '%' + this.searchString.trim() + '%'
+      
+      this.funcGetAllConsumer(this.inputData, 1)
+      // this.localConsumers = this.consumers.filter(item => { return item.consumerName.toLowerCase().includes(this.searchString.toLowerCase().trim()) || item.consumerNameKana.toLowerCase().includes(this.searchString.toLowerCase().trim()) })
     },
     changeTab(tab) {
       // Set error message empty when change tab
