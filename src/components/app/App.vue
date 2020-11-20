@@ -171,7 +171,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .inner{width:calc(100% - 20px);margin:auto;max-width:unset !important}
 .inner .alert{white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
 .screen-medium {max-width: 1327px; margin: auto;}
-.logo{display:inline-block;padding:10px 0px 0px 10px;width:10%;}
+.logo{display:inline-block;padding:10px 0px 0px 10px;width:8.5%;}
 /* .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;}
 .logo-small img {vertical-align: unset;}
