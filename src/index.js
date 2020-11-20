@@ -15,7 +15,7 @@ Vue.use(Vuelidate);
 // setup fake backend
 import { configureFakeBackend } from './_helpers';
 configureFakeBackend();
- 
+
 new Vue({
     el: '#app',
     router,
