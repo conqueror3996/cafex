@@ -220,7 +220,7 @@ export default {
   },
   created() {
     this.getUserInfo().then(() => {
-      this.inputData = { page: 1, maximumRecordsPerPage: 30 }
+      this.inputData = { page: 1, maximumRecordsPerPage: 30, keywords: '%%' }
       this.funcGetAllEmployee(this.inputData, 1);
     })
     this.changePasswordState = false;
@@ -272,7 +272,9 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localEmployees = this.employees.all.filter(item => { return item.employeeName.toLowerCase().includes(this.searchString.toLowerCase().trim())})
+      this.inputData.keywords = '%' + this.searchString.trim() + '%'
+      this.funcGetAllEmployee(this.inputData, 1)
+      // this.localEmployees = this.employees.all.filter(item => { return item.employeeName.toLowerCase().includes(this.searchString.toLowerCase().trim())})
     },
     formatConsumerData(arrInput) {
       return arrInput.map((e) => {
