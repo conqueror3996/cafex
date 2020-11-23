@@ -89,8 +89,10 @@
            <img v-show="isUploading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
       </div>
-      <div class="panel">
-        <img :src="this.responseImage">
+      <div class="panel box-imgShow">
+        <div class="box-show">
+          <img :src="this.responseImage" class="mw100 imgShow">
+        </div>
       </div>
     </div>
   </div>
@@ -150,7 +152,7 @@ export default {
       
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
-        this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
+        this.consumer[0].birthdate = moment(this.consumer[0].birthdate).format('yyyy/MM/DD');
       })
     }).then(() => {
       this.inputData = {
@@ -189,6 +191,7 @@ export default {
         this.meta = res.data.meta;
         this.files = res.data.file ? this.formatFileData(res.data.file) : [];
       }).catch((err) => {
+        this.files = [];
         this.meta = { page: 1, maximumPage: 1}
       });
     },
@@ -290,6 +293,9 @@ export default {
   max-width: 1344px;
   margin: 0 auto;
 }
+.imgShow{max-height: 480px;background: #fff;}
+.box-show{display:inline-block;}
+.box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
 /* .manage-file-conent {
   display: flex;
   justify-content: left;
@@ -457,7 +463,7 @@ export default {
 }
 
 .manage-file-conent .file-footer {
-  margin-top: 1.75rem;
+  margin-top: 5px;
   text-align: center;
 }
 
@@ -476,8 +482,7 @@ export default {
 }
 
 .manage-file-conent .img-btn {
-  float: right;
-  margin-right: 0.5rem;
+  width:80%;
 }
 
 .manage-file-conent input[type="file"] {
@@ -497,7 +502,7 @@ export default {
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
   border-top: 1px solid #dcdcdb;
-  margin:0px auto 10px auto;
+  margin:5px auto 0px auto;
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;
