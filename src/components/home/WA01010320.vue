@@ -81,6 +81,7 @@ export default {
     methods: {
         ...mapActions("alert", {
             error: "error",
+            clear: "clear",
         }),
         
         handleShow() {
@@ -88,6 +89,7 @@ export default {
             const errorCode = validate.validateInput(consumerValidatePattern, this.consumer);
             
             if(errorCode.length > 0) {
+                console.log('test')
                 const messageError = validate.getArrayMessageError(errorCode);
                 this.error(messageError.join("\n"));
                 return;
@@ -95,7 +97,8 @@ export default {
 
             // reset slert message
             if(this.alert.message !== '') {
-                this.error('');
+                console.log('test')
+                this.clear();
             }
             // this.confirmConsumer(this.consumer)
             // show modal confirm

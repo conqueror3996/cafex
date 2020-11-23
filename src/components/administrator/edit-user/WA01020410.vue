@@ -83,8 +83,8 @@ export default {
             localEmployee: {},
             resetPassword: '',
             confirmPassword: '',
-            branches: []
-            
+            branches: [],
+            msg: ''
         }
     },
     components: {
@@ -111,6 +111,7 @@ export default {
     methods: {
         ...mapActions("alert", {
             error: "error",
+            clear: "clear",
         }),
         ...mapActions("employees", {
             getEmployeeByID: "getEmployeeByID",
@@ -118,7 +119,6 @@ export default {
         handleShowEdit() {
             // validate
             const errorCode = validate.validateInput(userValidatePattern, this.localEmployee);
-            // console.log(errorCode)
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
                 this.error(messageError.join("\n"));
@@ -131,19 +131,20 @@ export default {
             }
             // this.msg = this.msg.trim();
             if(this.msg !== '') {
-                this.error(this.msg);
+                // this.error(this.msg);
+                this.alert.message = this.msg.trim()
                 return;
             }
             // reset slert message
             if(this.alert.message !== '') {
-                this.error('');
+                this.clear()
             }
 
             // show modal confirm
             this.showConfirmEdit = true;
         },
         handleCancel() {
-            this.error(''); // reset error message
+            this.clear(); // reset error message
             this.$emit("changeEdit", false)
         },
     }
