@@ -152,7 +152,7 @@ export default {
       
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
-        this.consumer[0].birthdate = moment(this.consumer[0].birthday).format('yyyy/MM/DD');
+        this.consumer[0].birthdate = moment(this.consumer[0].birthdate).format('yyyy/MM/DD');
       })
     }).then(() => {
       this.inputData = {
@@ -191,6 +191,7 @@ export default {
         this.meta = res.data.meta;
         this.files = res.data.file ? this.formatFileData(res.data.file) : [];
       }).catch((err) => {
+        this.files = [];
         this.meta = { page: 1, maximumPage: 1}
       });
     },
@@ -462,7 +463,7 @@ export default {
 }
 
 .manage-file-conent .file-footer {
-  margin-top: 1.75rem;
+  margin-top: 5px;
   text-align: center;
 }
 
@@ -481,8 +482,7 @@ export default {
 }
 
 .manage-file-conent .img-btn {
-  float: right;
-  margin-right: 0.5rem;
+  width:80%;
 }
 
 .manage-file-conent input[type="file"] {
@@ -502,7 +502,7 @@ export default {
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
   border-top: 1px solid #dcdcdb;
-  margin:0px auto 10px auto;
+  margin:5px auto 0px auto;
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;

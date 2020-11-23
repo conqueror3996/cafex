@@ -300,6 +300,7 @@ export default {
         this.meta = this.consumers ? this.consumers.meta : {};
         this.localConsumers = this.consumers.consumer ? this.formatConsumerData(this.consumers.consumer) : []
       }).catch((err) => {
+        this.localConsumers = [];
         this.meta = { page: 1, maximumPage: 1}
       });
     },
@@ -333,7 +334,7 @@ export default {
     okDelete() {
       this.deleteConsumer(this.selectedItem).then(() => {
         console.log("delete success", this.selectedItem);
-        this.funcGetAllConsumer(this.inputData)
+        this.funcGetAllConsumer(this.inputData, this.meta.page)
       })
     },
     // Event click button search
@@ -373,7 +374,7 @@ export default {
       }
     },
     afterChanges(event) {
-      this.funcGetAllConsumer(this.inputData)
+      this.funcGetAllConsumer(this.inputData, 1)
       return event
     } 
   },
