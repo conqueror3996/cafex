@@ -289,13 +289,18 @@ export default {
     ...mapActions("employees", {
       getUserInfo: "userInfo",
     }),
-    ...mapActions("alert", { error: "error" }),
+    ...mapActions("alert", { 
+      error: "error",
+      clear: "clear",
+    }),
 
     funcGetAllConsumer(input, page) {
       input.page = page;
       this.getAllConsumer(input).then(() => {
-        this.meta = this.consumers.meta ? this.consumers.meta : {};
+        this.meta = this.consumers ? this.consumers.meta : {};
         this.localConsumers = this.consumers.consumer ? this.formatConsumerData(this.consumers.consumer) : []
+      }).catch((err) => {
+        this.meta = { page: 1, maximumPage: 1}
       });
     },
     deleteItem(consumerId) {
@@ -342,7 +347,7 @@ export default {
     changeTab(tab) {
       // Set error message empty when change tab
       if (this.tabSelected !== tab) {
-        this.error('');
+        this.clear();
       }
       this.tabSelected = tab;
     },

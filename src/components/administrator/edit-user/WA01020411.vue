@@ -15,7 +15,7 @@
             <li>氏名：{{ localEmployee.employeeName }}</li>
             <li>氏名（カナ）：{{ localEmployee.mailAddress }}</li>
             <li>所属：{{ localEmployee.branchNumber }}</li>
-            <li>パスワード：{{ this.localPassword }}</li>
+            <li>パスワード： **************</li>
           </ul>
         </div>
         <template #modal-footer="{ ok, cancel }">
@@ -53,9 +53,6 @@ export default {
       })
     },
     created() {
-        for (var i = 0; i < this.localEmployee.loginPassword.length; i = i + 1) {
-          this.localPassword = this.localPassword + '*'
-        }
     },
     methods: {
       ...mapActions("employees", {

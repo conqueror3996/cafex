@@ -169,6 +169,7 @@ export default {
   methods: {
     ...mapActions("alert", {
         error: "error",
+        clear: "clear",
     }),
     ...mapActions("files", {
         getAllFile: "getAllFile",
@@ -187,6 +188,8 @@ export default {
       this.getAllFile(input).then((res) => {
         this.meta = res.data.meta;
         this.files = res.data.file ? this.formatFileData(res.data.file) : [];
+      }).catch((err) => {
+        this.meta = { page: 1, maximumPage: 1}
       });
     },
     initInfo () {
@@ -260,7 +263,7 @@ export default {
       if(errorMessage !== '') {
           this.error(errorMessage)
       } else {
-          this.error('')
+          this.clear()
           let formData = new FormData();
           formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])

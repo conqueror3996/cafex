@@ -17,7 +17,9 @@ class AgentService {
       console.log(inDto)
       const config = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          "Access-Control-Allow-Credentials": "true",
+          "Access-Control-Allow-Origin": "*"
         }
       };
       
