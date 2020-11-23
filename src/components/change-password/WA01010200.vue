@@ -69,7 +69,10 @@ export default {
     },
     methods: {
         ...mapActions('employees', ['changePassword']),
-        ...mapActions("alert", { error: "error" }),
+        ...mapActions("alert", { 
+            error: "error", 
+            clear: "clear", 
+        }),
         handleSubmit (e) {
             if(this.submitted == false) {
                 this.$router.push('/WA01010300').catch(() => {})
@@ -100,7 +103,7 @@ export default {
                 return;
             }
             else{
-                this.error('');
+                this.clear();
             }
             this.changePassword(data)
         }

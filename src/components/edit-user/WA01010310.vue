@@ -107,6 +107,7 @@ export default {
     methods: {
         ...mapActions("alert", {
             error: "error",
+            clear: "clear",
         }),
         ...mapActions("consumers", {
             getConsumerById: "getConsumerByID",
@@ -124,14 +125,14 @@ export default {
             
             // reset slert message
             if(this.alert.message !== '') {
-                this.error('');
+                this.clear();
             }
 
             // show modal confirm
             this.showConfirmEdit = true;
         },
         handleCancel() {
-            this.error(''); // reset error message
+            this.clear(); // reset error message
             this.$emit("changeEdit", false)
         },
         formatConsumerData(arrInput) {

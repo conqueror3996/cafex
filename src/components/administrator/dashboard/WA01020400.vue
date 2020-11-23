@@ -192,8 +192,8 @@ export default {
       searchString: '',
       cols: [
         { key: "checked", label: "", class: "col-check" },
-        { key: "employeeName", label: "氏名", class: "col-name" },
         { key: "branchName", label: "所属" },
+        { key: "employeeName", label: "氏名", class: "col-name" },
         { key: "mailAddress", label: "メールアドレス" },
         { key: "rollName", label: "ロール" },
         { key: "action", label: "" , class: "col-spec" },
@@ -220,7 +220,7 @@ export default {
   },
   created() {
     this.getUserInfo().then(() => {
-      this.inputData = { page: 1, maximumRecordsPerPage: 30 }
+      this.inputData = { page: 1, maximumRecordsPerPage: 30, keywords: '%%' }
       this.funcGetAllEmployee(this.inputData, 1);
     })
     this.changePasswordState = false;
@@ -239,6 +239,8 @@ export default {
       this.getAllEmployees(input).then(() => {
         this.meta = this.employees.all.meta;
         this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
+      }).catch((err) => {
+        this.meta = { page: 1, maximumPage: 1}
       });
     },
     deleteItem(employeeId) {
@@ -272,7 +274,9 @@ export default {
     },
     // Event click button search
     handleSearch() {
-      this.localEmployees = this.employees.all.filter(item => { return item.employeeName.toLowerCase().includes(this.searchString.toLowerCase().trim())})
+      this.inputData.keywords = '%' + this.searchString.trim() + '%'
+      this.funcGetAllEmployee(this.inputData, 1)
+      // this.localEmployees = this.employees.all.filter(item => { return item.employeeName.toLowerCase().includes(this.searchString.toLowerCase().trim())})
     },
     formatConsumerData(arrInput) {
       return arrInput.map((e) => {
