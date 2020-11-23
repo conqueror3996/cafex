@@ -294,7 +294,7 @@ export default {
     funcGetAllConsumer(input, page) {
       input.page = page;
       this.getAllConsumer(input).then(() => {
-        this.meta = this.consumers.meta;
+        this.meta = this.consumers.meta ? this.consumers.meta : {};
         this.localConsumers = this.consumers.consumer ? this.formatConsumerData(this.consumers.consumer) : []
       });
     },
