@@ -373,7 +373,7 @@ export default {
       }
     },
     afterChanges(event) {
-      this.funcGetAllConsumer(this.inputData)
+      this.funcGetAllConsumer(this.inputData, 1)
       return event
     } 
   },

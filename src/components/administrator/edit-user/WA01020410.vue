@@ -99,7 +99,8 @@ export default {
     created() {
         this.getEmployeeByID(this.$route.params.employeeId).then(() => {
             this.localEmployee = this.employees.employee
-            this.$set(this.localEmployee, 'loginPassword', this.loginPassword)
+            this.$set(this.localEmployee, 'loginPassword', this.resetPassword)
+            this.$set(this.localEmployee, 'confirmPassword', this.confirmPassword)
             
         })
         sharedService.getBranches().then((res) => {
@@ -112,6 +113,7 @@ export default {
         ...mapActions("alert", {
             error: "error",
             clear: "clear",
+            errorMsg: "errorMsg",
         }),
         ...mapActions("employees", {
             getEmployeeByID: "getEmployeeByID",
@@ -121,22 +123,24 @@ export default {
             const errorCode = validate.validateInput(userValidatePattern, this.localEmployee);
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
-                this.error(messageError.join("\n"));
+                // this.alert.message = messageError.join("\n")
+                this.errorMsg(messageError.join("\n"))
                 return;
             }
 
-            if (this.resetPassword != this.confirmPassword) {
+            if (this.localEmployee.resetPassword != this.localEmployee.confirmPassword) {
                 this.msg += validate.getMessageErrorFromCode("S02016") + "\n";
                 //return
             }
             // this.msg = this.msg.trim();
             if(this.msg !== '') {
                 // this.error(this.msg);
-                this.alert.message = this.msg.trim()
+                this.errorMsg(this.msg.trim())
+                this.msg = ''
                 return;
             }
             // reset slert message
-            if(this.alert.message !== '') {
+            if(this.msg == '') {
                 this.clear()
             }
 
