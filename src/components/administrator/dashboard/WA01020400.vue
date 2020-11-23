@@ -228,7 +228,8 @@ export default {
   methods: {
     ...mapActions("employees", {
       getAllEmployees: "getAll",
-      getUserInfo: "userInfo"
+      getUserInfo: "userInfo",
+      deleteEmployee: "deleteEmployee",
     }),
     ...mapActions("files", {
       editItem: "editItem",
@@ -270,7 +271,8 @@ export default {
     },
     // Event click button 編集 in delete modal
     okDelete() {
-      console.log("delete success");
+      // console.log("delete success");
+
     },
     // Event click button search
     handleSearch() {

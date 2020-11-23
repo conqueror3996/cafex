@@ -11,6 +11,7 @@ export const employeeService = {
     registerEmployees,
     updateEmployee,
     shareDoc,
+    deleteEmployee,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -88,4 +89,8 @@ function shareDoc(input) {
     let headers = { 'Content-Type': 'application/json' }
 
     return auth.sendRequest('POST', allAPI.share_doc, input, headers)
+}
+
+function deleteEmployee(id) {
+    return auth.sendRequest('DELETE', allAPI.delete_employee_by_id(id), null, null)
 }

@@ -143,6 +143,20 @@ const actions = {
             }
             
         })
+    },
+    deleteEmployee({commit, dispatch}, id) {
+        // commit('deleteRequest', id);
+
+        return consumerService.deleteEmployee(id)
+            .then((info) => {
+                commit('deleteSuccess', info)
+            }).catch((err) => {
+                if (err.response) {
+                    const { data } = err.response
+                    dispatch('alert/error', data.error.code, { root: true });
+                    commit('deleteFailure', { id, error: data.error.code })
+                }
+            });
     }
 
 };
@@ -188,6 +202,31 @@ const mutations = {
     getUserByIdFailed(state, error){
         state.status = {};
         state.err = error;
+    },
+    deleteRequest(state, id) {
+        // add 'deleting:true' property to user being deleted
+        // state.all.items = state.all.items.map(user =>
+        //     user.id === id
+        //         ? { ...user, deleting: true }
+        //         : user
+        // )
+    },
+    deleteSuccess(state, id) {
+        // remove deleted user from state
+        state.all.items = state.all.items.filter(user => user.id !== id)
+    },
+    deleteFailure(state, { id, error }) {
+        // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
+        state.all.items = state.items.map(user => {
+            if (user.id === id) {
+                // make copy of user without 'deleting:true' property
+                const { deleting, ...userCopy } = user;
+                // return copy of user with 'deleteError:[error]' property
+                return { ...userCopy, deleteError: error };
+            }
+
+            return user;
+        })
     },
 };
 
