@@ -282,7 +282,7 @@ export default {
       deleteConsumer: "deleteConsumer",
     //   deleteItem: "deleteItem"
     }),
-    ...mapActions("files", {
+    ...mapActions("files", { 
       editItem: "editItem",
     //   deleteItem: "deleteItem"
     }),
