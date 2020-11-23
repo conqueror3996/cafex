@@ -147,7 +147,7 @@ const actions = {
     deleteEmployee({commit, dispatch}, id) {
         // commit('deleteRequest', id);
 
-        return consumerService.deleteEmployee(id)
+        return employeeService.deleteEmployee(id)
             .then((info) => {
                 commit('deleteSuccess', info)
             }).catch((err) => {
@@ -202,14 +202,6 @@ const mutations = {
     getUserByIdFailed(state, error){
         state.status = {};
         state.err = error;
-    },
-    deleteRequest(state, id) {
-        // add 'deleting:true' property to user being deleted
-        // state.all.items = state.all.items.map(user =>
-        //     user.id === id
-        //         ? { ...user, deleting: true }
-        //         : user
-        // )
     },
     deleteSuccess(state, id) {
         // remove deleted user from state

@@ -272,7 +272,9 @@ export default {
     // Event click button 編集 in delete modal
     okDelete() {
       // console.log("delete success");
-
+      this.deleteEmployee(this.selectedItem).then(() => {
+        this.funcGetAllEmployee(this.inputData, this.meta.page)
+      })
     },
     // Event click button search
     handleSearch() {
