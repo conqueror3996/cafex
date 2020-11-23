@@ -49,6 +49,7 @@ export default {
     methods: {
         ...mapActions("alert", {
             error: "error",
+            clear: "clear"
         }),
         ...mapActions("employees", {
             registerEmployeesCsv: "registerEmployees"
@@ -65,7 +66,7 @@ export default {
 
             // reset slert message
             if(this.alert.message !== '') {
-                this.error('');
+                this.clear();
             }
 
             // show modal confirm
@@ -92,7 +93,7 @@ export default {
             if (errorMessage !== '') {
                 this.error(errorMessage)
             } else {
-                this.error('')
+                this.clear()
                 this.fileName = `${this.fileName}    を選択`;
             }
         },
