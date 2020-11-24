@@ -16,12 +16,10 @@ const actions = {
             .then(
                 
                 info => {
-                    console.log(info)
                     commit('getAllSuccessGet', info)
                 }
             ).catch((err) => {
                 if (err.response) {
-                    console.log(err.response)
                     const { data } = err.response
                     if (data.error.code != '0103014040201') {
                         dispatch('alert/error', data.error.code, { root: true });
@@ -74,7 +72,6 @@ const actions = {
 
     updateConsumer({commit, dispatch}, input) {
         return consumerService.updateConsumer(input.params, input.body).then((info) => {
-            console.log(info)
             return info
         }).catch((err) => {
             if (err.response) {

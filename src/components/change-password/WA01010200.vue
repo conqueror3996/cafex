@@ -91,7 +91,6 @@ export default {
             
             if (!common.isPassword(this.newPassword)) {
                 this.msg += validate.getMessageErrorFromCode("S02001") + "\n"; 
-                console.log(this.msg)
                 //return
             }
             if (this.newPassword != this.confirmPassword) {

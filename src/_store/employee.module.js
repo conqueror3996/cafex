@@ -12,7 +12,7 @@ const actions = {
                     // dispatch('alert/success', info.status + " Login Success", { root: true });
                     commit('loginSuccess', info);
                     dispatch("userInfo").then(() => {
-                        console.log("into user info", state.employee)
+                        // console.log("into user info", state.employee)
                         // if(state.employee.lastLoginDate === "") {
                         //     router.push('/WA01010200')
                         //     return;
@@ -96,7 +96,6 @@ const actions = {
     getEmployeeByID({commit , dispatch}, id) {
         return employeeService.getEmployeeByID(id).then(
             info => {
-                console.log(info.data)
                 commit("getUserByIdSuccess", info.data);
             }
         ).catch((err) => {
@@ -108,7 +107,6 @@ const actions = {
         })
     },
     registerEmployees({commit, dispatch}, inputFile) {
-        console.log(inputFile)
         return employeeService.registerEmployees(inputFile).then(
             info => {
                 commit ("getAllEmployeesSuccess", info.data)
@@ -123,7 +121,6 @@ const actions = {
 
     updateEmployee({commit, dispatch}, input) {
         return employeeService.updateEmployee(input.params, input.body).then((info) => {
-            console.log(info)
             return info
         }).catch((err) => {
             if (err.response) {

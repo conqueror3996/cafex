@@ -104,7 +104,6 @@ export default {
             
         })
         sharedService.getBranches().then((res) => {
-            console.log(res)
             this.branches = res.data.branch
         })
 
