@@ -145,9 +145,7 @@ const actions = {
         })
     },
     deleteEmployee({commit, dispatch}, id) {
-        // commit('deleteRequest', id);
-
-        return employeeService.deleteEmployee(id)
+        return employeeService.deleteEmployeeByID(id)
             .then((info) => {
                 commit('deleteSuccess', info)
             }).catch((err) => {

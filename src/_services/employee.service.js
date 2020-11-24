@@ -11,7 +11,7 @@ export const employeeService = {
     registerEmployees,
     updateEmployee,
     shareDoc,
-    deleteEmployee,
+    deleteEmployeeByID,
 };
 
 /** Ap010101_従業員ログインAPI */ 
@@ -91,6 +91,6 @@ function shareDoc(input) {
     return auth.sendRequest('POST', allAPI.share_doc, input, headers)
 }
 
-function deleteEmployee(id) {
+function deleteEmployeeByID(id) {
     return auth.sendRequest('DELETE', allAPI.delete_employee_by_id(id), null, null)
 }
