@@ -167,7 +167,7 @@ export const errorMsg = {
         },
         "0100004000708": {
             "message": "Bad Request",
-            "detail": "パスワードが間違っている"
+            "detail": "現在のパスワードが間違っています。"
         },
         "0100004000709": {
             "message": "Unprocessable Entity",
