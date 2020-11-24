@@ -166,7 +166,7 @@
               </div>
             </div>
             <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
-                <b-button variant="primary" class="btn-next" @click="information()">次へ</b-button>
+                <b-button variant="primary" :disabled="this.selectedItem === ''" class="btn-next" @click="information()">次へ</b-button>
             </div>
             
           </div>
