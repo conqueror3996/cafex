@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">再設定パスワード :</label></div>
+                <div class="label-form"><label for="name">再設定パスワード :</label></div>
                 <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="localEmployee.resetPassword"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">確認用パスワード :</label></div>
+                <div class="label-form"><label for="name">確認用パスワード :</label></div>
                 <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="localEmployee.confirmPassword"></b-input></div>
             </div>
             <div class="form-button">
