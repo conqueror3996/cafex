@@ -32,14 +32,14 @@
         </div>
         <div class="box-tab border-box scroll-bar">
           <div class="action-panel">
-            <button class="btn btn-outline-secondary small-font" @click="pushLink('share-plan1')">
+            <button class="btn btn-outline-secondary small-font" @click="showSimulation = true; showDescription = false; showContract = false; pushLink('share-plan1')">
             <!-- <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false"> -->
               <span>ライフプラン<br /> シミュレーション</span>
             </button>
             <button class="btn btn-outline-secondary" @click="showSimulation = false; showDescription = true; showContract = false">
               <span>商品説明</span>
             </button>
-            <button class="btn btn-outline-secondary" @click="pushLink('share-form1')">
+            <button class="btn btn-outline-secondary" @click="showSimulation = false; showDescription = false; showContract = true; pushLink('share-form1')">
               <span>契約申込</span>
             </button>
           </div>
