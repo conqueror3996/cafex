@@ -448,7 +448,7 @@ export default {
 
 .file-table {
   width: 739px;
-  height: 401px;
+  height: 381px;
   border: 1px solid #97989c;
   overflow: auto;
 }
@@ -519,7 +519,7 @@ export default {
 .pagination .box-paging span:nth-child(2){padding:0px 20px;}
 @media (max-width: 1366px) {
   .file-table {
-    height: calc(40vh - 20px);
+    height: calc(35vh - 30px);
   }
   .manage-file-conent .panel {
     height: calc(50vh - 15px);
@@ -557,7 +557,7 @@ export default {
 
 @media (max-width: 1024px) {
   .manage-file-conent .file-table {
-    height: calc(40vh - 20px);
+    height: calc(35vh - 30px);
   }
   .manage-file-conent .file-content {
     width: 65%;

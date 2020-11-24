@@ -475,7 +475,7 @@ export default {
 .table-main {
   margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
-  height: 397px;
+  height: 377px;
   overflow: auto;
 }
 .table-main .table.b-table>thead>tr>th {
@@ -564,7 +564,7 @@ export default {
     height: calc(70vh);
   }
   .table-main {
-    height: calc(40vh - 20px);
+    height: calc(35vh - 30px);
   }
   
 };
@@ -575,7 +575,7 @@ export default {
   }
   
   .table-main {
-    height: calc(45vh - 20px);
+    height: calc(40vh - 30px);
   }
 };
 
