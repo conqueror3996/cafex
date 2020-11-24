@@ -69,7 +69,8 @@ export default {
     },
     methods: {
         ...mapActions('employees', ['changePassword']),
-        ...mapActions("alert", { 
+        ...mapActions("alert", {
+            errorMsg: "errorMsg", 
             error: "error", 
             clear: "clear", 
         }),
@@ -99,7 +100,7 @@ export default {
             }
             this.msg = this.msg.trimEnd('\n');
             if(this.msg !== '') {
-                this.error(this.msg);
+                this.errorMsg(this.msg);
                 return;
             }
             else{

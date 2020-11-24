@@ -48,6 +48,7 @@ export default {
     },
     methods: {
         ...mapActions("alert", {
+            errorMsg: "errorMsg",
             error: "error",
             clear: "clear"
         }),
@@ -60,7 +61,7 @@ export default {
             
             if(errorCode.length > 0) {
                 const messageError = validate.getArrayMessageError(errorCode);
-                this.error(messageError.join("\n"));
+                this.errorMsg(messageError.join("\n"));
                 return;
             }
 
@@ -91,7 +92,7 @@ export default {
             }
 
             if (errorMessage !== '') {
-                this.error(errorMessage)
+                this.errorMsg(errorMessage)
             } else {
                 this.clear()
                 this.fileName = `${this.fileName}    を選択`;

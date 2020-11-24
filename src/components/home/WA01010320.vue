@@ -80,6 +80,7 @@ export default {
     },
     methods: {
         ...mapActions("alert", {
+            errorMsg: "errorMsg",
             error: "error",
             clear: "clear",
         }),
@@ -91,7 +92,7 @@ export default {
             if(errorCode.length > 0) {
                 console.log('test')
                 const messageError = validate.getArrayMessageError(errorCode);
-                this.error(messageError.join("\n"));
+                this.errorMsg(messageError.join("\n"));
                 return;
             }
 
