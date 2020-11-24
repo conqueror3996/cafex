@@ -170,6 +170,7 @@ export default {
   },
   methods: {
     ...mapActions("alert", {
+        errorMsg: "errorMsg",
         error: "error",
         clear: "clear",
     }),
@@ -264,7 +265,7 @@ export default {
       }
       
       if(errorMessage !== '') {
-          this.error(errorMessage)
+          this.errorMsg(errorMessage)
       } else {
           this.clear()
           let formData = new FormData();
