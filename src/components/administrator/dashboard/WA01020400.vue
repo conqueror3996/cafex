@@ -241,6 +241,7 @@ export default {
         this.meta = this.employees.all.meta;
         this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
       }).catch((err) => {
+        this.localEmployees = [];
         this.meta = { page: 1, maximumPage: 1}
       });
     },

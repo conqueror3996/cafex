@@ -219,6 +219,8 @@ export default {
         // this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
         this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.localConsumer.consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
           this.files = res.data.file;
+        }).catch((err) => {
+          this.files = [];
         });
       })
     })
