@@ -266,6 +266,7 @@ export default {
       
       if(errorMessage !== '') {
           this.errorMsg(errorMessage)
+          this.isUploading = false;
       } else {
           this.clear()
           let formData = new FormData();
