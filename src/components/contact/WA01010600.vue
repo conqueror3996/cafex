@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="contract" v-if="showContract">
-              <button class="btn btn-outline-primary">
+              <button class="btn btn-outline-secondary">
                 <span>代行入力</span>
               </button>
             </div>

@@ -92,6 +92,7 @@ export default {
     },
     goHome() {
       if(!this.employees.employee || !this.employees.employee.rollCode) return;
+      if(this.$router.currentRoute.path === '/WA01010600') return;
       if(this.employees.employee.rollCode) {
         if (this.$router.currentRoute.path !== '/WA01020300') this.$router.push('/WA01020300')
       } else {
