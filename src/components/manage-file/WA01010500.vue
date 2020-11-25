@@ -149,7 +149,6 @@ export default {
   created() {
     this.initInfo()
     this.getUserInfo().then(() => {
-      
       return this.getConsumerByID(this.localConsumerId).then(() => {
         this.consumer = [this.detail.item]
         this.consumer[0].birthdate = moment(this.consumer[0].birthdate).format('yyyy/MM/DD');
@@ -245,19 +244,17 @@ export default {
     },
     uploadFile(event) {
       const files = event.target.files;
+      const memoryImg = 104857600;
       let errorMessage = '';
       if(files.length < 1) return;
       this.isUploading = true;
-      for (var i = 0; i < files.length; i++)
-      {
-        const filename = files[i].name;
-        const filetype = filename.substring(filename.length - 3, filename.length);
-        if(filetype !== 'pdf') {
+      for (var i = 0; i < files.length; i++) {
+        const filetype = files[i].type;
+        if(filetype !== 'application/pdf') {
           errorMessage = validate.getMessageErrorFromCode("S02014");
           break;
         }
-        if(files[i].size/1024/1024 > 100)
-        {
+        if(files[i].size > memoryImg) {
           errorMessage = validate.getMessageErrorFromCode("S02011");
           break;
         }
@@ -265,13 +262,20 @@ export default {
       
       if(errorMessage !== '') {
           this.error(errorMessage)
+          this.isUploading = false;
       } else {
           this.clear()
           let formData = new FormData();
           formData.append('consumerId', this.consumer[0].consumerId)
           formData.append('file', event.target.files[0])
           this.addFile({ fileType: "0001", data: formData}).then(() => {
-            this.getAllFile({employeeId: this.employees.employee.employeeId, consumerId : this.consumer[0].consumerId, page: 1, maximumRecordsPerPage: 20}).then((res) => {
+            let inputRequest = {
+              employeeId: this.employees.employee.employeeId, 
+              consumerId : this.consumer[0].consumerId, 
+              page: 1, 
+              maximumRecordsPerPage: 20
+            }
+            this.getAllFile(inputRequest).then((res) => {
               this.isUploading = false;
               this.files = res.data.file;
             })
@@ -497,26 +501,7 @@ export default {
   border-radius: 0.6rem;
   margin: auto;
 }
-.pagination{
-  width:150px;
-  height: 40px;
-  border-bottom: 1px solid #dcdcdb;
-  border-top: 1px solid #dcdcdb;
-  margin:5px auto 0px auto;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-.pagination span{
-  display: inline-block;
-  font-size: 15px;
-  font-weight:bold;
-}
-.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
-.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
-.pagination .box-paging span:nth-child(2){padding:0px 20px;}
+
 @media (max-width: 1366px) {
   .file-table {
     height: calc(40vh - 20px);

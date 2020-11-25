@@ -533,7 +533,7 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
-.pagination{
+/* .pagination{
   width:150px;
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
@@ -552,7 +552,7 @@ export default {
 }
 .pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
 .pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
-.pagination .box-paging span:nth-child(2){padding:0px 20px;}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;} */
 @media (max-width: 1366px) {
   .home-screen {
     width: 96%;

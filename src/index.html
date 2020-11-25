@@ -30,7 +30,24 @@
         padding:0px;
         overflow: hidden;
     }
-    @media(max-width: 1367px){
-        /* body{ overflow-y: scroll;} */
+    .pagination{
+        width:150px;
+        height: 30px;
+        /* border-bottom: 1px solid #dcdcdb;
+        border-top: 1px solid #dcdcdb; */
+        margin:0px auto 5px auto;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
     }
+    .pagination span{
+        display: inline-block;
+        font-size: 15px;
+        font-weight:bold;
+    }
+    .pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
+    .pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
+    .pagination .box-paging span:nth-child(2){padding:0px 20px;}
 </style>
