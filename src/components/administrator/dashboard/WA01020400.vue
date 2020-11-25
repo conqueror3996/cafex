@@ -376,7 +376,7 @@ export default {
 }
 
 .home-admin .table-main {
-  margin: 1.5rem 0.75rem;
+  margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
   height: 397px;
   overflow: auto;
