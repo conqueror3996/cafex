@@ -380,7 +380,7 @@ export default {
 }
 
 .home-admin .table-main {
-  margin: 1.5rem 0.75rem;
+  margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
   height: 397px;
   overflow: auto;
@@ -441,7 +441,7 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
-.pagination{
+/* .pagination{
   width:150px;
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
@@ -460,7 +460,7 @@ export default {
 }
 .pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
 .pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
-.pagination .box-paging span:nth-child(2){padding:0px 20px;}
+.pagination .box-paging span:nth-child(2){padding:0px 20px;} */
 @media (max-width: 1366px) {
   .home-admin {
     width: 96%;

@@ -54,7 +54,7 @@
               <label>ファイル</label>
               <div class="input-group">
                 <select class="select-page" id="select-page" name="doc-page" v-model="docFileObj" @change="changeDoc">
-                      <option v-bind:key="file.fileId" :value="{fileId: file.fileId, totalPage: file.fileTotalPages}" v-for="file in files">{{file.fileName}}
+                      <option v-bind:key="file.fileId" :value="{fileId: file.fileId, fileName: file.fileName, totalPage: file.fileTotalPages}" v-for="file in files">{{file.fileName}}
                       </option>
                   </select>
               </div>
@@ -62,11 +62,11 @@
               <div class="input-group">
                 <select class="page-select" id="select-page" v-model="docSubPageIndex" @change="changeSubPage">
                   <option value=""></option>
-                  <option v-bind:key="idx" :value="obj" v-for="(obj, idx) in docSubPage">{{obj}}
+                  <option v-bind:key="idx" :value="obj" v-for="(obj, idx) in docSubPage">Page {{obj}}
                   </option>
                 </select>
               </div>
-              <button class="btn btn-primary" @click="pushDocUrl">
+              <button class="btn btn-primary" @click="pushDocUrl()">
                 <span>共有</span>
               </button>
               <div class="document-preview">
@@ -85,7 +85,6 @@
         <div ref="remoteView" class="remote-view">
             <div v-show="!isSharing">{{isSharing?'':'Not shared...'}}</div>
             <div v-show="!isSharing" style="position: relative;">
-                <img :src="responseImage" />
                 <video id="previewvideo" style="background: black;width: 500px;margin-bottom: 20px;" autoplay
                     playsinline></video>
                 <button type="button" name="camera-setting" class="single-button" title="カメラ設定"
@@ -100,7 +99,7 @@
                         (click)="setCam(cam)">{{cam.label}}</button>
                 </mat-menu> -->
             </div>
-            <div v-show="!isSharing"></div>
+            <div></div>
             <!-- width: 200px;height: 150px; -->
             <!-- display: none; -->
             <div id="localvideo" v-show="isSharing || (!gService.isDisplayMediaMode && appView)" :class="previewStyle"
@@ -354,7 +353,7 @@ export default {
           console.log("###Screen Share Active.###");
           this.selectedTool = 'control-selected';
           AssistAgentSDK.controlSelected();
-          this.pushLink('share-doc');
+          this.pushScreen('share-doc');
         } else {
         }
       });
@@ -562,7 +561,7 @@ export default {
       this.docSubPage.length = 0
       let index = 0;
       for (let i = 1; i <= this.docFileObj.totalPage; i++) {
-        this.docSubPage[index] = "page_" + i; 
+        this.docSubPage[index] = i; 
         index ++;
       }
       //this.docSubPageIndex = this.docSubPage[0];
@@ -575,12 +574,11 @@ export default {
       //   this.docPageObj = this.docSubPage[parseInt(this.docSubPageIndex)];
       // }
       if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
-          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
+          this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/page_" + this.docSubPageIndex + ".png";
           const data = {
             docUrl: this.docUrl
           }
           this.shareDoc(data).then((res) => {
-            console.table(res)
             this.responseImage = res.docUrl
           })
       }
@@ -597,10 +595,19 @@ export default {
         this.AssistAgentSDK.pushLink(`javascript:receiver.next(${JSON.stringify(obj)})`);
       }
     },
+    pushScreen(targetLink) {
+      if (this.isSharing && targetLink) {
+        this.appView = targetLink === 'share-doc';
+        const obj = { type: 'doc', body: { path: targetLink } };
+        this.AssistAgentSDK.pushLink(`javascript:receiver.next(${JSON.stringify(obj)})`);
+      }
+    },
     pushDocUrl() {
-      // if(this.docSubPageIndex !== '' && this.docFileObj.fileId !== '') {
-      //     this.docUrl = this.employees.employee.employeeId + "/" + this.docFileObj.fileId + "/" + this.docSubPageIndex + ".png";
-      // }
+      if (this.isSharing) {
+        let nameFile = this.docFileObj.fileName + "-P." + this.docSubPageIndex;
+        const obj = { type: 'doc', body: { path: 'share-doc', label: nameFile , value : this.responseImage } };
+        this.AssistAgentSDK.pushLink(`javascript:receiver.next(${JSON.stringify(obj)})`);
+      }
     }
   },
 
@@ -629,7 +636,7 @@ export default {
   .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
   .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
   .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
-  
+  .remote-view-element{width:calc(80% - 5px) !important;height:calc(100vh - 145px) !important;}
   .contractor-info {
     list-style: none;
     padding: 0;
