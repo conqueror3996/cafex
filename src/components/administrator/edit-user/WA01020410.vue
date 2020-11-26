@@ -99,7 +99,7 @@ export default {
     created() {
         this.getEmployeeByID(this.$route.params.employeeId).then(() => {
             this.localEmployee = this.employees.employee
-            this.$set(this.localEmployee, 'loginPassword', this.resetPassword)
+            this.$set(this.localEmployee, 'resetPassword', this.resetPassword)
             this.$set(this.localEmployee, 'confirmPassword', this.confirmPassword)
             
         })
@@ -128,7 +128,7 @@ export default {
                 return;
             }
 
-            if (this.localEmployee.resetPassword != this.localEmployee.confirmPassword) {
+            if (this.localEmployee.resetPassword.trim() !== this.localEmployee.confirmPassword.trim()) {
                 this.msg += validate.getMessageErrorFromCode("S02016") + "\n";
                 //return
             }
