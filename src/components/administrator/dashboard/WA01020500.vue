@@ -75,6 +75,7 @@ export default {
         },
         uploadFile(event) {
             this.files = event.target.files;
+            const memoryImg = 104857600;
             console.log(this.files)
             let errorMessage = '';
             for (var i = 0; i < this.files.length; i++)
@@ -88,7 +89,10 @@ export default {
                 } else {
                     this.fileName = filename;
                 }
-                
+                if(files[i].size > memoryImg) {
+                    errorMessage = validate.getMessageErrorFromCode("S02011");
+                    break;
+                }
             }
 
             if (errorMessage !== '') {
