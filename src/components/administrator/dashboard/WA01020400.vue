@@ -10,7 +10,7 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <!-- <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p> -->
+            <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
             <div class="content-search">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -20,7 +20,6 @@
                   class="border-right-0"
                   maxlength=38
                   v-model="searchString"
-                  style="font-family: 'HiraginoSan-W3'"
                   autofocus></b-form-input>
                 <b-input-group-append>
                   <b-button class="bg-transparent border-0" variant="primary" type="submit">
@@ -88,14 +87,13 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040001}}</div>
+                        <div>{{errorMess.WA0102040001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
                               size="sm"
                               variant="primary"
                               @click="ok()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               編集
                             </b-button>
@@ -103,7 +101,6 @@
                               size="sm"
                               variant="danger"
                               @click="cancel()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               キャンセル
                             </b-button>
@@ -119,14 +116,13 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040002}}</div>
+                        <div>{{errorMess.WA0102040002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
                               size="sm"
                               variant="primary"
                               @click="ok()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               削除
                             </b-button>
@@ -134,7 +130,6 @@
                               size="sm"
                               variant="danger"
                               @click="cancel()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               キャンセル
                             </b-button>
@@ -462,20 +457,7 @@ export default {
 .pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
 .pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
 .pagination .box-paging span:nth-child(2){padding:0px 20px;} */
-@media (max-width: 1366px) {
-  .home-admin {
-    width: 96%;
-    margin: 0 auto;
-    height: 100vh;
-  }
-  
-  .home-admin .selected-content {
-    height: calc(70vh);
-  }
-  .home-admin .table-main {
-    height: calc(45vh);
-  }
-};
+
 
 @media (max-width: 2301px){
   .home-admin .selected-content {
@@ -497,6 +479,56 @@ export default {
   .home-admin .table-main {
     height: 505px;
     width: 1680px;
+  }
+  .pagination {
+    height: 40px;
+  }
+};
+
+@media (max-width: 1695px) {
+  .home-admin .selected-content {
+    width: 1500px;
+    margin: 0rem 1rem 1rem -5.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    width: 1402px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 54px;
+  }
+  .home-admin .table-main {
+    height: 505px;
+    width: 1280px;
+  }
+  .pagination {
+    height: 40px;
+  }
+};
+
+@media (max-width: 1506px) {
+  .home-admin .selected-content {
+    width: 1200px;
+    margin: 0rem 1rem 1rem -.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    width: 1202px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 54px;
+  }
+  .home-admin .table-main {
+    height: 505px;
+    width: 1080px;
   }
   .pagination {
     height: 40px;
