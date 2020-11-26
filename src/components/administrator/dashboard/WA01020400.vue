@@ -504,6 +504,7 @@ export default {
   .home-admin .table-main {
     height: 505px;
     width: 1280px;
+    margin: 2rem 1rem 1rem 6.7rem;
   }
   .pagination {
     height: 40px;
@@ -513,11 +514,11 @@ export default {
 @media (max-width: 1506px) {
   .home-admin .selected-content {
     width: 1200px;
-    margin: 0rem 1rem 1rem -.5rem;
+    margin: 0rem 1rem 1rem 4.5rem;
     border-top: 1px solid rgba(0,0,0,.125);
   }
   .card-header-tabs{
-    width: 1202px;
+    width: 1262px;
   }
   .home-admin .form-control {
     height: 54px;
@@ -529,6 +530,7 @@ export default {
   .home-admin .table-main {
     height: 505px;
     width: 1080px;
+    margin: 2rem 1rem 1rem 3.7rem;
   }
   .pagination {
     height: 40px;
@@ -538,7 +540,7 @@ export default {
 @media (max-width: 1367px) {
  .home-admin .tab-pane .selected-content {
     height: 720px;
-    width: 1262px;
+    width: 1362px;
     margin: 0rem 2rem 1rem 1rem;
     border-top: 1px solid rgba(0,0,0,.125);
   }
