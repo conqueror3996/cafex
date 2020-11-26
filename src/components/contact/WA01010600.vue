@@ -1,9 +1,54 @@
 <template>
   <div id="main" class="clearfix">
+    <div class="toolbar">
+      <form name="toolsForm" class="tools"  v-show="isSharing">
+        <!-- -->
+        <b-button-group size="xs" class="edit-tools">
+        <b-button variant="light" title="選択" @click="selectedTool = 'control-selected'; touch()" :class="selectedTool === 'control-selected'? 'active' : ''">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-index-thumb" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M6.75 1a.75.75 0 0 0-.75.75V9.5a.5.5 0 0 1-.854.354l-2.41-2.411a.517.517 0 0 0-.809.631l2.512 4.185 1.232 2.465a.5.5 0 0 0 .447.276h6.302a.5.5 0 0 0 .434-.252l1.395-2.442a2.5 2.5 0 0 0 .317-.991l.272-2.715a1 1 0 0 0-.995-1.1H13.5v1a.5.5 0 1 1-1 0V7.154a4.208 4.208 0 0 0-.2-.26c-.187-.222-.368-.383-.486-.43-.124-.05-.392-.063-.708-.039a4.844 4.844 0 0 0-.106.01V8a.5.5 0 1 1-1 0V5.986c0-.167-.073-.272-.15-.314a1.657 1.657 0 0 0-.448-.182c-.179-.035-.5-.04-.816-.027l-.086.004V8a.5.5 0 1 1-1 0V1.75A.75.75 0 0 0 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.272-2.715a2 2 0 0 0-1.99-2.199h-.582a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.634 2.634 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z"/>
+          </svg>
+        選択</b-button>
+        <b-button variant="light" title="ポイント" @click="selectedTool = 'spotlight-selected'; spotlight()" :class="selectedTool === 'spotlight-selected'? 'active' : ''">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bullseye" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10zm0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+            <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+            <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+          </svg>
+          ポイント</b-button>
+        <b-button variant="light" title="赤ペン"  @click="selectedTool = 'draw-赤ペン'; paint('red')" style="color: red;" :class="selectedTool === 'draw-赤ペン'? 'active' : ''">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pen-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+          </svg>
+         <span style="color: black;"> 赤ペン</span> </b-button>
+        <b-button variant="light" title="蛍光ペン" @click="selectedTool = 'draw-蛍光ペン'; paint('green')" style="color: green;" :class="selectedTool === 'draw-蛍光ペン'? 'active' : ''">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pen-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+          </svg>
+          <span style="color: black;">蛍光ペン</span> </b-button>
+        <b-button variant="light" @click="clearSelected">消去</b-button>
+        </b-button-group>
+        <button type="button" name="zoom" class="single-button" title="拡大鏡" @click="startZoom">
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-zoom-in" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+            <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z"/>
+            <path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z"/>
+          </svg>
+        </button>
+        <!-- <button type="button" name="camera-setting" class="single-button" title="カメラ設定" [matMenuTriggerFor]="camMenu"
+            (click)="loadDevice()">
+            <em class="material-icons">videocam</em>
+        </button> -->
+        <!-- <button type="button" name="formShowHide" class="edit-tools" (click)="isShowFormContainer=!isShowFormContainer">
+            代行入力
+        </button> -->
+    </form>
+    </div>
       <div id="left">
         <div class="box-search border-box">
           <div class="input-search">
-            <input type="text" class="txt-search" placeholder="ショートコード" maxlength="4" v-model="shortCode">
+            <input type="text" class="txt-search" placeholder="ショートコード" maxlength="4" v-model="shortCode" v-on:keyup.enter="!isSharing ? start() : ''">
             <div class="input-group-btn">
               <button class="btn-send_code" type="button" 
                 @click="start" :disabled="shortCode.length!=4" v-show="!isSharing">
@@ -608,8 +653,42 @@ export default {
         const obj = { type: 'doc', body: { path: 'share-doc', label: nameFile , value : this.responseImage } };
         this.AssistAgentSDK.pushLink(`javascript:receiver.next(${JSON.stringify(obj)})`);
       }
+    },
+    touch() {
+      console.log("into touch")
+      console.log("this.selectedTool", this.selectedTool)
+      this.AssistAgentSDK.controlSelected();
+    },
+    spotlight() {
+      console.log("into spotlight")
+      console.log("this.selectedTool", this.selectedTool)
+      try { this.AssistAgentSDK.spotlightSelected(); } 
+      catch (e) 
+      { return; }
+    },
+    
+    drawSelected() {
+      try { this.AssistAgentSDK.drawSelected(); } catch (e) { return; }
+    },
+    paint(color) {
+      let drawStyle = {};
+      if (color === 'red') {
+        drawStyle = {label: "赤ペン", colour: "#FF0000", width: 1, opacity: 1};
+      }else {
+        drawStyle = {label: "蛍光ペン", colour: "#78F54E", width: 25, opacity: 0.4}
+      }
+      this.drawSelected();
+      try { this.AssistAgentSDK.setAgentDrawStyle(drawStyle.colour, drawStyle.opacity, drawStyle.width); } 
+      catch (e) { return }
+    },
+    clearSelected() {
+      console.log('into clear')
+      this.AssistAgentSDK.clearSelected();
+    },
+    startZoom() {
+      this.AssistAgentSDK.startZoom();
     }
-  },
+  }
 
 };
 </script>
@@ -636,7 +715,47 @@ export default {
   .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
   .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
   .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
-  .remote-view-element{width:calc(80% - 5px) !important;height:calc(100vh - 145px) !important;}
+  .remote-view {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .toolbar {
+    position: absolute;
+    top: 5vh;
+    right: 20vw;
+  }
+  .edit-tools button {
+    width: 120px;
+    border: 1px solid #000 !important;
+  }
+  
+  .tools .btn-group>.btn:first-child {
+    border-top-left-radius: 3rem !important;
+    border-bottom-left-radius: 3rem !important;
+  }
+
+  .tools .btn-group>.btn:last-child {
+    border-top-right-radius: 3rem !important;
+    border-bottom-right-radius: 3rem !important;
+  }
+
+  .single-button {
+    margin-left: 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: #ffffff;
+    color: #000;
+    position: relative;
+    padding-top: 5px;
+  }
+  /* .remote-view-element{width:calc(80% - 5px) !important;height:calc(100vh - 145px) !important;} */
   .contractor-info {
     list-style: none;
     padding: 0;
