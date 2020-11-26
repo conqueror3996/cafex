@@ -344,6 +344,7 @@ export default {
 .home-admin .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
+  border: none;
 }
 .home-admin .card-body {
   padding: 0px;
@@ -446,7 +447,7 @@ export default {
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
   border-top: 1px solid #dcdcdb;
-  margin:0px auto 10px auto;
+  margin:0px auto 5px auto;
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;
@@ -476,22 +477,58 @@ export default {
   }
 };
 
-@media (max-width: 1024px) {
+@media (max-width: 2301px){
   .home-admin .selected-content {
-    height: calc(75vh - 5px);
+    height: 710px;
+    width: 1700px;
+    margin: 0rem 1rem 1rem -11.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
   }
-  
+  .card-header-tabs{
+    width: 1507px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 60px;
+    height: 54px;
+  }
   .home-admin .table-main {
-    height: calc(50vh);
+    height: 505px;
+    width: 1680px;
+  }
+  .pagination {
+    height: 40px;
   }
 };
 
-@media (max-width: 1327px) {
+@media (max-width: 1367px) {
+ .home-admin .tab-pane .selected-content {
+    height: 720px;
+    width: 1262px;
+    margin: 0rem 2rem 1rem 1rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+    .home-admin .table-main {
+    height: 450px;
+    width: 1180px;
+    margin: 2rem 1rem 1rem 2.7rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    margin-left: -6.625rem;
+    width: 1365px;
+  }
+  
+};
+
+/* @media (max-width: 1327px) {
   .home-admin {
     width: 96%;
     margin: 0 auto;
   }
-};
+}; */
 @media (max-width: 600px) {
   .title {
     text-align: center;
@@ -521,6 +558,30 @@ export default {
     width: 305px;
   }
 };
+@media (max-width: 1023px) {
+  .home-admin .selected-content {
+    height: 580px;
+    width: 1350px;
+    margin: 0rem 7rem 1rem 1rem;
+  }
+  .card-header-tabs{
+    width: 1227px;
+  }
+  .home-admin .form-control {
+    height: 47px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 47px;
+  }
+  .home-admin .table-main {
+    height: 455px;
+  }
+  .pagination {
+    height: 40px;
+  }
+};
+
 
 </style>
 
