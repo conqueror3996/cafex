@@ -344,6 +344,7 @@ export default {
 }
 
 .home-admin .form-control {
+  height: calc(7vh - 20px);
   border-radius: 0.5rem;
 }
 
@@ -353,7 +354,12 @@ export default {
 
 .selected-content {
   background-color: #ffffff;
-  height: 625px;
+  height: calc(75vh - 30px);
+  width: calc(93vw - 27px);
+}
+
+.table-main {
+  height: calc(40vh - 30px);
 }
 
 .title {
@@ -364,8 +370,12 @@ export default {
 
 .home-admin .content-search {
   margin: auto;
-  width: 495px;
+  width: calc(60vh - 20px);
   padding-top: 3rem;
+}
+
+.card-header-tabs {
+  width: calc(77vw - 15px);
 }
 
 .home-admin .content-search .input-group-append {
@@ -435,6 +445,9 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
+.pagination {
+  height: calc(5vh - 10px);
+}
 /* .pagination{
   width:150px;
   height: 40px;
@@ -459,33 +472,13 @@ export default {
 
 @media (max-width: 2301px){
   .home-admin .selected-content {
-    height: 710px;
-    width: 1700px;
-    margin: 0rem 1rem 1rem -11.5rem;
+    margin: 0rem 1rem 1rem -20.1rem;
     border-top: 1px solid rgba(0,0,0,.125);
-  }
-  .card-header-tabs{
-    width: 1507px;
-  }
-  .home-admin .form-control {
-    height: 54px;
-  }
-  .home-admin .content-search .input-group-append {
-    width: 60px;
-    height: 54px;
-  }
-  .home-admin .table-main {
-    height: 505px;
-    width: 1680px;
-  }
-  .pagination {
-    height: 40px;
   }
 };
 
 @media (max-width: 1695px) {
   .home-admin .selected-content {
-    width: 1500px;
     margin: 0rem 1rem 1rem -5.5rem;
     border-top: 1px solid rgba(0,0,0,.125);
   }
@@ -535,24 +528,60 @@ export default {
   }
 };
 
-@media (max-width: 1367px) {
- .home-admin .tab-pane .selected-content {
+@media (max-width: 1024px) and (min-height: 768px) and (min-width: 769px) and (max-height: 1023px) {
+  .home-admin {
+    margin-top: -3rem;
+  }
+  .home-admin .tab-pane .selected-content {
     height: 720px;
-    width: 1362px;
-    margin: 0rem 2rem 1rem 1rem;
+    width: 1212px;
+    margin: 0rem 2rem 1rem 3rem;
     border-top: 1px solid rgba(0,0,0,.125);
   }
     .home-admin .table-main {
     height: 450px;
-    width: 1180px;
+    width: 1130px;
     margin: 2rem 1rem 1rem 2.7rem;
-    border-top: 1px solid rgba(0,0,0,.125);
+    /* border-top: 1px solid rgba(0,0,0,.125); */
   }
   .card-header-tabs{
     margin-left: -6.625rem;
-    width: 1365px;
+    width: 1345px;
   }
-  
+  .account img {
+    height: 40px;
+    margin-right: -300px;
+  }
+  .mw100 {
+    max-width: 150%;
+  }
+};
+
+@media (max-width: 768px) {
+  .home-admin {
+    margin-top: -3rem;
+  }
+  .home-admin .tab-pane .selected-content {
+    margin: 0rem 2rem 1rem 2.4rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .home-admin .table-main {
+    margin: 2rem 1rem 1rem 2rem;
+  }
+  .home-admin .content-search {
+    padding-bottom: .6rem;
+  }
+
+
+  .card-header-tabs{
+    margin-left: -6.625rem;
+  }
+  .account img {
+    margin-right: -300px;
+  }
+  .mw100 {
+    max-width: 200%;
+  }
 };
 
 /* @media (max-width: 1327px) {
@@ -561,7 +590,7 @@ export default {
     margin: 0 auto;
   }
 }; */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .title {
     text-align: center;
     font-size: 20px;
@@ -589,30 +618,8 @@ export default {
   .home-admin .content-search {
     width: 305px;
   }
-};
-@media (max-width: 1023px) {
-  .home-admin .selected-content {
-    height: 580px;
-    width: 1350px;
-    margin: 0rem 7rem 1rem 1rem;
-  }
-  .card-header-tabs{
-    width: 1227px;
-  }
-  .home-admin .form-control {
-    height: 47px;
-  }
-  .home-admin .content-search .input-group-append {
-    width: 50px;
-    height: 47px;
-  }
-  .home-admin .table-main {
-    height: 455px;
-  }
-  .pagination {
-    height: 40px;
-  }
-};
+}; */
+
 
 
 </style>
