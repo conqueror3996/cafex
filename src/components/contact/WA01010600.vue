@@ -77,21 +77,23 @@
         </div>
         <div class="box-tab border-box scroll-bar">
           <div class="action-panel">
-            <button class="btn btn-outline-secondary small-font" @click="showSimulation = true; showDescription = false; showContract = false; pushLink('share-plan1')">
+            <button :class="showSimulation === false ? 'btn btn-outline-secondary small-font' : 'btn btn-outline-secondary small-font active'" @click="showSimulation = true; showDescription = false; showContract = false; ">
             <!-- <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false"> -->
               <span>ライフプラン<br /> シミュレーション</span>
             </button>
-            <button class="btn btn-outline-secondary" @click="showSimulation = false; showDescription = true; showContract = false">
+            <button :class="showDescription === false ? 'btn btn-outline-secondary' : 'btn btn-outline-secondary active'" @click="showSimulation = false; showDescription = true; showContract = false">
               <span>商品説明</span>
             </button>
-            <button class="btn btn-outline-secondary" @click="showSimulation = false; showDescription = false; showContract = true; pushLink('share-form1')">
+            <button :class="showContract === false ? 'btn btn-outline-secondary' : 'btn btn-outline-secondary active'" @click="showSimulation = false; showDescription = false; showContract = true;">
               <span>契約申込</span>
             </button>
           </div>
           
           <div class="content-action">
+            <div class="simulation" v-if="!showSimulation && !showDescription && !showContract">
+            </div>
             <div class="simulation" v-if="showSimulation">
-              <button class="btn btn-outline-secondary">
+              <button class="btn btn-outline-secondary" @click="pushLink('share-plan1')" :disabled="!isSharing">
                 <span>代行入力</span>
               </button>
             </div>
@@ -119,7 +121,7 @@
               </div>
             </div>
             <div class="contract" v-if="showContract">
-              <button class="btn btn-outline-primary">
+              <button class="btn btn-outline-primary" @click=" pushLink('share-form1')" :disabled="!isSharing">
                 <span>代行入力</span>
               </button>
             </div>
@@ -183,7 +185,7 @@ import Assist from '../../models/AssistAgentSDK'
 export default {
   data() {
     return {
-      showSimulation: true,
+      showSimulation: false,
       showDescription: false,
       showContract: false,
       // docFiles: [],
@@ -397,7 +399,7 @@ export default {
         if (isActive) {
           console.log("###Screen Share Active.###");
           this.selectedTool = 'control-selected';
-          AssistAgentSDK.controlSelected();
+          this.AssistAgentSDK.controlSelected();
           this.pushScreen('share-doc');
         } else {
         }
@@ -422,7 +424,7 @@ export default {
       });
       this.AssistAgentSDK.setConsumerJoinedCallback(() => {
         console.log("### Consumer Joined ###");
-        AssistAgentSDK.requestScreenShare();
+        this.AssistAgentSDK.requestScreenShare();
       });
       this.AssistAgentSDK.setRemoteViewCallBack((width, height) => {
         this.consumerResize(width, height);
