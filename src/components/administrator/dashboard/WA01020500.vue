@@ -76,7 +76,6 @@ export default {
         uploadFile(event) {
             this.files = event.target.files;
             const memoryImg = 104857600;
-            console.log(this.files)
             let errorMessage = '';
             for (var i = 0; i < this.files.length; i++)
             {

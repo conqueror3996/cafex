@@ -18,7 +18,7 @@ class AgentService {
       const config = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'allowedOrigins' : ["*"]
+          // 'allowedOrigins' : ["*"]
         }
       };
       
