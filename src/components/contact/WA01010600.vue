@@ -121,7 +121,7 @@
               </div>
             </div>
             <div class="contract" v-if="showContract">
-              <button class="btn btn-outline-primary" @click=" pushLink('share-form1')" :disabled="!isSharing">
+              <button class="btn btn-outline-secondary" @click=" pushLink('share-form1')" :disabled="!isSharing">
                 <span>代行入力</span>
               </button>
             </div>

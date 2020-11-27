@@ -10,7 +10,7 @@
       <b-tab title="従業員一覧">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <!-- <p style="font-family: 'HiraginoSan-W3'" class="title">顧客を選択して「次へ」を押してください</p> -->
+            <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
             <div class="content-search">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -20,7 +20,6 @@
                   class="border-right-0"
                   maxlength=38
                   v-model="searchString"
-                  style="font-family: 'HiraginoSan-W3'"
                   autofocus></b-form-input>
                 <b-input-group-append>
                   <b-button class="bg-transparent border-0" variant="primary" type="submit">
@@ -88,14 +87,13 @@
                         height="25"
                       />
                       <b-modal id="modal-edit" hide-header centered @ok="okEdit()">
-                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040001}}</div>
+                        <div>{{errorMess.WA0102040001}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
                               size="sm"
                               variant="primary"
                               @click="ok()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               編集
                             </b-button>
@@ -103,7 +101,6 @@
                               size="sm"
                               variant="danger"
                               @click="cancel()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               キャンセル
                             </b-button>
@@ -119,14 +116,13 @@
                         height="25"
                       />
                       <b-modal id="modal-delete" hide-header centered @ok="okDelete()">
-                        <div style="font-family: 'HiraginoSan-W3'">{{errorMess.WA0102040002}}</div>
+                        <div>{{errorMess.WA0102040002}}</div>
                         <template #modal-footer="{ ok, cancel }">
                           <div>
                             <b-button
                               size="sm"
                               variant="primary"
                               @click="ok()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               削除
                             </b-button>
@@ -134,7 +130,6 @@
                               size="sm"
                               variant="danger"
                               @click="cancel()"
-                              style="font-family: 'HiraginoSan-W3'"
                             >
                               キャンセル
                             </b-button>
@@ -342,6 +337,7 @@ export default {
 .home-admin .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
+  border: none;
 }
 .home-admin .card-body {
   padding: 0px;
@@ -444,7 +440,7 @@ export default {
   height: 40px;
   border-bottom: 1px solid #dcdcdb;
   border-top: 1px solid #dcdcdb;
-  margin:0px auto 10px auto;
+  margin:0px auto 5px auto;
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;
@@ -459,37 +455,112 @@ export default {
 .pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
 .pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
 .pagination .box-paging span:nth-child(2){padding:0px 20px;} */
-@media (max-width: 1366px) {
-  .home-admin {
-    width: 96%;
-    margin: 0 auto;
-    height: 100vh;
-  }
-  
+
+
+@media (max-width: 2301px){
   .home-admin .selected-content {
-    height: calc(70vh);
+    height: 710px;
+    width: 1700px;
+    margin: 0rem 1rem 1rem -11.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    width: 1507px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 60px;
+    height: 54px;
   }
   .home-admin .table-main {
-    height: calc(45vh);
+    height: 505px;
+    width: 1680px;
+  }
+  .pagination {
+    height: 40px;
   }
 };
 
-@media (max-width: 1024px) {
+@media (max-width: 1695px) {
   .home-admin .selected-content {
-    height: calc(75vh - 5px);
+    width: 1500px;
+    margin: 0rem 1rem 1rem -5.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
   }
-  
+  .card-header-tabs{
+    width: 1402px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 54px;
+  }
   .home-admin .table-main {
-    height: calc(50vh);
+    height: 505px;
+    width: 1280px;
+    margin: 2rem 1rem 1rem 6.7rem;
+  }
+  .pagination {
+    height: 40px;
   }
 };
 
-@media (max-width: 1327px) {
+@media (max-width: 1506px) {
+  .home-admin .selected-content {
+    width: 1200px;
+    margin: 0rem 1rem 1rem 4.5rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    width: 1262px;
+  }
+  .home-admin .form-control {
+    height: 54px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 54px;
+  }
+  .home-admin .table-main {
+    height: 505px;
+    width: 1080px;
+    margin: 2rem 1rem 1rem 3.7rem;
+  }
+  .pagination {
+    height: 40px;
+  }
+};
+
+@media (max-width: 1367px) {
+ .home-admin .tab-pane .selected-content {
+    height: 720px;
+    width: 1362px;
+    margin: 0rem 2rem 1rem 1rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+    .home-admin .table-main {
+    height: 450px;
+    width: 1180px;
+    margin: 2rem 1rem 1rem 2.7rem;
+    border-top: 1px solid rgba(0,0,0,.125);
+  }
+  .card-header-tabs{
+    margin-left: -6.625rem;
+    width: 1365px;
+  }
+  
+};
+
+/* @media (max-width: 1327px) {
   .home-admin {
     width: 96%;
     margin: 0 auto;
   }
-};
+}; */
 @media (max-width: 600px) {
   .title {
     text-align: center;
@@ -519,6 +590,30 @@ export default {
     width: 305px;
   }
 };
+@media (max-width: 1023px) {
+  .home-admin .selected-content {
+    height: 580px;
+    width: 1350px;
+    margin: 0rem 7rem 1rem 1rem;
+  }
+  .card-header-tabs{
+    width: 1227px;
+  }
+  .home-admin .form-control {
+    height: 47px;
+  }
+  .home-admin .content-search .input-group-append {
+    width: 50px;
+    height: 47px;
+  }
+  .home-admin .table-main {
+    height: 455px;
+  }
+  .pagination {
+    height: 40px;
+  }
+};
+
 
 </style>
 

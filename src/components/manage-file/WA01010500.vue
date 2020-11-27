@@ -262,7 +262,7 @@ export default {
       }
       
       if(errorMessage !== '') {
-          this.error(errorMessage)
+          this.errorMsg(errorMessage)
           this.isUploading = false;
       } else {
           this.clear()

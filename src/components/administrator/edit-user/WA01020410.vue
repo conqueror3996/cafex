@@ -26,11 +26,11 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="name">再設定パスワード :</label></div>
-                <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="localEmployee.resetPassword"></b-input></div>
+                <div><b-input class="input-form" type="password" id="name" maxlength=20 v-model="localEmployee.resetPassword"></b-input></div>
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="name">確認用パスワード :</label></div>
-                <div><b-input class="input-form" type="password" id="name" maxlength=38 v-model="localEmployee.confirmPassword"></b-input></div>
+                <div><b-input class="input-form" type="password" id="name" maxlength=20 v-model="localEmployee.confirmPassword"></b-input></div>
             </div>
             <div class="form-button">
                 <b-button class="div-comfirm-change" type="submit" variant="primary">変更</b-button>
@@ -99,7 +99,7 @@ export default {
     created() {
         this.getEmployeeByID(this.$route.params.employeeId).then(() => {
             this.localEmployee = this.employees.employee
-            this.$set(this.localEmployee, 'loginPassword', this.resetPassword)
+            this.$set(this.localEmployee, 'resetPassword', this.resetPassword)
             this.$set(this.localEmployee, 'confirmPassword', this.confirmPassword)
             
         })
@@ -127,7 +127,7 @@ export default {
                 return;
             }
 
-            if (this.localEmployee.resetPassword != this.localEmployee.confirmPassword) {
+            if (this.localEmployee.resetPassword.trim() !== this.localEmployee.confirmPassword.trim()) {
                 this.msg += validate.getMessageErrorFromCode("S02016") + "\n";
                 //return
             }
