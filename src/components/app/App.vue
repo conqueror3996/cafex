@@ -260,4 +260,23 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 @media(max-width:500px){
 	.logo{width:25%;}
 }
+@media(max-width:1920px){
+	.header {
+    height: 145px;
+  }
+  .logo {
+    width: 9.5%;
+  }
+  .account img {
+    height: 60px;
+  }
+};
+@media(max-width:1367px) {
+  .account {
+    height: 50px;
+  }
+  .header {
+    width: 100%;
+  }
+}
 </style>
