@@ -57,3 +57,11 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+/*login*/
+.box-login{width:484px;margin:20px auto 0px auto;background:#fff;border-radius:10px;padding:3rem;box-sizing:border-box;}
+.box-login > p.title{text-align:center;font-size:24px;border-bottom:2px solid rgb(151, 151, 151);margin-bottom:35px;}
+/* .box-login form div.form-group{margin-bottom:30px;} */
+.btn-login{width:60%;margin:75px auto 0px auto;display:block;}
+</style>

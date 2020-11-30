@@ -69,7 +69,7 @@
                 </template>
 
                 <template #cell(age)="data">
-                  {{ data.item.birthdate }} ({{ data.item.age }})
+                  {{ data.item.birthdate }} {{ data.item.age ? '(' + data.item.age + ')' : '' }}
                 </template>
 
                 <template #cell(phone1)="data">
@@ -667,4 +667,3 @@ export default {
 };
 
 </style>
-
