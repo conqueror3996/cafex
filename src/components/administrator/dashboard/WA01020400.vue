@@ -584,7 +584,7 @@ export default {
   }
 };
 
-@media (max-width: 1024px) and (min-height: 768px) {
+@media (max-width: 1024px) and (min-height: 768px) and (min-width: 769px) and (max-height: 1023px) {
   .home-admin {
     margin-top: -3rem;
   }
@@ -643,38 +643,6 @@ export default {
   }
   .mw100 {
     max-width: 200%;
-  }
-};
-
-@media (max-width: 1024px) and (min-height: 1366px) and (min-width: 1367px) and (max-height: 1023px) {
-  .home-admin {
-    margin-top: -3rem;
-  }
-  .home-admin .tab-pane .selected-content {
-    height: calc(90vh - 30px);
-    width: calc(120vw - 27px);
-    margin: 0rem 2rem 1rem 3rem;
-    border-top: 1px solid rgba(0,0,0,.125);
-  }
-    .home-admin .table-main {
-    height: 450px;
-    width: 1130px;
-    margin: 2rem 1rem 1rem 2.4rem;
-    /* border-top: 1px solid rgba(0,0,0,.125); */
-  }
-  .home-admin .form-control {
-    height: 51px;
-  }
-  .card-header-tabs{
-    margin-left: -7.2rem;
-    width: 1345px;
-  }
-  .account img {
-    height: 40px;
-    margin-right: -300px;
-  }
-  .mw100 {
-    max-width: 150%;
   }
 };
 
