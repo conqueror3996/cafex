@@ -497,9 +497,12 @@ export default {
 .bottom-table {
   text-align: center;
 }
-.bottom-table .btn-primary.disabled, .btn-primary:disabled{
+.bottom-table .btn-primary.disabled{
   background-color: #a7dfff !important;
   border-color: #a7dfff !important;
+}
+.bottom-table .btn-primary.focus.disabled,.bottom-table .btn-primary.disabled:focus {
+    box-shadow: none !important;
 }
 .btn-next {
   width: 172px;

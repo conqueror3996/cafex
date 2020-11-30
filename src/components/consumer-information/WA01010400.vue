@@ -47,7 +47,7 @@ export default {
   data() {
     return {
         imgButtonFile: './static/img/btn_start_file_manage.svg',
-        imgButtonRemote: './static/img/btn_start_remote_consul.svg',
+        imgButtonRemote: './static/img/button_remote.png',
         imgBackIcon: './static/img/btn_back_consumer_select.svg',
         // customer_detail: {
         //   fullname: 'Khang',
