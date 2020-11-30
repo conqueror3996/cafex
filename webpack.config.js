@@ -66,9 +66,9 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiInternalUrl: 'http://192.168.11.75:8080',
-            // apiUrl: 'https://api.cafex.kinsol-bit.com',
-            apiUrl: 'http://192.168.11.75:1323',
+            apiInternalUrl: 'http://192.168.11.71:8080',
+            apiUrl: 'https://api.cafex.kinsol-bit.com',
+            // apiUrl: 'http://192.168.11.71:1323',
             API_KEY: '82e29d468d7f4b518347a2eab84b478719027367c67f4e00bfd84244067101f0',
             VERSION: '1.0.0'
         })

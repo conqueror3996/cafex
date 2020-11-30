@@ -166,7 +166,7 @@
               </div>
             </div>
             <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
-                <b-button variant="primary" :disabled="this.selectedItem === ''" class="btn-next" @click="information()">次へ</b-button>
+                <b-button variant="primary" :class="{'disabled' : this.selectedItem === ''}" class="btn-next" @click="information()">次へ</b-button>
             </div>
             
           </div>
@@ -496,6 +496,13 @@ export default {
 }
 .bottom-table {
   text-align: center;
+}
+.bottom-table .btn-primary.disabled{
+  background-color: #a7dfff !important;
+  border-color: #a7dfff !important;
+}
+.bottom-table .btn-primary.focus.disabled,.bottom-table .btn-primary.disabled:focus {
+    box-shadow: none !important;
 }
 .btn-next {
   width: 172px;
