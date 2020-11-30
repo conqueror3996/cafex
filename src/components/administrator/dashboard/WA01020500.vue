@@ -209,6 +209,26 @@ export default {
         margin-bottom: 60px;
     }
 }
+
+@media (max-width: 768px) {
+    .div-registration-content .div-button-confirm .button-confirm{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        margin-top: 10rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-height: 768px) and (min-width: 769px) and (max-height: 1023px) {
+  .div-registration-content .div-button-confirm .button-confirm{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        margin-top: 10rem;
+    }
+};
 /* .main-content {
     display: flex;
     justify-content: center;
