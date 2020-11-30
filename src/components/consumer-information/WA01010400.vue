@@ -108,7 +108,6 @@ export default {
       },
       initInfo () {
         this.localConsumerId = localStorage.getItem('consumerId')
-        console.log(this.localConsumerId)
       },
       goManageFile() {
         this.goTo(this.localConsumer.item)

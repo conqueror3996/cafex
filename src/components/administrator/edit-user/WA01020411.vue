@@ -61,7 +61,6 @@ export default {
 
       handleEdit() {
         // this.$set('contacts[' + newPsgId + ']', newObj)
-        console.log(this.localEmployee)
         const data = {
           body: this.localEmployee,
           params: this.$route.params.employeeId
