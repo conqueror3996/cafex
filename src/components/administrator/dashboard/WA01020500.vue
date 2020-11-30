@@ -4,7 +4,7 @@
             <p>ファイルをアップロード</p>
         </div>
         <div class="alert alert-primary div-custom-alert" role="alert">
-            <p class="p-csv">・CSVデータから営業員データを登録できます。</p>
+            <p class="p-csv">・CSVデータから従業員データを登録できます。</p>
             <p>・一度にアップロードできるファイルの上限は100MBです。</p>
         </div>
         <form @submit.prevent="handleSubmit" enctype="multipart/form-data">

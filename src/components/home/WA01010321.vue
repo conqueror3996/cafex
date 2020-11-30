@@ -14,7 +14,7 @@
         <div class="confirm-info">
           <p>氏名：{{ data.consumerName }}</p>
           <p>氏名（カナ）：{{ data.consumerNameKana }}</p>
-          <p>生年月日：{{ formatDateItem(data.birthdate) }}</p>
+          <p>生年月日：{{ data.birthdate ? formatDateItem(data.birthdate) : '' }}</p>
           <p>電話番号１：{{ data.phoneNumber1 }}</p>
           <p>電話番号２：{{ data.phoneNumber2 }}</p>
           <p>メールアドレス：{{ data.mailAddress }}</p>
