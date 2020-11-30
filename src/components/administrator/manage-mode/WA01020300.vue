@@ -37,3 +37,38 @@ export default {
     }
 }
 </script>
+<style scoped>
+.box{width:calc(25vw - 30px);height:calc(50vh - 50px);margin:20px auto 0px auto;background:#fff;border-radius:10px;padding:3rem;box-sizing:border-box;}
+
+.div-manage-mode {
+    font-size: 24px;
+}
+.div-space {
+    margin: 42px 0px 0px 0px;
+}
+.div-space-title {
+    margin: 43px 0px 0px 0px;
+}
+.selection-mode button, .selection-mode a{
+    box-shadow: unset !important;
+}
+/* .selection-mode {
+    padding-left: 10px;
+} */
+.div-space {
+    margin: 33px 0px 0px 0px;
+}
+.div-space-title {
+    margin: 38px 0px 0px 0px;
+}
+
+.btn-employee img {
+    height: calc(10vh - 7px);
+    width: calc(17vw - 5px);
+}
+
+.btn-consumer img {
+    height: calc(10vh - 7px);
+    width: calc(17vw - 5px);
+}
+</style>
