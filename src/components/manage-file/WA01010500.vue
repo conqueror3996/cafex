@@ -1,13 +1,13 @@
 <template>
-  <div class="manage-file-conent">
+  <div class="manage-file-conent clearfix">
     <div class="info">
-      <div class="info-title">
+      <div class="info-title clearfix">
         <p>お客様情報</p>
         <b-button variant="primary" @click="$router.push('/WA01010400')">
-          <img :src="imgBackIcon" />
+          <img :src="imgBackIcon">
         </b-button>
       </div>
-      <div class="info-table">
+      <div class="info-table clearfix">
         <b-table sticky-header :fields="userCols" :items="consumer">
           <template #cell(consumerName)="data">
             {{ data.item.consumerName }}
@@ -24,7 +24,7 @@
         </b-table>
       </div>
     </div>
-    <div class="detail">
+    <div class="detail clearfix">
       <div class="file-content">
         <div class="file-table">
           <b-table hover :fields="fileCols" select-mode="single" selectable :items="files" @row-hovered="rowHovered" @row-unhovered="rowUnhovered" @row-selected="rowSelected">
@@ -294,6 +294,7 @@ export default {
 </script>
 
 <style>
+.logo{width:8%;}
 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
@@ -406,8 +407,11 @@ export default {
   border-radius: .7rem;
   padding: 0;
   border: none;
+  display: block !important;
+  width: 175px;
+  height: 41px;
+  background-color: none !important;
 }
-
 /* .info-title button:hover {
     color: #fff;
     background-color: #0091FF;
