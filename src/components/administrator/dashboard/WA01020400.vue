@@ -473,7 +473,7 @@ export default {
 
 @media (max-width: 1920px){
   .home-admin {
-    margin-top: -3rem;
+    margin-top: 0;
   }
   .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem -13.5rem;
