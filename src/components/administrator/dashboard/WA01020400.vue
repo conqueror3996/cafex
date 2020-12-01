@@ -7,7 +7,7 @@
           <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
       </template>
-      <b-tab title="従業員一覧">
+      <b-tab title="従業員一覧" @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
             <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
@@ -159,7 +159,7 @@
           <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
         </b-card-text>
       </b-tab>
-      <b-tab title="従業員登録">
+      <b-tab title="従業員登録" @click="changeTab('register')" :active="(tabSelected === 'register')">
         <b-card-text class="selected-content">
           <WA01020500></WA01020500>
         </b-card-text>
@@ -197,7 +197,8 @@ export default {
       isEdit: false,
       localEmployees: [],
       inputData: {},
-      meta: {}
+      meta: {},
+      tabSelected: '',
     };
   },
   components: {
@@ -229,6 +230,10 @@ export default {
     ...mapActions("files", {
       editItem: "editItem",
     //   deleteItem: "deleteItem"
+    }),
+    ...mapActions("alert", { 
+      error: "error",
+      clear: "clear",
     }),
     funcGetAllEmployee(input, page){
       input.page = page;
@@ -283,7 +288,15 @@ export default {
           birthdate: moment(e.birthdate).format('yyyy/MM/DD')
         }
       })
-    }
+    },
+    changeTab(tab) {
+      console.log(tab)
+      // Set error message empty when change tab
+      if (this.tabSelected !== tab) {
+        this.clear();
+      }
+      this.tabSelected = tab;
+    },
   },
   
 };
