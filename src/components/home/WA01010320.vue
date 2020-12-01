@@ -78,6 +78,9 @@ export default {
             alert: state => state.alert
         })
     },
+    created() {
+        this.consumer[`birthdate`] = new Date('1980-01-01').toISOString().slice(0,10)
+    },
     methods: {
         ...mapActions("alert", {
             errorMsg: "errorMsg",
