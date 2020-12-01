@@ -190,7 +190,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .list_account-action li a:hover{text-decoration:none;}
 .list_account-action li span {cursor: pointer;}
 .contact {max-width: 500px; display: inline-block; margin-left: 3rem; vertical-align: top;}
-.contact p{font-size: 34px; font-weight: 200; font-family: "HiraginoSans-W3"; padding-top: 2rem; margin-bottom: 0px;}
+.contact p{font-size: 34px; font-weight: 200; padding-top: 2rem; margin-bottom: 0px;}
 .contact a {color: #000; text-decoration: underline; font-size: 20px;}
 
 /* table */
