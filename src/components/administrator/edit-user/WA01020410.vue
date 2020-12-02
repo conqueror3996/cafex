@@ -2,7 +2,7 @@
     <div class="main-content">
         <b-form @submit.stop.prevent="handleShowEdit()" class="form-info">
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">氏名 :</label></div>
+                <div class="label-form"><label for="name">氏名 :</label></div>
                 <div><b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.employeeName" autofocus></b-input></div>
             </div>
             <!-- <div class="input-row">
@@ -10,11 +10,11 @@
                 <div><b-input class="input-form" type="text" id="namekana" maxlength=38 v-model="user.namekana"></b-input></div>
             </div> -->
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="email">メールアドレス :</label></div>
+                <div class="label-form"><label for="email">メールアドレス :</label></div>
                 <div><b-input class="input-form" type="text" id="email" maxlength=190 v-model="localEmployee.mailAddress"></b-input></div>
             </div>
             <div class="input-row">
-                <div class="label-form"><div class="field-request"><span>必須</span></div><label for="name">所属 :</label></div>
+                <div class="label-form"><label for="name">所属 :</label></div>
                 <div>
                     <!-- <b-input class="input-form" type="text" id="name" maxlength=38 v-model="localEmployee.branchNumber"></b-input> -->
                     <select class="custom-select  input-form" v-model="localEmployee.branchNumber">
