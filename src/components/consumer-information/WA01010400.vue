@@ -162,7 +162,6 @@ export default {
     width: 100px;
     height: 28px;
     color: #313131;
-    font-family: "HiraginoSans-W3";
     font-size: 24px;
     font-weight: 400;
     /* line-height: 32px;
