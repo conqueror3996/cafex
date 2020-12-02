@@ -402,6 +402,9 @@ export default {
 .home-screen .card-header {
   font-size: 18px;
   color: #0091FF;
+  position: relative;
+  z-index: 9999;
+  margin-top: -20px;
 }
 
 .home-screen .nav-tabs .nav-link {
