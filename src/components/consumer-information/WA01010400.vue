@@ -1,40 +1,33 @@
 <template>
-  <div class="screen-medium">
-  <div class="customer-info-screen">
-        <div class="title-information">
-           <p >お客様情報</p>
-           <b-button @click="$router.push('/WA01010300')">
-             <img :src="imgBackIcon" />
-           </b-button>
-        </div>
-        <div class="content-information">
-            <div class="information">
-                <p style="margin: 0;">氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
-                <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
-                <span for="contractor">お客様情報</span> 
-                <ul id="v-for-object" class="contractor-info">
-                  <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
-                    <span v-if="Object.keys(labels).includes(name)" > 
-                      {{ labels[name] }} : {{ value }} 
-                    </span>
-                  </li>
-                </ul>
-                <!-- <label class="label-contractor" for="age">年齢：{{ customer_detail.age }}</label> 
-                <label class="label-contractor" for="birthday">生年月日：{{ customer_detail.birthday }}</label> 
-                <label class="label-contractor" for="postalcode">郵便番号：{{ customer_detail.post_code }}</label> 
-                <label class="label-contractor" for="address">住所：{{ customer_detail.address }}</label> 
-                <label class="label-contractor" for="phone1">電話番号１：{{ customer_detail.phone1 }}</label> 
-                <label class="label-contractor" for="phone2">電話番号２：{{ customer_detail.phone2 }}</label>  
-                href="/WA01010500"
-                -->
-            </div>
-            <div class="form-group"> 
-                <b-button variant="link" class="button-file" @click="$router.push('/WA01010500')"><img :src="imgButtonFile"></b-button>
-                <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonRemote"></b-button>
-            </div>
-        </div>
-    
-  </div>
+  <div class="box-page">
+    <b-button @click="$router.push('/WA01010300')">
+      <img :src="imgBackIcon" />
+    </b-button>
+    <div class="screen-medium">
+      <div class="customer-info-screen">
+          <div class="title-information">
+            <p >お客様情報</p>
+          </div>
+          <div class="content-information">
+              <div class="information">
+                  <p style="margin: 0;">氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
+                  <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
+                  <span for="contractor">お客様情報</span> 
+                  <ul id="v-for-object" class="contractor-info">
+                    <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
+                      <span v-if="Object.keys(labels).includes(name)" > 
+                        {{ labels[name] }} : {{ value }} 
+                      </span>
+                    </li>
+                  </ul>
+              </div>
+              <div class="form-group"> 
+                  <b-button variant="link" class="button-file" @click="$router.push('/WA01010500')"><img :src="imgButtonFile"></b-button>
+                  <b-button variant="link" class="button-remote" @click="goContact()"><img :src="imgButtonRemote"></b-button>
+              </div>
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -146,6 +139,11 @@ export default {
 </script>
 
 <style>
+.logo{width:8%}
+.screen-medium{margin-top:25px}
+.box-page{position: relative;}
+.box-page > button.btn {position:absolute;left:5px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
+.box-page > button.btn:focus{box-shadow:none;}
 .customer-info-screen {
   background-color: #ffffff;
   width: 100%;
@@ -181,31 +179,6 @@ export default {
 .title-information button img {
   float: right;
 }
-
-/* .title-information button:hover {
-    color: #fff;
-    background-color: #02ad9c;
-    border-color: #9ed9d3;
-}
-
-.title-information button.focus, .title-information button:focus {
-    box-shadow: 0 0 0 0.2rem rgba(158, 217, 211,.5);
-}
-
-.title-information button:not(:disabled):not(.disabled).active, .title-information button:not(:disabled):not(.disabled):active {
-    color: #fff;
-    background-color: #02ad9c;
-    border-color: #9ed9d3;
-} */
-/* .div-login {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    background-color: transparent;
-    width: auto !important;
-    height: 100vh !important;
-    border-radius: 0px !important;
-} */
 
 .content-information {
     /* width: 1102px; */
