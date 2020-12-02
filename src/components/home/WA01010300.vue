@@ -1,15 +1,18 @@
 <template>
-  <div class="screen-medium">
+  <div class="screen-medium box-table">
   <div class="home-screen">
     <b-tabs card align="right">
-      <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
+      <!-- <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
         <div class="div-back-button nav-item align-self-center">
           <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
         </div>
-      </template>
+      </template> -->
 
       <b-tab :title="this.localEmployee.rollCode === '21' ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
+          <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
+            <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+          </div>
           <div v-if="!isEdit">
             <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
@@ -383,6 +386,7 @@ export default {
 </script>
 
 <style>
+.screen-medium.box-table{max-width:1540px;}
 .col-name {
   width: 15rem;
 }
@@ -416,8 +420,13 @@ export default {
 }
 
 .home-screen .div-back-button {
-  margin-right: 18px;
-  margin-bottom: 1px;
+  /* margin-right: 18px;
+  margin-bottom: 1px; */
+  position:absolute;
+  top:0px;
+  right:100%;
+  z-index: 999;
+  width:175px;
 }
 
 .home-screen .div-back-button button {
@@ -425,8 +434,8 @@ export default {
 }
 .home-screen .button-manage-mode {
   cursor: pointer;
-  margin-bottom: 1px;
-  margin-right: -5px;
+  /* margin-bottom: 1px;
+  margin-right: -5px; */
   border: none;
 }
 
@@ -448,7 +457,9 @@ export default {
 
 .selected-content {
   background-color: #ffffff;
-  height: 625px;
+  height: auto;
+  padding-bottom:25px;
+  position: relative;
 }
 
 .title {
@@ -475,7 +486,7 @@ export default {
 .table-main {
   margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
-  height: 377px;
+  height: calc(100vh - 500px);
   overflow: auto;
 }
 .table-main .table.b-table>thead>tr>th {
@@ -540,81 +551,33 @@ export default {
   margin: 0 1rem;
   font-size: 18px;
 }
-/* .pagination{
-  width:150px;
-  height: 40px;
-  border-bottom: 1px solid #dcdcdb;
-  border-top: 1px solid #dcdcdb;
-  margin:0px auto 10px auto;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-.pagination span{
-  display: inline-block;
-  font-size: 15px;
-  font-weight:bold;
-}
-.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
-.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
-.pagination .box-paging span:nth-child(2){padding:0px 20px;} */
-/* @media (max-width: 1366px) {
-  .home-screen {
-    width: 96%;
-    margin: 0 auto;
-    height: 100vh;
-  }
-  
-  .selected-content {
-    height: calc(70vh);
-  }
-  .table-main {
-    height: calc(35vh - 30px);
-  }
-  
-}; */
 
-/* @media (max-width: 1024px) {
-  .selected-content {
-    height: calc(75vh - 5px);
-  }
-  
+@media(max-width:1440px){
+  .screen-medium.box-table{max-width:1000px;}
+  .home-screen .div-back-button{width:165px;}
+  .header{height:95px;}
+  .selected-content{max-height:445px;}
   .table-main {
-    height: calc(40vh - 30px);
+    margin: 15px 0.75rem 0px 0.75rem;
+    border: 1px solid;
+    height:239px;
+    overflow: auto;
   }
-}; */
-
-/* @media (max-width: 1327px) {
-  .home-screen {
-    width: 96%;
-    margin: 0 auto;
+  .admin-search {
+    padding-top: 20px;
   }
-}; */
+  .title{font-size:18px;}
+}
 
 @media (max-width: 768px) {
   .home-admin {
     margin-top: -3rem;
   }
-  /* .selected-content {
-    height: 720px;
-    width: 1200px;
-    margin: 0rem 2rem 1rem 2.4rem;
-    border-top: 1px solid rgba(0,0,0,.125);
-  }
-  .table-main {
-    height: 450px;
-    width: 900px;
-    margin: 2rem 1rem 1rem 2rem;
-  } */
   .content-search {
     height: 30%;
     width: 40%;
     padding-bottom: .6rem;
   }
-
-
   .card-header-tabs{
     margin-left: -6.625rem;
     width: 1095px;
