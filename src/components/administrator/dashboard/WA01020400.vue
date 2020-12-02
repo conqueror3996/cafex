@@ -1,17 +1,15 @@
 <template>
-<div class="screen-medium">
+<div class="screen-medium box-table">
   <div class="home-admin">
     <b-tabs card align="right">
-      <template #tabs-start>
-        <div class="div-back-button nav-item align-self-center">
-          <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
-        </div>
-      </template>
       <b-tab title="従業員一覧" @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
+            <div class="div-back-button nav-item align-self-center">
+              <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+            </div>
             <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
-            <div class="content-search">
+            <div class="content-search clearfix">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
                 <b-form-input
@@ -155,6 +153,7 @@
             <!-- <div class="bottom-table">
                 <b-button variant="primary" class="btn-next" href="/WA01010400">次へ</b-button>
             </div> -->
+            
           </div>
           <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
         </b-card-text>
@@ -303,6 +302,7 @@ export default {
 </script>
 
 <style>
+
 .col-name {
   width: 20rem;
 }
@@ -314,25 +314,21 @@ export default {
     margin-right: auto;
     border-radius: .5rem;
 }
-
 .button-manage-mode img {
   padding-right: 5px;
 }
-
 .div-back-button {
-  margin-right: 18px;
-  margin-bottom: 1px;
+  position:absolute;
+  right:100%;
+  top:0px;
+  z-index:9999;
+  width: 175px;
 }
-
 .div-back-button button {
   outline: unset;
 }
-
-
 .button-manage-mode {
   cursor: pointer;
-  margin-bottom: 1px;
-  margin-right: -5px;
   border: none;
 }
 
@@ -348,7 +344,7 @@ export default {
 }
 
 .home-admin .card-header {
-  padding: 0.75rem 0.55rem 0.75rem 1.25rem;
+  padding: 0px 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
   border: none;
 }
@@ -357,7 +353,7 @@ export default {
 }
 
 .home-admin .form-control {
-  height: calc(7vh - 20px);
+  /* height: calc(7vh - 20px); */
   border-radius: 0.5rem;
 }
 
@@ -367,13 +363,16 @@ export default {
 
 .selected-content {
   background-color: #ffffff;
-  height: calc(75vh - 30px);
-  width: calc(93vw - 27px);
+  padding-bottom:30px;
+  height: auto;
+  position:relative;
+  /* height: calc(75vh - 30px);
+  width: calc(93vw - 27px); */
 }
 
-.table-main {
-  height: calc(40vh - 30px);
-}
+/* .table-main {
+  height: calc(100vh - 500px);
+} */
 
 .title {
   text-align: center;
@@ -382,14 +381,15 @@ export default {
 }
 
 .home-admin .content-search {
-  margin: auto;
-  width: calc(60vh - 20px);
-  padding-top: 3rem;
+  margin: 0px auto;
+  width: 40%;
+  padding-top:20px;
+  box-sizing:border-box;
 }
 
-.card-header-tabs {
+/* .card-header-tabs {
   width: calc(77vw - 15px);
-}
+} */
 
 .home-admin .content-search .input-group-append {
   border: 1px solid #ced4da;
@@ -400,7 +400,7 @@ export default {
   margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid #000;
   /* border-top: none; */
-  height: 397px;
+  height: calc(100vh - 500px);
   overflow: auto;
 }
 
@@ -485,22 +485,23 @@ export default {
 
 
 @media (max-width: 1920px){
+  .screen-medium.box-table{max-width:1540px;}
   .home-admin {
     margin-top: 0;
   }
-  .home-admin .tab-pane .selected-content {
+  /* .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem -13.5rem;
-  }
+  } */
     .home-admin .table-main {
-    margin: 2rem 1.5rem 1rem 1.5rem;
+    margin: 20px 1.5rem 1rem 1.5rem;
   }
   .home-admin .form-control {
     height: 51px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-top: 1rem;
     margin-left: 3.7rem;
-  }
+  } */
   .account img {
     height: 50px;
   }
@@ -513,19 +514,19 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  .home-admin .tab-pane .selected-content {
+  /* .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem -8.5rem;
   }
     .home-admin .table-main {
     margin: 2rem 1.5rem 1rem 1.5rem;
-  }
+  } */
   .home-admin .form-control {
     height: 51px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-top: 1rem;
     margin-left: 7.1rem;
-  }
+  } */
   .account img {
     height: 45px;
   }
@@ -535,41 +536,47 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  .home-admin .tab-pane .selected-content {
+  /* .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem -4.5rem;
   }
     .home-admin .table-main {
     margin: 2rem 1.5rem 1rem 1.5rem;
-  }
+  } */
   .home-admin .form-control {
     height: 51px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-top: 1rem;
     margin-left: 9.5rem;
-  }
+  } */
   .account img {
     height: 45px;
   }
 };
 
 @media (max-width: 1469px) {
+  .screen-medium.box-table{max-width:1000px;}
+  .home-admin .table-main{
+    height:325px;
+  }
+  .div-back-button{width:165px;}
+
   .home-admin {
     margin-top: -3rem;
   }
-  .home-admin .tab-pane .selected-content {
+  /* .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem -0.5rem;
-  }
-    .home-admin .table-main {
+  } */
+    /* .home-admin .table-main {
     margin: 2rem 1.5rem 1rem 1.5rem;
-  }
+  } */
   .home-admin .form-control {
-    height: 51px;
+    height: 44px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-top: 1rem;
     margin-left: 12.2rem;
-  }
+  } */
   .account img {
     height: 45px;
   }
@@ -579,19 +586,19 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  .home-admin .tab-pane .selected-content {
+  /* .home-admin .tab-pane .selected-content {
     margin: 0rem 2rem 1rem 3.2rem;
   }
     .home-admin .table-main {
     margin: 2rem 1.5rem 1rem 1.5rem;
-  }
+  } */
   .home-admin .form-control {
     height: 51px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-top: 1rem;
     margin-left: 14.5rem;
-  }
+  } */
   .account img {
     height: 45px;
   }
@@ -616,10 +623,10 @@ export default {
   .home-admin .form-control {
     height: 51px;
   }
-  .card-header-tabs{
+  /* .card-header-tabs{
     margin-left: -7.2rem;
     width: 1345px;
-  }
+  } */
   .account img {
     height: 40px;
     margin-right: -300px;
