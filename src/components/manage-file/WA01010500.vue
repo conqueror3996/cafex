@@ -464,7 +464,7 @@ export default {
   border-radius: 0.6rem;
   margin: auto;
 }
-
+.file-content{padding:20px;box-sizing:border-box;}
 @media (max-width: 1440px) {
   .manage-file-conent{max-width:1000px;}
   .info button.btn-primary{width:165px;}
