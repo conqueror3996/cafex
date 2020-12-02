@@ -8,7 +8,7 @@
             <div class="div-back-button nav-item align-self-center">
               <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
             </div>
-            <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
+            <!-- <p class="title">お客様を選択して「次へ」を押してください</p> -->
             <div class="content-search clearfix">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -485,7 +485,7 @@ export default {
 
 
 @media (max-width: 1920px){
-  .screen-medium.box-table{max-width:1540px;}
+  .screen-medium.box-table{max-width:1540px;position: relative;z-index: 99;}
   .home-admin {
     margin-top: 0;
   }
