@@ -6,13 +6,13 @@
     <div class="screen-medium">
       <div class="customer-info-screen">
           <div class="title-information">
-            <p >顧客情報</p>
+            <p >お客様情報</p>
           </div>
           <div class="content-information">
               <div class="information">
                   <p style="margin: 0;">氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
                   <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
-                  <span for="contractor">契約者情報</span> 
+                  <span for="contractor">お客様情報</span> 
                   <ul id="v-for-object" class="contractor-info">
                     <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
                       <span v-if="Object.keys(labels).includes(name)" > 

@@ -65,7 +65,7 @@
           <div class="box-parent">
             <div><span class="new-title new-title-block">氏名</span>: <div v-if="this.localConsumer" class="info-text">{{ this.localConsumer.consumerName }}</div></div> 
             <div><span class="new-title new-title-block">カナ</span>: <div v-if="this.localConsumer"  class="info-text">{{ this.localConsumer.consumerNameKana }}</div> </div> 
-            <span for="contractor">属性情報</span> 
+            <span for="contractor">お客様情報</span> 
             <ul id="v-for-object" class="contractor-info">
               <li v-for="(value, name) in this.localConsumer" :key="name">
                 <div v-if="Object.keys(labels).includes(name)" > 
