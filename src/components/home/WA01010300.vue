@@ -8,13 +8,13 @@
         </div>
       </template> -->
 
-      <b-tab :title="this.localEmployee.rollCode === '21' ? '顧客一覧' : '顧客選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
+      <b-tab :title="this.localEmployee.rollCode === '21' ? 'お客様一覧' : 'お客様選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
             <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
           </div>
           <div v-if="!isEdit">
-            <p class="title" v-if="this.localEmployee.rollCode !== '21'">顧客を選択して「次へ」を押してください</p>
+            <p class="title" v-if="this.localEmployee.rollCode !== '21'">お客様を選択して「モード選択へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -169,14 +169,14 @@
               </div>
             </div>
             <div class="bottom-table" v-if="this.localEmployee.rollCode !== '21'">
-                <b-button variant="primary" :class="{'disabled' : this.selectedItem === ''}" class="btn-next" @click="information()">次へ</b-button>
+                <b-button variant="primary" :class="{'disabled' : this.selectedItem === ''}" class="btn-next" @click="information()">モード選択へ</b-button>
             </div>
             
           </div>
           <WA01010310 v-if="isEdit" @changeEdit="isEdit = afterChanges($event)"></WA01010310>
         </b-card-text>
       </b-tab>
-      <b-tab title="顧客登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="this.localEmployee.rollCode !== '21'">
+      <b-tab title="お客様登録"  @click="changeTab('register')" :active="(tabSelected === 'register')" v-if="this.localEmployee.rollCode !== '21'">
         <b-card-text class="selected-content">
           <WA01010320 @changeSelectedTab="tabSelected = afterChanges($event)"></WA01010320>
         </b-card-text>
