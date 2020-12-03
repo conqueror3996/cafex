@@ -155,7 +155,7 @@
             </div> -->
             
           </div>
-          <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
+          <WA01020410 v-if="isEdit" @changeEdit="isEdit = afterCommit($event)"></WA01020410>
         </b-card-text>
       </b-tab>
       <b-tab title="従業員登録" @click="changeTab('register')" :active="(tabSelected === 'register')">
@@ -296,6 +296,10 @@ export default {
       }
       this.tabSelected = tab;
     },
+    afterCommit(event){
+      this.funcGetAllEmployee(this.inputData, 1);
+      return event;
+    }
   },
   
 };
