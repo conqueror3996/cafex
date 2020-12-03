@@ -37,7 +37,7 @@ export default {
 }
 </script>
 <style scoped>
-.box{width:100%;max-width:460px;height:390px;margin:0px auto;background:#fff;border-radius:10px;padding:30px;box-sizing:border-box;}
+/*.box{width:100%;max-width:460px;height:390px;margin:0px auto;background:#fff;border-radius:10px;padding:30px;box-sizing:border-box;}
 
 .div-manage-mode {
     font-size: 24px;
@@ -54,14 +54,14 @@ export default {
 .selection-mode button, .selection-mode a{
     box-shadow: unset !important;
 }
-/* .selection-mode {
+ .selection-mode {
     padding-left: 10px;
-} */
+} 
 .div-space {
     margin: 33px 0px 0px 0px;
 }
 .div-space-title {
     margin: 38px 0px 0px 0px;
 }
-
+*/
 </style>
