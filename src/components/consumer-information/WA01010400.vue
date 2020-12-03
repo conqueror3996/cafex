@@ -14,9 +14,9 @@
                   <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
                   <span for="contractor">お客様情報</span> 
                   <ul id="v-for-object" class="contractor-info">
-                    <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
-                      <span v-if="Object.keys(labels).includes(name)" > 
-                        {{ labels[name] }} : {{ value }} 
+                    <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
+                      <span> 
+                        {{ labels[value] }} : {{ localConsumer.item[value] }} 
                       </span>
                     </li>
                   </ul>
@@ -61,8 +61,8 @@ export default {
           birthdate: '生年月日',
           postalCode: '郵便番号',
           address: '住所',
-          mailAddress: 'メールアドレス',
-          consumerMemo: 'メモ',
+          // mailAddress: 'メールアドレス',
+          // consumerMemo: 'メモ',
           phoneNumber1: '電話番号１',
           phoneNumber2: '電話番号２',
         },
