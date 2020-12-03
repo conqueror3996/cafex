@@ -13,15 +13,9 @@ function isKanaHalf(value) {
 }
 
 function isDate(value) {
-    const reg = new RegExp("^([0-9][0-9][0-9][0-9])[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$");
+    const reg = new RegExp("((?:19|20)\\d\\d)/(0?[1-9]|1[012])/([12][0-9]|3[01]|0?[1-9])");
 
-    return reg.test(moment(value).format('yyyy/MM/DD'))
-}
-
-function rangeDate(value) {
-    var minDate = moment('1900/01/01')
-    var today = moment()
-    return moment(value) >= minDate && moment(value) <= today;
+    return reg.test(moment(value).format('yyyy/MM/DD'));
 }
 
 function isEmail(value) {
@@ -49,6 +43,5 @@ export default {
     isKanaHalf,
     isDate,
     isPassword,
-    isEmail,
-    rangeDate
+    isEmail
 }

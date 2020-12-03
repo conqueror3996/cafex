@@ -833,10 +833,6 @@ export const errorMsg = {
             "message": "Unauthorized",
             "detail": "セッションがタイムアウトになりました。再度ログインをし直してください。"
         },
-        "0102014000109": {
-            "message": "Bad Request",
-            "detail": "新しいパスワードに現在のパスワードは登録できません。"
-        },
         "XXXXXXXXXXXXX": {
             "message": "Bad Request",
             "detail": "ファイルの内容が不正です。マニュアルを参照し、従業員情報が正しく記載されたファイルをアップロードしてください。"

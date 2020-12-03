@@ -1,11 +1,11 @@
 <template>
   <div class="manage-file-conent clearfix">
     <div class="info">
-      <b-button variant="primary" @click="$router.push('/WA01010400')">
-        <img class="mw100" :src="imgBackIcon">
-      </b-button>
       <div class="info-title clearfix">
         <p>お客様情報</p>
+        <b-button variant="primary" @click="$router.push('/WA01010400')">
+          <img :src="imgBackIcon">
+        </b-button>
       </div>
       <div class="info-table clearfix">
         <b-table sticky-header :fields="userCols" :items="consumer">
@@ -302,8 +302,21 @@ export default {
 .imgShow{max-height: 480px;background: #fff;}
 .box-show{display:inline-block;}
 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
-.info button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;right:100%;top:23px;z-index:999;margin-right:10px}
-.info button.btn-primary:focus{box-shadow: none;}
+/* .manage-file-conent {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 1344px;
+} */
+/* .table {
+  margin-bottom: unset;
+}
+
+.table thead th {
+  border-bottom: 2px solid #9d9fa0;
+  font-weight: normal;
+} */
+
 .manage-file-conent .table td,
 .manage-file-conent .table th {
   border-top: inherit !important;
@@ -334,6 +347,17 @@ export default {
   width: 50%;
   float:right;
 }
+/* .action-link {
+    display: none;
+} */
+/* 
+.table-hover tbody tr:hover {
+    background-color: rgba(203, 245, 229, 0.4);
+} */
+
+/* .table-hover tbody tr:hover .action-link {
+    display: unset;
+} */
 
 .modal-content {
   width: 501px;
@@ -363,7 +387,6 @@ export default {
 .manage-file-conent .info {
   margin: 0 auto;
   width: 100%;
-  position: relative;
 }
 
 .manage-file-conent .info-title {
@@ -389,6 +412,21 @@ export default {
   height: 41px;
   background-color: none !important;
 }
+/* .info-title button:hover {
+    color: #fff;
+    background-color: #0091FF;
+    border-color: #9ed9d3;
+}
+
+.info-title button.focus, .info-title button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(158, 217, 211,.5);
+}
+
+.info-title button:not(:disabled):not(.disabled).active, .info-title button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #0091FF;
+    border-color: #9ed9d3;
+} */
 
 .manage-file-conent .info-table {
   background-color: #ffffff;
@@ -411,6 +449,10 @@ export default {
   width: 100%;
   height: 538px;
   border: 2px solid #cacaca;
+}
+
+.file-content {
+  margin: 1.5rem;
 }
 
 .file-table {
@@ -464,28 +506,21 @@ export default {
   border-radius: 0.6rem;
   margin: auto;
 }
-.file-content{padding:20px;box-sizing:border-box;}
-@media (max-width: 1440px) {
-  .manage-file-conent{max-width:1000px;}
-  .info button.btn-primary{width:165px;}
-  .file-content{width:65%;padding:20px;box-sizing:border-box;}
-  .header{height:92px;}
+
+@media (max-width: 1366px) {
   .file-table {
     height: calc(35vh - 30px);
-    width:100%;
   }
   .manage-file-conent .panel {
-    height: calc(50vh - 10px);
+    height: calc(50vh - 15px);
+    margin: 1.5rem auto;
   }
-  .manage-file-conent .panel{width:32%;}
   .detail {
     height: calc(55vh - 10px);
   }
   .manage-file-conent .file-footer {
     margin-top: .5rem;
   }
-  .pagination{margin-top:10px;margin-bottom:15px;}
-  .imgShow{width:68%;}
 }
 
 @media (max-width: 1327px) {

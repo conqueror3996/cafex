@@ -14,7 +14,6 @@ export default  {
     validations: {
       required: { value: false },
       type: { value: "Date", message: "S02006" },
-      type2: { value: "RangeDate", message: "S02017"}
     },
   },
   phoneNumber1: {

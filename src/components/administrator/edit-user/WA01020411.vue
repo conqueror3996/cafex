@@ -13,7 +13,7 @@
         <div class="confirm-info">
           <ul class="div-information">
             <li>氏名：{{ localEmployee.employeeName }}</li>
-            <li>メールアドレス：{{ localEmployee.mailAddress }}</li>
+            <li>氏名（カナ）：{{ localEmployee.mailAddress }}</li>
             <li>所属：{{ localEmployee.branchNumber }}</li>
             <li>パスワード： **************</li>
           </ul>
