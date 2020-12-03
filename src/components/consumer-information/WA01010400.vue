@@ -1,7 +1,7 @@
 <template>
   <div class="box-page">
     <b-button @click="$router.push('/WA01010300')">
-      <img :src="imgBackIcon" />
+      <img :src="imgBackIcon" class="back-icon" />
     </b-button>
     <div class="screen-medium">
       <div class="customer-info-screen">
@@ -144,12 +144,13 @@ export default {
 .box-page{position: relative;}
 .box-page > button.btn {position:absolute;left:5px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
 .box-page > button.btn:focus{box-shadow:none;}
+.back-icon{width: 100%;}
 .customer-info-screen {
-  background-color: #ffffff;
-  width: 100%;
-  height: auto;
-  padding: 1.5rem 3rem 0 3rem;
-  margin: auto;
+    background-color: #ffffff;
+    width: 110%;
+    height: auto;
+    padding: 1.5rem 3rem 0 3rem;
+    margin: 0px 0px 0px -70px;
 }
 .title-information {
   width: 100%;
@@ -223,10 +224,11 @@ export default {
 @media(max-width:1440px){
   .screen-medium{max-width:1050px;}
   .header{height:90px;}
-  .customer-info-screen{padding:10px 30px 0px 30px}
+  .customer-info-screen{padding: 10px 30px 0px 30px;margin: 0px 0px 0px 40px;width: 95%;}
   .title-information p{font-size:21px;margin-bottom:10px}
   .customer-info-screen .form-group button{width:250px;margin-top:10px}
   .information{padding:10px 15px;}
+  .account img {height: 45px;}
 }
 @media (max-width: 1370px) {
   .screen-medium{max-width:975px;}
@@ -247,7 +249,10 @@ export default {
 
 @media (max-width: 1024px) {
   .customer-info-screen {
-    height: calc(80vh);
+    padding: 10px 30px 0px 30px;
+    margin: 0px 0px 0px 190px;
+    height: calc(75vh);
+    width: calc(60vw);
   }
   .information {
     height: 50vh;
@@ -256,6 +261,16 @@ export default {
   .customer-info-screen .form-group button {
     margin: 20px 2rem 0 2rem;
   }
+  .customer-info-screen .form-group {
+    column-count: 2;
+  }
+  .back-icon {
+    width: 90%;
+  }
+
+  .customer-info-screen .form-group button img {
+    width: 100%;
+}
 }
 
 @media (max-width: 1000px) {
