@@ -360,8 +360,6 @@ export default {
         return {
           ...e,
           birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') ,
-          phoneNumber1: auth.formatPhoneNumber(e.phoneNumber1),
-          phoneNumber2: auth.formatPhoneNumber(e.phoneNumber2)
         }
       })
     },
