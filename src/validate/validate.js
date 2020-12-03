@@ -140,7 +140,6 @@ function checkType(value, type) {
       return common.isPassword(value);
 
     case "RangeDate":
-      console.log(value)
       return common.rangeDate(value);
     
     default:
