@@ -249,10 +249,19 @@ export default {
 .customer-info-screen .form-group button img{
     width: 100%;
 }
-
-@media (max-width: 1366px) {
+@media(max-width:1440px){
+  .screen-medium{max-width:1050px;}
+  .header{height:90px;}
+  .customer-info-screen{padding:10px 30px 0px 30px}
+  .title-information p{font-size:21px;margin-bottom:10px}
+  .customer-info-screen .form-group button{width:250px;margin-top:10px}
+  .information{padding:10px 15px;}
+}
+@media (max-width: 1370px) {
+  .screen-medium{max-width:975px;}
+  .customer-info-screen .form-group{margin-bottom:25px;}
   .customer-info-screen {
-    height: calc(80vh - 15px);
+    height: auto;
   }
   .information {
     height: 50vh;

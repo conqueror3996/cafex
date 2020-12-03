@@ -294,7 +294,6 @@ export default {
 </script>
 
 <style>
-.logo{width:8%;}
 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
@@ -302,21 +301,8 @@ export default {
 .imgShow{max-height: 480px;background: #fff;}
 .box-show{display:inline-block;}
 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
-/* .manage-file-conent {
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-  width: 1344px;
-} */
-/* .table {
-  margin-bottom: unset;
-}
-
-.table thead th {
-  border-bottom: 2px solid #9d9fa0;
-  font-weight: normal;
-} */
-
+.info button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;right:100%;top:23px;z-index:999;margin-right:10px;width:175px;}
+.info button.btn-primary:focus{box-shadow: none;}
 .manage-file-conent .table td,
 .manage-file-conent .table th {
   border-top: inherit !important;

@@ -139,6 +139,9 @@ function checkType(value, type) {
     case "Password":
       return common.isPassword(value);
 
+    case "RangeDate":
+      return common.rangeDate(value);
+    
     default:
       break;
   }

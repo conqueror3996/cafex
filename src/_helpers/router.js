@@ -150,6 +150,12 @@ router.beforeEach((to, from, next) => {
           next({ name: 'WA01010300' });
         }
       } else {
+        if (to.matched.find(record2 => record2.name).name === 'WA01010600') {
+          // window.document.title = toRoute.meta && toRoute.meta.title ? toRoute.meta.title : 'Home';
+          window.document.title = 'CafeMeet｜リモート相談'
+        } else {
+          window.document.title = 'CafeMeet'
+        }
         next();
       }
     }

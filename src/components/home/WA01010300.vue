@@ -1,5 +1,5 @@
 <template>
-  <div class="screen-medium">
+  <div class="screen-medium box-table" :class="tabSelected == 'register' ? 'box-edit' : ''">
   <div class="home-screen">
     <b-tabs card align="right">
       <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
@@ -357,8 +357,6 @@ export default {
         return {
           ...e,
           birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') ,
-          phoneNumber1: auth.formatPhoneNumber(e.phoneNumber1),
-          phoneNumber2: auth.formatPhoneNumber(e.phoneNumber2)
         }
       })
     },
@@ -576,15 +574,17 @@ export default {
   
 }; */
 
-/* @media (max-width: 1024px) {
-  .selected-content {
-    height: calc(75vh - 5px);
-  }
+@media(max-width:1440px){
+  .screen-medium.box-table{max-width:1000px;}
   
+  .home-screen .div-back-button{width:165px;}
+  .header{height:95px;}
+  .selected-content{max-height:445px;}
+  .screen-medium.box-table.box-edit .selected-content{max-height:unset;height: auto;}
   .table-main {
     height: calc(40vh - 30px);
   }
-}; */
+}; 
 
 /* @media (max-width: 1327px) {
   .home-screen {

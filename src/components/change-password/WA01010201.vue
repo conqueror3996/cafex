@@ -1,6 +1,6 @@
 <template>
-    <div class="box-login">
-        <p style="font-size: 24px; text-align: center; margin-bottom: 0">パスワード変更</p>
+    <div class="complete-change change-password">
+        <p style="font-size: 24px; text-align: center; margin-bottom: 0">従業員登録</p>
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handleSubmit" style="margin-top: 3rem;">
             <div class="div-change-password">
@@ -61,7 +61,7 @@ export default {
     .div-form-input {
         margin-top: 0.5rem;
     }
-    .div-form-button {
+    .complete-change .div-form-button {
         margin-top: 10rem;
         text-align: center;
     }
