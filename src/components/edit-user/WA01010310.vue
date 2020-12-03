@@ -207,8 +207,9 @@ export default {
     vertical-align: super;
     margin-right: .5rem;
 }
-
-@media (max-width: 1366px) {
+@media (max-width: 1370px) {
+    .selected-content.WA01010310{max-height:unset;}
+    .main-content{width:70%;}
     .main-content .form-info {
         margin-top: 1rem;
         font-size: 15px !important;
