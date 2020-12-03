@@ -1,5 +1,5 @@
 <template>
-  <div class="screen-medium box-table">
+  <div class="screen-medium box-table" :class="tabSelected == 'register' ? 'box-edit' : ''">
   <div class="home-screen">
     <b-tabs card align="right">
       <!-- <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
@@ -555,9 +555,11 @@ export default {
 
 @media(max-width:1440px){
   .screen-medium.box-table{max-width:1000px;}
+  
   .home-screen .div-back-button{width:165px;}
   .header{height:95px;}
   .selected-content{max-height:445px;}
+  .screen-medium.box-table.box-edit .selected-content{max-height:unset;height: auto;}
   .table-main {
     margin: 15px 0.75rem 0px 0.75rem;
     border: 1px solid;
