@@ -8,7 +8,7 @@
             <div class="div-back-button nav-item align-self-center">
               <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
             </div>
-            <!-- <p class="title">顧客を選択して「次へ」を押してください</p> -->
+            <!-- <p class="title">お客様を選択して「次へ」を押してください</p> -->
             <div class="content-search clearfix">
               <b-form @submit.stop.prevent="handleSearch">
               <b-input-group>
@@ -155,7 +155,7 @@
             </div> -->
             
           </div>
-          <WA01020410 v-if="isEdit" @changeEdit="isEdit = $event"></WA01020410>
+          <WA01020410 v-if="isEdit" @changeEdit="isEdit = afterCommit($event)"></WA01020410>
         </b-card-text>
       </b-tab>
       <b-tab title="従業員登録" @click="changeTab('register')" :active="(tabSelected === 'register')">
@@ -296,6 +296,10 @@ export default {
       }
       this.tabSelected = tab;
     },
+    afterCommit(event){
+      this.funcGetAllEmployee(this.inputData, 1);
+      return event;
+    }
   },
   
 };
@@ -452,7 +456,7 @@ export default {
   height: calc(5vh - 10px);
 }
 @media (max-width: 1920px){
-  .screen-medium.box-table{max-width:1540px;}
+  .screen-medium.box-table{max-width:1540px;position: relative;z-index: 99;}
   .home-admin {
     margin-top: 0;
   }
