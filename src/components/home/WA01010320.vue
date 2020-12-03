@@ -174,7 +174,8 @@ export default {
 }
 
 
-@media (max-width: 1366px) {
+@media (max-width: 1440px) {
+    .main-content{width:70%}
     .main-content .form-info {
         margin-top: 1rem;
         font-size: 15px !important;

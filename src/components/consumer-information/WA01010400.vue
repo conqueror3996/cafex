@@ -6,7 +6,7 @@
     <div class="screen-medium">
       <div class="customer-info-screen">
           <div class="title-information">
-            <p >お客様情報</p>
+            <p>お客様情報</p>
           </div>
           <div class="content-information">
               <div class="information">
@@ -157,7 +157,6 @@ export default {
 }
 
 .title-information p{
-    width: 100px;
     height: 28px;
     color: #313131;
     font-size: 24px;
