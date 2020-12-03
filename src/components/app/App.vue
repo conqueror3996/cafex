@@ -24,36 +24,6 @@
     <div class="inner">
       <router-view></router-view>
     </div>
-
-    <!-- <div class="main">
-        <div class="header">
-            <a class="logo" href="/WA01010300">
-                <img :src="imgLogo" alt="logo"/>
-            </a>
-            <b-dropdown id="my-account" right class="m-2" v-if="account.user">
-                <template slot="button-content">
-                    <img class="img-fluid p-2" :src="imgMyAccountIcon" width="50"/>
-                </template>
-                <b-dropdown-item href="/WA01010200">パスワード変更</b-dropdown-item>
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item href="/WA01010100">ログアウト</b-dropdown-item>
-                <!- <b-dropdown-item href="#">{{account}}</b-dropdown-item> ->
-            </b-dropdown>
-        </div>
-        <!- <div class="container div-container">
-            <div class="row div-login">
-                    <router-view></router-view>
-            </div>
-        </div> 
-        <div id="container">
-            <div class="inner"> <!-v-if="alert.message" ->
-                <div :class="`alert alert-danger ${alert.type} pre-formatted`">{{alert.message}}</div>
-                <div class="row div-login">
-                    <router-view></router-view>
-                </div>
-            </div>
-        </div>
-    </div> -->
   </div>
 </template>
 
@@ -109,59 +79,7 @@ export default {
 </script>
 
 <style>
-/* .div-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
 
-.div-login {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 484px;
-  height: 498px;
-  background-color: #ffffff;
-  border-radius: 10px;
-}
-
-.main {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  min-width: 1300px;
-}
-
-#my-account {
-  height: fit-content;
-}
-
-#my-account .btn-secondary {
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
-#container {
-  max-width: 1360px;
-  margin: 0 auto;
-}
-.inner {
-  max-width: 1360px;
-  margin: auto;
-}
-
-.logo {
-  display: inline-block;
-  padding: 10px 0 0 10px;
-}
-*/
 .pre-formatted {
   white-space: pre-line;
 } 
@@ -171,7 +89,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .inner{width:calc(100% - 20px);margin:auto;max-width:unset !important}
 .inner .alert{white-space: pre-line;width: 50%;margin-left: auto;margin-right: auto;border-radius: .5rem;}
 .screen-medium {max-width: 1327px; margin: auto;}
-.logo{display:inline-block;padding:10px 0px 0px 10px;width:8.5%;}
+.logo{display:inline-block;padding:10px 0px 0px 10px;width:8%;}
 /* .logo img {filter: invert(37%) sepia(86%) saturate(689%) hue-rotate(132deg) brightness(65%) contrast(101%);} */
 .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:7%;}
 .logo-small img {vertical-align: unset;}
@@ -234,7 +152,17 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
   opacity: 0.5 !important;
   background-color: #ffffff;
 }
-
+@media(max-width:1920px){
+	.header {
+    height: 145px;
+  }
+  .logo {
+    width: 8%;
+  }
+  .account img {
+    height: 60px;
+  }
+};
 @media(max-width: 1200px){
   .logo-small { display:inline-block;padding:10px 0px 0px 10px;width:10%;}
   .contact p{padding-top: 2.75rem;}
@@ -254,17 +182,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 @media(max-width:500px){
 	.logo{width:25%;}
 }
-@media(max-width:1920px){
-	.header {
-    height: 145px;
-  }
-  .logo {
-    width: 9.5%;
-  }
-  .account img {
-    height: 60px;
-  }
-};
+
 @media(max-width:1367px) {
   .account {
     height: 50px;

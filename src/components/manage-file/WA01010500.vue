@@ -294,7 +294,6 @@ export default {
 </script>
 
 <style>
-.logo{width:8%;}
 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
@@ -302,7 +301,7 @@ export default {
 .imgShow{max-height: 480px;background: #fff;}
 .box-show{display:inline-block;}
 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
-.info button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;right:100%;top:23px;z-index:999;margin-right:10px}
+.info button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;right:100%;top:23px;z-index:999;margin-right:10px;width:175px;}
 .info button.btn-primary:focus{box-shadow: none;}
 .manage-file-conent .table td,
 .manage-file-conent .table th {

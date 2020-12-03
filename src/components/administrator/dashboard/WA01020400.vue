@@ -366,13 +366,7 @@ export default {
   padding-bottom:30px;
   height: auto;
   position:relative;
-  /* height: calc(75vh - 30px);
-  width: calc(93vw - 27px); */
 }
-
-/* .table-main {
-  height: calc(100vh - 500px);
-} */
 
 .title {
   text-align: center;
@@ -386,11 +380,6 @@ export default {
   padding-top:20px;
   box-sizing:border-box;
 }
-
-/* .card-header-tabs {
-  width: calc(77vw - 15px);
-} */
-
 .home-admin .content-search .input-group-append {
   border: 1px solid #ced4da;
   border-radius: 0 .5rem .5rem 0;
@@ -462,71 +451,29 @@ export default {
 .pagination {
   height: calc(5vh - 10px);
 }
-/* .pagination{
-  width:150px;
-  height: 40px;
-  border-bottom: 1px solid #dcdcdb;
-  border-top: 1px solid #dcdcdb;
-  margin:0px auto 5px auto;
-  background-color: #f7f7f7;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-.pagination span{
-  display: inline-block;
-  font-size: 15px;
-  font-weight:bold;
-}
-.pagination .box-paging span:nth-child(1),.pagination .box-paging span:nth-child(3){cursor: pointer;padding:2px;}
-.pagination .box-paging span.disabled{pointer-events: none;color:#6d6d6d}
-.pagination .box-paging span:nth-child(2){padding:0px 20px;} */
-
-
 @media (max-width: 1920px){
   .screen-medium.box-table{max-width:1540px;}
   .home-admin {
     margin-top: 0;
   }
-  /* .home-admin .tab-pane .selected-content {
-    margin: 0rem 2rem 1rem -13.5rem;
-  } */
     .home-admin .table-main {
     margin: 20px 1.5rem 1rem 1.5rem;
   }
   .home-admin .form-control {
     height: 51px;
   }
-  /* .card-header-tabs{
-    margin-top: 1rem;
-    margin-left: 3.7rem;
-  } */
   .account img {
     height: 50px;
   }
-  /*.mw100 {
-    max-width: 150%;
-  } */
 };
 
 @media (max-width: 1755px) {
   .home-admin {
     margin-top: -3rem;
   }
-  /* .home-admin .tab-pane .selected-content {
-    margin: 0rem 2rem 1rem -8.5rem;
-  }
-    .home-admin .table-main {
-    margin: 2rem 1.5rem 1rem 1.5rem;
-  } */
   .home-admin .form-control {
     height: 51px;
   }
-  /* .card-header-tabs{
-    margin-top: 1rem;
-    margin-left: 7.1rem;
-  } */
   .account img {
     height: 45px;
   }
@@ -536,19 +483,9 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  /* .home-admin .tab-pane .selected-content {
-    margin: 0rem 2rem 1rem -4.5rem;
-  }
-    .home-admin .table-main {
-    margin: 2rem 1.5rem 1rem 1.5rem;
-  } */
   .home-admin .form-control {
     height: 51px;
   }
-  /* .card-header-tabs{
-    margin-top: 1rem;
-    margin-left: 9.5rem;
-  } */
   .account img {
     height: 45px;
   }
@@ -564,19 +501,9 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  /* .home-admin .tab-pane .selected-content {
-    margin: 0rem 2rem 1rem -0.5rem;
-  } */
-    /* .home-admin .table-main {
-    margin: 2rem 1.5rem 1rem 1.5rem;
-  } */
   .home-admin .form-control {
     height: 44px;
   }
-  /* .card-header-tabs{
-    margin-top: 1rem;
-    margin-left: 12.2rem;
-  } */
   .account img {
     height: 45px;
   }
@@ -586,19 +513,9 @@ export default {
   .home-admin {
     margin-top: -3rem;
   }
-  /* .home-admin .tab-pane .selected-content {
-    margin: 0rem 2rem 1rem 3.2rem;
-  }
-    .home-admin .table-main {
-    margin: 2rem 1.5rem 1rem 1.5rem;
-  } */
   .home-admin .form-control {
     height: 51px;
   }
-  /* .card-header-tabs{
-    margin-top: 1rem;
-    margin-left: 14.5rem;
-  } */
   .account img {
     height: 45px;
   }
@@ -623,10 +540,6 @@ export default {
   .home-admin .form-control {
     height: 51px;
   }
-  /* .card-header-tabs{
-    margin-left: -7.2rem;
-    width: 1345px;
-  } */
   .account img {
     height: 40px;
     margin-right: -300px;
@@ -665,44 +578,5 @@ export default {
     max-width: 200%;
   }
 };
-
-/* @media (max-width: 1327px) {
-  .home-admin {
-    width: 96%;
-    margin: 0 auto;
-  }
-}; */
-/* @media (max-width: 600px) {
-  .title {
-    text-align: center;
-    font-size: 20px;
-  }
-  .content-search {
-    width: 435px;
-  }
-  
-  .col-spec {
-    width: 3rem;
-  }
-};
-
-@media (max-width: 600px) {
-  .title {
-    text-align: center;
-    font-size: 16px;
-  }
-  .home-admin .content-search {
-    width: 375px;
-  }
-};
-
-@media (max-width: 414px) {
-  .home-admin .content-search {
-    width: 305px;
-  }
-}; */
-
-
-
 </style>
 
