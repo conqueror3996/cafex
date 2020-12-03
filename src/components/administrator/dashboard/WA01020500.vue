@@ -152,7 +152,6 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    position: absolute;
 }
 
 .div-registration-content .div-button-confirm div label p {
