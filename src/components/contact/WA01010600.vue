@@ -752,97 +752,6 @@ export default {
     margin-left: 2rem;
   }
 
-  
-  .form-frame {
-    position: absolute;
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.75);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .form-frame .form-container {
-    width: 85%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-
-  .form-frame .form-container--title {
-    display: flex;
-    justify-content: space-between;
-    background: #024607;
-    padding: 20px;
-    opacity: 0.75;
-    color: white;
-    font-size: 20px;
-  }
-
-  .form-frame .form-container--title div {
-    cursor: pointer;
-    font-size: 46px;
-    position: absolute;
-    right: -2px;
-    top: -1px;
-    margin-right: 1.5rem;
-  }
-
-  .form-frame .form-container--title .close-icons img{
-    height: 40px;
-    width: 40px;
-    margin-bottom: .6rem;
-    filter: invert(93%) sepia(100%) saturate(1%) hue-rotate(92deg) brightness(106%) contrast(102%);
-  }
-
-  .form-frame .form-container--body {
-    padding: 0;
-  }
-
-  .form-frame .form-container--body >>> form {
-    height: calc(100vh - 280px);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 20px;
-    margin-bottom: 80px;
-    border-bottom: 2px solid #999;
-  }
-  .form-frame .form-container--body >>> table > thead {
-    font-weight: bold;
-    font-size: 20px;
-  }
-  .form-frame .form-container--body >>> table > tr {
-    line-height: 50px;
-  }
-  .form-frame .form-container--body >>> table > tr > td > button {
-    border-radius: 20px;
-    border: 1px solid #999;
-    width: 40px;
-    text-align: center;
-    background: #333;
-    color: #aaa;
-    border: none;
-    font-weight: bold;
-  }
-  .form-frame .form-container--body >>> input[type="submit"] {
-    font-size: 20px;
-    background: #333;
-    background-image: linear-gradient(135deg, #ffc107 0%, #f76a35 100%);
-    color: black;
-    padding: 10px;
-    border-radius: 55px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
-      0 6px 6px rgba(0, 0, 0, 0.23);
-    border: none;
-    position: absolute;
-    bottom: 20px;
-    width: calc(100% - 40px);
-  }
-
   .single-button {
     margin-left: 20px;
     border-radius: 50px;
@@ -1087,5 +996,96 @@ export default {
     .action-panel button.small-font {
       padding-left: .1rem;
     }
+  }
+</style>
+<style scoped>
+  .form-frame {
+    position: absolute;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.75);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .form-frame .form-container {
+    width: 85%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  .form-frame .form-container--title {
+    display: flex;
+    justify-content: space-between;
+    background: #024607;
+    padding: 20px;
+    opacity: 0.75;
+    color: white;
+    font-size: 20px;
+  }
+
+  .form-frame .form-container--title div {
+    cursor: pointer;
+    font-size: 46px;
+    position: absolute;
+    right: -2px;
+    top: -1px;
+    margin-right: 1.5rem;
+  }
+
+  .form-frame .form-container--title .close-icons img{
+    height: 40px;
+    width: 40px;
+    margin-bottom: .6rem;
+    filter: invert(93%) sepia(100%) saturate(1%) hue-rotate(92deg) brightness(106%) contrast(102%);
+  }
+
+  .form-frame .form-container--body {
+    padding: 0;
+  }
+
+  .form-frame .form-container--body >>> form {
+    height: calc(100vh - 280px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+    margin-bottom: 80px;
+    border-bottom: 2px solid #999;
+  }
+  .form-frame .form-container--body >>> table > thead {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .form-frame .form-container--body >>> table > tr {
+    line-height: 50px;
+  }
+  .form-frame .form-container--body >>> table > tr > td > button {
+    border-radius: 20px;
+    border: 1px solid #999;
+    width: 40px;
+    text-align: center;
+    background: #333;
+    color: #aaa;
+    border: none;
+    font-weight: bold;
+  }
+  .form-frame .form-container--body >>> input[type="submit"] {
+    font-size: 20px;
+    background: #333;
+    background-image: linear-gradient(135deg, #ffc107 0%, #f76a35 100%);
+    color: black;
+    padding: 10px;
+    border-radius: 55px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+      0 6px 6px rgba(0, 0, 0, 0.23);
+    border: none;
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
   }
 </style>
