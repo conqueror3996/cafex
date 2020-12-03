@@ -228,9 +228,11 @@ export default {
   .customer-info-screen .form-group button{width:250px;margin-top:10px}
   .information{padding:10px 15px;}
 }
-@media (max-width: 1366px) {
+@media (max-width: 1370px) {
+  .screen-medium{max-width:975px;}
+  .customer-info-screen .form-group{margin-bottom:25px;}
   .customer-info-screen {
-    height: calc(80vh - 15px);
+    height: auto;
   }
   .information {
     height: 50vh;
