@@ -52,7 +52,6 @@ export default {
 .selection-mode button, .selection-mode a{
     box-shadow: unset !important;
 }
-
 .div-space {
     margin: 33px 0px 0px 0px;
 }
