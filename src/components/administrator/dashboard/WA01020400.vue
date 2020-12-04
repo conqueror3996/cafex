@@ -400,10 +400,8 @@ export default {
 .home-admin .table-main .table.b-table>thead>tr>th {
   background-color: #ffffff;
   position: sticky;
-  position: -webkit-sticky;
   top: 0;
 }
-
 .col-spec {
   width: 8rem;
 }

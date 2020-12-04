@@ -25,7 +25,7 @@
         <template #modal-footer="{ ok, cancel }">
           <div>
             <b-button size="sm" variant="primary" @click="ok()">
-              実行
+              登録
             </b-button>
             
             <b-button size="sm" variant="danger" @click="cancel()">

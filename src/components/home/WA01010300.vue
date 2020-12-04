@@ -9,7 +9,7 @@
       </template> -->
 
       <b-tab :title="this.localEmployee.rollCode === '21' ? 'お客様一覧' : 'お客様選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
-        <b-card-text class="selected-content">
+        <b-card-text class="selected-content" :class="isEdit ? 'WA01010310' : ''">
           <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
             <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
           </div>
@@ -359,7 +359,7 @@ export default {
       return arrInput.map((e) => {
         return {
           ...e,
-          birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') ,
+          birthdate: e.birthdate ? auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') : '' ,
         }
       })
     },

@@ -1,5 +1,8 @@
 <template>
     <div class="div-registration-content">
+        <div class="div-back-button nav-item align-self-center">
+            <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+        </div>
         <div>
             <p>ファイルをアップロード</p>
         </div>
@@ -14,11 +17,9 @@
                         <p>ファイル選択</p>
                     </label>
                     <input type="file" name="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
-                <b-button type="submit" style="margin-top: 30px;" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
+                    <b-button type="submit" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
                 </div>
-                <div class="info-file" v-if="fileName !== ''">
-                    <label>{{fileName}}</label>
-                </div>
+                <span class="info-file" v-if="fileName !== ''">{{fileName}} を選択</span>
             </div>
         </form>
         
@@ -36,6 +37,7 @@ export default {
             showModal: false,
             files: {},
             fileName: '',
+            imgManageMode: './static/img/btn_back_mode_select.svg',
         }
     },
     computed: {
@@ -145,7 +147,8 @@ export default {
 .div-registration-content .div-button-confirm {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction:column;
+    position: relative;
 }
 
 .div-registration-content .div-button-confirm .button-confirm{
@@ -159,9 +162,10 @@ export default {
 }
 
 .div-registration-content .div-button-confirm .info-file {
-    padding: .75rem 0 0 3rem;
-    width: auto;
-    margin-left: 450px;
+    display: inline-block;
+    position: absolute;
+    left: calc(50% + 110px);
+    top: calc(50% - 40px);
 }
 
 .div-registration-content .button-custom {
@@ -203,9 +207,15 @@ export default {
 .div-registration-content input[type="file"] {
 	display: none;
 }
-@media (max-width: 1366px) {
+@media (max-width: 1370px) {
     .div-custom-alert {
         margin-bottom: 60px;
+    }
+    .div-custom-alert{
+        margin-bottom:80px;
+    }
+    .div-registration-content{
+        margin-bottom:50px;
     }
 }
 
