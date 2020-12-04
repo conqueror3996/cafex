@@ -90,7 +90,7 @@ export default {
                 } else {
                     this.fileName = filename;
                 }
-                if(files[i].size > memoryImg) {
+                if(this.files[i].size > memoryImg) {
                     errorMessage = validate.getMessageErrorFromCode("S02011");
                     break;
                 }

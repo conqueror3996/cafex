@@ -11,8 +11,9 @@
             </div>
             <div class="input-row">
                 <div class="label-form"><label for="birthday">生年月日 :</label></div>
-                <div>
-                    <b-input class="input-form" type="date" id="birthday" maxlength=10 v-model="consumer.birthdate" placeholder="YYYY/MM/DD"></b-input>
+                <div class="datetime-box">
+                    <b-input class="input-form" @blur="focusOut" type="date" id="birthday" maxlength=10 v-model="consumer.birthdate" placeholder="YYYY/MM/DD"></b-input>
+                    <input type="date" v-model="dateHide" @change="afterChangeDate" tabindex="-1">
                     <!-- <b-form-datepicker class="input-form" id="birthday" v-model="consumer.birthdate"  placeholder="YYYY/MM/DD"></b-form-datepicker> -->
                 </div>
             </div>
@@ -67,7 +68,8 @@ export default {
     data() {
         return {
             showModal: false,
-            consumer: {}
+            consumer: new Consumer(),
+            dateHide: '1980-01-01'
         }
     },
     components: {
@@ -79,7 +81,7 @@ export default {
         })
     },
     created() {
-        this.consumer[`birthdate`] = new Date('1980-01-01').toISOString().slice(0,10)
+        // this.consumer[`birthdate`] = new Date('1980-01-01').toISOString().slice(0,10)
     },
     methods: {
         ...mapActions("alert", {
@@ -108,6 +110,14 @@ export default {
         },
         handleBackHome() {
           this.$emit("changeSelectedTab", 'selection');
+        },
+        afterChangeDate(event){
+            const date = event.target.value;
+            this.consumer.birthdate = new Date(date).toISOString().slice(0,10)
+        },
+        focusOut(event){
+            const dateFocusOut = event.target.value;
+            this.dateHide = new Date(dateFocusOut).toISOString().slice(0,10)
         }
     }
 }
@@ -172,8 +182,29 @@ export default {
     vertical-align: super;
     margin-right: .5rem;
 }
-
-
+input[type="date"].input-form::-webkit-inner-spin-button,
+input[type="date"].input-form::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+input[type=date]:nth-child(2)::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]:nth-child(2)::-webkit-datetime-edit-month-field{
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]:nth-child(2)::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]:nth-child(2)::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
+    display: none;
+}
+.datetime-box{position: relative;}
+.datetime-box input[type="date"]:nth-child(2){position: absolute;width:230px;right:5px;top:5px;z-index:999;border:none}
 @media (max-width: 1440px) {
     .main-content{width:70%}
     
