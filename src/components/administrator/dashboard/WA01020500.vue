@@ -1,5 +1,8 @@
 <template>
     <div class="div-registration-content">
+        <div class="div-back-button nav-item align-self-center">
+            <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+        </div>
         <div>
             <p>ファイルをアップロード</p>
         </div>
@@ -34,6 +37,7 @@ export default {
             showModal: false,
             files: {},
             fileName: '',
+            imgManageMode: './static/img/btn_back_mode_select.svg',
         }
     },
     computed: {
