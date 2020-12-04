@@ -76,8 +76,13 @@ export default {
         }),
         handleSubmit (e) {
             if(this.submitted == false) {
-                this.$router.push('/WA01010300').catch(() => {})
-                return;
+                if (this.employees.employee.rollCode == 21) {
+                    this.$router.push('/WA01020300').catch(() => {})
+                    return;
+                } else {
+                    this.$router.push('/WA01010300').catch(() => {})
+                    return;
+                }
             }
             this.msg = ''
             const data = {
