@@ -14,11 +14,9 @@
                         <p>ファイル選択</p>
                     </label>
                     <input type="file" name="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
-                <b-button type="submit" style="margin-top: 30px;" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
+                    <b-button type="submit" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
                 </div>
-                <div class="info-file" v-if="fileName !== ''">
-                    <label>{{fileName}}</label>
-                </div>
+                <span class="info-file" v-if="fileName !== ''">{{fileName}}</span>
             </div>
         </form>
         
@@ -145,7 +143,8 @@ export default {
 .div-registration-content .div-button-confirm {
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction:column;
+    position: relative;
 }
 
 .div-registration-content .div-button-confirm .button-confirm{
@@ -159,9 +158,10 @@ export default {
 }
 
 .div-registration-content .div-button-confirm .info-file {
-    padding: .75rem 0 0 3rem;
-    width: auto;
-    margin-left: 450px;
+    display: inline-block;
+    position: absolute;
+    left: calc(50% + 110px);
+    top: calc(50% - 40px);
 }
 
 .div-registration-content .button-custom {
@@ -203,9 +203,15 @@ export default {
 .div-registration-content input[type="file"] {
 	display: none;
 }
-@media (max-width: 1366px) {
+@media (max-width: 1370px) {
     .div-custom-alert {
         margin-bottom: 60px;
+    }
+    .div-custom-alert{
+        margin-bottom:80px;
+    }
+    .div-registration-content{
+        margin-bottom:50px;
     }
 }
 
