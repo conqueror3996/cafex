@@ -16,7 +16,7 @@
                     <input type="file" name="file" value="ファイル選択" id="file" @change="uploadFile" accept=".csv"/>
                     <b-button type="submit" class="button-custom" variant="primary" :disabled="fileName === ''">登録</b-button>
                 </div>
-                <span class="info-file" v-if="fileName !== ''">{{fileName}}</span>
+                <span class="info-file" v-if="fileName !== ''">{{fileName}} を選択</span>
             </div>
         </form>
         
