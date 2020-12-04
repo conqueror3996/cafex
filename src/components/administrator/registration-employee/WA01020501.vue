@@ -1,5 +1,5 @@
 <template>
-    <div class="box-login">
+    <div class="complete-change">
         <p style="font-size: 24px; text-align: center; margin-bottom: 0;">従業員登録</p>
         <hr style="height: 1px; background-color:#979797; margin-top:0">
         <form @submit.prevent="handlesubmit" style="margin-top: 3rem;">
@@ -73,10 +73,13 @@ export default {
 </script>
 
 <style>
+    .complete-change {
+        width:484px;margin:20px auto 0px auto;background:#fff;border-radius:10px;padding:3rem;box-sizing:border-box;
+    }
     .div-form-input {
         margin-top: 0.5rem;
     }
-    .div-form-button {
+    .complete-change .div-form-button {
         margin-top: 10rem;
         text-align: center;
     }

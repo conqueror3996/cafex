@@ -289,7 +289,6 @@ export default {
       })
     },
     changeTab(tab) {
-      console.log(tab)
       // Set error message empty when change tab
       if (this.tabSelected !== tab) {
         this.clear();
