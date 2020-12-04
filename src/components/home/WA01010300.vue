@@ -359,7 +359,7 @@ export default {
       return arrInput.map((e) => {
         return {
           ...e,
-          birthdate: auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') ,
+          birthdate: e.birthdate ? auth.formatDateTime(e.birthdate, 'yyyy/MM/DD') : '' ,
         }
       })
     },
