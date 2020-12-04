@@ -729,7 +729,7 @@ export default {
   .toolbar {
     position: absolute;
     top: 5vh;
-    right: 20vw;
+    right: 20px;
   }
   .edit-tools button {
     width: 120px;
@@ -750,6 +750,7 @@ export default {
     background-color: #f8f9fa;
     padding: .2rem .5rem;
     margin-left: 2rem;
+    border-radius: 3rem;
   }
 
   .single-button {
