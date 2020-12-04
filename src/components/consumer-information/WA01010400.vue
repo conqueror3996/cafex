@@ -1,9 +1,9 @@
 <template>
   <div class="box-page">
-    <b-button @click="$router.push('/WA01010300')">
-      <img :src="imgBackIcon" />
-    </b-button>
     <div class="screen-medium">
+      <b-button @click="$router.push('/WA01010300')">
+        <img :src="imgBackIcon" />
+      </b-button>
       <div class="customer-info-screen">
           <div class="title-information">
             <p>お客様情報</p>
@@ -140,10 +140,21 @@ export default {
 
 <style>
 .logo{width:8%}
-.screen-medium{margin-top:25px}
+.screen-medium{margin-top:25px;position: relative;}
 .box-page{position: relative;}
 .box-page > button.btn {position:absolute;left:5px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
 .box-page > button.btn:focus{box-shadow:none;}
+.box-page > .screen-medium button.btn-secondary {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    z-index: 999;
+    margin-right: 10px;
+    width: 175px;
+}
 .customer-info-screen {
   background-color: #ffffff;
   width: 100%;
