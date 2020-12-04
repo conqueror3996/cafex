@@ -100,7 +100,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 .account:hover .list_account-action{opacity:1;transition:0.2s all;visibility:visible;}
 .alert-message{max-width:500px;position:absolute;left:0px;right:0px;bottom:0px;margin:auto;z-index:99}
 .alert-message p {margin-bottom: 0px;}
-.list_account-action{width:162px;position:absolute;background:#fff;border-radius:5px;right:20px;top:55px;list-style:none;border:1px solid #b1acac;padding:0px;visibility:hidden; opacity:0;transition:0.2s all;}
+.list_account-action{width:162px;position:absolute;z-index:9999;background:#fff;border-radius:5px;right:20px;top:55px;list-style:none;border:1px solid #b1acac;padding:0px;visibility:hidden; opacity:0;transition:0.2s all;}
 .list_account-action li{padding:10px 0px 10px 15px;border-bottom:1px solid #e0e0e0;}
 .list_account-action li:last-child{border-bottom:none}
 .list_account-action li:hover{background:#eee;}
@@ -160,7 +160,7 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
     width: 8%;
   }
   .account img {
-    height: 60px;
+    height: 45px;
   }
 };
 @media(max-width: 1200px){
@@ -183,12 +183,13 @@ body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height
 	.logo{width:25%;}
 }
 
-@media(max-width:1367px) {
+@media(max-width:1370px) {
   .account {
     height: 50px;
   }
   .header {
     width: 100%;
   }
+  .account img{height:45px;}
 }
 </style>
