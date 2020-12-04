@@ -16,7 +16,7 @@
                   <ul id="v-for-object" class="contractor-info">
                     <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
                       <span> 
-                        {{ labels[value] }} : {{ localConsumer.item[value] }} 
+                        {{ labels[value] }} : {{ localConsumer.item ? localConsumer.item[value] : '' }} 
                       </span>
                     </li>
                   </ul>
@@ -34,7 +34,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { Consumer } from '../../models';
-import moment from 'moment';
+import { auth } from '../../_helpers/'
 
 export default {
   data() {
@@ -82,7 +82,7 @@ export default {
     this.initInfo()
     this.getConsumerByID(this.localConsumerId).then(() => {
       this.localConsumer = this.consumers
-      this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
+      this.localConsumer.item.birthdate = this.localConsumer.item.birthdate ? auth.formatDateTime(this.localConsumer.item.birthdate, 'yyyy/MM/DD') : ''
     })
   },
   methods: {
