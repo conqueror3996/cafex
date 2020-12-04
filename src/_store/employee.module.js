@@ -110,12 +110,18 @@ const actions = {
         return employeeService.registerEmployees(inputFile).then(
             info => {
                 commit ("getAllEmployeesSuccess", info.data)
+                return info
             }
         ).catch((err) => {
-            if (err.response) {
-                const { status, data } = err.response
-                dispatch('alert/error', data.error.code, { root: true });
+            const { status, data } = err.response
+            if (status !== 500) {
+                const mailDuplicate = []
+                data.forEach(element => {
+                    mailDuplicate.push(element.mailAddress)
+                });
+                dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} already exists`, { root: true });
             }
+            return err.response
         })
     },
 

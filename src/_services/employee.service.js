@@ -69,13 +69,11 @@ function getEmployeeByID(id) {
 }
 
 function registerEmployees(inputFile) {
-    console.log(inputFile)
     const form = new FormData();
 
     form.append('file', inputFile);
 
     let headers = { 'Content-Type': 'multipart/form-data' }
-
     return auth.sendRequest('POST' , allAPI.register_employees, form, headers)
 }
 

@@ -100,13 +100,17 @@ export default {
                 this.errorMsg(errorMessage)
             } else {
                 this.clear()
-                this.fileName = `${this.fileName}    を選択`;
+                this.fileName = `${this.fileName}`;
             }
         },
 
         handleSubmit (e) {
             this.registerEmployeesCsv(this.files[0]).then((res) => {
-                this.$router.push('/WA01020501')
+                if (res.status === 200) {
+                    this.$router.push('/WA01020501')
+                }
+            }).catch((err) => {
+                console.log(err)
             })
             // this.submitted = true;
             // const { username, password } = this;
