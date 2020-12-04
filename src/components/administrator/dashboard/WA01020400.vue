@@ -289,7 +289,6 @@ export default {
       })
     },
     changeTab(tab) {
-      console.log(tab)
       // Set error message empty when change tab
       if (this.tabSelected !== tab) {
         this.clear();
@@ -400,10 +399,8 @@ export default {
 .home-admin .table-main .table.b-table>thead>tr>th {
   background-color: #ffffff;
   position: sticky;
-  position: -webkit-sticky;
   top: 0;
 }
-
 .col-spec {
   width: 8rem;
 }

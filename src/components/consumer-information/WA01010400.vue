@@ -1,9 +1,9 @@
 <template>
   <div class="box-page">
-    <b-button @click="$router.push('/WA01010300')">
-      <img :src="imgBackIcon" />
-    </b-button>
     <div class="screen-medium">
+      <b-button @click="$router.push('/WA01010300')">
+        <img :src="imgBackIcon" />
+      </b-button>
       <div class="customer-info-screen">
           <div class="title-information">
             <p>お客様情報</p>
@@ -14,9 +14,9 @@
                   <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
                   <span for="contractor">お客様情報</span> 
                   <ul id="v-for-object" class="contractor-info">
-                    <li v-for="(value, name) in this.localConsumer.item" :key="name" style="margin-top: 0.5rem;">
-                      <span v-if="Object.keys(labels).includes(name)" > 
-                        {{ labels[name] }} : {{ value }} 
+                    <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
+                      <span> 
+                        {{ labels[value] }} : {{ localConsumer.item ? localConsumer.item[value] : '' }} 
                       </span>
                     </li>
                   </ul>
@@ -34,7 +34,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { Consumer } from '../../models';
-import moment from 'moment';
+import { auth } from '../../_helpers/'
 
 export default {
   data() {
@@ -61,8 +61,8 @@ export default {
           birthdate: '生年月日',
           postalCode: '郵便番号',
           address: '住所',
-          mailAddress: 'メールアドレス',
-          consumerMemo: 'メモ',
+          // mailAddress: 'メールアドレス',
+          // consumerMemo: 'メモ',
           phoneNumber1: '電話番号１',
           phoneNumber2: '電話番号２',
         },
@@ -82,7 +82,7 @@ export default {
     this.initInfo()
     this.getConsumerByID(this.localConsumerId).then(() => {
       this.localConsumer = this.consumers
-      this.localConsumer.item.birthdate = moment(this.localConsumer.item.birthdate).format('yyyy/MM/DD')
+      this.localConsumer.item.birthdate = this.localConsumer.item.birthdate ? auth.formatDateTime(this.localConsumer.item.birthdate, 'yyyy/MM/DD') : ''
     })
   },
   methods: {
@@ -140,10 +140,21 @@ export default {
 
 <style>
 .logo{width:8%}
-.screen-medium{margin-top:25px}
+.screen-medium{margin-top:25px;position: relative;}
 .box-page{position: relative;}
 .box-page > button.btn {position:absolute;left:5px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
 .box-page > button.btn:focus{box-shadow:none;}
+.box-page > .screen-medium button.btn-secondary {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    z-index: 999;
+    margin-right: 10px;
+    width: 175px;
+}
 .customer-info-screen {
   background-color: #ffffff;
   width: 100%;
