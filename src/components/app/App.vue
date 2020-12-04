@@ -83,6 +83,7 @@ export default {
 .pre-formatted {
   white-space: pre-line;
 } 
+.table-main .table.b-table{border-collapse: separate;border-spacing: 0;}
 body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden;width:100%;height:100vh;}
 #container{width:100%;margin:auto;}
 /* .inner{max-width: 1344px;margin:auto;} */
