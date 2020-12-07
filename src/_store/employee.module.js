@@ -86,11 +86,14 @@ const actions = {
         return employeeService.getAllEmployees(input).then(
             info => {
                 commit("getAllEmployeesSuccess", info.data);
+                return info.status
             },
         ).catch((err) => {
-            const { data } = err.response
-            dispatch('alert/error', data.error.code, { root: true });
-            commit('getUserInfoFailed', data.error);
+            const { data, status } = err.response
+            if (data.error.code !== '0105014040201') {
+                dispatch('alert/error', data.error.code, { root: true });
+            }
+            return status
         })
     },
     getEmployeeByID({commit , dispatch}, id) {

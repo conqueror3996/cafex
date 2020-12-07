@@ -239,13 +239,16 @@ export default {
     }),
     funcGetAllEmployee(input, page){
       input.page = page;
-      this.getAllEmployees(input).then(() => {
-        this.meta = this.employees.all.meta;
-        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
-      }).catch((err) => {
-        this.localEmployees = [];
-        this.meta = { page: 1, maximumPage: 1}
-      });
+      this.getAllEmployees(input).then((res) => {
+        if (res === 404) {
+          this.localEmployees = [];
+          this.meta = { page: 1, maximumPage: 1}
+        } else {
+          this.meta = this.employees.all.meta;
+          this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
+        }
+        
+      })
     },
     deleteItem(employeeId) {
         if(employeeId !== this.selectedItem) {
