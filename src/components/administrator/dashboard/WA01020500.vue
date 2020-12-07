@@ -1,8 +1,5 @@
 <template>
     <div class="div-registration-content">
-        <div class="div-back-button nav-item align-self-center">
-            <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
-        </div>
         <div>
             <p>ファイルをアップロード</p>
         </div>
@@ -22,7 +19,6 @@
                 <span class="info-file" v-if="fileName !== ''">{{fileName}} を選択</span>
             </div>
         </form>
-        
     </div>
 </template>
 

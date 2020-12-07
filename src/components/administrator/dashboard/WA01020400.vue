@@ -1,13 +1,15 @@
 <template>
+<div class="box-page_WA01020400">
+  <div class="div-back-button nav-item align-self-center">
+    <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+  </div>
 <div class="screen-medium box-table">
   <div class="home-admin">
     <b-tabs card align="right">
       <b-tab title="従業員一覧" @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content">
           <div v-if="!isEdit">
-            <div class="div-back-button nav-item align-self-center">
-              <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
-            </div>
+            
             <!-- <p class="title">お客様を選択して「次へ」を押してください</p> -->
             <div class="content-search clearfix">
               <b-form @submit.stop.prevent="handleSearch">
@@ -166,6 +168,7 @@
     </b-tabs>
   </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -236,13 +239,16 @@ export default {
     }),
     funcGetAllEmployee(input, page){
       input.page = page;
-      this.getAllEmployees(input).then(() => {
-        this.meta = this.employees.all.meta;
-        this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
-      }).catch((err) => {
-        this.localEmployees = [];
-        this.meta = { page: 1, maximumPage: 1}
-      });
+      this.getAllEmployees(input).then((res) => {
+        if (res === 404) {
+          this.localEmployees = [];
+          this.meta = { page: 1, maximumPage: 1}
+        } else {
+          this.meta = this.employees.all.meta;
+          this.localEmployees = this.employees.all.employee ? this.formatConsumerData(this.employees.all.employee) : []
+        }
+        
+      })
     },
     deleteItem(employeeId) {
         if(employeeId !== this.selectedItem) {
@@ -305,7 +311,7 @@ export default {
 </script>
 
 <style>
-
+.box-page_WA01020400{position: relative;}
 .col-name {
   width: 20rem;
 }
@@ -320,10 +326,10 @@ export default {
 .button-manage-mode img {
   padding-right: 5px;
 }
-.div-back-button {
+.box-page_WA01020400 .div-back-button {
   position:absolute;
-  right:100%;
-  top:0px;
+  left:0px;
+  top:41px;
   z-index:9999;
   width: 175px;
 }

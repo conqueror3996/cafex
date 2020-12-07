@@ -40,9 +40,9 @@
             (click)="loadDevice()">
             <em class="material-icons">videocam</em>
         </button> -->
-        <button type="button" name="formShowHide" class="edit-tools" @click="isShowFormContainer=!isShowFormContainer">
+        <!-- <button type="button" name="formShowHide" class="edit-tools" @click="isShowFormContainer=!isShowFormContainer">
             代行入力
-        </button>
+        </button> -->
     </form>
     </div>
       <div id="left">
@@ -77,14 +77,14 @@
         </div>
         <div class="box-tab border-box scroll-bar">
           <div class="action-panel">
-            <button :class="showSimulation === false ? 'btn btn-outline-secondary small-font' : 'btn btn-outline-secondary small-font active'" @click="showSimulation = true; showDescription = false; showContract = false; ">
+            <button :class="showSimulation === false ? 'btn btn-outline-secondary small-font' : 'btn btn-outline-secondary small-font active'" @click="showSimulation = true; showDescription = false; showContract = false; pushLink('share-plan1') ">
             <!-- <button class="btn btn-outline-primary small-font" @click="showSimulation = true; showDescription = false; showContract = false"> -->
               <span>ライフプラン<br /> シミュレーション</span>
             </button>
             <button :class="showDescription === false ? 'btn btn-outline-secondary' : 'btn btn-outline-secondary active'" @click="showSimulation = false; showDescription = true; showContract = false">
               <span>商品説明</span>
             </button>
-            <button :class="showContract === false ? 'btn btn-outline-secondary' : 'btn btn-outline-secondary active'" @click="showSimulation = false; showDescription = false; showContract = true;">
+            <button :class="showContract === false ? 'btn btn-outline-secondary' : 'btn btn-outline-secondary active'" @click="showSimulation = false; showDescription = false; showContract = true; pushLink('share-form1')">
               <span>契約申込</span>
             </button>
           </div>
@@ -93,7 +93,7 @@
             <div class="simulation" v-if="!showSimulation && !showDescription && !showContract">
             </div>
             <div class="simulation" v-if="showSimulation">
-              <button class="btn btn-outline-secondary" @click="pushLink('share-plan1')" :disabled="!isSharing">
+              <button class="btn btn-outline-secondary" @click="isShowFormContainer=!isShowFormContainer" :disabled="!isSharing">
                 <span>代行入力</span>
               </button>
             </div>
@@ -121,7 +121,7 @@
               </div>
             </div>
             <div class="contract" v-if="showContract">
-              <button class="btn btn-outline-secondary" @click=" pushLink('share-form1')" :disabled="!isSharing">
+              <button class="btn btn-outline-secondary" @click="isShowFormContainer=!isShowFormContainer" :disabled="!isSharing">
                 <span>代行入力</span>
               </button>
             </div>
@@ -729,7 +729,7 @@ export default {
   .toolbar {
     position: absolute;
     top: 5vh;
-    right: 20vw;
+    right: 20px;
   }
   .edit-tools button {
     width: 120px;
@@ -750,6 +750,7 @@ export default {
     background-color: #f8f9fa;
     padding: .2rem .5rem;
     margin-left: 2rem;
+    border-radius: 3rem;
   }
 
   .single-button {

@@ -1,18 +1,14 @@
 <template>
+<div class="box-page">
+  <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
+    <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
+  </div>
   <div class="screen-medium box-table" :class="tabSelected == 'register' ? 'box-edit' : ''">
   <div class="home-screen">
     <b-tabs card align="right">
-      <!-- <template #tabs-start v-if="this.localEmployee.rollCode === '21'">
-        <div class="div-back-button nav-item align-self-center">
-          <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon" :src="imgManageMode" alt=""></button>
-        </div>
-      </template> -->
-
       <b-tab :title="this.localEmployee.rollCode === '21' ? 'お客様一覧' : 'お客様選択' "  @click="changeTab('selection')" :active="(tabSelected === 'selection')">
         <b-card-text class="selected-content" :class="isEdit ? 'WA01010310' : ''">
-          <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
-            <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
-          </div>
+          
           <div v-if="!isEdit">
             <p class="title" v-if="this.localEmployee.rollCode !== '21'">お客様を選択して「モード選択へ」を押してください</p>
             <div :class="this.localEmployee.rollCode !== '21' ? 'content-search' : 'content-search admin-search'">
@@ -184,6 +180,7 @@
     </b-tabs>
   </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -384,6 +381,7 @@ export default {
 </script>
 
 <style>
+.box-page{position:relative;}
 .screen-medium.box-table{max-width:1540px;}
 .col-name {
   width: 15rem;
@@ -420,20 +418,18 @@ export default {
     color: #0091FF;
 }
 
-.home-screen .div-back-button {
-  /* margin-right: 18px;
-  margin-bottom: 1px; */
+.box-page .div-back-button {
   position:absolute;
-  top:0px;
-  right:100%;
+  top:57px;
+  left:0px;
   z-index: 999;
   width:175px;
 }
-
-.home-screen .div-back-button button {
+ .div-back-button button {
   outline: unset;
+  padding:0px;
 }
-.home-screen .button-manage-mode {
+.button-manage-mode {
   cursor: pointer;
   /* margin-bottom: 1px;
   margin-right: -5px; */
