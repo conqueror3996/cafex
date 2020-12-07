@@ -1,9 +1,10 @@
 <template>
+<div class="box-page">
+  <b-button variant="primary" @click="$router.push('/WA01010400')">
+    <img class="mw100" :src="imgBackIcon">
+  </b-button>
   <div class="manage-file-conent clearfix">
     <div class="info">
-      <b-button variant="primary" @click="$router.push('/WA01010400')">
-        <img class="mw100" :src="imgBackIcon">
-      </b-button>
       <div class="info-title clearfix">
         <p>お客様情報</p>
       </div>
@@ -96,6 +97,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -294,6 +296,7 @@ export default {
 </script>
 
 <style>
+.box-page{position: relative;}
 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
@@ -301,8 +304,8 @@ export default {
 .imgShow{max-height: 480px;background: #fff;}
 .box-show{display:inline-block;}
 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
-.info button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;right:100%;top:23px;z-index:999;margin-right:10px;width:175px;}
-.info button.btn-primary:focus{box-shadow: none;}
+.box-page button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;left:0px;top:23px;z-index:999;width:175px;}
+.box-page button.btn-primary:focus{box-shadow: none;}
 .manage-file-conent .table td,
 .manage-file-conent .table th {
   border-top: inherit !important;
