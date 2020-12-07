@@ -123,6 +123,8 @@ const actions = {
                     mailDuplicate.push(element.mailAddress)
                 });
                 dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} already exists`, { root: true });
+            } else {
+                dispatch('alert/error', data.error.code, { root: true });
             }
             return err.response
         })
