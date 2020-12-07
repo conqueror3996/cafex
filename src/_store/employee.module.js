@@ -118,7 +118,6 @@ const actions = {
         ).catch((err) => {
             const { status, data } = err.response
             if (status !== 500) {
-                console.log(err.response);
                 const mailDuplicate = []
                 data.forEach(element => {
                     mailDuplicate.push(element.mailAddress)
@@ -128,7 +127,8 @@ const actions = {
                 }else{
                     dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が重複している`, { root: true });
                 }
-                
+                // let styleMess = (status !== 409) ? 'が存在している' : 'が重複している';
+                // dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} ${styleMess}`, { root: true });
             }
             return err.response
         })
