@@ -697,15 +697,17 @@ export default {
 </script>
 
 <style>
-  body{margin:0px;padding:0px;/*background:url('/static/img/istockphoto-1049489394-1024x1024.jpg') center center no-repeat;background-size:100% 100%;*/ overflow:hidden !important;width:100%;height:100vh;}
+  body{margin:0px;padding:0px;background:url('/static/img/background-image.png') center center no-repeat;background-size:100% 100%; overflow:hidden !important;width:100%;height:100vh;}
   .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
   .inner{width:calc(100% - 30px);margin:auto;max-width:unset !important}
   .logo-small{display:inline-block;padding:10px 0px 0px 10px;}
+  .contact p,.contact p > a{color:#fff}
+  
   .mw100{max-width:100%;}
   header.header{height:130px;}
   .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
   #left{width:calc(20% - 8px);float:left;height:calc(100vh - 145px);}
-  #right{width:calc(80% - 8px);float:right;height:calc(100vh - 145px);background:rgba(255, 255, 255, 0.55);border-radius:10px;}
+  #right{width:calc(80% - 8px);float:right;height:calc(100vh - 145px);background:rgba(255, 255, 255, 0.75);border-radius:10px;}
   .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:10px;} /*10%*/
   .input-search{position:relative;width:100%;height:auto;}
   .txt-search{width:100%;height:43px;border:1px solid #313131;border-radius:8px;padding-left:15px;
