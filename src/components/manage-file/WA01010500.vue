@@ -1,5 +1,5 @@
 <template>
-<div class="box-page">
+<div class="box-page WA01010500">
   <b-button variant="primary" @click="$router.push('/WA01010400')">
     <img class="mw100" :src="imgBackIcon">
   </b-button>
@@ -299,47 +299,51 @@ export default {
 
 <style>
 .header{height:140px;}
-.box-page{position: relative;}
-.manage-file-conent {
+.box-page.WA01010500{position: relative;}
+.WA01010500 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
 }
-.imgShow{max-height: 440px;background: #fff;}
-.box-show{display:inline-block;}
-.box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;height: 450px;
+.WA01010500 .imgShow{max-height: 440px;background: #fff;}
+.WA01010500 .box-show{display:inline-block;}
+.WA01010500 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;height: 450px;
   background-color: #ececec;
   border: 1px solid #97989c;
   border-radius:5px;
 }
-.box-page button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;left:0px;top:23px;z-index:999;width:175px;}
-.box-page button.btn-primary:focus{box-shadow: none;}
-.manage-file-conent .table td,
-.manage-file-conent .table th {
+.box-page.WA01010500 button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;left:0px;top:23px;z-index:999;width:175px;
+  background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.box-page.WA01010500 button.btn-primary:focus{box-shadow: none;}
+.WA01010500 .manage-file-conent .table td,
+.WA01010500 .manage-file-conent .table th {
   border-top: inherit !important;
   padding: 0.45rem 2rem;
 }
 
-.manage-file-conent .file-table .table td,
-.manage-file-conent .file-table .table th {
+.WA01010500 .manage-file-conent .file-table .table td,
+.WA01010500 .manage-file-conent .file-table .table th {
   padding: 0.45rem .75rem;
 }
 
-.manage-file-conent .file-table .table td.col-action,
-.manage-file-conent .file-table .table th.col-action  {
+.WA01010500 .manage-file-conent .file-table .table td.col-action,
+.WA01010500 .manage-file-conent .file-table .table th.col-action  {
     padding: unset;
     width: 50px;
 }
-.manage-file-conent .file-table .table td.col-small,
-.manage-file-conent .file-table .table th.col-small {
+.WA01010500 .manage-file-conent .file-table .table td.col-small,
+.WA01010500 .manage-file-conent .file-table .table th.col-small {
     width: 20%;
 }
 
-.manage-file-conent .file-table .table td.col-medium,
-.manage-file-conent .file-table .table th.col-medium {
+.WA01010500 .manage-file-conent .file-table .table td.col-medium,
+.WA01010500 .manage-file-conent .file-table .table th.col-medium {
     width: 30%;
 }
 
-.manage-file-conent .table .col-action div.action-link{
+.WA01010500 .manage-file-conent .table .col-action div.action-link{
   width: 50%;
   float:right;
 }
