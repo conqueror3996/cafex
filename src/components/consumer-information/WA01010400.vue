@@ -1,5 +1,5 @@
 <template>
-  <div class="box-page">
+  <div class="box-page WA01010400">
     <b-button @click="$router.push('/WA01010300')">
       <img :src="imgBackIcon" />
     </b-button>
@@ -99,10 +99,10 @@ export default {
 .logo{width:8%}
 .information p{margin-bottom:6px;}
 .screen-medium{margin-top:25px;position: relative;}
-.box-page{position: relative;}
-.box-page > button.btn {position:absolute;left:0px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
-.box-page > button.btn:focus{box-shadow:none;}
-.box-page > .screen-medium button.btn-secondary {
+.box-page.WA01010400{position: relative;}
+.box-page.WA01010400 > button.btn {position:absolute;left:0px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
+.box-page.WA01010400 > button.btn:focus{box-shadow:none;}
+.box-page.WA01010400 > .screen-medium button.btn-secondary {
     background-color: transparent;
     border: none;
     padding: 0px;
@@ -113,19 +113,19 @@ export default {
     margin-right: 10px;
     width: 175px;
 }
-.customer-info-screen {
+.WA01010400 .customer-info-screen {
   background-color: #ffffff;
   width: 100%;
   height: auto;
   padding: 1.5rem 3rem 0 3rem;
   margin: auto;
 }
-.title-information {
+.WA01010400 .title-information {
   width: 100%;
   display: inline-block;
 }
 
-.title-information p{
+.WA01010400 .title-information p{
     height: 28px;
     color: #313131;
     font-size: 24px;
@@ -135,18 +135,18 @@ export default {
     clear: right;
 }
 
-.title-information button {
+.WA01010400 .title-information button {
   float: right;
   padding: 0;
   border-radius: .7rem;
   border: none;
 }
 
-.title-information button img {
+.WA01010400 .title-information button img {
   float: right;
 }
 
-.content-information {
+.WA01010400 .content-information {
     /* width: 1102px; */
     width: 100%;
     height: auto;
@@ -154,11 +154,11 @@ export default {
     margin: 0px auto;
 }
 
-.contractor-info {
+.WA01010400 .contractor-info {
     list-style: none;
 }
-.contractor-info li{padding:5px 0px;}
-.information {
+.WA01010400 .contractor-info li{padding:5px 0px;}
+.WA01010400 .information {
   width: 100%;
   height: auto;
   border-radius: 8px;
@@ -167,46 +167,46 @@ export default {
   padding: 1rem 2rem;
 }
 
-.information label {
+.WA01010400 .information label {
   font-size: 16px;
 }
 
-.customer-info-screen .form-group {
+.WA01010400 .customer-info-screen .form-group {
   width: 100%;
   text-align: center;
   display: inline-block;
   margin-bottom: 4rem;
 }
 
-.customer-info-screen .form-group button{
+.WA01010400 .customer-info-screen .form-group button{
   margin: 40px 4rem 0 4rem;
   width: 331px;
   height: 85px;
   padding: 0px;
 }
 
-.customer-info-screen .form-group button img{
+.WA01010400 .customer-info-screen .form-group button img{
     width: 100%;
 }
 @media(max-width:1440px){
-  .screen-medium{max-width:1050px;}
+  .WA01010400 .screen-medium{max-width:1050px;}
   .header{height:90px;}
-  .customer-info-screen{padding:10px 30px 0px 30px}
-  .title-information p{font-size:21px;margin-bottom:10px}
-  .customer-info-screen .form-group button{width:250px;margin-top:10px}
-  .information{padding:10px 15px;}
+  .WA01010400 .customer-info-screen{padding:10px 30px 0px 30px}
+  .WA01010400 .title-information p{font-size:21px;margin-bottom:10px}
+  .WA01010400 .customer-info-screen .form-group button{width:250px;margin-top:10px}
+  .WA01010400 .information{padding:10px 15px;}
 }
 @media (max-width: 1370px) {
-  .screen-medium{max-width:975px;}
-  .customer-info-screen .form-group{margin-bottom:25px;}
-  .customer-info-screen {
+  .WA01010400 .screen-medium{max-width:975px;}
+  .WA01010400 .customer-info-screen .form-group{margin-bottom:25px;}
+  .WA01010400 .customer-info-screen {
     height: auto;
   }
-  .information {
+  .WA01010400 .information {
     height: 50vh;
     font-size: 14px;
   }
-  .customer-info-screen .form-group button {
+  .WA01010400 .customer-info-screen .form-group button {
     margin-top: 20px;
     width: 298px;
     height: 77px;
@@ -214,20 +214,20 @@ export default {
 }
 
 @media (max-width: 1024px) {
-  .customer-info-screen {
+  .WA01010400 .customer-info-screen {
     height: calc(80vh);
   }
-  .information {
+  .WA01010400 .information {
     height: 50vh;
     font-size: 13px;
   }
-  .customer-info-screen .form-group button {
+  .WA01010400 .customer-info-screen .form-group button {
     margin: 20px 2rem 0 2rem;
   }
 }
 
 @media (max-width: 1000px) {
-  .customer-info-screen .form-group button{
+  .WA01010400 .customer-info-screen .form-group button{
     width: 35%;
     height: auto;
   }
@@ -235,7 +235,7 @@ export default {
 
 @media (max-width: 600px) {
   
-  .information {
+  .WA01010400 .information {
     font-size: 14px;
   }
 }
