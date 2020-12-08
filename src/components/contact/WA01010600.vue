@@ -705,7 +705,7 @@ export default {
   
   .mw100{max-width:100%;}
   header.header{height:130px;position:relative;}
-  header.header::before{position:absolute;content: '';width:35%;height:calc(100% - 10px);background:rgba(255, 255, 255, 0.75);left:0px;top:0px;}
+  header.header::before{position:absolute;content: '';width:35%;height:calc(100% - 15px);background:rgba(255, 255, 255, 0.75);left:0px;top:0px;}
   .WA01010600 .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
   .WA01010600 #left{width:calc(20% - 8px);float:left;height:calc(100vh - 145px);}
   .WA01010600 #right{width:calc(80% - 8px);float:right;height:calc(100vh - 145px);background:rgba(255, 255, 255, 0.75);border-radius:10px;}
