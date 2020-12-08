@@ -444,9 +444,6 @@ export default {
   padding: 0px;
 }
 
-.WA01010300 .home-screen .form-control {
-  border-radius: 0.5rem;
-}
 
 .WA01010300 .home-screen .input-group-text {
   border-radius: 0.5rem;
