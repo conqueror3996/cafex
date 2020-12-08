@@ -67,9 +67,10 @@
             <div><span class="new-title new-title-block">カナ</span>: <div v-if="this.localConsumer"  class="info-text">{{ this.localConsumer.consumerNameKana }}</div> </div> 
             <span for="contractor">お客様情報</span> 
             <ul id="v-for-object" class="contractor-info">
-              <li v-for="(value, name) in this.localConsumer" :key="name">
-                <div v-if="Object.keys(labels).includes(name)" > 
-                  <span class="new-title">{{ labels[name] }}</span> : <div class="info-text">{{ value }} </div>
+              
+              <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
+                <div> 
+                  <span class="new-title">{{ labels[value] }}</span> : <div class="info-text">{{ localConsumer ? localConsumer[value] : '' }}  </div>
                 </div>
               </li>
             </ul>
@@ -152,7 +153,6 @@
             <div id="localvideo" v-show="isSharing || (!gService.isDisplayMediaMode && appView)" :class="previewStyle"
                 style="background: black;position: absolute;z-index: 3;">
             </div>
-            
         </div>
         <div class="form-frame" v-show="isShowFormContainer">
             <div class="form-container">
@@ -697,25 +697,25 @@ export default {
 </script>
 
 <style>
-  body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden !important;width:100%;height:100vh;}
+  body{margin:0px;padding:0px;background:url('/static/img/istockphoto-1049489394-1024x1024.jpg') center center no-repeat;background-size:100% 100%; overflow:hidden !important;width:100%;height:100vh;}
   .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
-  .inner{width:calc(100% - 20px);margin:auto;max-width:unset !important}
+  .inner{width:calc(100% - 30px);margin:auto;max-width:unset !important}
   .logo-small{display:inline-block;padding:10px 0px 0px 10px;}
   .mw100{max-width:100%;}
-  /* header.header{height:125px;} */
+  header.header{height:130px;}
   .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
-  #left{width:calc(20% - 5px);float:left;height:calc(100vh - 145px);}
-  #right{width:calc(80% - 5px);float:right;height:calc(100vh - 145px);background:#fff;border-radius:10px;}
-  .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:13px;} /*10%*/
-  .input-search{position:relative;width:100%;height:65px;}
-  .txt-search{width:100%;height:35px;border:none;border-radius:25px;padding-left:15px;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D)";/*IE 8*/
-    -moz-box-shadow: 1px 1px 4px #4D4D4D inset;/*FF 3.5+*/
-    -webkit-box-shadow: 1px 1px 4px #4D4D4D inset;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-    box-shadow: 1px 1px 4px #4D4D4D inset;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D); /*IE 5.5-7*/
+  #left{width:calc(20% - 8px);float:left;height:calc(100vh - 145px);}
+  #right{width:calc(80% - 8px);float:right;height:calc(100vh - 145px);background:rgba(255, 255, 255, 0.55);border-radius:10px;}
+  .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:10px;} /*10%*/
+  .input-search{position:relative;width:100%;height:auto;}
+  .txt-search{width:100%;height:43px;border:1px solid #313131;border-radius:8px;padding-left:15px;
+    /* -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D)";
+    -moz-box-shadow: 1px 1px 4px #4D4D4D inset;
+    -webkit-box-shadow: 1px 1px 4px #4D4D4D inset;
+    box-shadow: 1px 1px 4px #4D4D4D inset;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D);  */
   }
-  .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
+  .btn-send_code{width:72px;height:41px;color:#000;background:#fff;border-radius:8px;border:none; border-left:1px solid #313131;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
   .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
   .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
   .remote-view {
