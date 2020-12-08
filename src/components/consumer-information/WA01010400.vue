@@ -10,11 +10,11 @@
           </div>
           <div class="content-information">
               <div class="information">
-                  <p style="margin: 0;">氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
-                  <p style="margin: 0;">氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
+                  <p>氏名：<span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerName }}</span></p> 
+                  <p>氏名（カナ）: <span v-if="this.localConsumer.item">{{ this.localConsumer.item.consumerNameKana }}</span> </p> 
                   <span for="contractor">お客様情報</span> 
                   <ul id="v-for-object" class="contractor-info">
-                    <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
+                    <li v-for="(value, name) in Object.keys(labels)" :key="name">
                       <span> 
                         {{ labels[value] }} : {{ localConsumer.item ? localConsumer.item[value] : '' }} 
                       </span>
@@ -42,20 +42,6 @@ export default {
         imgButtonFile: './static/img/btn_start_file_manage.svg',
         imgButtonRemote: './static/img/button_remote.svg',
         imgBackIcon: './static/img/btn_back_consumer_select.svg',
-        // customer_detail: {
-        //   fullname: 'Khang',
-        //   name_kana: 'Khang',
-        //   age: '24',
-        //   birthday: '1996/03/09',
-        //   post_code: '3424',
-        //   address: '32/2',
-        //   phone1: '0914957644',
-        //   phone2: '19001560',
-        //   memo: 'manhkhang@vn-cubesystem.com'
-        // },
-        // requestJson: {
-        //     user_id: 1
-        // },
         labels: {
           age: '年齢',
           birthdate: '生年月日',
@@ -105,41 +91,13 @@ export default {
       goManageFile() {
         this.goTo(this.localConsumer.item)
       }
-      // goToFileManagement() {
-      //   this.detail = this.customer_detail
-      // }
-    // ...mapActions("users", {
-    //   getAllUsers: "getAll",
-    //   deleteUser: "delete",
-    // //   editItem: "editItem",
-    // //   deleteItem: "deleteItem"
-    // }),
-    // editItem(user_id) {
-    //   if(user_id !== this.selectedItem) {
-    //       return
-    //   }
-    //   console.log('success')
   },
-
-//   deleteItem(user_id) {
-//       if(user_id !== this.selectedItem) {
-//           return
-//       }
-//       console.log('success')
-//   },
-//   onRowSelected(items) {
-//         this.selectedItem = items[0].user_id
-//       },
-//   selectedRow(item) {
-//         this.$refs.selectableTable.selectRow(this.users.items.indexOf(item))
-//       },
-//   },
-  
 };
 </script>
 
 <style>
 .logo{width:8%}
+.information p{margin-bottom:6px;}
 .screen-medium{margin-top:25px;position: relative;}
 .box-page{position: relative;}
 .box-page > button.btn {position:absolute;left:0px;top:0px;z-index:999;background-color:transparent;border:none;padding:0px}
@@ -172,8 +130,6 @@ export default {
     color: #313131;
     font-size: 24px;
     font-weight: 400;
-    /* line-height: 32px;
-    margin: 25px 0px 0px 123px; */
     text-align: left;
     float: left;
     clear: right;
@@ -201,6 +157,7 @@ export default {
 .contractor-info {
     list-style: none;
 }
+.contractor-info li{padding:5px 0px;}
 .information {
   width: 100%;
   height: auto;
