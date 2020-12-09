@@ -1,5 +1,5 @@
 <template>
-<div class="box-page">
+<div class="box-page WA01010500">
   <b-button variant="primary" @click="$router.push('/WA01010400')">
     <img class="mw100" :src="imgBackIcon">
   </b-button>
@@ -90,9 +90,11 @@
            <img v-show="isUploading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
       </div>
-      <div class="panel box-imgShow">
-        <div class="box-show">
-          <img :src="this.responseImage" class="mw100 imgShow">
+      <div class="panel">
+        <div class="box-imgShow">
+          <div class="box-show">
+            <img :src="this.responseImage" class="mw100 imgShow">
+          </div>
         </div>
       </div>
     </div>
@@ -296,43 +298,52 @@ export default {
 </script>
 
 <style>
-.box-page{position: relative;}
-.manage-file-conent {
+.header{height:140px;}
+.box-page.WA01010500{position: relative;}
+.WA01010500 .manage-file-conent {
   max-width: 1344px;
   margin: 0 auto;
 }
-.imgShow{max-height: 480px;background: #fff;}
-.box-show{display:inline-block;}
-.box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;}
-.box-page button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;left:0px;top:23px;z-index:999;width:175px;}
-.box-page button.btn-primary:focus{box-shadow: none;}
-.manage-file-conent .table td,
-.manage-file-conent .table th {
+.WA01010500 .imgShow{max-height: 440px;background: #fff;}
+.WA01010500 .box-show{display:inline-block;}
+.WA01010500 .box-imgShow{text-align:center;display:flex;flex-direction:column;justify-content: center;align-content: center;height: 450px;
+  background-color: #ececec;
+  border: 1px solid #97989c;
+  border-radius:5px;
+}
+.box-page.WA01010500 button.btn-primary{background-color:transparent;border:none;padding:0px;position: absolute;left:0px;top:23px;z-index:999;width:175px;
+  background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.box-page.WA01010500 button.btn-primary:focus{box-shadow: none;}
+.WA01010500 .manage-file-conent .table td,
+.WA01010500 .manage-file-conent .table th {
   border-top: inherit !important;
   padding: 0.45rem 2rem;
 }
 
-.manage-file-conent .file-table .table td,
-.manage-file-conent .file-table .table th {
+.WA01010500 .manage-file-conent .file-table .table td,
+.WA01010500 .manage-file-conent .file-table .table th {
   padding: 0.45rem .75rem;
 }
 
-.manage-file-conent .file-table .table td.col-action,
-.manage-file-conent .file-table .table th.col-action  {
+.WA01010500 .manage-file-conent .file-table .table td.col-action,
+.WA01010500 .manage-file-conent .file-table .table th.col-action  {
     padding: unset;
     width: 50px;
 }
-.manage-file-conent .file-table .table td.col-small,
-.manage-file-conent .file-table .table th.col-small {
+.WA01010500 .manage-file-conent .file-table .table td.col-small,
+.WA01010500 .manage-file-conent .file-table .table th.col-small {
     width: 20%;
 }
 
-.manage-file-conent .file-table .table td.col-medium,
-.manage-file-conent .file-table .table th.col-medium {
+.WA01010500 .manage-file-conent .file-table .table td.col-medium,
+.WA01010500 .manage-file-conent .file-table .table th.col-medium {
     width: 30%;
 }
 
-.manage-file-conent .table .col-action div.action-link{
+.WA01010500 .manage-file-conent .table .col-action div.action-link{
   width: 50%;
   float:right;
 }
@@ -405,19 +416,16 @@ export default {
 }
 
 .detail {
-  display: flex;
-  flex-direction: row;
-  margin: 1rem auto auto 0;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  width: 100%;
-  height: 538px;
-  border: 2px solid #cacaca;
+  margin-top:15px;
+  border:1px solid #97989c;
+  height:auto;
+  background:#fff;
+  box-sizing: border-box;
+  border-radius:8px;
 }
 
 .file-table {
-  width: 739px;
-  height: 381px;
+  height: 450px;
   border: 1px solid #97989c;
   overflow: auto;
 }
@@ -430,7 +438,6 @@ export default {
   position: -webkit-sticky;
   top: 0;
 }
-
 .manage-file-conent .file-footer {
   margin-top: 5px;
   text-align: center;
@@ -459,14 +466,13 @@ export default {
 }
 
 .manage-file-conent .panel {
-  width: 466.43px;
-  height: 490px;
-  background-color: #ececec;
-  border: 2px solid #e2e3e7;
-  border-radius: 0.6rem;
-  margin: auto;
+  width: 30%;
+  float: left;
+  padding:20px;
+  padding-left:0px;
+  box-sizing: border-box;
 }
-.file-content{padding:20px;box-sizing:border-box;}
+.file-content{padding:20px;box-sizing:border-box;width:70%;float: left;}
 @media (max-width: 1440px) {
   .manage-file-conent{max-width:1000px;}
   .info button.btn-primary{width:165px;}

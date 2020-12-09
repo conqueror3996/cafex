@@ -122,7 +122,14 @@ const actions = {
                 data.forEach(element => {
                     mailDuplicate.push(element.mailAddress)
                 });
-                dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} already exists`, { root: true });
+                
+                if(status !== 409){
+                    dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が存在している`, { root: true });
+                }else{
+                    dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が重複している`, { root: true });
+                }
+            } else {
+                dispatch('alert/error', data.error.code, { root: true });
             }
             return err.response
         })

@@ -1,5 +1,5 @@
 <template>
-  <div id="main" class="clearfix">
+  <div id="main" class="clearfix WA01010600">
     <div class="toolbar">
       <form name="toolsForm" class="tools"  v-show="isSharing">
         <!-- -->
@@ -27,7 +27,7 @@
             <path fill-rule="evenodd" d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
           </svg>
           <span style="color: black;">蛍光ペン</span> </b-button>
-        <b-button variant="light" @click="clearSelected">消去</b-button>
+        <b-button variant="light" @click="clearSelected"><i class="fa fa-trash" aria-hidden="true"></i> 消去</b-button>
         </b-button-group>
         <button type="button" name="zoom" class="single-button" title="拡大鏡" @click="startZoom">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-zoom-in" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -67,9 +67,10 @@
             <div><span class="new-title new-title-block">カナ</span>: <div v-if="this.localConsumer"  class="info-text">{{ this.localConsumer.consumerNameKana }}</div> </div> 
             <span for="contractor">お客様情報</span> 
             <ul id="v-for-object" class="contractor-info">
-              <li v-for="(value, name) in this.localConsumer" :key="name">
-                <div v-if="Object.keys(labels).includes(name)" > 
-                  <span class="new-title">{{ labels[name] }}</span> : <div class="info-text">{{ value }} </div>
+              
+              <li v-for="(value, name) in Object.keys(labels)" :key="name" style="margin-top: 0.5rem;">
+                <div> 
+                  <span class="new-title">{{ labels[value] }}</span> : <div class="info-text">{{ localConsumer ? localConsumer[value] : '' }}  </div>
                 </div>
               </li>
             </ul>
@@ -152,7 +153,6 @@
             <div id="localvideo" v-show="isSharing || (!gService.isDisplayMediaMode && appView)" :class="previewStyle"
                 style="background: black;position: absolute;z-index: 3;">
             </div>
-            
         </div>
         <div class="form-frame" v-show="isShowFormContainer">
             <div class="form-container">
@@ -697,28 +697,31 @@ export default {
 </script>
 
 <style>
-  body{margin:0px;padding:0px;background:#f0f0f0;overflow:hidden !important;width:100%;height:100vh;}
+  body{margin:0px;padding:0px;background:url('/static/img/background-image.svg') center center no-repeat;background-size:100%; overflow:hidden !important;width:100%;height:100vh;}
   .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
-  .inner{width:calc(100% - 20px);margin:auto;max-width:unset !important}
-  .logo-small{display:inline-block;padding:10px 0px 0px 10px;}
+  .inner{width:calc(100% - 30px);margin:auto;max-width:unset !important}
+  .logo-small{display:inline-block;padding:0px 0px 0px 10px;position: relative;z-index:99;}
+  .contact{position: relative;z-index:99}
+  
   .mw100{max-width:100%;}
-  /* header.header{height:125px;} */
-  .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
-  #left{width:calc(20% - 5px);float:left;height:calc(100vh - 145px);}
-  #right{width:calc(80% - 5px);float:right;height:calc(100vh - 145px);background:#fff;border-radius:10px;}
-  .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:13px;} /*10%*/
-  .input-search{position:relative;width:100%;height:65px;}
-  .txt-search{width:100%;height:35px;border:none;border-radius:25px;padding-left:15px;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D)";/*IE 8*/
-    -moz-box-shadow: 1px 1px 4px #4D4D4D inset;/*FF 3.5+*/
-    -webkit-box-shadow: 1px 1px 4px #4D4D4D inset;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-    box-shadow: 1px 1px 4px #4D4D4D inset;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D); /*IE 5.5-7*/
+  header.header{height:130px;position:relative;}
+  header.header::before{position:absolute;content: '';width:35%;height:calc(100% - 15px);background:rgba(255, 255, 255, 0.75);left:0px;top:0px;}
+  .WA01010600 .border-box{border:1px solid #e0e0e0;box-sizing:border-box;}
+  .WA01010600 #left{width:calc(20% - 8px);float:left;height:calc(100vh - 145px);}
+  .WA01010600 #right{width:calc(80% - 8px);float:right;height:calc(100vh - 145px);background:rgba(255, 255, 255, 0.75);border-radius:10px;}
+  .WA01010600 .box-search{background:#fff;border-radius:8px;width:100%;height:65px;padding:10px;} /*10%*/
+  .WA01010600 .input-search{position:relative;width:100%;height:auto;}
+  .WA01010600 .txt-search{width:100%;height:43px;border:1px solid #313131;border-radius:8px;padding-left:15px;
+    /* -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D)";
+    -moz-box-shadow: 1px 1px 4px #4D4D4D inset;
+    -webkit-box-shadow: 1px 1px 4px #4D4D4D inset;
+    box-shadow: 1px 1px 4px #4D4D4D inset;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color=#4D4D4D);  */
   }
-  .btn-send_code{width:72px;height:32px;background:#ddd;border-radius:25px;border:none;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
-  .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
-  .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
-  .remote-view {
+  .WA01010600 .btn-send_code{width:72px;height:41px;color:#000;background:#fff;border-radius:8px;border:none; border-left:1px solid #313131;position:absolute;right:1px;top:1px;display:block;z-index:999;cursor:pointer;}
+  .WA01010600 .box-info{background:#fff;border-radius:8px;width:100%;height:calc(40% - 10px);margin-top:10px;padding:15px;font-size:15px;overflow: auto;}
+  .WA01010600 .box-tab{background:#fff;border-radius:8px;width:100%;height:calc(60% - 75px);margin-top:10px;}
+  .WA01010600 .remote-view {
     height: 100%;
     position: relative;
     display: flex;
@@ -726,34 +729,34 @@ export default {
     align-items: center;
     justify-content: space-evenly;
   }
-  .toolbar {
+  .WA01010600 .toolbar {
     position: absolute;
     top: 5vh;
     right: 20px;
   }
-  .edit-tools button {
+  .WA01010600 .edit-tools button {
     width: 120px;
     border: 1px solid #000 !important;
   }
   
-  .tools .btn-group>.btn:first-child {
+  .WA01010600 .tools .btn-group>.btn:first-child {
     border-top-left-radius: 3rem !important;
     border-bottom-left-radius: 3rem !important;
   }
 
-  .tools .btn-group>.btn:last-child {
+  .WA01010600 .tools .btn-group>.btn:last-child {
     border-top-right-radius: 3rem !important;
     border-bottom-right-radius: 3rem !important;
   }
 
-  .tools .edit-tools {
+  .WA01010600 .tools .edit-tools {
     background-color: #f8f9fa;
     padding: .2rem .5rem;
     margin-left: 2rem;
     border-radius: 3rem;
   }
 
-  .single-button {
+  .WA01010600 .single-button {
     margin-left: 20px;
     border-radius: 50px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -766,38 +769,38 @@ export default {
     padding-top: 5px;
   }
   /* .remote-view-element{width:calc(80% - 5px) !important;height:calc(100vh - 145px) !important;} */
-  .contractor-info {
+  .WA01010600 .contractor-info {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  .box-info .box-parent > p, .box-info .box-parent div, .contractor-info li{margin-bottom:3px;}
-  .box-info .box-parent div, .contractor-info li div {vertical-align: middle;}
-  .contractor-info li div > span{padding-left:15px;}
-  .scroll-bar {
+  .WA01010600 .box-info .box-parent > p, .box-info .box-parent div, .contractor-info li{margin-bottom:3px;}
+  .WA01010600 .box-info .box-parent div, .contractor-info li div {vertical-align: middle;}
+  .WA01010600 .contractor-info li div > span{padding-left:15px;}
+  .WA01010600 .scroll-bar {
     overflow: hidden;
     overflow-y: scroll;
     padding: 5px;
   }
   
-  .scroll-bar::-webkit-scrollbar-track {
+  .WA01010600 .scroll-bar::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
   
-  .scroll-bar::-webkit-scrollbar-thumb {
+  .WA01010600 .scroll-bar::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
   }
-  .new-title {
+  .WA01010600 .new-title {
     width: 35%;
     display: inline-block;
   }
-  .info-text {
+  .WA01010600 .info-text {
     width: 60%;
     display: inline-block;
     white-space: normal;
   }
-  .screen-contact {
+  .WA01010600 .screen-contact {
     display: flex;
     flex-direction: row;
     padding-left: 1rem;
@@ -807,7 +810,7 @@ export default {
     margin-top: .5rem;
   }
 
-  .side-left {
+  .WA01010600 .side-left {
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -816,20 +819,20 @@ export default {
     margin: auto auto;
   }
 
-  .side-right {
+  .WA01010600 .side-right {
     width: 75%;
     margin-left: 2rem;
     margin: auto auto;
   }
 
-  .screen-share {
+  .WA01010600 .screen-share {
     background-color: #ffffff;
     width: 100%;
     height: 702px;
     border-radius: .5rem;
   }
 
-  .search-code {
+  .WA01010600 .search-code {
     background-color: #ffffff;
     width: 100%;
     height: 52px;
@@ -837,16 +840,16 @@ export default {
     padding: .45rem 1rem;
   }
 
-  .search-contact {
+  .WA01010600 .search-contact {
     border: 1px solid;
     border-radius: .5rem;
   }
 
-  .btn-search-text {
+  .WA01010600 .btn-search-text {
     color: black;
   }
 
-  .screen-contact .info {
+  .WA01010600 .screen-contact .info {
     background-color: #ffffff;
     width: 100%;
     height: 228px;
@@ -854,19 +857,19 @@ export default {
     margin-top: .5rem;
   }
 
-  .content-info {
+  .WA01010600 .content-info {
     margin-left: 1rem;
     margin-top: .5rem;
     font-size: 13px;
   }
-  .content-info p{
+  .WA01010600 .content-info p{
     margin-bottom: .5rem;
   }
-  .content-info p.info-sub {
+  .WA01010600 .content-info p.info-sub {
     margin-left: 2rem;
   }
 
-  .action {
+  .WA01010600 .action {
     background-color: #ffffff;
     width: 100%;
     height: 400px;
@@ -874,75 +877,75 @@ export default {
     margin-top: .5rem;
   }
 
-  .action-panel {
+  .WA01010600 .action-panel {
     margin: .75rem .3rem;
     text-align: center;
   }
 
-  .action-panel button {
+  .WA01010600 .action-panel button {
     width: 32%;
     height: 3rem;
     line-height: 1rem;
   }
 
-  .action-panel .small-font span {
+  .WA01010600 .action-panel .small-font span {
     font-size: 9px;
   }
 
-  .action-panel span {
+  .WA01010600 .action-panel span {
     font-size: 0.75rem;
     color: black;
   }
 
-  .action-panel button:hover {
+  .WA01010600 .action-panel button:hover {
       color: #fff;
       background-color: #BCD9D6 !important;
   }
 
-  .action-panel button.focus, .action-panel button:focus {
+  .WA01010600 .action-panel button.focus, .action-panel button:focus {
       box-shadow: 0 0 0 0.2rem rgba(155, 224, 217,.5);
   }
 
-  .action-panel button:not(:disabled):not(.disabled).active, .action-panel button:not(:disabled):not(.disabled):active {
+  .WA01010600 .action-panel button:not(:disabled):not(.disabled).active, .action-panel button:not(:disabled):not(.disabled):active {
       color: #fff;
       background-color: #BCD9D6 !important;
   }
 
-  .simulation {
+  .WA01010600 .simulation {
     text-align: center;
     margin-top: 8rem;
   }
 
-  .simulation button {
+  .WA01010600 .simulation button {
     color: #000000;
     border-radius: 1rem;
   }
 
-  .contract {
+  .WA01010600 .contract {
     text-align: center;
     margin-top: 8rem;
   }
 
-  .contract button {
+  .WA01010600 .contract button {
     color: #000000;
     border-radius: 1rem;
   }
 
-  .description {
+  .WA01010600 .description {
     padding: 0 1rem;
   }
 
-  .description label{
+  .WA01010600 .description label{
     margin-bottom: 0px;
   }
 
-  .description select{
+  .WA01010600 .description select{
     height: 34px;
     width: 100%;
     border: 1px solid #dbdad7;
   }
 
-  .description button{
+  .WA01010600 .description button{
     margin-top: 0.5rem;
     width: 100%;
     border-radius: 1rem;
@@ -951,7 +954,7 @@ export default {
     padding-top: 0px;
   }
 
-  .description .document-preview {
+  .WA01010600 .description .document-preview {
     margin-top: .5rem;
     background-color: #cacfce;
     width: 100%;
@@ -959,12 +962,12 @@ export default {
     overflow: auto;
   }
 
-  .description .document-preview img {
+  .WA01010600 .description .document-preview img {
     width: 100%;
   }
   @media(min-width:2000px){
     .logo-small{width:5%}
-    .box-info .box-parent > p, .contractor-info li{margin-bottom:6px;}
+    .WA01010600 .box-info .box-parent > p, .WA01010600 .contractor-info li{margin-bottom:6px;}
   }
   @media(max-width:1600px){
    .logo-small{width:8%}
@@ -976,31 +979,31 @@ export default {
     .logo-small{width:9%;}
     #header{height:100px;}
     /* #main{margin-top:20px;} */
-    #left,#right{height:calc(100vh - 130px);}
-    #left{width:calc(25% - 10px);}
-    #right{width:calc(75% - 10px);}
-    .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
-    .input-search{position:relative;width:100%;height:55px;}
-    .box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
-    .box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
+    .WA01010600 #left,.WA01010600 #right{height:calc(100vh - 130px);}
+    .WA01010600 #left{width:calc(25% - 10px);}
+    .WA01010600 #right{width:calc(75% - 10px);}
+    .WA01010600 .box-search{background:#fff;border-radius:10px;width:100%;height:55px;padding:9px;} /*10%*/
+    .WA01010600 .input-search{position:relative;width:100%;height:55px;}
+    .WA01010600 .box-info{height: calc(100% - 59% - 10px);margin-top:10px;line-height:18px;font-size:14px;padding:10px 15px;}
+    .WA01010600 .box-tab{height: calc(100% - 52% - 10px);margin-top:10px;}
   }
   @media(max-width:1100px){
    .new-title { width: 42%; }
    .info-text { width: 51%; }
-   .action-panel .small-font span {
+   .WA01010600 .action-panel .small-font span {
       font-size: 8px;
     }
-    .action-panel button {
+    .WA01010600 .action-panel button {
       width: 31%;
       padding-left: .5rem;
     }
-    .action-panel button.small-font {
+    .WA01010600 .action-panel button.small-font {
       padding-left: .1rem;
     }
   }
 </style>
 <style scoped>
-  .form-frame {
+  .WA01010600 .form-frame {
     position: absolute;
     z-index: 9999;
     background: rgba(0, 0, 0, 0.75);
@@ -1010,7 +1013,7 @@ export default {
     height: 100%;
   }
 
-  .form-frame .form-container {
+  .WA01010600 .form-frame .form-container {
     width: 85%;
     position: absolute;
     top: 50%;
@@ -1020,7 +1023,7 @@ export default {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
 
-  .form-frame .form-container--title {
+  .WA01010600 .form-frame .form-container--title {
     display: flex;
     justify-content: space-between;
     background: #024607;
@@ -1030,7 +1033,7 @@ export default {
     font-size: 20px;
   }
 
-  .form-frame .form-container--title div {
+  .WA01010600 .form-frame .form-container--title div {
     cursor: pointer;
     font-size: 46px;
     position: absolute;
@@ -1039,18 +1042,18 @@ export default {
     margin-right: 1.5rem;
   }
 
-  .form-frame .form-container--title .close-icons img{
+  .WA01010600 .form-frame .form-container--title .close-icons img{
     height: 40px;
     width: 40px;
     margin-bottom: .6rem;
     filter: invert(93%) sepia(100%) saturate(1%) hue-rotate(92deg) brightness(106%) contrast(102%);
   }
 
-  .form-frame .form-container--body {
+  .WA01010600 .form-frame .form-container--body {
     padding: 0;
   }
 
-  .form-frame .form-container--body >>> form {
+  .WA01010600 .form-frame .form-container--body >>> form {
     height: calc(100vh - 280px);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -1058,14 +1061,14 @@ export default {
     margin-bottom: 80px;
     border-bottom: 2px solid #999;
   }
-  .form-frame .form-container--body >>> table > thead {
+  .WA01010600 .form-frame .form-container--body >>> table > thead {
     font-weight: bold;
     font-size: 20px;
   }
-  .form-frame .form-container--body >>> table > tr {
+  .WA01010600 .form-frame .form-container--body >>> table > tr {
     line-height: 50px;
   }
-  .form-frame .form-container--body >>> table > tr > td > button {
+  .WA01010600 .form-frame .form-container--body >>> table > tr > td > button {
     border-radius: 20px;
     border: 1px solid #999;
     width: 40px;
@@ -1075,7 +1078,7 @@ export default {
     border: none;
     font-weight: bold;
   }
-  .form-frame .form-container--body >>> input[type="submit"] {
+  .WA01010600 .form-frame .form-container--body >>> input[type="submit"] {
     font-size: 20px;
     background: #333;
     background-image: linear-gradient(135deg, #ffc107 0%, #f76a35 100%);

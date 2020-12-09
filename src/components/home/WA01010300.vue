@@ -1,5 +1,5 @@
 <template>
-<div class="box-page">
+<div class="box-page WA01010300">
   <div class="div-back-button nav-item align-self-center" v-if="this.localEmployee.rollCode === '21'">
     <button class="button-manage-mode" @click="$router.push({path:'/WA01020300'})"><img class="img-back-icon mw100" :src="imgManageMode" alt=""></button>
   </div>
@@ -382,7 +382,7 @@ export default {
 
 <style>
 .box-page{position:relative;}
-.screen-medium.box-table{max-width:1540px;}
+.WA01010300 .screen-medium.box-table{max-width:1540px;}
 .col-name {
   width: 15rem;
 }
@@ -395,7 +395,7 @@ export default {
   width: 15rem;
 }
 
-.home-screen .card-header {
+.WA01010300 .home-screen .card-header {
   font-size: 18px;
   color: #0091FF;
   position: relative;
@@ -403,90 +403,87 @@ export default {
   margin-top: -20px;
 }
 
-.home-screen .nav-tabs .nav-link {
+.WA01010300 .home-screen .nav-tabs .nav-link {
   width: 135px;
   text-align: center;
   background-color: #D8D8D8;
 }
 
-.home-screen .nav-link.active {
+.WA01010300 .home-screen .nav-link.active {
   color: #0091FF !important;
   background-color: #ffffff;
 }
 
-.home-screen .nav-tabs a:hover {
+.WA01010300 .home-screen .nav-tabs a:hover {
     color: #0091FF;
 }
 
-.box-page .div-back-button {
+.WA01010300 .box-page .div-back-button {
   position:absolute;
   top:57px;
   left:0px;
   z-index: 999;
   width:175px;
 }
- .div-back-button button {
+.WA01010300 .div-back-button button {
   outline: unset;
   padding:0px;
 }
-.button-manage-mode {
+.WA01010300 .button-manage-mode {
   cursor: pointer;
   /* margin-bottom: 1px;
   margin-right: -5px; */
   border: none;
 }
 
-.home-screen .card-header {
+.WA01010300 .home-screen .card-header {
   padding: 0.75rem 0.55rem 0.75rem 1.25rem;
   background-color: transparent;
 }
-.home-screen .card-body {
+.WA01010300 .home-screen .card-body {
   padding: 0px;
 }
 
-.home-screen .form-control {
+
+.WA01010300 .home-screen .input-group-text {
   border-radius: 0.5rem;
 }
 
-.home-screen .input-group-text {
-  border-radius: 0.5rem;
-}
-
-.selected-content {
+.WA01010300 .selected-content {
   background-color: #ffffff;
   height: auto;
   padding-bottom:25px;
   position: relative;
 }
 
-.title {
+.WA01010300 .title {
   text-align: center;
   font-size: 24px;
   padding-top: 0.75rem;
 }
 
-.admin-search {
+.WA01010300 .admin-search {
   padding-top: 2rem;
 }
 
-.content-search {
+.WA01010300 .content-search {
   /* margin-top: 100px; */
   margin: auto;
   width: 495px; 
 }
 
-.content-search .input-group-append {
+.WA01010300 .content-search .input-group-append {
   border: 1px solid #ced4da;
   border-radius: 0 .5rem .5rem 0;
 }
 
-.table-main {
+.WA01010300 .table-main {
   margin: 1.5rem 0.75rem 10px 0.75rem;
   border: 1px solid;
   height: calc(100vh - 500px);
   overflow: auto;
 }
-.table-main .table.b-table>thead>tr>th {
+.WA01010300 .table-main .table.b-table>thead>tr>th {
   background-color: #ffffff;
   position: sticky;
   position: -webkit-sticky;
@@ -550,13 +547,13 @@ export default {
 }
 
 @media(max-width:1440px){
-  .screen-medium.box-table{max-width:1000px;}
+  .WA01010300 .screen-medium.box-table{max-width:1000px;}
   
-  .home-screen .div-back-button{width:165px;}
+  .WA01010300 .home-screen .div-back-button{width:165px;}
   .header{height:95px;}
-  .selected-content{max-height:445px;}
-  .screen-medium.box-table.box-edit .selected-content{max-height:unset;height: auto;}
-  .table-main {
+  .WA01010300 .selected-content{max-height:445px;}
+  .WA01010300 .screen-medium.box-table.box-edit .selected-content{max-height:unset;height: auto;}
+  .WA01010300 .table-main {
     margin: 15px 0.75rem 0px 0.75rem;
     border: 1px solid;
     height:239px;
@@ -569,15 +566,15 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .home-admin {
+  .WA01010300 .home-admin {
     margin-top: -3rem;
   }
-  .content-search {
+  .WA01010300 .content-search {
     height: 30%;
     width: 40%;
     padding-bottom: .6rem;
   }
-  .card-header-tabs{
+  .WA01010300 .card-header-tabs{
     margin-left: -6.625rem;
     width: 1095px;
   }
