@@ -61,7 +61,6 @@ const actions = {
                 dispatch('alert/error', data.error.code, { root: true });
             }
         });
-
     },
     userInfo({commit, dispatch}){
         return employeeService.getEmployeeUserinfo().then(
@@ -118,16 +117,17 @@ const actions = {
         ).catch((err) => {
             const { status, data } = err.response
             if (status !== 500) {
-                const mailDuplicate = []
-                data.forEach(element => {
-                    mailDuplicate.push(element.mailAddress)
-                });
+                // const mailDuplicate = []
+                // data.forEach(element => {
+                //     mailDuplicate.push(element.mailAddress)
+                // });
                 
-                if(status !== 409){
-                    dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が存在している`, { root: true });
-                }else{
-                    dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が重複している`, { root: true });
-                }
+                // if(status !== 409){
+                //     dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が存在している`, { root: true });
+                // }else{
+                //     dispatch('alert/errorMsg', `Email(s): ${mailDuplicate} が重複している`, { root: true });
+                // }
+                dispatch('alert/errorMsg', 'ファイルの内容が不正です。マニュアルを参照し、従業員情報が正しく記載されたファイルをアップロードしてください。', { root: true });
             } else {
                 dispatch('alert/error', data.error.code, { root: true });
             }
@@ -143,7 +143,6 @@ const actions = {
                 const { data } = err.response
                 dispatch('alert/error', data.error.code, { root: true });
             }
-            
         })
     },
     shareDoc({commit, dispatch}, input) {
@@ -154,7 +153,6 @@ const actions = {
                 const { data } = err.response
                 dispatch('alert/error', data.error.code, { root: true });
             }
-            
         })
     },
     deleteEmployee({commit, dispatch}, id) {
@@ -169,7 +167,6 @@ const actions = {
                 }
             });
     }
-
 };
 
 const mutations = {
